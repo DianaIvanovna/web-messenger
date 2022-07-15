@@ -1,0 +1,22 @@
+{
+  "name": "web-messenger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DianaIvanovna/web-messenger.git"
+  },
+  "author": "Diana Garbuz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DianaIvanovna/web-messenger/issues"
+  },
+  "homepage": "https://github.com/DianaIvanovna/web-messenger#readme",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
+}
