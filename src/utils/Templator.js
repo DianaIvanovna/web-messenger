@@ -2,7 +2,7 @@ import { getObjectKey } from './getObjectKey';
 
 window.Templator = (function () {
   class Templator {
-    TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
+    TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;
 
     constructor(template) {
       this._template = template;
@@ -18,17 +18,14 @@ window.Templator = (function () {
       const regExp = this.TEMPLATE_REGEXP;
 
       // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
+
       while ((key = regExp.exec(tmpl))) {
         if (key[1]) {
           const tmplValue = key[1].trim();
           const data = getObjectKey(ctx, tmplValue);
 
-          console.log('data', data);
-
           if (typeof data === 'function') {
             window[tmplValue] = data;
-
-            console.log('window[tmplValue]', window[tmplValue]);
             tmpl = tmpl.replace(
               new RegExp(key[0], 'gi'),
               `window.${key[1].trim()}()`

@@ -533,93 +533,27 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"8lqZg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _mainButton = require("./components/MainButton/MainButton");
-var _mainButtonDefault = parcelHelpers.interopDefault(_mainButton);
-console.log("!!!!!");
-const buttonFunc = ()=>{
-    console.log("buttonFunc");
-};
-const newbtn = (0, _mainButtonDefault.default)({
-    nameButton: "aaaaaaaaaaaa",
-    handlerButton: buttonFunc
+var _errorPage = require("./pages/ErrorPage/ErrorPage");
+var _errorPageDefault = parcelHelpers.interopDefault(_errorPage);
+var _chatPage = require("./pages/ChatPage/ChatPage");
+var _chatPageDefault = parcelHelpers.interopDefault(_chatPage);
+var _styleScss = require("./style.scss");
+const root = document.querySelector(".root");
+const errorPage404 = (0, _errorPageDefault.default)({
+    title: "404",
+    description: `Oooops! Страница не найдена.`
 });
-document.body.innerHTML = newbtn;
+const errorPage500 = (0, _errorPageDefault.default)({
+    title: "500",
+    description: `Мы уже фиксим`
+});
+const chatPage = (0, _chatPageDefault.default)({
+    title: "500",
+    description: `Мы уже фиксим`
+});
+root.innerHTML = chatPage;
 
-},{"./components/MainButton/MainButton":"qAhIZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"qAhIZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// пробуем сделать шаблон для кнопки
-var _templator = require("../../utils/Templator");
-var _mainButtonScss = require("./MainButton.scss");
-const MainButton = (props)=>{
-    console.log("props", props);
-    const context = {
-        nameButton: props.nameButton,
-        handlerButton: props.handlerButton,
-        buttonClass: "button"
-    };
-    const template = `<button class={{buttonClass}} onClick={{handlerButton}}>{{nameButton}}</button>`;
-    return (0, _templator.getTemplate)(template, context);
-};
-exports.default = MainButton;
-
-},{"../../utils/Templator":"beJ1N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./MainButton.scss":"2x680"}],"beJ1N":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getTemplate", ()=>getTemplate);
-var _getObjectKey = require("./getObjectKey");
-window.Templator = function() {
-    class Templator {
-        TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
-        constructor(template){
-            this._template = template;
-        }
-        compile(ctx) {
-            return this._compileTemplate(this._template, ctx);
-        }
-        _compileTemplate(template, ctx) {
-            let tmpl = this._template;
-            let key = null;
-            const regExp = this.TEMPLATE_REGEXP;
-            // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
-            while(key = regExp.exec(tmpl))if (key[1]) {
-                const tmplValue = key[1].trim();
-                const data = (0, _getObjectKey.getObjectKey)(ctx, tmplValue);
-                console.log("data", data);
-                if (typeof data === "function") {
-                    window[tmplValue] = data;
-                    console.log("window[tmplValue]", window[tmplValue]);
-                    tmpl = tmpl.replace(new RegExp(key[0], "gi"), `window.${key[1].trim()}()`);
-                    continue;
-                }
-                tmpl = tmpl.replace(new RegExp(key[0], "gi"), data);
-            }
-            return tmpl;
-        }
-    }
-    // Можно не только из window брать, но и присвоить экспорту файла
-    return Templator;
-}();
-function getTemplate(template, context) {
-    const tmpl = new window.Templator(template);
-    return tmpl.compile(context); // Строка с html-вёрсткой
-}
-
-},{"./getObjectKey":"ezcL9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ezcL9":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getObjectKey", ()=>getObjectKey);
-function getObjectKey(obj, path, defaultValue) {
-    const keys = path.split(".");
-    let result = obj;
-    for (let key of keys){
-        result = result[key];
-        if (result === undefined) return defaultValue;
-    }
-    return result ?? defaultValue;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+},{"./style.scss":"81Z0h","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./pages/ErrorPage/ErrorPage":"i22Vy","./pages/ChatPage/ChatPage":"kKNlY"}],"81Z0h":[function() {},{}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -649,7 +583,108 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"2x680":[function(require,module,exports) {
+},{}],"i22Vy":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _templator = require("../../utils/Templator");
+var _errorPageModuleScss = require("./ErrorPage.module.scss");
+var _errorPageModuleScssDefault = parcelHelpers.interopDefault(_errorPageModuleScss);
+const ErrorPage = (props)=>{
+    const context = {
+        title: props.title,
+        description: props.description,
+        classes: (0, _errorPageModuleScssDefault.default)
+    };
+    const template = `<div class={{classes.error-page}} >
+  <h1  class={{classes.error-page__title}} >{{title}}
+  </h1>
+  <p  class={{classes.error-page__description}}    >{{description}}</p>
+</div>`;
+    return (0, _templator.getTemplate)(template, context);
+};
+exports.default = ErrorPage;
+
+},{"../../utils/Templator":"beJ1N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./ErrorPage.module.scss":"fqes9"}],"beJ1N":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getTemplate", ()=>getTemplate);
+var _getObjectKey = require("./getObjectKey");
+window.Templator = function() {
+    class Templator {
+        TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;
+        constructor(template){
+            this._template = template;
+        }
+        compile(ctx) {
+            return this._compileTemplate(this._template, ctx);
+        }
+        _compileTemplate(template, ctx) {
+            let tmpl = this._template;
+            let key = null;
+            const regExp = this.TEMPLATE_REGEXP;
+            // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
+            while(key = regExp.exec(tmpl))if (key[1]) {
+                const tmplValue = key[1].trim();
+                const data = (0, _getObjectKey.getObjectKey)(ctx, tmplValue);
+                if (typeof data === "function") {
+                    window[tmplValue] = data;
+                    tmpl = tmpl.replace(new RegExp(key[0], "gi"), `window.${key[1].trim()}()`);
+                    continue;
+                }
+                tmpl = tmpl.replace(new RegExp(key[0], "gi"), data);
+            }
+            return tmpl;
+        }
+    }
+    // Можно не только из window брать, но и присвоить экспорту файла
+    return Templator;
+}();
+function getTemplate(template, context) {
+    const tmpl = new window.Templator(template);
+    return tmpl.compile(context); // Строка с html-вёрсткой
+}
+
+},{"./getObjectKey":"ezcL9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ezcL9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getObjectKey", ()=>getObjectKey);
+function getObjectKey(obj, path, defaultValue) {
+    let keys = path.split(".");
+    let result = obj;
+    for (let key of keys){
+        result = result[key];
+        if (result === undefined) return defaultValue;
+    }
+    return result ?? defaultValue;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fqes9":[function(require,module,exports) {
+module.exports["error-page__description"] = `rXMN1a_error-page__description`;
+module.exports["error-page__title"] = `rXMN1a_error-page__title`;
+module.exports["error-page"] = `rXMN1a_error-page`;
+
+},{}],"kKNlY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _templator = require("../../utils/Templator");
+var _chatPageModuleScss = require("./ChatPage.module.scss");
+var _chatPageModuleScssDefault = parcelHelpers.interopDefault(_chatPageModuleScss);
+const ChatPage = (props)=>{
+    const context = {
+        title: props.title,
+        description: props.description,
+        classes: (0, _chatPageModuleScssDefault.default)
+    };
+    const template = `<div class={{classes.error-page}} >
+  <h1  class={{classes.error-page__title}} >{{title}}
+  </h1>
+  <p  class={{classes.error-page__description}}    >{{description}}</p>
+</div>`;
+    return (0, _templator.getTemplate)(template, context);
+};
+exports.default = ChatPage;
+
+},{"../../utils/Templator":"beJ1N","./ChatPage.module.scss":"dcYY3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dcYY3":[function(require,module,exports) {
 
 },{}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire1ce6")
 

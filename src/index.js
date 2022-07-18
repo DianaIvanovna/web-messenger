@@ -1,13 +1,20 @@
-import MainButton from './components/MainButton/MainButton';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
+import ChatPage from './pages/ChatPage/ChatPage';
+import './style.scss';
 
-console.log('!!!!!');
-const buttonFunc = () => {
-  console.log('buttonFunc');
-};
+const root = document.querySelector('.root');
 
-const newbtn = MainButton({
-  nameButton: 'aaaaaaaaaaaa',
-  handlerButton: buttonFunc,
+const errorPage404 = ErrorPage({
+  title: '404',
+  description: `Oooops! Страница не найдена.`,
+});
+const errorPage500 = ErrorPage({
+  title: '500',
+  description: `Мы уже фиксим`,
+});
+const chatPage = ChatPage({
+  title: '500',
+  description: `Мы уже фиксим`,
 });
 
-document.body.innerHTML = newbtn;
+root.innerHTML = chatPage;
