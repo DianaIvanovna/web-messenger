@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Dependency directory
 node_modules
+.parcel-cache
 #/dist
 
 # Optional npm cache directory
