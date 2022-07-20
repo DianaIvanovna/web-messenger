@@ -648,14 +648,24 @@ var _templator = require("../../utils/Templator");
 var _fieldInputModuleScss = require("./FieldInput.module.scss");
 var _fieldInputModuleScssDefault = parcelHelpers.interopDefault(_fieldInputModuleScss);
 const FieldInput = (props)=>{
+    const initValue = {
+        value: props.value ? props.value : "",
+        class: props.class ? `${(0, _fieldInputModuleScssDefault.default)["field-input__input"]} ${props.class}` : (0, _fieldInputModuleScssDefault.default)["field-input__input"],
+        type: props.type,
+        name: props.name,
+        placeholder: props.placeholder ? props.placeholder : "",
+        title: props.title ? `<p class="{{classes.field-input__title}} ">${props.title}</p>` : "",
+        disabled: props.disabled ? `disabled= ${props.disabled}` : ""
+    };
+    console.log("props.disabled ", initValue);
     const context = {
-        ...props,
+        ...initValue,
         classes: (0, _fieldInputModuleScssDefault.default)
     };
     const template = `
    <div class={{classes.field-input}}> 
         <p class="{{classes.field-input__title}} ">{{title}}</p>
-        <input class="{{classes.field-input__input}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" >
+        <input class="{{class}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" {{disabled}} value="{{value}}" >
    </div>
   `;
     return (0, _templator.getTemplate)(template, context);

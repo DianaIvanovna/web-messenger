@@ -539,10 +539,56 @@ var _message = require("../../components/Message/Message");
 var _messageDefault = parcelHelpers.interopDefault(_message);
 var _sendMessange = require("../../components/SendMessange/SendMessange");
 var _sendMessangeDefault = parcelHelpers.interopDefault(_sendMessange);
+var _userSetting = require("./modules/UserSetting/UserSetting");
+var _userSettingDefault = parcelHelpers.interopDefault(_userSetting);
 var _data = require("./data");
 (function() {
     const MainContainer = document.querySelector(".chat__main");
     const chatContainer = document.querySelector(".chat__container");
+    const userForm = [
+        {
+            name: "email",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u043E\u0447\u0442\u0443",
+            title: "\u041F\u043E\u0447\u0442\u0430",
+            value: "pochta@yandex.ru"
+        },
+        {
+            name: "login",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041B\u043E\u0433\u0438\u043D",
+            title: "\u041B\u043E\u0433\u0438\u043D",
+            value: "ivanivanov"
+        },
+        {
+            name: "first-name",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F",
+            title: "\u0418\u043C\u044F",
+            value: "\u0418\u0432\u0430\u043D"
+        },
+        {
+            name: "second-name",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0444\u0430\u043C\u0438\u043B\u0438\u044E",
+            title: "\u0424\u0430\u043C\u0438\u043B\u0438\u044F",
+            value: "\u0418\u0432\u0430\u043D\u043E\u0432"
+        },
+        {
+            name: "phone",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043B\u0435\u0444\u043E\u043D",
+            title: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D",
+            value: "+7 (909) 967 30 30"
+        },
+        {
+            name: "password",
+            type: "password",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            title: "\u041F\u0430\u0440\u043E\u043B\u044C",
+            value: "qwerty"
+        }, 
+    ];
     const openDialog = (index)=>{
         chatContainer.innerHTML = "";
         chatContainer.classList.add("chat__container--dialog");
@@ -561,15 +607,21 @@ var _data = require("./data");
     };
     const getUserSettings = ()=>{
         // ВЫВОД НАСТРОЕК ПОЛЬЗОВАТЕЛЯ
-        MainContainer.innerHTML = "getUserSettings";
+        MainContainer.innerHTML = "";
+        let div = document.createElement("div");
+        div.className = "chat__user-setting";
+        div.innerHTML = (0, _userSettingDefault.default)({
+            userForm
+        });
+        MainContainer.append(div);
     };
     const getContacts = ()=>{
         // ВЫВОД КОНТАКТОВ
-        MainContainer.innerHTML = "getContacts";
+        MainContainer.innerHTML = "\u0440\u0430\u0437\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F..";
     };
     const getSettings = ()=>{
         // ВЫВОД НАСТРОЕК ПРИЛОЖЕНИЯ
-        MainContainer.innerHTML = "getSettings";
+        MainContainer.innerHTML = "\u0440\u0430\u0437\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F..";
     };
     const getDialogs = ()=>{
         // ВЫВОД СПИСКА ДИАЛОГОЛОВ
@@ -607,7 +659,7 @@ var _data = require("./data");
 //openDialog(0);
 })();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/DialogsItem/DialogsItem":"gK4QH","./data":"fPPM4","../../components/Message/Message":"cw81T","../../components/SendMessange/SendMessange":"39sG3"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/DialogsItem/DialogsItem":"gK4QH","./data":"fPPM4","../../components/Message/Message":"cw81T","../../components/SendMessange/SendMessange":"39sG3","./modules/UserSetting/UserSetting":"9QOHt"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -948,6 +1000,149 @@ module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../
 },{"./helpers/bundle-url":"lgJ39"}],"j8Dl4":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../send-messange.a080967d.png" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
+},{"./helpers/bundle-url":"lgJ39"}],"9QOHt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _templator = require("../../../../utils/Templator");
+var _fieldInput = require("../../../../components/FieldInput/FieldInput");
+var _fieldInputDefault = parcelHelpers.interopDefault(_fieldInput);
+var _userSettingScss = require("./UserSetting.scss");
+var _photoJpg = require("../../../../../static/img/avatars/photo.jpg");
+var _photoJpgDefault = parcelHelpers.interopDefault(_photoJpg);
+var _penPng = require("../../../../../static/img/icons/pen.png");
+var _penPngDefault = parcelHelpers.interopDefault(_penPng);
+const passwordForm = [
+    {
+        name: "prevPassword",
+        type: "password",
+        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+        title: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
+    },
+    {
+        name: "newPassword",
+        type: "password",
+        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+        title: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
+    },
+    {
+        name: "repeatPassword",
+        type: "password",
+        placeholder: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
+        title: "\u041F\u0430\u0440\u043E\u043B\u044C"
+    }, 
+];
+const UserSetting = (props)=>{
+    let flagActiveForm = false;
+    let form1 = "";
+    props.userForm.forEach((item, index)=>{
+        form1 = form1 + (0, _fieldInputDefault.default)({
+            ...item,
+            disabled: true
+        });
+    });
+    const changeUserDataForm = (event)=>{
+        event.preventDefault();
+        const formDom = document.querySelector(".user-setting__form");
+        let form = "";
+        props.userForm.forEach((item, index)=>{
+            form = form + (0, _fieldInputDefault.default)({
+                ...item
+            });
+        });
+        form = form + `<button class="user-setting__button" > Сохранить </button>
+    <button class="user-setting__button" >Отмена </button>`;
+        console.log("form", form);
+        formDom.innerHTML = form;
+    };
+    const changePassword = (event)=>{
+        event.preventDefault();
+        const formDom = document.querySelector(".user-setting__form");
+        let form = "";
+        passwordForm.forEach((item, index)=>{
+            form = form + (0, _fieldInputDefault.default)({
+                ...item
+            });
+        });
+        form = form + `<button class="user-setting__button" > Сохранить </button>
+    <button class="user-setting__button" >Отмена </button>`;
+        console.log("form", form);
+        formDom.innerHTML = form;
+    };
+    //console.log('form', form);
+    const context = {
+        photo: (0, _photoJpgDefault.default),
+        pen: (0, _penPngDefault.default),
+        form: form1,
+        passwordForm,
+        changeUserDataForm: ()=>{
+            changeUserDataForm(event);
+        },
+        changePassword: ()=>{
+            changePassword(event);
+        }
+    };
+    const template = `
+  <div class="user-setting" >
+    <div class="user-setting__avatar-container" >
+        <img src={{photo}} alt="avatar" class="user-setting__avatar" />
+        <img src={{pen}} alt="изменить аватар" class="user-setting__icon" />
+    </div>
+
+    <form class="user-setting__form">
+        {{form}}
+        <button onClick={{changeUserDataForm}} class="user-setting__button" > Изменить данные </button>
+        <button class="user-setting__button" onClick={{changePassword}}> Изменить пароль </button>
+        <button class="user-setting__button user-setting__button--exit">Выйти </button>
+   </form>
+  </div>
+   
+
+  `;
+    return (0, _templator.getTemplate)(template, context);
+};
+exports.default = UserSetting;
+
+},{"../../../../../static/img/avatars/photo.jpg":"5g8Je","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../../utils/Templator":"beJ1N","../../../../../static/img/icons/pen.png":"2LrlS","../../../../components/FieldInput/FieldInput":"iEcxx","./UserSetting.scss":"AyukO"}],"2LrlS":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../pen.af272b33.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"iEcxx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _templator = require("../../utils/Templator");
+var _fieldInputModuleScss = require("./FieldInput.module.scss");
+var _fieldInputModuleScssDefault = parcelHelpers.interopDefault(_fieldInputModuleScss);
+const FieldInput = (props)=>{
+    const initValue = {
+        value: props.value ? props.value : "",
+        class: props.class ? `${(0, _fieldInputModuleScssDefault.default)["field-input__input"]} ${props.class}` : (0, _fieldInputModuleScssDefault.default)["field-input__input"],
+        type: props.type,
+        name: props.name,
+        placeholder: props.placeholder ? props.placeholder : "",
+        title: props.title ? `<p class="{{classes.field-input__title}} ">${props.title}</p>` : "",
+        disabled: props.disabled ? `disabled= ${props.disabled}` : ""
+    };
+    console.log("props.disabled ", initValue);
+    const context = {
+        ...initValue,
+        classes: (0, _fieldInputModuleScssDefault.default)
+    };
+    const template = `
+   <div class={{classes.field-input}}> 
+        <p class="{{classes.field-input__title}} ">{{title}}</p>
+        <input class="{{class}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" {{disabled}} value="{{value}}" >
+   </div>
+  `;
+    return (0, _templator.getTemplate)(template, context);
+};
+exports.default = FieldInput;
+
+},{"../../utils/Templator":"beJ1N","./FieldInput.module.scss":"7lnGJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7lnGJ":[function(require,module,exports) {
+module.exports["body"] = `oO4kea_body`;
+module.exports["field-input__title"] = `oO4kea_field-input__title`;
+module.exports["root"] = `oO4kea_root`;
+module.exports["field-input"] = `oO4kea_field-input`;
+module.exports["field-input__input"] = `oO4kea_field-input__input`;
+
+},{}],"AyukO":[function() {},{}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
 
 //# sourceMappingURL=ChatPage.e6314848.js.map

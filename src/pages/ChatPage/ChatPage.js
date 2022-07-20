@@ -1,11 +1,56 @@
 import DialogsItem from '../../components/DialogsItem/DialogsItem';
 import Message from '../../components/Message/Message';
 import SendMessange from '../../components/SendMessange/SendMessange';
+import UserSetting from './modules/UserSetting/UserSetting';
 import { dialogs } from './data';
 
 (function () {
   const MainContainer = document.querySelector('.chat__main');
   const chatContainer = document.querySelector('.chat__container');
+  const userForm = [
+    {
+      name: 'email',
+      type: 'text',
+      placeholder: 'введите почту',
+      title: 'Почта',
+      value: 'pochta@yandex.ru',
+    },
+    {
+      name: 'login',
+      type: 'text',
+      placeholder: 'введите Логин',
+      title: 'Логин',
+      value: 'ivanivanov',
+    },
+    {
+      name: 'first-name',
+      type: 'text',
+      placeholder: 'введите имя',
+      title: 'Имя',
+      value: 'Иван',
+    },
+    {
+      name: 'second-name',
+      type: 'text',
+      placeholder: 'введите фамилию',
+      title: 'Фамилия',
+      value: 'Иванов',
+    },
+    {
+      name: 'phone',
+      type: 'text',
+      placeholder: 'введите телефон',
+      title: 'Телефон',
+      value: '+7 (909) 967 30 30',
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: 'введите Пароль',
+      title: 'Пароль',
+      value: 'qwerty',
+    },
+  ];
 
   const openDialog = (index) => {
     chatContainer.innerHTML = '';
@@ -29,16 +74,24 @@ import { dialogs } from './data';
 
   const getUserSettings = () => {
     // ВЫВОД НАСТРОЕК ПОЛЬЗОВАТЕЛЯ
-    MainContainer.innerHTML = 'getUserSettings';
+
+    MainContainer.innerHTML = '';
+
+    let div = document.createElement('div');
+    div.className = 'chat__user-setting';
+    div.innerHTML = UserSetting({
+      userForm,
+    });
+    MainContainer.append(div);
   };
 
   const getContacts = () => {
     // ВЫВОД КОНТАКТОВ
-    MainContainer.innerHTML = 'getContacts';
+    MainContainer.innerHTML = 'разрабатывается..';
   };
   const getSettings = () => {
     // ВЫВОД НАСТРОЕК ПРИЛОЖЕНИЯ
-    MainContainer.innerHTML = 'getSettings';
+    MainContainer.innerHTML = 'разрабатывается..';
   };
 
   const getDialogs = () => {
