@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "parcel src/index.html --open ",
     "devChat": "parcel src/pages/ChatPage/ChatPage.html --open ",
+    "devError": "parcel src/pages/ErrorPage/ErrorPage.html --open ",
     "build": "parcel build src/index.html"
   },
   "repository": {

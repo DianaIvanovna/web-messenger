@@ -320,6 +320,7 @@ template, [hidden] {
   background-image: linear-gradient(#f7f9fa80, #f7f9fa80), url("background.52d00d0f.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0;
 }
 
 .root {
@@ -328,75 +329,48 @@ template, [hidden] {
   box-sizing: border-box;
 }
 
-.rXMN1a_error-page {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.rXMN1a_error-page__title {
+.root__title {
+  text-transform: uppercase;
   color: #397387;
-  margin: 0;
-  font-family: Montserrat Alternates;
-  font-size: 256px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%;
-}
-
-.rXMN1a_error-page__description {
-  color: #397387;
-  margin: 0;
   font-family: Montserrat;
   font-size: 24px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 150%;
 }
 
-@media screen and (max-width: 768px) {
-  .rXMN1a_error-page__title {
-    font-size: 128px;
-  }
-
-  .rXMN1a_error-page__description {
-    text-align: center;
-    font-size: 18px;
-  }
-}
-
-.-S5u_q_chat {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  border: 1px solid red;
+.root__nav {
+  max-width: 350px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 20%;
   display: flex;
 }
 
-.-S5u_q_chat__list {
-  width: 300px;
-  background: #ffffffb3;
-  border: 1px solid green;
+.root__link {
+  width: 100%;
+  color: #397387;
+  align-items: center;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  text-decoration: none;
+  display: flex;
+}
+
+.root__link:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #397387;
+  border-radius: 50%;
   flex-shrink: 0;
-}
-
-.-S5u_q_chat__menu {
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-}
-
-.-S5u_q_chat__icon {
-  width: 50px;
-}
-
-.-S5u_q_chat__container {
-  width: 100%;
-  border: 1px solid #ff0;
+  margin-right: 15px;
+  display: block;
 }
 
 /*# sourceMappingURL=index.b2d9cf43.css.map */

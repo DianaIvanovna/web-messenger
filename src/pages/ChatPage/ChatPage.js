@@ -6,6 +6,7 @@ import { dialogs } from './data';
   const MainContainer = document.querySelector('.chat__main');
 
   const getUserSettings = () => {
+    // ВЫВОД НАСТРОЕК ПОЛЬЗОВАТЕЛЯ
     MainContainer.innerHTML = 'getUserSettings';
   };
   const getDialogs = () => {
@@ -19,9 +20,11 @@ import { dialogs } from './data';
     });
   };
   const getContacts = () => {
+    // ВЫВОД КОНТАКТОВ
     MainContainer.innerHTML = 'getContacts';
   };
   const getSettings = () => {
+    // ВЫВОД НАСТРОЕК ПРИЛОЖЕНИЯ
     MainContainer.innerHTML = 'getSettings';
   };
 

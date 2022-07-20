@@ -642,7 +642,7 @@ var _data = require("./data");
  // };
  // export default ChatPage;
 
-},{"../../utils/Templator":"beJ1N","./data":"fPPM4","../../components/DialogsItem/DialogsItem":"gK4QH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"beJ1N":[function(require,module,exports) {
+},{"../../utils/Templator":"beJ1N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/DialogsItem/DialogsItem":"gK4QH","./data":"fPPM4"}],"beJ1N":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getTemplate", ()=>getTemplate);
@@ -727,7 +727,38 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"fPPM4":[function(require,module,exports) {
+},{}],"gK4QH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+// пробуем сделать шаблон для кнопки
+var _templator = require("../../utils/Templator");
+var _dialogsItemScss = require("./DialogsItem.scss");
+const DialogsItem = (props)=>{
+    const context = {
+        first_name: props.first_name,
+        id: props.id,
+        link: props.link,
+        photo: props.photo,
+        unreadMessage: props.unreadMessage
+    };
+    const template = `
+    <div class="dialogs-item">
+    <img src={{photo}} alt="avatar" class="dialogs-item__photo"  />
+    <div class="dialogs-item__text-container" >
+        <p class="dialogs-item__name">{{first_name}}</p>
+        <p class="dialogs-item__messange">Друзья, у меня для вас особенный выпуск новостей! Это супер пупуер интересно и длинно</p>
+    </div>
+   
+    <span class="dialogs-item__number">{{unreadMessage}}</span>
+    <span class="dialogs-item__time">10:49</span>
+    </div>
+  
+  `;
+    return (0, _templator.getTemplate)(template, context);
+};
+exports.default = DialogsItem;
+
+},{"../../utils/Templator":"beJ1N","./DialogsItem.scss":"bP2W2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bP2W2":[function() {},{}],"fPPM4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "dialogs", ()=>dialogs);
@@ -762,8 +793,8 @@ const dialogs = [
     }, 
 ];
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../static/img/avatars/avatar3.png":"fLy3C","../../../static/img/avatars/avatar1.png":"3x6Mz","../../../static/img/avatars/photo.jpg":"fmyzN"}],"fLy3C":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "avatar3.6676c29a.png" + "?" + Date.now();
+},{"../../../static/img/avatars/avatar1.png":"c2UxN","../../../static/img/avatars/avatar3.png":"4gXpg","../../../static/img/avatars/photo.jpg":"5g8Je","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c2UxN":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../avatar1.2ca7a5d5.png" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
 "use strict";
@@ -799,43 +830,12 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"3x6Mz":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "avatar1.2ca7a5d5.png" + "?" + Date.now();
+},{}],"4gXpg":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../avatar3.6676c29a.png" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}],"fmyzN":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "photo.e3b357e3.jpg" + "?" + Date.now();
+},{"./helpers/bundle-url":"lgJ39"}],"5g8Je":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../photo.e3b357e3.jpg" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}],"gK4QH":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// пробуем сделать шаблон для кнопки
-var _templator = require("../../utils/Templator");
-var _dialogsItemScss = require("./DialogsItem.scss");
-const DialogsItem = (props)=>{
-    const context = {
-        first_name: props.first_name,
-        id: props.id,
-        link: props.link,
-        photo: props.photo,
-        unreadMessage: props.unreadMessage
-    };
-    const template = `
-    <div class="dialogs-item">
-    <img src={{photo}} alt="avatar" class="dialogs-item__photo"  />
-    <div class="dialogs-item__text-container" >
-        <p class="dialogs-item__name">{{first_name}}</p>
-        <p class="dialogs-item__messange">Друзья, у меня для вас особенный выпуск новостей! Это супер пупуер интересно и длинно</p>
-    </div>
-   
-    <span class="dialogs-item__number">{{unreadMessage}}</span>
-    <span class="dialogs-item__time">10:49</span>
-    </div>
-  
-  `;
-    return (0, _templator.getTemplate)(template, context);
-};
-exports.default = DialogsItem;
-
-},{"../../utils/Templator":"beJ1N","./DialogsItem.scss":"bP2W2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bP2W2":[function() {},{}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
+},{"./helpers/bundle-url":"lgJ39"}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
 
 //# sourceMappingURL=ChatPage.e6314848.js.map
