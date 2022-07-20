@@ -1,0 +1,73 @@
+@import '../../variables.scss';
+
+.dialogs-item {
+  width: 100%;
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #eaeaea;
+
+  display: flex;
+  position: relative;
+
+  &__photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-right: 5px;
+  }
+
+  &__name {
+    @include fontText(normal, 600, 14px, 150%);
+
+    color: #397387;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  &__messange {
+    @include fontText(normal, 400, 13px, 150%);
+    color: #999999;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    margin: 0;
+  }
+
+  &__text-container {
+  }
+
+  &__number {
+    @include fontText(normal, 700, 12px, 100%);
+    text-align: center;
+
+    color: #397387;
+    border: 1px solid #397387;
+    border-radius: 50%;
+
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__time {
+    @include fontText(normal, 400, 12px, 126%);
+    color: #999999;
+  }
+}

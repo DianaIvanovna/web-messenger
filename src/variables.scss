@@ -20,3 +20,23 @@ $title_main: #397387;
   font-size: $size;
   line-height: $height;
 }
+
+.body {
+  // width: 100vw;
+  // height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+      rgba(247, 249, 250, 0.5),
+      rgba(247, 249, 250, 0.5)
+    ),
+    url(/static/img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+}
+.root {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}

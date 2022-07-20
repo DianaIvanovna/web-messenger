@@ -1,5 +1,7 @@
 import { getObjectKey } from './getObjectKey';
 
+//НУЖНО НАПИСАТЬ ОБРАБОТКУ МАССИВОВ mas[0]
+
 window.Templator = (function () {
   class Templator {
     TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;

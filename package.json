@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel src/index.html --open ",
+    "devChat": "parcel src/pages/ChatPage/ChatPage.html --open ",
     "build": "parcel build src/index.html"
   },
   "repository": {

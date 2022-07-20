@@ -326,22 +326,6 @@ template, [hidden] {
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-@media screen and (max-width: 1024px) {
-  .root {
-    padding: 60px 50px;
-  }
-}
-
-@media screen and (max-width: 670px) {
-  .root {
-    padding: 20px 15px;
-  }
 }
 
 .rXMN1a_error-page {
@@ -385,6 +369,34 @@ template, [hidden] {
   }
 }
 
+.-S5u_q_chat {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid red;
+  display: flex;
+}
 
+.-S5u_q_chat__list {
+  width: 300px;
+  background: #ffffffb3;
+  border: 1px solid green;
+  flex-shrink: 0;
+}
+
+.-S5u_q_chat__menu {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+.-S5u_q_chat__icon {
+  width: 50px;
+}
+
+.-S5u_q_chat__container {
+  width: 100%;
+  border: 1px solid #ff0;
+}
 
 /*# sourceMappingURL=index.b2d9cf43.css.map */
