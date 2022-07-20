@@ -1,5 +1,3 @@
-// пробуем сделать шаблон для кнопки
-
 import { getTemplate } from '../../utils/Templator';
 import './DialogsItem.scss';
 
@@ -10,13 +8,15 @@ const DialogsItem = (props) => {
     link: props.link,
     photo: props.photo,
     unreadMessage: props.unreadMessage,
+    lastMessange: props.lastMessange,
+    openDialog: props.openDialog,
   };
   const template = `
-    <div class="dialogs-item">
+    <div class="dialogs-item" onClick={{openDialog}}>
     <img src={{photo}} alt="avatar" class="dialogs-item__photo"  />
     <div class="dialogs-item__text-container" >
         <p class="dialogs-item__name">{{first_name}}</p>
-        <p class="dialogs-item__messange">Друзья, у меня для вас особенный выпуск новостей! Это супер пупуер интересно и длинно</p>
+        <p class="dialogs-item__messange">{{lastMessange.text}}</p>
     </div>
    
     <span class="dialogs-item__number">{{unreadMessage}}</span>

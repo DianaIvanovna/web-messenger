@@ -1,24 +1,38 @@
-import { getTemplate } from '../../utils/Templator';
 import DialogsItem from '../../components/DialogsItem/DialogsItem';
+import Message from '../../components/Message/Message';
+import SendMessange from '../../components/SendMessange/SendMessange';
 import { dialogs } from './data';
 
 (function () {
   const MainContainer = document.querySelector('.chat__main');
+  const chatContainer = document.querySelector('.chat__container');
+
+  const openDialog = (index) => {
+    chatContainer.innerHTML = '';
+    chatContainer.classList.add('chat__container--dialog');
+
+    dialogs?.[index].messages.forEach((item, index) => {
+      let div = document.createElement('div');
+      div.className = 'chat__messange';
+      div.innerHTML = Message({
+        ...item,
+      });
+
+      chatContainer.prepend(div);
+    });
+
+    let div = document.createElement('div');
+    div.className = 'chat__messange';
+    div.innerHTML = SendMessange({});
+    console.log('div', div);
+    chatContainer.append(div);
+  };
 
   const getUserSettings = () => {
     // ВЫВОД НАСТРОЕК ПОЛЬЗОВАТЕЛЯ
     MainContainer.innerHTML = 'getUserSettings';
   };
-  const getDialogs = () => {
-    // ВЫВОД СПИСКА ДИАЛОГОЛОВ
-    MainContainer.innerHTML = '';
 
-    dialogs?.forEach((item, index) => {
-      let div = document.createElement('div');
-      div.innerHTML = DialogsItem(item);
-      MainContainer.append(div);
-    });
-  };
   const getContacts = () => {
     // ВЫВОД КОНТАКТОВ
     MainContainer.innerHTML = 'getContacts';
@@ -26,6 +40,24 @@ import { dialogs } from './data';
   const getSettings = () => {
     // ВЫВОД НАСТРОЕК ПРИЛОЖЕНИЯ
     MainContainer.innerHTML = 'getSettings';
+  };
+
+  const getDialogs = () => {
+    // ВЫВОД СПИСКА ДИАЛОГОЛОВ
+    MainContainer.innerHTML = '';
+
+    dialogs?.forEach((item, index) => {
+      let div = document.createElement('div');
+      div.innerHTML = DialogsItem({
+        ...item,
+        lastMessange: item.messages?.[0],
+        openDialog: () => {
+          openDialog(index);
+        },
+      });
+
+      MainContainer.append(div);
+    });
   };
 
   const menuFunction = [getUserSettings, getDialogs, getContacts, getSettings];
@@ -40,78 +72,7 @@ import { dialogs } from './data';
 
   // при первом открытии показываю список чатов
   menuFunction[1]();
+  // при первом открытии
+  //chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
+  openDialog(0);
 })();
-
-// import classes from './ChatPage.module.scss';
-
-// const ChatPage = () => {
-//   const listContentArr = [
-//     {
-//       menuContent: '1',
-//       messangeContainer: '1',
-//     },
-//     {
-//       menuContent: '2',
-//       messangeContainer: '2',
-//     },
-//     {
-//       menuContent: '3',
-//       messangeContainer: '3',
-//     },
-//     {
-//       menuContent: '4',
-//       messangeContainer: '4',
-//     },
-//   ];
-
-//   const iconHadler = (index) => {
-//     document.querySelector(`.${classes.chat__ul}`).innerHTML =
-//       listContentArr[index].menuContent;
-
-//     console.log(document.querySelector(`.${classes.chat__container}`));
-//     document.querySelector(`.${classes.chat__container}`).innerHTML =
-//       listContentArr[index].messangeContainer;
-//   };
-
-//   const context = {
-//     classes,
-//     iconChat,
-//     iconContacts,
-//     iconSettings,
-//     iconUserSettings,
-//     iconHadler0: () => {
-//       iconHadler(0);
-//     },
-//     iconHadler1: () => {
-//       iconHadler(1);
-//     },
-//     iconHadler2: () => {
-//       iconHadler(2);
-//     },
-//     iconHadler3: () => {
-//       iconHadler(3);
-//     },
-//   };
-
-//   const template = `
-//     <div class={{classes.chat}}>
-//       <div class={{classes.chat__list}}>
-//         <div class={{classes.chat__menu}}>
-//           <img class={{classes.chat__icon}} onClick={{iconHadler0}} src={{iconUserSettings}} alt="настройки пользователя"/>
-//           <img class={{classes.chat__icon}} onClick={{iconHadler1}} src={{iconChat}} alt="чаты"/>
-//           <img class={{classes.chat__icon}} onClick={{iconHadler2}} src={{iconContacts}} alt="контакты"/>
-//           <img class={{classes.chat__icon}} onClick={{iconHadler3}} src={{iconSettings}} alt="настройки"/>
-//         </div>
-
-//         <div class={{classes.chat__ul}}>
-//         1
-//         </div>
-//       </div>
-//       <div class={{classes.chat__container}}>fdfdsf</div>
-//     </div>
-//   `;
-
-//   return getTemplate(template, context);
-// };
-
-// export default ChatPage;

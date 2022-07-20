@@ -27,10 +27,18 @@ window.Templator = (function () {
           const data = getObjectKey(ctx, tmplValue);
 
           if (typeof data === 'function') {
-            window[tmplValue] = data;
+            /*
+            баг. если название функции одинаковые, то они переопределяются.. 
+            нужно подумать как с этим быть, но пока просто добавляю хеш
+            */
+            const newFuncName = `${tmplValue}_${Math.floor(
+              Math.random() * 500
+            )}`;
+            window[newFuncName] = data;
+
             tmpl = tmpl.replace(
               new RegExp(key[0], 'gi'),
-              `window.${key[1].trim()}()`
+              `window.${newFuncName}()`
             );
             continue;
           }

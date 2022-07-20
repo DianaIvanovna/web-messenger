@@ -1,3 +1,6 @@
+@import '../../../static/vendor/normalize.css';
+@import '../../../static/font/stylesheet.css';
+@import '../../../static/font/montserratAlternates.css';
 @import '../../variables.scss';
 
 .chat {
@@ -11,6 +14,12 @@
     width: 350px;
     flex-shrink: 0;
     background: rgba(255, 255, 255, 0.7);
+  }
+
+  &__subtitle {
+    @include fontText(normal, 400, 14px, 150%);
+    text-align: center;
+    justify-self: center;
   }
 
   &__menu {
@@ -56,9 +65,23 @@
 
   &__container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    &--dialog {
+      justify-content: end;
+    }
   }
 
   &__main {
     padding: 0 5px;
+  }
+
+  &__messange {
+    width: 100%;
   }
 }
