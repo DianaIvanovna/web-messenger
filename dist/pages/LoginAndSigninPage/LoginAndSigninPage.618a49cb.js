@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"lVfbH":[function(require,module,exports) {
+})({"3X2Ca":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "7041018ae6314848";
+module.bundle.HMR_BUNDLE_ID = "cad51d5c618a49cb";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -531,145 +531,138 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"kKNlY":[function(require,module,exports) {
+},{}],"6yqaK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _dialogsItem = require("../../components/DialogsItem/DialogsItem");
-var _dialogsItemDefault = parcelHelpers.interopDefault(_dialogsItem);
-var _message = require("../../components/Message/Message");
-var _messageDefault = parcelHelpers.interopDefault(_message);
-var _sendMessange = require("../../components/SendMessange/SendMessange");
-var _sendMessangeDefault = parcelHelpers.interopDefault(_sendMessange);
-var _data = require("./data");
+var _fieldInput = require("../../components/FieldInput/FieldInput");
+var _fieldInputDefault = parcelHelpers.interopDefault(_fieldInput);
 (function() {
-    const MainContainer = document.querySelector(".chat__main");
-    const chatContainer = document.querySelector(".chat__container");
-    const openDialog = (index)=>{
-        chatContainer.innerHTML = "";
-        chatContainer.classList.add("chat__container--dialog");
-        (0, _data.dialogs)?.[index].messages.forEach((item, index)=>{
+    const regForm = [
+        {
+            name: "email",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u043E\u0447\u0442\u0443",
+            title: "\u041F\u043E\u0447\u0442\u0430"
+        },
+        {
+            name: "login",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041B\u043E\u0433\u0438\u043D",
+            title: "\u041B\u043E\u0433\u0438\u043D"
+        },
+        {
+            name: "first-name",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F",
+            title: "\u0418\u043C\u044F"
+        },
+        {
+            name: "second-name",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0444\u0430\u043C\u0438\u043B\u0438\u044E",
+            title: "\u0424\u0430\u043C\u0438\u043B\u0438\u044F"
+        },
+        {
+            name: "phone",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043B\u0435\u0444\u043E\u043D",
+            title: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
+        },
+        {
+            name: "password",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            title: "\u041F\u0430\u0440\u043E\u043B\u044C"
+        }, 
+    ];
+    const loginForm = [
+        {
+            name: "login",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041B\u043E\u0433\u0438\u043D",
+            title: "\u041B\u043E\u0433\u0438\u043D"
+        },
+        {
+            name: "password",
+            type: "text",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            title: "\u041F\u0430\u0440\u043E\u043B\u044C"
+        }, 
+    ];
+    const form = document.querySelector(".login-form__form");
+    const renderLoginForm = ()=>{
+        form.innerHTML = "";
+        let title = document.createElement("h1");
+        title.textContent = "\u0412\u0445\u043E\u0434";
+        title.className = "login-form__title";
+        form.append(title);
+        loginForm.forEach((item, index)=>{
             let div = document.createElement("div");
-            div.className = "chat__messange";
-            div.innerHTML = (0, _messageDefault.default)({
+            div.className = "login-form__field";
+            div.innerHTML = (0, _fieldInputDefault.default)({
                 ...item
             });
-            chatContainer.prepend(div);
+            form.append(div);
         });
-        let div1 = document.createElement("div");
-        div1.className = "chat__messange";
-        div1.innerHTML = (0, _sendMessangeDefault.default)();
-        chatContainer.append(div1);
+        let button = document.createElement("button");
+        button.textContent = "\u0410\u0432\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F";
+        button.className = "login-form__button";
+        form.append(button);
+        let button2 = document.createElement("button");
+        button2.textContent = "\u041D\u0435\u0442 \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430?";
+        button2.className = "login-form__button login-form__button--second";
+        button2.addEventListener("click", renderRegForm);
+        form.append(button2);
     };
-    const getUserSettings = ()=>{
-        // ВЫВОД НАСТРОЕК ПОЛЬЗОВАТЕЛЯ
-        MainContainer.innerHTML = "getUserSettings";
-    };
-    const getContacts = ()=>{
-        // ВЫВОД КОНТАКТОВ
-        MainContainer.innerHTML = "getContacts";
-    };
-    const getSettings = ()=>{
-        // ВЫВОД НАСТРОЕК ПРИЛОЖЕНИЯ
-        MainContainer.innerHTML = "getSettings";
-    };
-    const getDialogs = ()=>{
-        // ВЫВОД СПИСКА ДИАЛОГОЛОВ
-        MainContainer.innerHTML = "";
-        (0, _data.dialogs)?.forEach((item, index)=>{
+    const renderRegForm = ()=>{
+        form.innerHTML = "";
+        let title = document.createElement("h1");
+        title.textContent = "\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F";
+        title.className = "login-form__title";
+        form.append(title);
+        regForm.forEach((item, index)=>{
             let div = document.createElement("div");
-            div.innerHTML = (0, _dialogsItemDefault.default)({
-                ...item,
-                lastMessange: item.messages?.[0],
-                openDialog: ()=>{
-                    openDialog(index);
-                }
+            div.className = "login-form__field";
+            div.innerHTML = (0, _fieldInputDefault.default)({
+                ...item
             });
-            MainContainer.append(div);
+            form.append(div);
         });
+        let button = document.createElement("button");
+        button.textContent = "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F";
+        button.className = "login-form__button";
+        form.append(button);
+        let button2 = document.createElement("button");
+        button2.textContent = "\u0412\u043E\u0439\u0442\u0438";
+        button2.className = "login-form__button login-form__button--second";
+        button2.addEventListener("click", renderLoginForm);
+        form.append(button2);
     };
-    const menuFunction = [
-        getUserSettings,
-        getDialogs,
-        getContacts,
-        getSettings
-    ];
-    const chatMenu = document.querySelector(".chat__menu");
-    const chatMenuButton = document.querySelectorAll(".chat__icon");
-    chatMenuButton.forEach((item, index)=>{
-        item.addEventListener("click", ()=>{
-            menuFunction[index]();
-            chatMenu.className = `chat__menu chat__menu--active-${index}`;
-        });
-    });
-    // при первом открытии показываю список чатов
-    menuFunction[1]();
-    // при первом открытии
-    chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
-//openDialog(0);
+    // при первом вхождение показываю форму авторизации
+    renderLoginForm();
 })();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/DialogsItem/DialogsItem":"gK4QH","./data":"fPPM4","../../components/Message/Message":"cw81T","../../components/SendMessange/SendMessange":"39sG3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"gK4QH":[function(require,module,exports) {
+},{"../../components/FieldInput/FieldInput":"iEcxx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iEcxx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _templator = require("../../utils/Templator");
-var _dialogsItemScss = require("./DialogsItem.scss");
-const DialogsItem = (props)=>{
+var _fieldInputModuleScss = require("./FieldInput.module.scss");
+var _fieldInputModuleScssDefault = parcelHelpers.interopDefault(_fieldInputModuleScss);
+const FieldInput = (props)=>{
     const context = {
-        first_name: props.first_name,
-        id: props.id,
-        link: props.link,
-        photo: props.photo,
-        unreadMessage: props.unreadMessage,
-        lastMessange: props.lastMessange,
-        openDialog: props.openDialog
+        ...props,
+        classes: (0, _fieldInputModuleScssDefault.default)
     };
     const template = `
-    <div class="dialogs-item" onClick={{openDialog}}>
-    <img src={{photo}} alt="avatar" class="dialogs-item__photo"  />
-    <div class="dialogs-item__text-container" >
-        <p class="dialogs-item__name">{{first_name}}</p>
-        <p class="dialogs-item__messange">{{lastMessange.text}}</p>
-    </div>
-   
-    <span class="dialogs-item__number">{{unreadMessage}}</span>
-    <span class="dialogs-item__time">10:49</span>
-    </div>
-  
+   <div class={{classes.field-input}}> 
+        <p class="{{classes.field-input__title}} ">{{title}}</p>
+        <input class="{{classes.field-input__input}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" >
+   </div>
   `;
     return (0, _templator.getTemplate)(template, context);
 };
-exports.default = DialogsItem;
+exports.default = FieldInput;
 
-},{"../../utils/Templator":"beJ1N","./DialogsItem.scss":"bP2W2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"beJ1N":[function(require,module,exports) {
+},{"../../utils/Templator":"beJ1N","./FieldInput.module.scss":"7lnGJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"beJ1N":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getTemplate", ()=>getTemplate);
@@ -728,226 +721,43 @@ function getObjectKey(obj, path, defaultValue) {
     return result ?? defaultValue;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bP2W2":[function() {},{}],"fPPM4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "dialogs", ()=>dialogs);
-// временный файл с тем, как предположительно будут приходить данные с бекенда
-var _avatar1Png = require("../../../static/img/avatars/avatar1.png");
-var _avatar1PngDefault = parcelHelpers.interopDefault(_avatar1Png);
-var _avatar3Png = require("../../../static/img/avatars/avatar3.png");
-var _avatar3PngDefault = parcelHelpers.interopDefault(_avatar3Png);
-var _photoJpg = require("../../../static/img/avatars/photo.jpg");
-var _photoJpgDefault = parcelHelpers.interopDefault(_photoJpg);
-const dialogs = [
-    {
-        id: 1,
-        photo: (0, _avatar1PngDefault.default),
-        first_name: "\u041C\u0438\u043B\u0430\u043D\u0430",
-        link: "/",
-        unreadMessage: 2,
-        messages: [
-            {
-                text: "\u0438\u043D\u0442\u0435\u0440\u0435\u0441\u043D\u043E..",
-                data: "10:15",
-                flagRead: 0,
-                flagSend: 1,
-                myMes: 1
-            },
-            {
-                text: `Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
-
-        Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.`,
-                data: "10:10",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 0
-            },
-            {
-                text: "\u0437\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439))",
-                data: "10:05",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 1
-            },
-            {
-                text: "\u043F\u0440\u0438\u0432\u0435\u0442!",
-                data: "10:00",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 0
-            }, 
-        ]
-    },
-    {
-        id: 3,
-        photo: (0, _photoJpgDefault.default),
-        first_name: "\u041E\u0447\u043D\u044C \u0434\u043B\u0438\u043D\u043D\u043E\u0435 \u0438\u043C\u044F, \u043A\u043E\u0442\u043E\u0440\u043E\u0435 \u043D\u0435 \u043F\u043E\u043C\u0435\u0449\u0430\u0435\u0442\u0441\u044F \u0432 \u043A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440",
-        link: "/",
-        unreadMessage: 0,
-        messages: [
-            {
-                text: "\u0437\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439))",
-                data: "10:05",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 1
-            },
-            {
-                text: "\u043F\u0440\u0438\u0432\u0435\u0442!",
-                data: "10:00",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 0
-            }, 
-        ]
-    },
-    {
-        id: 2,
-        photo: (0, _avatar3PngDefault.default),
-        first_name: "\u041B\u0435\u043D\u044F",
-        link: "/",
-        unreadMessage: 79,
-        messages: [
-            {
-                text: "\u0431\u043B\u0430?",
-                data: "10:05",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 1
-            },
-            {
-                text: "\u0431\u043B\u0430 \u0431\u043B\u0430 \u0431\u043B\u0430",
-                data: "10:00",
-                flagRead: 1,
-                flagSend: 1,
-                myMes: 0
-            }, 
-        ]
-    }, 
-];
-
-},{"../../../static/img/avatars/avatar1.png":"c2UxN","../../../static/img/avatars/avatar3.png":"4gXpg","../../../static/img/avatars/photo.jpg":"5g8Je","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c2UxN":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../avatar1.2ca7a5d5.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return "/";
-}
-function getBaseURL(url) {
-    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error("Origin not found");
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"4gXpg":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../avatar3.6676c29a.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"5g8Je":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../photo.e3b357e3.jpg" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"cw81T":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _templator = require("../../utils/Templator");
-var _messageModuleScss = require("./Message.module.scss");
-var _messageModuleScssDefault = parcelHelpers.interopDefault(_messageModuleScss);
-const message = (props1)=>{
-    const returnClass = (props)=>{
-        return `${(0, _messageModuleScssDefault.default).message}  ${props.myMes ? (0, _messageModuleScssDefault.default)["message--my"] : ""}  ${props.flagRead ? (0, _messageModuleScssDefault.default)["message--read"] : ""} ${props.flagSend ? (0, _messageModuleScssDefault.default)["message--send"] : ""}`;
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
     };
-    const context = {
-        text: props1.text,
-        data: props1.data,
-        classes: (0, _messageModuleScssDefault.default),
-        classMes: returnClass(props1)
-    };
-    const template = `
-   <div class="{{classMes}}">
-    <p class="{{classes.message__text}}" >
-      {{text}}
-      <span class="{{classes.message__data}}" >{{data}}</span>
-    <p/>
-   </div>
-
-  `;
-    return (0, _templator.getTemplate)(template, context);
 };
-exports.default = message;
-
-},{"../../utils/Templator":"beJ1N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Message.module.scss":"5JPeP"}],"5JPeP":[function(require,module,exports) {
-module.exports["message__data"] = `oSqLca_message__data`;
-module.exports["root"] = `oSqLca_root`;
-module.exports["message"] = `oSqLca_message`;
-module.exports["body"] = `oSqLca_body`;
-module.exports["message--my"] = `oSqLca_message--my`;
-module.exports["message__text"] = `oSqLca_message__text`;
-
-},{}],"39sG3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _templator = require("../../utils/Templator");
-var _sendMessangeModuleScss = require("./SendMessange.module.scss");
-var _sendMessangeModuleScssDefault = parcelHelpers.interopDefault(_sendMessangeModuleScss);
-var _clipPng = require("../../../static/img/icons/clip.png");
-var _clipPngDefault = parcelHelpers.interopDefault(_clipPng);
-var _sendMessangePng = require("../../../static/img/icons/send-messange.png");
-var _sendMessangePngDefault = parcelHelpers.interopDefault(_sendMessangePng);
-const SendMessange = ()=>{
-    const context = {
-        classes: (0, _sendMessangeModuleScssDefault.default),
-        clip: (0, _clipPngDefault.default),
-        sendMessangeIcon: (0, _sendMessangePngDefault.default)
-    };
-    const template = `
-   <form class={{classes.send-messange}}>
-    <button class={{classes.send-messange__img}}><img src={{clip}} /></button>
-    <input class={{classes.send-messange__input}} placeholder="Сообщение" type="text" id="messange" name="messange" >
-    <button class={{classes.send-messange__img}}><img src={{sendMessangeIcon}}  /></button>
-   </form>
-
-  `;
-    return (0, _templator.getTemplate)(template, context);
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
 };
-exports.default = SendMessange;
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
-},{"../../utils/Templator":"beJ1N","./SendMessange.module.scss":"aJgrR","../../../static/img/icons/clip.png":"cncjL","../../../static/img/icons/send-messange.png":"j8Dl4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aJgrR":[function(require,module,exports) {
-module.exports["body"] = `I5cg2a_body`;
-module.exports["send-messange__img"] = `I5cg2a_send-messange__img`;
-module.exports["send-messange"] = `I5cg2a_send-messange`;
-module.exports["root"] = `I5cg2a_root`;
-module.exports["send-messange__input"] = `I5cg2a_send-messange__input`;
+},{}],"7lnGJ":[function(require,module,exports) {
+module.exports["body"] = `oO4kea_body`;
+module.exports["field-input__title"] = `oO4kea_field-input__title`;
+module.exports["root"] = `oO4kea_root`;
+module.exports["field-input"] = `oO4kea_field-input`;
+module.exports["field-input__input"] = `oO4kea_field-input__input`;
 
-},{}],"cncjL":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../clip.9630bb32.png" + "?" + Date.now();
+},{}]},["3X2Ca","6yqaK"], "6yqaK", "parcelRequire1ce6")
 
-},{"./helpers/bundle-url":"lgJ39"}],"j8Dl4":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../send-messange.a080967d.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
-
-//# sourceMappingURL=ChatPage.e6314848.js.map
+//# sourceMappingURL=LoginAndSigninPage.618a49cb.js.map

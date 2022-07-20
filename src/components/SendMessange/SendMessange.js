@@ -12,8 +12,8 @@ const SendMessange = () => {
   const template = `
    <form class={{classes.send-messange}}>
     <button class={{classes.send-messange__img}}><img src={{clip}} /></button>
-    <input class={{classes.send-messange__input}} placeholder="Сообщение" >
-    <button class={{classes.send-messange__img}}><img src={{sendMessangeIcon}} type="text" id="messange" name="messange" /></button>
+    <input class={{classes.send-messange__input}} placeholder="Сообщение" type="text" id="messange" name="messange" >
+    <button class={{classes.send-messange__img}}><img src={{sendMessangeIcon}}  /></button>
    </form>
 
   `;

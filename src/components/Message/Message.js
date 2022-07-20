@@ -2,8 +2,6 @@ import { getTemplate } from '../../utils/Templator';
 import classes from './Message.module.scss';
 
 const message = (props) => {
-  console.log('props', props);
-
   const returnClass = (props) => {
     return `${classes.message}  ${props.myMes ? classes['message--my'] : ''}  ${
       props.flagRead ? classes['message--read'] : ''

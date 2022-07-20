@@ -23,8 +23,7 @@ import { dialogs } from './data';
 
     let div = document.createElement('div');
     div.className = 'chat__messange';
-    div.innerHTML = SendMessange({});
-    console.log('div', div);
+    div.innerHTML = SendMessange();
     chatContainer.append(div);
   };
 
@@ -73,6 +72,6 @@ import { dialogs } from './data';
   // при первом открытии показываю список чатов
   menuFunction[1]();
   // при первом открытии
-  //chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
-  openDialog(0);
+  chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
+  //openDialog(0);
 })();
