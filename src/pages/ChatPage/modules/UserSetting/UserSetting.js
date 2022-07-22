@@ -4,28 +4,27 @@ import './UserSetting.scss';
 import photo from '../../../../../static/img/avatars/photo.jpg';
 import pen from '../../../../../static/img/icons/pen.png';
 
-const passwordForm = [
-  {
-    name: 'prevPassword',
-    type: 'password',
-    placeholder: 'введите Пароль',
-    title: 'Старый пароль',
-  },
-  {
-    name: 'newPassword',
-    type: 'password',
-    placeholder: 'введите Пароль',
-    title: 'Новый пароль',
-  },
-  {
-    name: 'repeatPassword',
-    type: 'password',
-    placeholder: 'Повторите новый пароль',
-    title: 'Пароль',
-  },
-];
-
 const UserSetting = (props) => {
+  const passwordForm = [
+    {
+      name: 'prevPassword',
+      type: 'password',
+      placeholder: 'введите Пароль',
+      title: 'Старый пароль',
+    },
+    {
+      name: 'newPassword',
+      type: 'password',
+      placeholder: 'введите Пароль',
+      title: 'Новый пароль',
+    },
+    {
+      name: 'repeatPassword',
+      type: 'password',
+      placeholder: 'Повторите новый пароль',
+      title: 'Пароль',
+    },
+  ];
   let flagActiveForm = false;
   let form = '';
   props.userForm.forEach((item, index) => {

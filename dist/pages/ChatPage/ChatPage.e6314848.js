@@ -1010,27 +1010,27 @@ var _photoJpg = require("../../../../../static/img/avatars/photo.jpg");
 var _photoJpgDefault = parcelHelpers.interopDefault(_photoJpg);
 var _penPng = require("../../../../../static/img/icons/pen.png");
 var _penPngDefault = parcelHelpers.interopDefault(_penPng);
-const passwordForm = [
-    {
-        name: "prevPassword",
-        type: "password",
-        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
-        title: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-    },
-    {
-        name: "newPassword",
-        type: "password",
-        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
-        title: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-    },
-    {
-        name: "repeatPassword",
-        type: "password",
-        placeholder: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
-        title: "\u041F\u0430\u0440\u043E\u043B\u044C"
-    }, 
-];
 const UserSetting = (props)=>{
+    const passwordForm = [
+        {
+            name: "prevPassword",
+            type: "password",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            title: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
+        },
+        {
+            name: "newPassword",
+            type: "password",
+            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            title: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
+        },
+        {
+            name: "repeatPassword",
+            type: "password",
+            placeholder: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
+            title: "\u041F\u0430\u0440\u043E\u043B\u044C"
+        }, 
+    ];
     let flagActiveForm = false;
     let form1 = "";
     props.userForm.forEach((item, index)=>{
