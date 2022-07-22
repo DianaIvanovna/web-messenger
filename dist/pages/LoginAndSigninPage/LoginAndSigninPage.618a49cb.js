@@ -533,9 +533,10 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"6yqaK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
 var _fieldInput = require("../../components/FieldInput/FieldInput");
 var _fieldInputDefault = parcelHelpers.interopDefault(_fieldInput);
-(function() {
+const loginAndSigninPage = ()=>{
     const regForm = [
         {
             name: "email",
@@ -636,7 +637,8 @@ var _fieldInputDefault = parcelHelpers.interopDefault(_fieldInput);
     };
     // при первом вхождение показываю форму авторизации
     renderLoginForm();
-})();
+};
+exports.default = loginAndSigninPage();
 
 },{"../../components/FieldInput/FieldInput":"iEcxx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iEcxx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

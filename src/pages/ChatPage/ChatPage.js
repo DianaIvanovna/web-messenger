@@ -4,7 +4,7 @@ import SendMessange from '../../components/SendMessange/SendMessange';
 import UserSetting from './modules/UserSetting/UserSetting';
 import { dialogs } from './data';
 
-(function () {
+const chat = () => {
   const MainContainer = document.querySelector('.chat__main');
   const chatContainer = document.querySelector('.chat__container');
   const userForm = [
@@ -126,4 +126,6 @@ import { dialogs } from './data';
   menuFunction[1]();
   // при первом открытии
   chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
-})();
+};
+
+export default chat();

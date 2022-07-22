@@ -533,6 +533,7 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"kKNlY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
 var _dialogsItem = require("../../components/DialogsItem/DialogsItem");
 var _dialogsItemDefault = parcelHelpers.interopDefault(_dialogsItem);
 var _message = require("../../components/Message/Message");
@@ -542,7 +543,7 @@ var _sendMessangeDefault = parcelHelpers.interopDefault(_sendMessange);
 var _userSetting = require("./modules/UserSetting/UserSetting");
 var _userSettingDefault = parcelHelpers.interopDefault(_userSetting);
 var _data = require("./data");
-(function() {
+const chat = ()=>{
     const MainContainer = document.querySelector(".chat__main");
     const chatContainer = document.querySelector(".chat__container");
     const userForm = [
@@ -656,7 +657,8 @@ var _data = require("./data");
     menuFunction[1]();
     // при первом открытии
     chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
-})();
+};
+exports.default = chat();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/DialogsItem/DialogsItem":"gK4QH","./data":"fPPM4","../../components/Message/Message":"cw81T","../../components/SendMessange/SendMessange":"39sG3","./modules/UserSetting/UserSetting":"9QOHt"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {

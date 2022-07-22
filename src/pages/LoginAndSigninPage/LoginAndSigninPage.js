@@ -1,5 +1,5 @@
 import FieldInput from '../../components/FieldInput/FieldInput';
-(function () {
+const loginAndSigninPage = () => {
   const regForm = [
     {
       name: 'email',
@@ -113,4 +113,6 @@ import FieldInput from '../../components/FieldInput/FieldInput';
 
   // при первом вхождение показываю форму авторизации
   renderLoginForm();
-})();
+};
+
+export default loginAndSigninPage();
