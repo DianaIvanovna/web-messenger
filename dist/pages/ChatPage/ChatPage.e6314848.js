@@ -952,12 +952,12 @@ const message = (props1)=>{
 exports.default = message;
 
 },{"../../utils/Templator":"beJ1N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Message.module.scss":"5JPeP"}],"5JPeP":[function(require,module,exports) {
-module.exports["message__data"] = `oSqLca_message__data`;
-module.exports["root"] = `oSqLca_root`;
-module.exports["message"] = `oSqLca_message`;
 module.exports["body"] = `oSqLca_body`;
 module.exports["message--my"] = `oSqLca_message--my`;
 module.exports["message__text"] = `oSqLca_message__text`;
+module.exports["message__data"] = `oSqLca_message__data`;
+module.exports["message"] = `oSqLca_message`;
+module.exports["root"] = `oSqLca_root`;
 
 },{}],"39sG3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -989,9 +989,9 @@ exports.default = SendMessange;
 
 },{"../../utils/Templator":"beJ1N","./SendMessange.module.scss":"aJgrR","../../../static/img/icons/clip.png":"cncjL","../../../static/img/icons/send-messange.png":"j8Dl4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aJgrR":[function(require,module,exports) {
 module.exports["body"] = `I5cg2a_body`;
-module.exports["send-messange__img"] = `I5cg2a_send-messange__img`;
-module.exports["send-messange"] = `I5cg2a_send-messange`;
 module.exports["root"] = `I5cg2a_root`;
+module.exports["send-messange"] = `I5cg2a_send-messange`;
+module.exports["send-messange__img"] = `I5cg2a_send-messange__img`;
 module.exports["send-messange__input"] = `I5cg2a_send-messange__input`;
 
 },{}],"cncjL":[function(require,module,exports) {
@@ -1137,10 +1137,10 @@ const FieldInput = (props)=>{
 exports.default = FieldInput;
 
 },{"../../utils/Templator":"beJ1N","./FieldInput.module.scss":"7lnGJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7lnGJ":[function(require,module,exports) {
-module.exports["body"] = `oO4kea_body`;
-module.exports["field-input__title"] = `oO4kea_field-input__title`;
-module.exports["root"] = `oO4kea_root`;
 module.exports["field-input"] = `oO4kea_field-input`;
+module.exports["body"] = `oO4kea_body`;
+module.exports["root"] = `oO4kea_root`;
+module.exports["field-input__title"] = `oO4kea_field-input__title`;
 module.exports["field-input__input"] = `oO4kea_field-input__input`;
 
 },{}],"AyukO":[function() {},{}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
