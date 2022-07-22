@@ -4,51 +4,52 @@ import FieldInput from '../../components/FieldInput/FieldInput';
     {
       name: 'email',
       type: 'text',
-      placeholder: 'введите почту',
       title: 'Почта',
     },
     {
       name: 'login',
       type: 'text',
-      placeholder: 'введите Логин',
       title: 'Логин',
     },
     {
       name: 'first-name',
       type: 'text',
-      placeholder: 'введите имя',
       title: 'Имя',
     },
     {
       name: 'second-name',
       type: 'text',
-      placeholder: 'введите фамилию',
+
       title: 'Фамилия',
     },
     {
       name: 'phone',
       type: 'text',
-      placeholder: 'введите телефон',
+
       title: 'Телефон',
     },
     {
       name: 'password',
-      type: 'text',
-      placeholder: 'введите Пароль',
+      type: 'password',
+
       title: 'Пароль',
+    },
+    {
+      name: 'repeatPassword',
+      type: 'password',
+
+      title: 'Повторите пароль',
     },
   ];
   const loginForm = [
     {
       name: 'login',
       type: 'text',
-      placeholder: 'введите Логин',
       title: 'Логин',
     },
     {
       name: 'password',
-      type: 'text',
-      placeholder: 'введите Пароль',
+      type: 'password',
       title: 'Пароль',
     },
   ];

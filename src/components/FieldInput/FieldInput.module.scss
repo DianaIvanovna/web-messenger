@@ -7,15 +7,16 @@
     @include fontText(normal, 400, 12px, 150%);
     margin: 0;
     margin-bottom: 5px;
-    color: #333333;
+    color: $font_color_second;
   }
 
   &__input {
     @include fontText(normal, 400, 14px, 150%);
     width: 100%;
     margin-bottom: 20px;
-    border: navajowhite;
-    border-bottom: 1px solid #397387;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid $back-color-attention;
 
     &:active,
     &:hover,

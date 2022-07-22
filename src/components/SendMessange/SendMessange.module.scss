@@ -20,15 +20,15 @@
     width: 100%;
     border-radius: 30px;
     border: none;
-    background-color: #efefef;
+    background-color: $back-messange;
     padding: 10px 22px;
     margin: 0 20px;
     @include fontText(normal, 400, 14px, 126%);
-    color: #1e1e1e;
+    color: $font_color_second;
 
     &::placeholder {
       @include fontText(normal, 400, 14px, 126%);
-      color: #999999;
+      color: $font_color_second;
     }
     &:active,
     &:hover,

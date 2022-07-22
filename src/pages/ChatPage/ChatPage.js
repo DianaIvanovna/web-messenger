@@ -126,5 +126,4 @@ import { dialogs } from './data';
   menuFunction[1]();
   // при первом открытии
   chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
-  //openDialog(0);
 })();

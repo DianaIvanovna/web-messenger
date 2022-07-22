@@ -23,7 +23,7 @@
   &__name {
     @include fontText(normal, 600, 14px, 150%);
 
-    color: #397387;
+    color: $font_color_main;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -35,7 +35,7 @@
 
   &__messange {
     @include fontText(normal, 400, 13px, 150%);
-    color: #999999;
+    color: $font_color_second;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -45,15 +45,12 @@
     margin: 0;
   }
 
-  &__text-container {
-  }
-
   &__number {
     @include fontText(normal, 700, 12px, 100%);
     text-align: center;
 
-    color: #397387;
-    border: 1px solid #397387;
+    color: $font_color_main;
+    border: 1px solid $back-color-attention;
     border-radius: 50%;
 
     position: absolute;
@@ -68,6 +65,6 @@
 
   &__time {
     @include fontText(normal, 400, 12px, 126%);
-    color: #999999;
+    color: $font_color_second;
   }
 }

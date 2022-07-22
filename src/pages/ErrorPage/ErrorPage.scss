@@ -20,7 +20,7 @@
   &__description {
     @include fontText(normal, 400, 24px, 150%);
 
-    color: #397387;
+    color: $font_color_main;
     margin: 0;
   }
 

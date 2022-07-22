@@ -3,19 +3,18 @@ import classes from './FieldInput.module.scss';
 
 const FieldInput = (props) => {
   const initValue = {
+    type: props.type, // обязательное поле
+    name: props.name, // обязательное поле
     value: props.value ? props.value : '',
     class: props.class
       ? `${classes['field-input__input']} ${props.class}`
       : classes['field-input__input'],
-    type: props.type, // обязательное поле
-    name: props.name, // обязательное поле
     placeholder: props.placeholder ? props.placeholder : '',
     title: props.title
       ? `<p class="{{classes.field-input__title}} ">${props.title}</p>`
       : '',
     disabled: props.disabled ? `disabled= ${props.disabled}` : '',
   };
-  console.log('props.disabled ', initValue);
 
   const context = {
     ...initValue,

@@ -7,19 +7,15 @@
   &--my {
     flex-direction: row-reverse;
     .message__text {
-      background-color: #e4edfd;
+      background-color: $back-messange-my;
     }
-  }
-  &--read {
-  }
-  &--send {
   }
 
   &__text {
     @include fontText(normal, 500, 12px, 15px);
     max-width: 420px;
     width: max-content;
-    background: #f7f9fa;
+    background: $back-messange;
     padding: 11px;
     border-radius: 5px;
     margin: 0;

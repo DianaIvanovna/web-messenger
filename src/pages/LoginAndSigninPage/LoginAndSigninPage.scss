@@ -28,13 +28,13 @@
 
   &__title {
     @include fontText(normal, 700, 24px, 150%);
-    color: #397387;
+    color: $font_color_main;
   }
 
   &__button {
     @include fontText(normal, 400, 16px, 150%);
     color: #ffffff;
-    background: #397387;
+    background: $back-color-attention;
     padding: 12px 0;
     border-radius: 8px;
     width: 100%;
@@ -45,7 +45,7 @@
 
     &--second {
       background: transparent;
-      color: #397387;
+      color: $font_color_main;
       margin-bottom: 0;
     }
   }

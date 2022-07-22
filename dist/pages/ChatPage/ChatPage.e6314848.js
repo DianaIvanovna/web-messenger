@@ -656,7 +656,6 @@ var _data = require("./data");
     menuFunction[1]();
     // при первом открытии
     chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
-//openDialog(0);
 })();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../components/DialogsItem/DialogsItem":"gK4QH","./data":"fPPM4","../../components/Message/Message":"cw81T","../../components/SendMessange/SendMessange":"39sG3","./modules/UserSetting/UserSetting":"9QOHt"}],"gkKU3":[function(require,module,exports) {
@@ -726,9 +725,11 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getTemplate", ()=>getTemplate);
 var _getObjectKey = require("./getObjectKey");
-//НУЖНО НАПИСАТЬ ОБРАБОТКУ МАССИВОВ mas[0]
-window.Templator = function() {
-    class Templator {
+/*TODOS: 
+  - дописать обработку массивов mas[0]
+  - баг. если название функции одинаковые, то они переопределяются.
+*/ const Templator = function() {
+    class Templator1 {
         TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;
         constructor(template){
             this._template = template;
@@ -740,14 +741,13 @@ window.Templator = function() {
             let tmpl = this._template;
             let key = null;
             const regExp = this.TEMPLATE_REGEXP;
-            // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
             while(key = regExp.exec(tmpl))if (key[1]) {
                 const tmplValue = key[1].trim();
                 const data = (0, _getObjectKey.getObjectKey)(ctx, tmplValue);
                 if (typeof data === "function") {
                     /*
-            баг. если название функции одинаковые, то они переопределяются.. 
-            нужно подумать как с этим быть, но пока просто добавляю хеш
+              баг. если название функции одинаковые, то они переопределяются.. 
+              нужно подумать как с этим быть, но пока просто добавляю хеш
             */ const newFuncName = `${tmplValue}_${Math.floor(Math.random() * 500)}`;
                     window[newFuncName] = data;
                     tmpl = tmpl.replace(new RegExp(key[0], "gi"), `window.${newFuncName}()`);
@@ -758,11 +758,10 @@ window.Templator = function() {
             return tmpl;
         }
     }
-    // Можно не только из window брать, но и присвоить экспорту файла
-    return Templator;
+    return Templator1;
 }();
 function getTemplate(template, context) {
-    const tmpl = new window.Templator(template);
+    const tmpl = new Templator(template);
     return tmpl.compile(context); // Строка с html-вёрсткой
 }
 
@@ -952,12 +951,12 @@ const message = (props1)=>{
 exports.default = message;
 
 },{"../../utils/Templator":"beJ1N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Message.module.scss":"5JPeP"}],"5JPeP":[function(require,module,exports) {
-module.exports["body"] = `oSqLca_body`;
-module.exports["message--my"] = `oSqLca_message--my`;
-module.exports["message__text"] = `oSqLca_message__text`;
-module.exports["message__data"] = `oSqLca_message__data`;
 module.exports["message"] = `oSqLca_message`;
 module.exports["root"] = `oSqLca_root`;
+module.exports["message__text"] = `oSqLca_message__text`;
+module.exports["body"] = `oSqLca_body`;
+module.exports["message--my"] = `oSqLca_message--my`;
+module.exports["message__data"] = `oSqLca_message__data`;
 
 },{}],"39sG3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -988,11 +987,11 @@ const SendMessange = ()=>{
 exports.default = SendMessange;
 
 },{"../../utils/Templator":"beJ1N","./SendMessange.module.scss":"aJgrR","../../../static/img/icons/clip.png":"cncjL","../../../static/img/icons/send-messange.png":"j8Dl4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aJgrR":[function(require,module,exports) {
-module.exports["body"] = `I5cg2a_body`;
-module.exports["root"] = `I5cg2a_root`;
-module.exports["send-messange"] = `I5cg2a_send-messange`;
 module.exports["send-messange__img"] = `I5cg2a_send-messange__img`;
 module.exports["send-messange__input"] = `I5cg2a_send-messange__input`;
+module.exports["body"] = `I5cg2a_body`;
+module.exports["send-messange"] = `I5cg2a_send-messange`;
+module.exports["root"] = `I5cg2a_root`;
 
 },{}],"cncjL":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("9Dwye") + "../../clip.9630bb32.png" + "?" + Date.now();
@@ -1113,15 +1112,14 @@ var _fieldInputModuleScss = require("./FieldInput.module.scss");
 var _fieldInputModuleScssDefault = parcelHelpers.interopDefault(_fieldInputModuleScss);
 const FieldInput = (props)=>{
     const initValue = {
-        value: props.value ? props.value : "",
-        class: props.class ? `${(0, _fieldInputModuleScssDefault.default)["field-input__input"]} ${props.class}` : (0, _fieldInputModuleScssDefault.default)["field-input__input"],
         type: props.type,
         name: props.name,
+        value: props.value ? props.value : "",
+        class: props.class ? `${(0, _fieldInputModuleScssDefault.default)["field-input__input"]} ${props.class}` : (0, _fieldInputModuleScssDefault.default)["field-input__input"],
         placeholder: props.placeholder ? props.placeholder : "",
         title: props.title ? `<p class="{{classes.field-input__title}} ">${props.title}</p>` : "",
         disabled: props.disabled ? `disabled= ${props.disabled}` : ""
     };
-    console.log("props.disabled ", initValue);
     const context = {
         ...initValue,
         classes: (0, _fieldInputModuleScssDefault.default)
@@ -1137,11 +1135,11 @@ const FieldInput = (props)=>{
 exports.default = FieldInput;
 
 },{"../../utils/Templator":"beJ1N","./FieldInput.module.scss":"7lnGJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7lnGJ":[function(require,module,exports) {
-module.exports["field-input"] = `oO4kea_field-input`;
 module.exports["body"] = `oO4kea_body`;
 module.exports["root"] = `oO4kea_root`;
 module.exports["field-input__title"] = `oO4kea_field-input__title`;
 module.exports["field-input__input"] = `oO4kea_field-input__input`;
+module.exports["field-input"] = `oO4kea_field-input`;
 
 },{}],"AyukO":[function() {},{}]},["lVfbH","kKNlY"], "kKNlY", "parcelRequire1ce6")
 

@@ -40,12 +40,12 @@
     border: none;
     padding: 0;
 
-    @include fontText(normal, 400, 16px, 126%);
+    @include fontText(normal, 500, 16px, 126%);
     text-align: left;
-    color: #397387;
+    color: $font_color_main;
 
     &--exit {
-      color: #ff0000;
+      color: $font_color_attention;
     }
   }
 }

@@ -1,8 +1,11 @@
 import { getObjectKey } from './getObjectKey';
 
-//НУЖНО НАПИСАТЬ ОБРАБОТКУ МАССИВОВ mas[0]
+/*TODOS: 
+  - дописать обработку массивов mas[0]
+  - баг. если название функции одинаковые, то они переопределяются.
+*/
 
-window.Templator = (function () {
+const Templator = (function () {
   class Templator {
     TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;
 
@@ -19,8 +22,6 @@ window.Templator = (function () {
       let key = null;
       const regExp = this.TEMPLATE_REGEXP;
 
-      // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
-
       while ((key = regExp.exec(tmpl))) {
         if (key[1]) {
           const tmplValue = key[1].trim();
@@ -28,8 +29,8 @@ window.Templator = (function () {
 
           if (typeof data === 'function') {
             /*
-            баг. если название функции одинаковые, то они переопределяются.. 
-            нужно подумать как с этим быть, но пока просто добавляю хеш
+              баг. если название функции одинаковые, то они переопределяются.. 
+              нужно подумать как с этим быть, но пока просто добавляю хеш
             */
             const newFuncName = `${tmplValue}_${Math.floor(
               Math.random() * 500
@@ -50,13 +51,11 @@ window.Templator = (function () {
       return tmpl;
     }
   }
-
-  // Можно не только из window брать, но и присвоить экспорту файла
   return Templator;
 })();
 
 export function getTemplate(template, context) {
-  const tmpl = new window.Templator(template);
+  const tmpl = new Templator(template);
 
   return tmpl.compile(context); // Строка с html-вёрсткой
 }

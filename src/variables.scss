@@ -1,9 +1,16 @@
 /* фон зеленоватый */
 $back-color: #f7f9fa;
 $back-color-second: #ffffff;
+$back-color-attention: #397387;
+
+$back-messange: #f7f9fa;
+$back-messange-my: #e4edfd;
 
 /*цвет шрифтов*/
 $title_main: #397387;
+$font_color_main: #397387;
+$font_color_second: #333333;
+$font_color_attention: #f2a490;
 
 @mixin fontTitle($style, $weight, $size, $height) {
   font-family: 'Montserrat Alternates';
@@ -22,8 +29,6 @@ $title_main: #397387;
 }
 
 .body {
-  // width: 100vw;
-  // height: 100vh;
   width: 100vw;
   height: 100vh;
   background-image: linear-gradient(

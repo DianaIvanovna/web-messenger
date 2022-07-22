@@ -540,51 +540,48 @@ var _fieldInputDefault = parcelHelpers.interopDefault(_fieldInput);
         {
             name: "email",
             type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u043E\u0447\u0442\u0443",
             title: "\u041F\u043E\u0447\u0442\u0430"
         },
         {
             name: "login",
             type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041B\u043E\u0433\u0438\u043D",
             title: "\u041B\u043E\u0433\u0438\u043D"
         },
         {
             name: "first-name",
             type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F",
             title: "\u0418\u043C\u044F"
         },
         {
             name: "second-name",
             type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0444\u0430\u043C\u0438\u043B\u0438\u044E",
             title: "\u0424\u0430\u043C\u0438\u043B\u0438\u044F"
         },
         {
             name: "phone",
             type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043B\u0435\u0444\u043E\u043D",
             title: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"
         },
         {
             name: "password",
-            type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            type: "password",
             title: "\u041F\u0430\u0440\u043E\u043B\u044C"
+        },
+        {
+            name: "repeatPassword",
+            type: "password",
+            title: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"
         }, 
     ];
     const loginForm = [
         {
             name: "login",
             type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041B\u043E\u0433\u0438\u043D",
             title: "\u041B\u043E\u0433\u0438\u043D"
         },
         {
             name: "password",
-            type: "text",
-            placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u041F\u0430\u0440\u043E\u043B\u044C",
+            type: "password",
             title: "\u041F\u0430\u0440\u043E\u043B\u044C"
         }, 
     ];
@@ -649,15 +646,14 @@ var _fieldInputModuleScss = require("./FieldInput.module.scss");
 var _fieldInputModuleScssDefault = parcelHelpers.interopDefault(_fieldInputModuleScss);
 const FieldInput = (props)=>{
     const initValue = {
-        value: props.value ? props.value : "",
-        class: props.class ? `${(0, _fieldInputModuleScssDefault.default)["field-input__input"]} ${props.class}` : (0, _fieldInputModuleScssDefault.default)["field-input__input"],
         type: props.type,
         name: props.name,
+        value: props.value ? props.value : "",
+        class: props.class ? `${(0, _fieldInputModuleScssDefault.default)["field-input__input"]} ${props.class}` : (0, _fieldInputModuleScssDefault.default)["field-input__input"],
         placeholder: props.placeholder ? props.placeholder : "",
         title: props.title ? `<p class="{{classes.field-input__title}} ">${props.title}</p>` : "",
         disabled: props.disabled ? `disabled= ${props.disabled}` : ""
     };
-    console.log("props.disabled ", initValue);
     const context = {
         ...initValue,
         classes: (0, _fieldInputModuleScssDefault.default)
@@ -677,9 +673,11 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getTemplate", ()=>getTemplate);
 var _getObjectKey = require("./getObjectKey");
-//НУЖНО НАПИСАТЬ ОБРАБОТКУ МАССИВОВ mas[0]
-window.Templator = function() {
-    class Templator {
+/*TODOS: 
+  - дописать обработку массивов mas[0]
+  - баг. если название функции одинаковые, то они переопределяются.
+*/ const Templator = function() {
+    class Templator1 {
         TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;
         constructor(template){
             this._template = template;
@@ -691,14 +689,13 @@ window.Templator = function() {
             let tmpl = this._template;
             let key = null;
             const regExp = this.TEMPLATE_REGEXP;
-            // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
             while(key = regExp.exec(tmpl))if (key[1]) {
                 const tmplValue = key[1].trim();
                 const data = (0, _getObjectKey.getObjectKey)(ctx, tmplValue);
                 if (typeof data === "function") {
                     /*
-            баг. если название функции одинаковые, то они переопределяются.. 
-            нужно подумать как с этим быть, но пока просто добавляю хеш
+              баг. если название функции одинаковые, то они переопределяются.. 
+              нужно подумать как с этим быть, но пока просто добавляю хеш
             */ const newFuncName = `${tmplValue}_${Math.floor(Math.random() * 500)}`;
                     window[newFuncName] = data;
                     tmpl = tmpl.replace(new RegExp(key[0], "gi"), `window.${newFuncName}()`);
@@ -709,11 +706,10 @@ window.Templator = function() {
             return tmpl;
         }
     }
-    // Можно не только из window брать, но и присвоить экспорту файла
-    return Templator;
+    return Templator1;
 }();
 function getTemplate(template, context) {
-    const tmpl = new window.Templator(template);
+    const tmpl = new Templator(template);
     return tmpl.compile(context); // Строка с html-вёрсткой
 }
 
@@ -762,11 +758,11 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"7lnGJ":[function(require,module,exports) {
-module.exports["field-input"] = `oO4kea_field-input`;
 module.exports["body"] = `oO4kea_body`;
 module.exports["root"] = `oO4kea_root`;
 module.exports["field-input__title"] = `oO4kea_field-input__title`;
 module.exports["field-input__input"] = `oO4kea_field-input__input`;
+module.exports["field-input"] = `oO4kea_field-input`;
 
 },{}]},["3X2Ca","6yqaK"], "6yqaK", "parcelRequire1ce6")
 
