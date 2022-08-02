@@ -20,7 +20,7 @@ const DialogsItem = (props) => {
     </div>
    
     <span class="dialogs-item__number">{{unreadMessage}}</span>
-    <span class="dialogs-item__time">10:49</span>
+    <time class="dialogs-item__time">10:49</time>
     </div>
   
   `;

@@ -10,9 +10,7 @@ const FieldInput = (props) => {
       ? `${classes['field-input__input']} ${props.class}`
       : classes['field-input__input'],
     placeholder: props.placeholder ? props.placeholder : '',
-    title: props.title
-      ? `<p class="{{classes.field-input__title}} ">${props.title}</p>`
-      : '',
+    title: props.title ? props.title : '',
     disabled: props.disabled ? `disabled= ${props.disabled}` : '',
   };
 
@@ -22,7 +20,8 @@ const FieldInput = (props) => {
   };
 
   const template = `
-   <div class={{classes.field-input}}> 
+   <div class={{classes.field-input}}>
+   
         <p class="{{classes.field-input__title}} ">{{title}}</p>
         <input class="{{class}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" {{disabled}} value="{{value}}" >
    </div>

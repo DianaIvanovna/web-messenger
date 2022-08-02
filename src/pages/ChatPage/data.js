@@ -1,12 +1,12 @@
 // временный файл с тем, как предположительно будут приходить данные с бекенда
-import phoro1 from '../../../static/img/avatars/avatar1.png';
-import phoro2 from '../../../static/img/avatars/avatar3.png';
-import phoro3 from '../../../static/img/avatars/photo.jpg';
+import photo1 from '../../../static/img/avatars/avatar1.png';
+import photo2 from '../../../static/img/avatars/avatar3.png';
+import photo3 from '../../../static/img/avatars/photo.jpg';
 
 export const dialogs = [
   {
     id: 1,
-    photo: phoro1,
+    photo: photo1,
     first_name: 'Милана',
     link: '/',
     unreadMessage: 2,
@@ -45,7 +45,7 @@ export const dialogs = [
   },
   {
     id: 3,
-    photo: phoro3,
+    photo: photo3,
     first_name: 'Очнь длинное имя, которое не помещается в контейнер',
     link: '/',
     unreadMessage: 0,
@@ -68,7 +68,7 @@ export const dialogs = [
   },
   {
     id: 2,
-    photo: phoro2,
+    photo: photo2,
     first_name: 'Леня',
     link: '/',
     unreadMessage: 79,

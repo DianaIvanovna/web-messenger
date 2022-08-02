@@ -82,7 +82,7 @@ const UserSetting = (props) => {
   const template = `
   <div class="user-setting" >
     <div class="user-setting__avatar-container" >
-        <img src={{photo}} alt="avatar" class="user-setting__avatar" />
+        <img src={{photo}} alt="аватар" class="user-setting__avatar" />
         <img src={{pen}} alt="изменить аватар" class="user-setting__icon" />
     </div>
 

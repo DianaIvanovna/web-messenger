@@ -5,7 +5,7 @@ import UserSetting from './modules/UserSetting/UserSetting';
 import { dialogs } from './data';
 
 const chat = () => {
-  const MainContainer = document.querySelector('.chat__main');
+  const mainContainer = document.querySelector('.chat__main');
   const chatContainer = document.querySelector('.chat__container');
   const userForm = [
     {
@@ -75,28 +75,28 @@ const chat = () => {
   const getUserSettings = () => {
     // ВЫВОД НАСТРОЕК ПОЛЬЗОВАТЕЛЯ
 
-    MainContainer.innerHTML = '';
+    mainContainer.innerHTML = '';
 
     let div = document.createElement('div');
     div.className = 'chat__user-setting';
     div.innerHTML = UserSetting({
       userForm,
     });
-    MainContainer.append(div);
+    mainContainer.append(div);
   };
 
   const getContacts = () => {
     // ВЫВОД КОНТАКТОВ
-    MainContainer.innerHTML = 'разрабатывается..';
+    mainContainer.innerHTML = 'разрабатывается..';
   };
   const getSettings = () => {
     // ВЫВОД НАСТРОЕК ПРИЛОЖЕНИЯ
-    MainContainer.innerHTML = 'разрабатывается..';
+    mainContainer.innerHTML = 'разрабатывается..';
   };
 
   const getDialogs = () => {
     // ВЫВОД СПИСКА ДИАЛОГОЛОВ
-    MainContainer.innerHTML = '';
+    mainContainer.innerHTML = '';
 
     dialogs?.forEach((item, index) => {
       let div = document.createElement('div');
@@ -108,7 +108,7 @@ const chat = () => {
         },
       });
 
-      MainContainer.append(div);
+      mainContainer.append(div);
     });
   };
 
