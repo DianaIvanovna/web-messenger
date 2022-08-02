@@ -1,0 +1,91 @@
+@import '../../../static/vendor/normalize.css';
+@import '../../../static/font/stylesheet.css';
+@import '../../../static/font/montserratAlternates.css';
+@import '../../variables.scss';
+
+.chat {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+
+  &__menu-container {
+    width: 350px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  &__subtitle {
+    @include fontText(normal, 400, 14px, 150%);
+    text-align: center;
+    justify-self: center;
+  }
+
+  &__menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 25%;
+      height: 2px;
+      background-color: $back-color-attention;
+      position: absolute;
+      bottom: 0;
+    }
+    &--active-0 {
+      &::after {
+        left: 0%;
+      }
+    }
+    &--active-1 {
+      &::after {
+        left: 25%;
+      }
+    }
+    &--active-2 {
+      &::after {
+        left: 50%;
+      }
+    }
+    &--active-3 {
+      &::after {
+        left: 75%;
+      }
+    }
+  }
+
+  &__icon {
+    width: 50px;
+  }
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    &--dialog {
+      justify-content: end;
+    }
+  }
+
+  &__main {
+    padding: 0 5px;
+  }
+
+  &__messange {
+    width: 100%;
+  }
+
+  &__user-setting {
+    width: 100%;
+  }
+}

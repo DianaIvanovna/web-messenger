@@ -5,10 +5,12 @@ npm-debug.log*
 
 # Dependency directory
 node_modules
-#/dist
+.parcel-cache
+/dist
 
 # Optional npm cache directory
 .npm
+.nvmrc
 
 # Optional REPL history
 .DS_Store

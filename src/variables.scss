@@ -1,0 +1,47 @@
+/* фон зеленоватый */
+$back-color: #f7f9fa;
+$back-color-second: #ffffff;
+$back-color-attention: #397387;
+
+$back-messange: #f7f9fa;
+$back-messange-my: #e4edfd;
+
+/*цвет шрифтов*/
+$title_main: #397387;
+$font_color_main: #397387;
+$font_color_second: #333333;
+$font_color_attention: #f2a490;
+
+@mixin fontTitle($style, $weight, $size, $height) {
+  font-family: 'Montserrat Alternates';
+  font-weight: $weight;
+  font-style: $style;
+  font-size: $size;
+  line-height: $height;
+}
+
+@mixin fontText($style, $weight, $size, $height) {
+  font-family: 'Montserrat';
+  font-weight: $weight;
+  font-style: $style;
+  font-size: $size;
+  line-height: $height;
+}
+
+.body {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+      rgba(247, 249, 250, 0.5),
+      rgba(247, 249, 250, 0.5)
+    ),
+    url(/static/img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+}
+.root {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}

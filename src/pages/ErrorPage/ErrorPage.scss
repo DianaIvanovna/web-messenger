@@ -1,0 +1,36 @@
+@import '../../../static/vendor/normalize.css';
+@import '../../../static/font/stylesheet.css';
+@import '../../../static/font/montserratAlternates.css';
+@import '../../variables.scss';
+
+.error-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  &__title {
+    @include fontTitle(normal, 700, 256, 100%);
+    color: $title_main;
+    margin: 0;
+  }
+  &__description {
+    @include fontText(normal, 400, 24px, 150%);
+
+    color: $font_color_main;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    &__title {
+      font-size: 128px;
+    }
+    &__description {
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+}
