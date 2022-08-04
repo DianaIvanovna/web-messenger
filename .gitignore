@@ -16,5 +16,10 @@ node_modules
 .DS_Store
 .idea
 
+.eslintrc.json
+.eslintcache
+.eslintignore
+.stylelintrc.json
+
 .env
 *.log

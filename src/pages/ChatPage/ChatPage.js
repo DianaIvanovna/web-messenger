@@ -56,8 +56,8 @@ const chat = () => {
     chatContainer.innerHTML = '';
     chatContainer.classList.add('chat__container--dialog');
 
-    dialogs?.[index].messages.forEach((item, index) => {
-      let div = document.createElement('div');
+    dialogs?.[index].messages.forEach((item) => {
+      const div = document.createElement('div');
       div.className = 'chat__messange';
       div.innerHTML = Message({
         ...item,
@@ -66,7 +66,7 @@ const chat = () => {
       chatContainer.prepend(div);
     });
 
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     div.className = 'chat__messange';
     div.innerHTML = SendMessange();
     chatContainer.append(div);
@@ -77,7 +77,7 @@ const chat = () => {
 
     mainContainer.innerHTML = '';
 
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     div.className = 'chat__user-setting';
     div.innerHTML = UserSetting({
       userForm,
@@ -99,7 +99,7 @@ const chat = () => {
     mainContainer.innerHTML = '';
 
     dialogs?.forEach((item, index) => {
-      let div = document.createElement('div');
+      const div = document.createElement('div');
       div.innerHTML = DialogsItem({
         ...item,
         lastMessange: item.messages?.[0],
@@ -125,7 +125,8 @@ const chat = () => {
   // при первом открытии показываю список чатов
   menuFunction[1]();
   // при первом открытии
-  chatContainer.innerHTML = `<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>`;
+  chatContainer.innerHTML =
+    '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
 };
 
 export default chat();

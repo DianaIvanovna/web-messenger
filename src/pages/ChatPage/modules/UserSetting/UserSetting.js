@@ -25,10 +25,10 @@ const UserSetting = (props) => {
       title: 'Пароль',
     },
   ];
-  let flagActiveForm = false;
+  const flagActiveForm = false;
   let form = '';
   props.userForm.forEach((item, index) => {
-    form = form + FieldInput({ ...item, disabled: true });
+    form += FieldInput({ ...item, disabled: true });
   });
 
   const changeUserDataForm = (event) => {
@@ -37,12 +37,11 @@ const UserSetting = (props) => {
 
     let form = '';
     props.userForm.forEach((item, index) => {
-      form = form + FieldInput({ ...item });
+      form += FieldInput({ ...item });
     });
 
-    form =
-      form +
-      `<button class="user-setting__button" > Сохранить </button>
+    form
+      += `<button class="user-setting__button" > Сохранить </button>
     <button class="user-setting__button" >Отмена </button>`;
 
     console.log('form', form);
@@ -54,19 +53,18 @@ const UserSetting = (props) => {
 
     let form = '';
     passwordForm.forEach((item, index) => {
-      form = form + FieldInput({ ...item });
+      form += FieldInput({ ...item });
     });
 
-    form =
-      form +
-      `<button class="user-setting__button" > Сохранить </button>
+    form
+      += `<button class="user-setting__button" > Сохранить </button>
     <button class="user-setting__button" >Отмена </button>`;
 
     console.log('form', form);
     formDom.innerHTML = form;
   };
 
-  //console.log('form', form);
+  // console.log('form', form);
   const context = {
     photo,
     pen,
