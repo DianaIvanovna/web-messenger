@@ -2,10 +2,9 @@ import { getTemplate } from '../../utils/Templator';
 import classes from './Message.module.scss';
 
 const message = (props) => {
-  const returnClass = (props) =>
-    `${classes.message}  ${props.myMes ? classes['message--my'] : ''}  ${
-      props.flagRead ? classes['message--read'] : ''
-    } ${props.flagSend ? classes['message--send'] : ''}`;
+  const returnClass = (props) => `${classes.message}  ${props.myMes ? classes['message--my'] : ''}  ${
+    props.flagRead ? classes['message--read'] : ''
+  } ${props.flagSend ? classes['message--send'] : ''}`;
 
   const context = {
     text: props.text,

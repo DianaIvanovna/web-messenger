@@ -125,8 +125,7 @@ const chat = () => {
   // при первом открытии показываю список чатов
   menuFunction[1]();
   // при первом открытии
-  chatContainer.innerHTML =
-    '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
+  chatContainer.innerHTML = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
 };
 
 export default chat();

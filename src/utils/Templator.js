@@ -36,7 +36,7 @@ class Templator {
 
           tmpl = tmpl.replace(
             new RegExp(key[0], 'gi'),
-            `window.${newFuncName}()`
+            `window.${newFuncName}()`,
           );
           continue;
         }
