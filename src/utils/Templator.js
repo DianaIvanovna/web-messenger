@@ -25,7 +25,7 @@ class Templator {
       if (key[1]) {
         const tmplValue = key[1].trim();
         const data = getObjectKey(ctx, tmplValue);
-
+        
         if (typeof data === 'function') {
           /*
             баг. если название функции одинаковые, то они переопределяются..

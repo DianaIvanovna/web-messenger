@@ -35,7 +35,7 @@ import './style.scss';
 //       {{text}}
 //       {{button}}
 //       <button  class="button_2" > button 2  </button>
-//     <p/>`);
+//     </p>`);
 //   }
 // }
 
@@ -44,7 +44,7 @@ import './style.scss';
 //     return this.compile(`
 //     <button>
 //       {{textButton}}
-//     <button/>`);
+//     </button>`);
 //   }
 // }
 // // 1.27
@@ -87,29 +87,29 @@ import './style.scss';
 // });
 // renderDOM('.test', page);
 
-// // setTimeout(() => {
-// //   console.log('setTimeout!');
-// //   page.setProps({
-// //     button: new Button('div', {
-// //       textButton: 'новый button1',
-// //       attr: { class: 'button_1' },
-// //       events: [
-// //         {
-// //           class: '.button_1',
-// //           event: 'click',
-// //           handler: (e) => {
-// //             console.log('e.target', e.target);
-// //           },
-// //         },
-// //       ],
-// //     }),
-// //   });
-// // }, 2000);
-
 // setTimeout(() => {
 //   console.log('setTimeout!');
 //   page.setProps({
-//     title: 'Заголовокdede',
-//     text: 'text',
+//     button: new Button('div', {
+//       textButton: 'новый button1',
+//       attr: { class: 'button_1' },
+//       events: [
+//         {
+//           class: '.button_1',
+//           event: 'click',
+//           handler: (e) => {
+//             console.log('e.target', e.target);
+//           },
+//         },
+//       ],
+//     }),
 //   });
 // }, 2000);
+
+setTimeout(() => {
+  console.log('setTimeout!');
+  page.setProps({
+    title: 'Заголовокdede',
+    text: 'text',
+  });
+}, 2000);

@@ -65,7 +65,7 @@ export default class Block {
   }
 
   _componentDidMount() {
-    // console.log('-----componentDidMount-----');
+    console.log('-----componentDidMount-----', this._element);
     this.componentDidMount();
 
     Object.values(this._children).forEach((child) => {
@@ -83,10 +83,9 @@ export default class Block {
   }
 
   _componentDidUpdate(oldProps, newProps) {
-    console.log('-----_componentDidUpdate-----');
+    // console.log('-----_componentDidUpdate-----');
     const isReander = this.componentDidUpdate(oldProps, newProps);
     if (isReander) {
-      console.log('this._eventBus.emit(Block.EVENTS.FLOW_RENDER);');
       this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
     }
   }
@@ -127,9 +126,10 @@ export default class Block {
   }
 
   _render() {
-    console.log('-----render-----');
+    console.log('-----render-----', this._element);
 
     const block = this.render();
+
     // TODO: Удалить старые события через removeEventListener
     this.removeEvents();
     this._element.innerHTML = '';
@@ -143,7 +143,7 @@ export default class Block {
   render() {}
 
   getContent() {
-    return this.element;
+    return this._element;
   }
 
   _makePropsProxy(props) {
@@ -176,7 +176,6 @@ export default class Block {
     if (this._props.setting?.withInternalID) {
       newElement.setAttribute('data-id', this._id);
     }
-
     return newElement;
   }
 
@@ -208,10 +207,7 @@ export default class Block {
 
     const fragment = this._createDocumentElement('template');
 
-    // console.log('getTemplate(template, propsAndStubs)', getTemplate(template, propsAndStubs));
-    fragment.innerHTML = '';
     fragment.innerHTML = getTemplate(template, propsAndStubs);
-    // console.log('fragment.innerHTM', fragment.innerHTML);
 
     Object.values(this._children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
@@ -224,10 +220,11 @@ export default class Block {
 
   addEvents() {
     const { events = [] } = this._props;
+
     let bufElement = null;
 
     events.forEach((element, index) => {
-      bufElement = this._element.querySelector(element.class);
+      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
       if (bufElement) {
         bufElement.addEventListener(events[index].event, events[index].handler);
       }
