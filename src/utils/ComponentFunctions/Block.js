@@ -65,7 +65,7 @@ export default class Block {
   }
 
   _componentDidMount() {
-    console.log('-----componentDidMount-----', this._element);
+    // console.log('-----componentDidMount-----', this._element);
     this.componentDidMount();
 
     Object.values(this._children).forEach((child) => {
@@ -91,7 +91,7 @@ export default class Block {
   }
 
   componentDidUpdate(oldProps, newProps) {
-    console.log('-----componentDidUpdate-----', oldProps, newProps);
+    // console.log('-----componentDidUpdate-----', oldProps, newProps);
     // по сложный объектам не отработает ,
     // return JSON.stringify(oldProps) !== JSON.stringify(newProps);
     // Object.keys({ ...first, ...second }).every(key => first[key] === second[key]);
@@ -126,7 +126,7 @@ export default class Block {
   }
 
   _render() {
-    console.log('-----render-----', this._element);
+    // console.log('-----render-----', this._element);
 
     const block = this.render();
 

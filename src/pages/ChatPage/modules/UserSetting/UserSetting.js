@@ -1,101 +1,49 @@
-import { getTemplate } from '../../../../utils/Templator';
-import FieldInput from '../../../../components/FieldInput/FieldInput';
 import './UserSetting.scss';
-import photo from '../../../../../static/img/avatars/photo.jpg';
+import FormContainer from '../../../../components/FormContainer/FormContainer';
 import pen from '../../../../../static/img/icons/pen.png';
+import UserSettingFormUpdate from './modules/UserSettingFormUpdate';
+import UserSettingPasswordUpdate from './modules/UserSettingPasswordUpdate';
 
-const UserSetting = (props) => {
-  const passwordForm = [
-    {
-      name: 'prevPassword',
-      type: 'password',
-      placeholder: 'введите Пароль',
-      title: 'Старый пароль',
-    },
-    {
-      name: 'newPassword',
-      type: 'password',
-      placeholder: 'введите Пароль',
-      title: 'Новый пароль',
-    },
-    {
-      name: 'repeatPassword',
-      type: 'password',
-      placeholder: 'Повторите новый пароль',
-      title: 'Пароль',
-    },
-  ];
-  const flagActiveForm = false;
-  let form = '';
-  props.userForm.forEach((item, index) => {
-    form += FieldInput({ ...item, disabled: true });
-  });
+// временно
+import photo from '../../../../../static/img/avatars/photo.jpg';
 
-  const changeUserDataForm = (event) => {
-    event.preventDefault();
-    const formDom = document.querySelector('.user-setting__form');
-
-    let form = '';
-    props.userForm.forEach((item, index) => {
-      form += FieldInput({ ...item });
-    });
-
-    form
-      += `<button class="user-setting__button" > Сохранить </button>
-    <button class="user-setting__button" >Отмена </button>`;
-
-    console.log('form', form);
-    formDom.innerHTML = form;
+const UserSettingComponent = () => {
+  const changeForm = (form) => {
+    if (form === 'update') {
+      formUserUpdate.show();
+      formPasswordUpdate.hide();
+    } else {
+      formUserUpdate.hide();
+      formPasswordUpdate.show();
+    }
   };
-  const changePassword = (event) => {
-    event.preventDefault();
-    const formDom = document.querySelector('.user-setting__form');
+  const formUserUpdate = UserSettingFormUpdate(changeForm);
+  const formPasswordUpdate = UserSettingPasswordUpdate(changeForm);
 
-    let form = '';
-    passwordForm.forEach((item, index) => {
-      form += FieldInput({ ...item });
-    });
-
-    form
-      += `<button class="user-setting__button" > Сохранить </button>
-    <button class="user-setting__button" >Отмена </button>`;
-
-    console.log('form', form);
-    formDom.innerHTML = form;
-  };
-
-  // console.log('form', form);
-  const context = {
-    photo,
-    pen,
-    form,
-    passwordForm,
-    changeUserDataForm: () => {
-      changeUserDataForm(event);
-    },
-    changePassword: () => {
-      changePassword(event);
-    },
-  };
-  const template = `
-  <div class="user-setting" >
-    <div class="user-setting__avatar-container" >
+  changeForm('update');
+  class UserSetting extends FormContainer {
+    render() {
+      return this.compile(`
+      <div class="user-setting__avatar-container" >
         <img src={{photo}} alt="аватар" class="user-setting__avatar" />
         <img src={{pen}} alt="изменить аватар" class="user-setting__icon" />
-    </div>
+      </div>
+      {{formUserUpdate}}
+      {{formPasswordUpdate}}
+      `);
+    }
+  }
 
-    <form class="user-setting__form">
-        {{form}}
-        <button onClick={{changeUserDataForm}} class="user-setting__button" > Изменить данные </button>
-        <button class="user-setting__button" onClick={{changePassword}}> Изменить пароль </button>
-        <button class="user-setting__button user-setting__button--exit">Выйти </button>
-   </form>
-  </div>
-   
+  const userSetting = new UserSetting('div', {
+    photo,
+    pen,
+    formUserUpdate,
+    formPasswordUpdate,
+    attr: { class: 'user-setting' },
 
-  `;
+  });
 
-  return getTemplate(template, context);
+  return userSetting;
 };
 
-export default UserSetting;
+export default UserSettingComponent;

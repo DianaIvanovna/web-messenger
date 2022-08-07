@@ -106,10 +106,10 @@ import './style.scss';
 //   });
 // }, 2000);
 
-setTimeout(() => {
-  console.log('setTimeout!');
-  page.setProps({
-    title: 'Заголовокdede',
-    text: 'text',
-  });
-}, 2000);
+// setTimeout(() => {
+//   console.log('setTimeout!');
+//   page.setProps({
+//     title: 'Заголовокdede',
+//     text: 'text',
+//   });
+// }, 2000);

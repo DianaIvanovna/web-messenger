@@ -87,6 +87,8 @@ class FormContainer extends Block {
   }
 
   _formSubmission(event) { // отправка формы
+    event.preventDefault();
+    event.stopPropagation();
     this._validateForm();
     if (event.target.classList.contains('button-valid')) {
       this._props.sendForm(event);
@@ -94,7 +96,6 @@ class FormContainer extends Block {
   }
 
   _checkInputValidity(event) {
-    this._error.textContent = '';
     this._validateForm();
     this._validateInputElement(event.target);
   }

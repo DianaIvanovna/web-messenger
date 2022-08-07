@@ -17,6 +17,7 @@
     border: none;
     background: transparent;
     border-bottom: 1px solid $back-color-attention;
+    box-sizing: border-box;
     &:invalid {
       border: 2px dashed $inpit-error-color;
       border-radius: 5px;
