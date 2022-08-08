@@ -1,24 +1,50 @@
-import { getTemplate } from '../../utils/Templator';
+/* eslint no-param-reassign: "off" */
 import classes from './SendMessange.module.scss';
+import FormContainer from '../FormContainer/FormContainer';
 import clip from '../../../static/img/icons/clip.png';
 import sendMessangeIcon from '../../../static/img/icons/send-messange.png';
+import Button from '../Button/Button';
 
-const SendMessange = () => {
-  const context = {
-    classes,
-    clip,
-    sendMessangeIcon,
-  };
-  const template = `
-   <form class={{classes.send-messange}}>
-    <button class={{classes.send-messange__img}}><img src={{clip}} /></button>
-    <input class={{classes.send-messange__input}} placeholder="Сообщение" type="text" id="messange" name="messange" >
-    <button class={{classes.send-messange__img}}><img src={{sendMessangeIcon}}  /></button>
-   </form>
+class SendMessange extends FormContainer {
+  constructor(tag, props) {
+    const formId = 'sendMessange';
 
-  `;
+    props.classes = classes;
+    props.clip = clip;
+    props.sendMessangeIcon = sendMessangeIcon;
+    props.formId = formId;
+    props.button = new Button('div', {
+      form: formId,
+      text: `<img src=${sendMessangeIcon}  />`,
+      class: classes['send-messange__img'],
+      attr: { class: 'login-form__button-container' },
+    });
+    props.sendForm = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const { elements } = document.querySelector(`.${classes['send-messange']}`);
 
-  return getTemplate(template, context);
-};
+      Array.from(elements)
+        .filter((item) => !!item.name)
+        .forEach((element) => {
+          const { name, value } = element;
+          console.log({ name, value });
+        });
+    };
 
+    super(tag, props);
+  }
+
+  render() {
+    return this.compile(`
+       <form class={{classes.send-messange}} id="{{formId}}" >
+        <button class={{classes.send-messange__img}}><img src={{clip}} /></button>
+        <input class={{classes.send-messange__input}} placeholder="Сообщение" type="text" id="messange" name="messange" required >
+        <p class="error error-messange"></p>
+        {{button}}
+        
+       </form>
+    `);
+  }
+}
 export default SendMessange;

@@ -90,7 +90,7 @@ export default class Block {
     }
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate() {
     // console.log('-----componentDidUpdate-----', oldProps, newProps);
     // по сложный объектам не отработает ,
     // return JSON.stringify(oldProps) !== JSON.stringify(newProps);

@@ -24,12 +24,15 @@ const UserSettingComponent = () => {
   class UserSetting extends FormContainer {
     render() {
       return this.compile(`
-      <div class="user-setting__avatar-container" >
-        <img src={{photo}} alt="аватар" class="user-setting__avatar" />
-        <img src={{pen}} alt="изменить аватар" class="user-setting__icon" />
+      <div class="user-setting">
+        <div class="user-setting__avatar-container" >
+          <img src={{photo}} alt="аватар" class="user-setting__avatar" />
+          <img src={{pen}} alt="изменить аватар" class="user-setting__icon" />
+        </div>
+        {{formUserUpdate}}
+        {{formPasswordUpdate}}
       </div>
-      {{formUserUpdate}}
-      {{formPasswordUpdate}}
+
       `);
     }
   }
@@ -39,7 +42,7 @@ const UserSettingComponent = () => {
     pen,
     formUserUpdate,
     formPasswordUpdate,
-    attr: { class: 'user-setting' },
+    attr: { class: 'chat__user-setting' },
 
   });
 

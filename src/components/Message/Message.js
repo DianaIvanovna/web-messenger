@@ -1,28 +1,45 @@
-import { getTemplate } from '../../utils/Templator';
-import classes from './Message.module.scss';
+/* eslint no-param-reassign: "off" */
+import './Message.scss';
+import Block from '../../utils/ComponentFunctions/Block';
 
-const message = (props) => {
-  const returnClass = (props) => `${classes.message}  ${props.myMes ? classes['message--my'] : ''}  ${
-    props.flagRead ? classes['message--read'] : ''
-  } ${props.flagSend ? classes['message--send'] : ''}`;
+class Message extends Block {
+  render() {
+    return this.compile(`
+       <p class="message__text" >
+          {{text}}
+          <time class="message__data" >{{data}}</time>
+        </p>
+    `);
+  }
+}
 
-  const context = {
-    text: props.text,
-    data: props.data,
-    classes,
-    classMes: returnClass(props),
-  };
-  const template = `
-   <div class="{{classMes}}">
-    <p class="{{classes.message__text}}" >
-      {{text}}
-      <span class="{{classes.message__data}}" >{{data}}</span>
-    <p/>
-   </div>
+export default Message;
 
-  `;
+// import { getTemplate } from '../../utils/Templator';
+// import classes from './Message.module.scss';
 
-  return getTemplate(template, context);
-};
+// const message = (props) => {
+//   const returnClass = (props) => `${classes.message}  ${props.myMes ? classes['message--my'] : ''}  ${
+//     props.flagRead ? classes['message--read'] : ''
+//   } ${props.flagSend ? classes['message--send'] : ''}`;
 
-export default message;
+//   const context = {
+//     text: props.text,
+//     data: props.data,
+//     classes,
+//     classMes: returnClass(props),
+//   };
+//   const template = `
+//    <div class="{{classMes}}">
+//     <p class="{{classes.message__text}}" >
+//       {{text}}
+//       <span class="{{classes.message__data}}" >{{data}}</span>
+//     <p/>
+//    </div>
+
+//   `;
+
+//   return getTemplate(template, context);
+// };
+
+// export default message;

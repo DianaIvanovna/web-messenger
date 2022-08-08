@@ -90,7 +90,7 @@ class FormContainer extends Block {
     event.preventDefault();
     event.stopPropagation();
     this._validateForm();
-    if (event.target.classList.contains('button-valid')) {
+    if (this._button.classList.contains('button-valid')) {
       this._props.sendForm(event);
     }
   }
@@ -103,7 +103,9 @@ class FormContainer extends Block {
   _resetError(input) { // убирает сообщение об ошибке
     this._form = this._element.querySelector('form');
     const errorElement = this._form.querySelector(`.error__${input.target.name}`);
-    errorElement.textContent = '';
+    if (errorElement) {
+      errorElement.textContent = '';
+    }
   }
 
   _validateInputElement(element) { // проверяет валидность отдельных инпутов
@@ -112,14 +114,19 @@ class FormContainer extends Block {
 
     if (!element.checkValidity()) {
       if (element.hasAttribute('required') && !element.value) {
-        errorElement.textContent = validationRequiredField;
+        if (errorElement) {
+          errorElement.textContent = validationRequiredField;
+        }
+
         return false;
       }
 
       const errorInput = element.getAttribute('data-error');
 
       if (errorInput) {
-        errorElement.textContent = errorInput;
+        if (errorElement) {
+          errorElement.textContent = errorInput;
+        }
         return false;
       }
 
