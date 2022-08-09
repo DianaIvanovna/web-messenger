@@ -1,4 +1,4 @@
-import FormContainer from '../../../../../components/FormContainer/FormContainer';
+import FormValidation from '../../../../../utils/FormValidation/FormValidation';
 import FieldRepeatPassword from '../../../../../components/FieldInput/FieldRepeatPassword';
 import Button from '../../../../../components/Button/Button';
 
@@ -42,17 +42,20 @@ const UserSettingPasswordUpdate = (changeForm) => {
   const sendForm = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const { elements } = document.querySelector('.user-setting__form--password');
+    const form: HTMLFormElement|null = document.querySelector('.user-setting__form--password');
+    if (form) {
+      const { elements } = form;
 
-    Array.from(elements)
-      .filter((item) => !!item.name)
-      .forEach((element) => {
-        const { name, value } = element;
-        console.log({ name, value });
-      });
+      Array.from(elements)
+        .filter((item) => item.tagName === 'INPUT')
+        .forEach((element: HTMLInputElement) => {
+          const { name, value } = element;
+          console.log({ name, value });
+        });
+    }
   };
 
-  class FormPasswordUpdate extends FormContainer {
+  class FormPasswordUpdate extends FormValidation {
     render() {
       return this.compile(`
         <form class="user-setting__form user-setting__form--password" id={{formId}}>

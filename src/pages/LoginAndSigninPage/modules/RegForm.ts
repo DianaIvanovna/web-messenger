@@ -1,4 +1,4 @@
-import FormContainer from '../../../components/FormContainer/FormContainer';
+import FormValidation from '../../../utils/FormValidation/FormValidation';
 import FieldInput from '../../../components/FieldInput/FieldInput';
 import FieldRepeatPassword from '../../../components/FieldInput/FieldRepeatPassword';
 import Button from '../../../components/Button/Button';
@@ -85,17 +85,20 @@ const RegForm = (redirectFunction) => {
   const sendForm = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const { elements } = document.querySelector('.login-form__form');
+    const form: HTMLFormElement|null = document.querySelector('.login-form__form');
+    if (form) {
+      const { elements } = form;
 
-    Array.from(elements)
-      .filter((item) => !!item.name)
-      .forEach((element) => {
-        const { name, value } = element;
-        console.log({ name, value });
-      });
+      Array.from(elements)
+        .filter((item) => item.tagName === 'INPUT')
+        .forEach((element:HTMLInputElement) => {
+          const { name, value } = element;
+          console.log({ name, value });
+        });
+    }
   };
 
-  class LoginForm extends FormContainer {
+  class LoginForm extends FormValidation {
     render() {
       return this.compile(`
         <form class="login-form__form" id={{formId}}>

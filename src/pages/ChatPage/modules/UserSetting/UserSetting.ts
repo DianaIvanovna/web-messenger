@@ -1,5 +1,5 @@
 import './UserSetting.scss';
-import FormContainer from '../../../../components/FormContainer/FormContainer';
+import FormValidation from '../../../../utils/FormValidation/FormValidation';
 import pen from '../../../../../static/img/icons/pen.png';
 import UserSettingFormUpdate from './modules/UserSettingFormUpdate';
 import UserSettingPasswordUpdate from './modules/UserSettingPasswordUpdate';
@@ -21,7 +21,7 @@ const UserSettingComponent = () => {
   const formPasswordUpdate = UserSettingPasswordUpdate(changeForm);
 
   changeForm('update');
-  class UserSetting extends FormContainer {
+  class UserSetting extends FormValidation {
     render() {
       return this.compile(`
       <div class="user-setting">
@@ -32,7 +32,6 @@ const UserSettingComponent = () => {
         {{formUserUpdate}}
         {{formPasswordUpdate}}
       </div>
-
       `);
     }
   }

@@ -1,9 +1,9 @@
 // Event Bus нужен для подписки/отписки/оповещения подсписчиков на некие события
+import { EventBusInterface } from './types';
 
-// TODO: Названия возможных событий лучше описывать в отдельном объекте или использовать enum в TypeScript.
-// TODO: переписать в TypeScript
+export default class EventBus implements EventBusInterface {
+  listeners;
 
-export default class EventBus {
   constructor() {
     this.listeners = {};
   }

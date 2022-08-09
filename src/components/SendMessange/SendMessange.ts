@@ -1,11 +1,12 @@
 /* eslint no-param-reassign: "off" */
+
 import classes from './SendMessange.module.scss';
-import FormContainer from '../FormContainer/FormContainer';
+import FormValidation from '../../utils/FormValidation/FormValidation';
 import clip from '../../../static/img/icons/clip.png';
 import sendMessangeIcon from '../../../static/img/icons/send-messange.png';
 import Button from '../Button/Button';
 
-class SendMessange extends FormContainer {
+class SendMessange extends FormValidation {
   constructor(tag, props) {
     const formId = 'sendMessange';
 
@@ -22,14 +23,17 @@ class SendMessange extends FormContainer {
     props.sendForm = (event) => {
       event.preventDefault();
       event.stopPropagation();
-      const { elements } = document.querySelector(`.${classes['send-messange']}`);
+      // const { elements } = document.querySelector(`.${classes['send-messange']}`);
+      const form :HTMLFormElement|null = document.querySelector(`.${classes['send-messange']}`);
 
-      Array.from(elements)
-        .filter((item) => !!item.name)
-        .forEach((element) => {
-          const { name, value } = element;
-          console.log({ name, value });
-        });
+      if (form) {
+        Array.from(form.elements)
+          .filter((item) => item.tagName === 'INPUT')
+          .forEach((element: HTMLInputElement) => {
+            const { value, name } = element;
+            console.log({ name, value });
+          });
+      }
     };
 
     super(tag, props);

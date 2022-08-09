@@ -2,7 +2,7 @@ import './Button.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
 class Button extends Block {
-  constructor(tag, props = {}) {
+  constructor(tag: string, props) {
     /* eslint no-param-reassign: "off" */
     props.class = props.class
       ? `button ${props.class}`

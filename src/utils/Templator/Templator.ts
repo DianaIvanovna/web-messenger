@@ -1,12 +1,15 @@
 import { getObjectKey } from './getObjectKey';
+import { TemplatorInterface } from './types';
 
 /* TODOS:
   - дописать обработку массивов mas[0]
   - баг. если название функции одинаковые, то они переопределяются.
 */
 
-class Templator {
+class Templator implements TemplatorInterface {
   TEMPLATE_REGEXP = /\{\{(.*?)\}\}/i;
+
+  _template;
 
   constructor(template) {
     this._template = template;
@@ -17,11 +20,13 @@ class Templator {
   }
 
   _compileTemplate(template, ctx) {
-    let tmpl = this._template;
-    let key = null;
+    let tmpl = template;
+    let key: RegExpExecArray|null = null;
     const regExp = this.TEMPLATE_REGEXP;
 
-    while ((key = regExp.exec(tmpl))) {
+    /* eslint no-cond-assign: 0 */
+    /* eslint no-continue: 0 */
+    while (key = regExp.exec(tmpl)) {
       if (key[1]) {
         const tmplValue = key[1].trim();
         const data = getObjectKey(ctx, tmplValue);
@@ -38,6 +43,7 @@ class Templator {
             new RegExp(key[0], 'gi'),
             `window.${newFuncName}()`,
           );
+
           continue;
         }
 

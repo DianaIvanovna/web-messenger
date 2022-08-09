@@ -11,11 +11,6 @@ import icon2 from '../../../static/img/icons/chats.png';
 import icon3 from '../../../static/img/icons/contacts.png';
 import icon4 from '../../../static/img/icons/settings.png';
 
-// import DialogsItem from '../../components/DialogsItem/DialogsItem';
-// import Message from '../../components/Message/Message';
-// import SendMessange from '../../components/SendMessange/SendMessange';
-// import { dialogs } from './data';
-
 const chat = () => {
   class ChatMain extends Block {
     setProps = (nextProps) => {
@@ -189,12 +184,6 @@ const chat = () => {
       },
     ],
   });
-
-  // setTimeout(() => {
-  //   chatMain.setProps({
-  //     activeChat: 'чат',
-  //   });
-  // }, 3000);
 
   renderDOM('.root', chatMain);
 };

@@ -33,7 +33,7 @@ const ChatContainer = (ParentComponent) => {
             ...message,
             attr: { class: classMes },
           });
-          activeChatTmp = `${activeChatTmp} {{${messageName}}} `;
+          activeChatTmp = `{{${messageName}}} ${activeChatTmp}`;
         });
 
         // форма отправки сообщения
@@ -42,8 +42,6 @@ const ChatContainer = (ParentComponent) => {
         }
 
         activeChatTmp = `${activeChatTmp} {{SendMessange}} `;
-
-        console.log('activeChatTmp', activeChatTmp);
 
         nextProps.activeChat = activeChatTmp;
       }

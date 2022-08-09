@@ -4,9 +4,10 @@
 
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
-import { getTemplate } from '../Templator';
+import { getTemplate } from '../Templator/Templator';
+import { BlockInterface } from './types';
 
-export default class Block {
+export default class Block implements BlockInterface {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -20,7 +21,7 @@ export default class Block {
 
   _id;
 
-  _element;
+  _element: HTMLElement;
 
   _meta;
 
@@ -59,46 +60,29 @@ export default class Block {
   }
 
   init() {
-    // console.log('-----init-----');
     this._createResources();
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
   _componentDidMount() {
-    // console.log('-----componentDidMount-----', this._element);
     this.componentDidMount();
 
-    Object.values(this._children).forEach((child) => {
+    Object.values(this._children).forEach((child: BlockInterface) => {
       child.dispatchComponentDidMount();
     });
   }
 
-  componentDidMount() {
-    // console.log('-----componentDidMount-----');
-    // console.log('oldProps', oldProps);
-  }
+  componentDidMount() {}
 
   dispatchComponentDidMount() {
     this._eventBus.emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps, newProps) {
-    // console.log('-----_componentDidUpdate-----');
-    const isReander = this.componentDidUpdate(oldProps, newProps);
-    if (isReander) {
-      this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
-    }
+  _componentDidUpdate() {
+    this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  componentDidUpdate() {
-    // console.log('-----componentDidUpdate-----', oldProps, newProps);
-    // по сложный объектам не отработает ,
-    // return JSON.stringify(oldProps) !== JSON.stringify(newProps);
-    // Object.keys({ ...first, ...second }).every(key => first[key] === second[key]);
-    return true;
-  }
-
-  setProps = (nextProps) => {
+  setProps(nextProps) {
     if (!nextProps) {
       return;
     }
@@ -119,30 +103,28 @@ export default class Block {
       this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this._props);
       this._setUpdate = false;
     }
-  };
-
-  get element() {
-    return this._element;
   }
 
   _render() {
-    // console.log('-----render-----', this._element);
-
     const block = this.render();
 
+    if (block) {
     // TODO: Удалить старые события через removeEventListener
-    this.removeEvents();
-    this._element.innerHTML = '';
-    this._element.appendChild(block);
-    // TODO: Навесить новые события через addEventListener
+      this.removeEvents();
+      this._element.innerHTML = '';
+      this._element.appendChild(block);
+      // TODO: Навесить новые события через addEventListener
 
-    this.addEvents();
-    this.addAttribute();
+      this.addEvents();
+      this.addAttribute();
+    }
   }
 
-  render() {}
+  render():DocumentFragment|null {
+    return null;
+  }
 
-  getContent() {
+  getContent():HTMLElement {
     return this._element;
   }
 
@@ -168,14 +150,23 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName) {
-    // TODO:  Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    const newElement = document.createElement(tagName);
+  _createDocumentElement(tagName: string): HTMLElement|HTMLTemplateElement {
+    const newElement:HTMLElement = document.createElement(tagName);
 
-    // TODO: ???
     if (this._props.setting?.withInternalID) {
       newElement.setAttribute('data-id', this._id);
     }
+
+    return newElement;
+  }
+
+  _createDocumentTemplate(): HTMLTemplateElement {
+    const newElement:HTMLTemplateElement = document.createElement('template');
+
+    if (this._props.setting?.withInternalID) {
+      newElement.setAttribute('data-id', this._id);
+    }
+
     return newElement;
   }
 
@@ -193,26 +184,26 @@ export default class Block {
     return { children, props };
   }
 
-  compile(template, props) {
-    // console.log('-----compile-----');
-    let propsAndStubs = { ...props };
-
+  compile(template, props?) {
     if (typeof (props) === 'undefined') {
-      propsAndStubs = { ...this._props };
+      props = this._props;
     }
 
-    Object.entries(this._children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+    const propsAndStubs = { ...props };
+
+    Object.entries(this._children).forEach(([key, child]: [string, BlockInterface]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
-    const fragment = this._createDocumentElement('template');
-
+    const fragment: HTMLTemplateElement = this._createDocumentTemplate();
     fragment.innerHTML = getTemplate(template, propsAndStubs);
 
-    Object.values(this._children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+    Object.values(this._children).forEach((child: BlockInterface) => {
+      const stub :HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);
 
-      stub.replaceWith(child.getContent());
+      if (stub) {
+        stub.replaceWith(child.getContent());
+      }
     });
 
     return fragment.content;
@@ -221,7 +212,7 @@ export default class Block {
   addEvents() {
     const { events = [] } = this._props;
 
-    let bufElement = null;
+    let bufElement: HTMLElement | null = null;
 
     events.forEach((element, index) => {
       bufElement = element.class ? this._element.querySelector(element.class) : this._element;
@@ -233,7 +224,7 @@ export default class Block {
 
   removeEvents() {
     const { events = [] } = this._props;
-    let bufElement = null;
+    let bufElement: HTMLElement | null = null;
 
     events.forEach((element, index) => {
       bufElement = this._element.querySelector(element.class);
@@ -245,7 +236,7 @@ export default class Block {
 
   addAttribute() {
     const { attr = {} } = this._props;
-    Object.entries(attr).forEach(([key, value]) => {
+    Object.entries(attr).forEach(([key, value]: [string, string]) => {
       this._element.setAttribute(key, value);
     });
   }

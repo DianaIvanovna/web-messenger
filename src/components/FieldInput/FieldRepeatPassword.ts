@@ -3,7 +3,7 @@ import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
 class FieldRepeatPassword extends Block {
-  constructor(tag, props = {}) {
+  constructor(tag, props) {
     props.classes = classes;
     props.class = props.class
       ? `${classes['field-input__input']} ${props.class}`
@@ -24,10 +24,10 @@ class FieldRepeatPassword extends Block {
       class: '.field-input__input--repeat',
       event: 'input',
       handler: (event) => {
-        const password = this._element.querySelector(`.${classes['field-input__input']}`);
+        const password:HTMLInputElement|null = this._element.querySelector(`.${classes['field-input__input']}`);
         const repeatPassword = event.target;
 
-        if (password.checkValidity()) {
+        if (password?.checkValidity()) {
           if (password.value === repeatPassword.value) {
             repeatPassword.setCustomValidity('');
           } else {

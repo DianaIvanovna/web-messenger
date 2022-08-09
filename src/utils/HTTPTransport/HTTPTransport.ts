@@ -1,3 +1,5 @@
+import { HTTPTransportInterface } from './types';
+
 const METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -5,33 +7,32 @@ const METHODS = {
   DELETE: 'DELETE',
 };
 
-// Самая простая версия. Реализовать штучку со всеми проверками им предстоит в конце спринта
-// Необязательный метод
 function queryStringify(data) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
   }
 
-  // Здесь достаточно и [object Object] для объекта
   const keys = Object.keys(data);
   return keys.reduce((result, key, index) => `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`, '?');
 }
 
-export default class HTTPTransport {
-  get = (url, options = {}) => this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+export default class HTTPTransport implements HTTPTransportInterface {
+  get = (url, options = {}) => this.request(url, { ...options, method: METHODS.GET });
 
-  post = (url, options = {}) => this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+  post = (url, options = {}) => this.request(url, { ...options, method: METHODS.POST });
 
-  put = (url, options = {}) => this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  put = (url, options = {}) => this.request(url, { ...options, method: METHODS.PUT });
 
-  delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE });
 
-  request = (url, options = {}, timeout = 5000) => {
-    const { headers = {}, method, data } = options;
+  request = (url, options) => {
+    const {
+      headers = {}, method, data, timeout = 5000,
+    } = options;
 
     return new Promise((resolve, reject) => {
       if (!method) {
-        reject('No method');
+        reject(new Error('No method'));
         return;
       }
 
@@ -49,7 +50,7 @@ export default class HTTPTransport {
         xhr.setRequestHeader(key, headers[key]);
       });
 
-      xhr.onload = function () {
+      xhr.onload = () => {
         resolve(xhr);
       };
 

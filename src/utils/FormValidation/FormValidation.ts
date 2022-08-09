@@ -1,9 +1,12 @@
-// Класс FormContainer нужен для валидации форм
-import Block from '../../utils/ComponentFunctions/Block';
+// Класс FormValidation нужен для валидации форм
+import Block from '../ComponentFunctions/Block';
+import { FormValidationInterface } from './types';
 
-const validationRequiredField = 'Это обязательное поле';
+class FormValidation extends Block implements FormValidationInterface {
+  _form: HTMLFormElement|null;
 
-class FormContainer extends Block {
+  _button: HTMLElement | null;
+
   constructor(tag, props = {}) {
     super(tag, props);
     this._form = null;
@@ -17,7 +20,7 @@ class FormContainer extends Block {
     const { events = [] } = this._props;
 
     // оставляю старую логику добавления событий
-    let bufElement = null;
+    let bufElement: HTMLElement | null = null;
 
     events.forEach((element, index) => {
       bufElement = element.class ? this._element.querySelector(element.class) : this._element;
@@ -35,11 +38,11 @@ class FormContainer extends Block {
 
     if (this._form) {
       Array.from(this._form)
-        .filter((item) => {
+        .filter((item:HTMLElement) => {
           if (item.getAttribute('form') === this._props?.formId) {
             this._button = item;
           }
-          return !!item.name;
+          return item.hasAttribute('name');
         })
         .forEach((element) => {
           element.addEventListener('blur', this._checkInputValidity.bind(this));
@@ -55,7 +58,7 @@ class FormContainer extends Block {
   removeEvents() {
     // оставляю старую логику добавления событий
     const { events = [] } = this._props;
-    let bufElement = null;
+    let bufElement:HTMLElement | null = null;
 
     events.forEach((element, index) => {
       bufElement = this._element.querySelector(element.class);
@@ -70,11 +73,11 @@ class FormContainer extends Block {
   _removeHandlers() { // удаляет обработчики всем полям формы.
     if (this._form) {
       Array.from(this._form)
-        .filter((item) => {
+        .filter((item:HTMLElement) => {
           if (item.getAttribute('form') === this._props?.formId) {
             this._button = item;
           }
-          return !!item.name;
+          return item.hasAttribute('name');
         })
         .forEach((element) => {
           element.removeEventListener('input', this._checkInputValidity.bind(this));
@@ -90,7 +93,7 @@ class FormContainer extends Block {
     event.preventDefault();
     event.stopPropagation();
     this._validateForm();
-    if (this._button.classList.contains('button-valid')) {
+    if (this._button?.classList.contains('button-valid')) {
       this._props.sendForm(event);
     }
   }
@@ -102,7 +105,8 @@ class FormContainer extends Block {
 
   _resetError(input) { // убирает сообщение об ошибке
     this._form = this._element.querySelector('form');
-    const errorElement = this._form.querySelector(`.error__${input.target.name}`);
+
+    const errorElement = this._form?.querySelector(`.error__${input.target.name}`);
     if (errorElement) {
       errorElement.textContent = '';
     }
@@ -110,12 +114,12 @@ class FormContainer extends Block {
 
   _validateInputElement(element) { // проверяет валидность отдельных инпутов
     this._form = this._element.querySelector('form');
-    const errorElement = this._form.querySelector(`.error__${element.name}`);
+    const errorElement = this._form?.querySelector(`.error__${element.name}`);
 
     if (!element.checkValidity()) {
       if (element.hasAttribute('required') && !element.value) {
         if (errorElement) {
-          errorElement.textContent = validationRequiredField;
+          errorElement.textContent = 'Это обязательное поле';
         }
 
         return false;
@@ -140,14 +144,14 @@ class FormContainer extends Block {
     this._form = this._element.querySelector('form');
     if (this._form) {
       Array.from(this._form)
-        .filter(((item) => {
+        .filter(((item:HTMLElement) => {
           if (item.getAttribute('form') === this._props?.formId) {
             this._button = item;
           }
-          return !!item.name;
+          return item.hasAttribute('name');
         }))
         .forEach((element) => {
-          if (!(this._validateInputElement(element, this._form))) flagValid = false;
+          if (!(this._validateInputElement(element))) flagValid = false;
         });
     }
     this._setSubmitButton(flagValid);
@@ -166,4 +170,4 @@ class FormContainer extends Block {
   }
 }
 
-export default FormContainer;
+export default FormValidation;

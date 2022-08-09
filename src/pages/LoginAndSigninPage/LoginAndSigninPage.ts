@@ -5,7 +5,10 @@ import RegForm from './modules/RegForm';
 const loginAndSigninPage = () => {
   // TODO: скрывать блоки, а не заново рендер делать
   const renderForm = (form) => {
-    document.querySelector('.root').innerHTML = '';
+    const root:HTMLElement|null = document.querySelector('.root');
+    if (root) {
+      root.innerHTML = '';
+    }
     if (form === 'loginForm') {
       renderDOM('.root', loginForm);
     } else {

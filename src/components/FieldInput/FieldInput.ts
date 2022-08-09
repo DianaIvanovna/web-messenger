@@ -3,7 +3,7 @@ import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
 class FieldInput extends Block {
-  constructor(tag, props = {}) {
+  constructor(tag, props) {
     props.classes = classes;
     props.class = props.class
       ? `${classes['field-input__input']} ${props.class}`

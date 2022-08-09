@@ -1,4 +1,4 @@
-import FormContainer from '../../../../../components/FormContainer/FormContainer';
+import FormValidation from '../../../../../utils/FormValidation/FormValidation';
 import FieldInput from '../../../../../components/FieldInput/FieldInput';
 import Button from '../../../../../components/Button/Button';
 
@@ -174,21 +174,24 @@ const UserSettingFormUpdate = (changeForm) => {
   const sendForm = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const { elements } = document.querySelector('.user-setting__form');
+    const form: HTMLFormElement|null = document.querySelector('.user-setting__form');
+    if (form) {
+      const { elements } = form;
 
-    Array.from(elements)
-      .filter((item) => !!item.name)
-      .forEach((element) => {
-        const { name, value } = element;
-        console.log({ name, value });
-      });
+      Array.from(elements)
+        .filter((item) => item.tagName === 'INPUT')
+        .forEach((element: HTMLInputElement) => {
+          const { name, value } = element;
+          console.log({ name, value });
+        });
+    }
   };
 
   // скрываю кнопки сохранить и отмена, покажу после "Изменить данные"
   saveButton.hide();
   cancelButton.hide();
 
-  class FormUserData extends FormContainer {
+  class FormUserData extends FormValidation {
     render() {
       return this.compile(`
         <form class="user-setting__form" id={{formId}}>
