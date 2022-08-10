@@ -7,7 +7,7 @@ class FormValidation extends Block implements FormValidationInterface {
 
   _button: HTMLElement | null;
 
-  constructor(tag, props = {}) {
+  constructor(tag:string, props = {}) {
     super(tag, props);
     this._form = null;
   }
@@ -19,10 +19,16 @@ class FormValidation extends Block implements FormValidationInterface {
   addEvents() {
     const { events = [] } = this._props;
 
+    type EventElement = {
+      class?:string,
+      event:string,
+      handler: Function
+    }
+
     // оставляю старую логику добавления событий
     let bufElement: HTMLElement | null = null;
 
-    events.forEach((element, index) => {
+    events.forEach((element:EventElement, index:number) => {
       bufElement = element.class ? this._element.querySelector(element.class) : this._element;
       if (bufElement) {
         bufElement.addEventListener(events[index].event, events[index].handler);
@@ -58,10 +64,15 @@ class FormValidation extends Block implements FormValidationInterface {
   removeEvents() {
     // оставляю старую логику добавления событий
     const { events = [] } = this._props;
+    type EventElement = {
+      class?:string,
+      event:string,
+      handler: Function
+    }
     let bufElement:HTMLElement | null = null;
 
-    events.forEach((element, index) => {
-      bufElement = this._element.querySelector(element.class);
+    events.forEach((element:EventElement, index:number) => {
+      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
       if (bufElement) {
         bufElement.removeEventListener(events[index].event, events[index].handler);
       }
@@ -89,7 +100,7 @@ class FormValidation extends Block implements FormValidationInterface {
     }
   }
 
-  _formSubmission(event) { // отправка формы
+  _formSubmission(event:Event) { // отправка формы
     event.preventDefault();
     event.stopPropagation();
     this._validateForm();
@@ -98,21 +109,25 @@ class FormValidation extends Block implements FormValidationInterface {
     }
   }
 
-  _checkInputValidity(event) {
+  _checkInputValidity(event:Event) {
     this._validateForm();
-    this._validateInputElement(event.target);
+    this._validateInputElement(event.target as HTMLInputElement);
   }
 
-  _resetError(input) { // убирает сообщение об ошибке
+  _resetError(input:Event) { // убирает сообщение об ошибке
     this._form = this._element.querySelector('form');
 
-    const errorElement = this._form?.querySelector(`.error__${input.target.name}`);
-    if (errorElement) {
-      errorElement.textContent = '';
+    const inputElement = input.target as HTMLInputElement;
+
+    if (inputElement) {
+      const errorElement = this._form?.querySelector(`.error__${inputElement.name}`);
+      if (errorElement) {
+        errorElement.textContent = '';
+      }
     }
   }
 
-  _validateInputElement(element) { // проверяет валидность отдельных инпутов
+  _validateInputElement(element:HTMLInputElement) { // проверяет валидность отдельных инпутов
     this._form = this._element.querySelector('form');
     const errorElement = this._form?.querySelector(`.error__${element.name}`);
 
@@ -150,14 +165,14 @@ class FormValidation extends Block implements FormValidationInterface {
           }
           return item.hasAttribute('name');
         }))
-        .forEach((element) => {
+        .forEach((element:HTMLInputElement) => {
           if (!(this._validateInputElement(element))) flagValid = false;
         });
     }
     this._setSubmitButton(flagValid);
   }
 
-  _setSubmitButton(flag) { // делает кнопку активной/неактивной
+  _setSubmitButton(flag:boolean) { // делает кнопку активной/неактивной
     if (this._button) {
       if (flag) {
         this._button.classList.add('button-valid');

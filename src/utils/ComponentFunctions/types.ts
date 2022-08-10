@@ -1,13 +1,26 @@
 /* eslint no-unused-vars: 0 */
+export interface EventBusInterface {
+  listeners: {
+    [key:string]: Function[];
+  };
+  on(event:string, callback:()=>Function): void;
+  off(event:string, callback:()=>Function): void;
+  emit(event:string, args:any[]): void;
+}
+
 export interface BlockInterface {
-  _props;
+  _props: {
+    [key: string]:any
+  };
   _children:{
       [key: string]:BlockInterface
     };
   _id: string;
   _element: HTMLElement;
-  _meta;
-  _eventBus;
+  _meta:{
+    [key: string]:any
+  };
+  _eventBus:EventBusInterface;
   _setUpdate: boolean;
 
   _registerEvents():void;
@@ -24,15 +37,15 @@ export interface BlockInterface {
 
   _componentDidUpdate():void;
 
-  setProps(nextProps:any):void;
+  setProps(nextProps:{
+    [key: string]:any
+  }):void;
 
   _render():void;
 
   render():DocumentFragment|null;
 
   getContent():HTMLElement;
-
-  // _makePropsProxy(props)
 
   _createDocumentElement(tagName: string): HTMLElement;
   _createDocumentTemplate(): HTMLTemplateElement;
@@ -52,10 +65,3 @@ export interface BlockInterface {
   hide():void;
 
 }
-
-export interface EventBusInterface {
-    listeners: object;
-    on(event:string, callback:()=>any): void;
-    off(event:string, callback:()=>any): void;
-    emit(event:string, any): void;
-  }

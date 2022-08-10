@@ -1,9 +1,13 @@
+/* eslint no-unused-vars: "off" */
 import Block from '../../../../utils/ComponentFunctions/Block';
 import DialogsItem from '../../../../components/DialogsItem/DialogsItem';
-import { dialogs } from '../../data';
+import { dialogs, dialogInterface } from '../../data';
 
-const DialogsContainer = (openDialog) => {
-  const dialogComponents = {};
+const DialogsContainer = (openDialog:(item:dialogInterface)=>void) => {
+  const dialogComponents:{
+    [key:string]:DialogsItem
+  } = {};
+
   let dialogTmp = '';
   dialogs?.forEach((item, index) => {
     dialogComponents[`dialogComponents-${index}`] = new DialogsItem('div', {
@@ -13,7 +17,7 @@ const DialogsContainer = (openDialog) => {
       events: [
         {
           event: 'click',
-          handler: (event) => {
+          handler: (event:Event) => {
             event.preventDefault();
             event.stopPropagation();
             openDialog(dialogs?.[index]);

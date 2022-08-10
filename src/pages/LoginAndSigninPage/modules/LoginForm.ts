@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: "off" */
 import FormValidation from '../../../utils/FormValidation/FormValidation';
 import FieldInput from '../../../components/FieldInput/FieldInput';
 import Button from '../../../components/Button/Button';
@@ -21,7 +22,7 @@ const inputsProps = {
   },
 };
 
-const LoginFormModule = (redirectFunction) => {
+const LoginFormModule = (redirectFunction: (form:'regForm'|'loginForm')=>void) => {
   const loginInput = new FieldInput('div', {
     ...inputsProps.loginInput,
     attr: { class: 'login-form__field' },
@@ -41,7 +42,7 @@ const LoginFormModule = (redirectFunction) => {
     class: 'login-form__button login-form__button--second',
     attr: { class: 'login-form__button-container' },
   });
-  const sendForm = (event) => {
+  const sendForm = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
     const form: HTMLFormElement|null = document.querySelector('.login-form__form');

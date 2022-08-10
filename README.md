@@ -10,8 +10,10 @@ CloudTalk - проект с реализацией собственного ве
 - Netlify — сервис для разворачивания приложения в сети интернет.
 
 ## Особенности проекта
-
-Реализация собственного простого шаблонизатора. подробнее в [шаблонизатор](src/utils/README.md)
+Реализация собственного простого шаблонизатора. подробнее в [шаблонизатор](src/utils/Templator/README.md)
+Реализация компонентного подхода на чистом JS. подробнее в [Block](src/utils/ ComponentFunctions /README.md)
+Реализация Fetch на базе Promise и XHP в [FormValidation.ts](src/utils/ FormValidation/ FormValidation.ts)
+Валидация всех форм происходит в классе [FormValidation](src/utils/ FormValidation / FormValidation.ts)
 
 ## Инструкция как развернуть проект
 

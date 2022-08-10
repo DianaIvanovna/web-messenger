@@ -3,8 +3,7 @@ import LoginForm from './modules/LoginForm';
 import RegForm from './modules/RegForm';
 
 const loginAndSigninPage = () => {
-  // TODO: скрывать блоки, а не заново рендер делать
-  const renderForm = (form) => {
+  const renderForm = (form:'regForm'|'loginForm') => {
     const root:HTMLElement|null = document.querySelector('.root');
     if (root) {
       root.innerHTML = '';

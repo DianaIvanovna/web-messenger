@@ -1,24 +1,24 @@
-/* eslint no-param-reassign: "off" */
 import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
 class FieldInput extends Block {
-  constructor(tag, props) {
-    props.classes = classes;
-    props.class = props.class
+  constructor(tag:string, props:Record<string, any>) {
+    const newProps = { ...props };
+    newProps.classes = classes;
+    newProps.class = props.class
       ? `${classes['field-input__input']} ${props.class}`
       : classes['field-input__input'];
-    props.classError = `${classes['field-input__error']} error__${props.name}`;
-    props.name = props.name ? `name= ${props.name}` : '';
-    props.type = props.type ? `type= ${props.type}` : '';
-    props.value = props.value ? `value= ${props.value}` : '';
-    props.placeholder = props.placeholder ? `placeholder= ${props.placeholder}` : '';
-    props.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
-    props.required = props.required ? 'required' : '';
-    props.pattern = props.pattern ? `pattern= ${props.pattern}` : '';
-    props['data-error'] = props['data-error'] ? `data-error="${props['data-error']}"` : '';
+    newProps.classError = `${classes['field-input__error']} error__${props.name}`;
+    newProps.name = props.name ? `name= ${props.name}` : '';
+    newProps.type = props.type ? `type= ${props.type}` : '';
+    newProps.value = props.value ? `value= ${props.value}` : '';
+    newProps.placeholder = props.placeholder ? `placeholder= ${props.placeholder}` : '';
+    newProps.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
+    newProps.required = props.required ? 'required' : '';
+    newProps.pattern = props.pattern ? `pattern= ${props.pattern}` : '';
+    newProps['data-error'] = props['data-error'] ? `data-error="${props['data-error']}"` : '';
 
-    super(tag, props);
+    super(tag, newProps);
   }
 
   render() {

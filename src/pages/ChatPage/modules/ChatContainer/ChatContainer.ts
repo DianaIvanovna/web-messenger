@@ -1,18 +1,19 @@
-/* eslint no-param-reassign: "off" */
 import Message from '../../../../components/Message/Message';
 import SendMessange from '../../../../components/SendMessange/SendMessange';
+import ChatMain from '../ChatMain/ChatMain';
 
-const ChatContainer = (ParentComponent) => {
-  class ChatContainerBlock extends ParentComponent {
-    constructor(tag, props) {
+const ChatContainer = () => {
+  class ChatContainerBlock extends ChatMain {
+    constructor(tag:string, props:Record<string, any>) {
+      const newProps = { ...props };
       if (!props.activeChat) {
-        props.activeChat = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
+        newProps.activeChat = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
       }
 
-      super(tag, props);
+      super(tag, newProps);
     }
 
-    setProps = (newProps) => {
+    setProps = (newProps:Record<string, any>) => {
       if (!newProps) {
         return;
       }
@@ -20,10 +21,18 @@ const ChatContainer = (ParentComponent) => {
       this._setUpdate = false;
       const oldProps = { ...this._props };
 
+      type MessangeType = {
+          text: string
+          data: string,
+          flagRead: boolean,
+          flagSend: boolean,
+          myMes: boolean,
+      }
+
       // логика для отображения всех сообщений из чата
       if ('activeChat' in nextProps) {
         let activeChatTmp = '';
-        nextProps.activeChat.messages.forEach((message, index) => {
+        nextProps.activeChat.messages.forEach((message:MessangeType, index:number) => {
           const messageName = `message-${index}`;
           const classMes = `message ${message.myMes ? 'message--my' : ''} ${
             message.flagRead ? 'message--read' : ''
@@ -56,7 +65,7 @@ const ChatContainer = (ParentComponent) => {
       }
 
       if (this._setUpdate) {
-        this._eventBus.emit(ParentComponent.EVENTS.FLOW_CDU, oldProps, this._props);
+        this._eventBus.emit(ChatMain.EVENTS.FLOW_CDU, oldProps, this._props);
         this._setUpdate = false;
       }
     };

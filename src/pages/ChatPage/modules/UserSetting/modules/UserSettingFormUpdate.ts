@@ -1,8 +1,13 @@
+/* eslint no-unused-vars: "off" */
 import FormValidation from '../../../../../utils/FormValidation/FormValidation';
 import FieldInput from '../../../../../components/FieldInput/FieldInput';
 import Button from '../../../../../components/Button/Button';
 
-const inputsProps = {
+type inputsPropsType = {
+  [key:string]: {[key:string]:string|boolean}
+}
+
+const inputsProps:inputsPropsType = {
   emailInput: {
     name: 'email',
     type: 'text',
@@ -55,16 +60,19 @@ const inputsProps = {
   },
 };
 
-const UserSettingFormUpdate = (changeForm) => {
-  const disabledInputs = (disabledValue) => {
-    const inputs = {
+const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') => void) => {
+  const disabledInputs = (disabledValue:boolean) => {
+    type inputsType = {
+      [key:string] : FieldInput|null
+    };
+    const inputs: inputsType = {
       emailInput: null,
       loginInput: null,
       firstNameInput: null,
       secondNameInput: null,
       phoneInput: null,
     };
-    Object.entries(inputsProps).forEach(([key, child]) => {
+    Object.entries(inputsProps).forEach(([key, child]:[string, {[key:string]:string|boolean}]) => {
       inputs[key] = new FieldInput('div', {
         ...child,
         disabled: disabledValue,
@@ -78,7 +86,7 @@ const UserSettingFormUpdate = (changeForm) => {
   let flagDisabled = true;
   const inputs = disabledInputs(flagDisabled);
 
-  const changeUserDataBtnHandler = (event) => {
+  const changeUserDataBtnHandler = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
     flagDisabled = !flagDisabled;
@@ -111,10 +119,10 @@ const UserSettingFormUpdate = (changeForm) => {
     events: [
       {
         event: 'click',
-        handler: (event) => {
+        handler: (event:Event) => {
           event.preventDefault();
           event.stopPropagation();
-          changeForm('password');
+          changeForm('formPassword');
         },
       },
     ],
@@ -127,7 +135,7 @@ const UserSettingFormUpdate = (changeForm) => {
     events: [
       {
         event: 'click',
-        handler: (event) => {
+        handler: (event:Event) => {
           event.preventDefault();
           event.stopPropagation();
           console.log('Выход');
@@ -143,7 +151,7 @@ const UserSettingFormUpdate = (changeForm) => {
     attr: { class: 'user-setting__button-container' },
   });
 
-  const cancelButtonHandler = (event) => {
+  const cancelButtonHandler = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
     flagDisabled = !flagDisabled;
@@ -171,7 +179,7 @@ const UserSettingFormUpdate = (changeForm) => {
     ],
   });
 
-  const sendForm = (event) => {
+  const sendForm = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
     const form: HTMLFormElement|null = document.querySelector('.user-setting__form');

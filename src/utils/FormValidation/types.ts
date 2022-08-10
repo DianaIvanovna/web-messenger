@@ -4,10 +4,10 @@ export interface FormValidationInterface {
   _button: HTMLElement | null;
   _setHandlers():void;
   _removeHandlers():void;
-  _formSubmission(event:EventTarget): void;
-  _checkInputValidity(event:EventTarget): void;
-  _resetError(event:EventTarget): void;
-  _validateInputElement(element: EventTarget): boolean;
+  _formSubmission(event:Event): void;
+  _checkInputValidity(event:Event): void;
+  _resetError(event:Event): void;
+  _validateInputElement(element: HTMLInputElement): boolean;
   _validateForm():void;
   _setSubmitButton(flag:boolean): void;
 }

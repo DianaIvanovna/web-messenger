@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "clean": "rimraf dist",
-    "start": "nodemon server.js",
+    "start": "npm run build && nodemon server.js",
     "dev": "npm run clean && parcel  src/index.html --open ",
     "build": "npm run clean && parcel  build src/index.html",
     "lint": "eslint --cache ./src",
@@ -24,6 +24,7 @@
     "@babel/core": "^7.18.10",
     "@babel/eslint-parser": "^7.18.9",
     "@parcel/transformer-sass": "2.6.2",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
     "assert": "2.0.0",

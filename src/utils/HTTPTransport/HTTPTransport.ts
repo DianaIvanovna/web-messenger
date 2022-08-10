@@ -7,28 +7,33 @@ const METHODS = {
   DELETE: 'DELETE',
 };
 
-function queryStringify(data) {
+function queryStringify(data:{[key:string]:any}) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
   }
-
   const keys = Object.keys(data);
-  return keys.reduce((result, key, index) => `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`, '?');
+  return keys.reduce((result, key:string, index) => `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`, '?');
 }
 
 export default class HTTPTransport implements HTTPTransportInterface {
-  get = (url, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  get = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
 
-  post = (url, options = {}) => this.request(url, { ...options, method: METHODS.POST });
+  post = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.POST });
 
-  put = (url, options = {}) => this.request(url, { ...options, method: METHODS.PUT });
+  put = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.PUT });
 
-  delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE });
+  delete = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.DELETE });
 
-  request = (url, options) => {
-    const {
-      headers = {}, method, data, timeout = 5000,
-    } = options;
+  request = (url:string, options?:{
+    headers?:{[key:string]:any},
+    method?: string,
+    data?: object,
+    timeout?:number
+  }) => {
+    const headers = options?.headers ? options.headers : null;
+    const data = options?.data ? options.data : null;
+    const timeout = options?.timeout ? options.timeout : 5000;
+    const method = options?.method ? options.method : null;
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -46,9 +51,11 @@ export default class HTTPTransport implements HTTPTransportInterface {
           : url,
       );
 
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
+      if (headers) {
+        Object.keys(headers).forEach((key) => {
+          xhr.setRequestHeader(key, headers[key]);
+        });
+      }
 
       xhr.onload = () => {
         resolve(xhr);
@@ -63,7 +70,7 @@ export default class HTTPTransport implements HTTPTransportInterface {
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };

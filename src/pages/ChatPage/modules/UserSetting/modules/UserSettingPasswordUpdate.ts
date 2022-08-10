@@ -1,8 +1,9 @@
+/* eslint no-unused-vars: "off" */
 import FormValidation from '../../../../../utils/FormValidation/FormValidation';
 import FieldRepeatPassword from '../../../../../components/FieldInput/FieldRepeatPassword';
 import Button from '../../../../../components/Button/Button';
 
-const UserSettingPasswordUpdate = (changeForm) => {
+const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword') => void) => {
   const formId = 'userEditPassword';
   const repeatPasswordInput = new FieldRepeatPassword('div', {
     title: 'Пароль',
@@ -30,16 +31,16 @@ const UserSettingPasswordUpdate = (changeForm) => {
     events: [
       {
         event: 'click',
-        handler: (event) => {
+        handler: (event:Event) => {
           event.preventDefault();
           event.stopPropagation();
-          changeForm('update');
+          changeForm('formUpdate');
         },
       },
     ],
   });
 
-  const sendForm = (event) => {
+  const sendForm = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
     const form: HTMLFormElement|null = document.querySelector('.user-setting__form--password');

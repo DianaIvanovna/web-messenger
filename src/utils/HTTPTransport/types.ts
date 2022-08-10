@@ -9,9 +9,9 @@ export interface HTTPTransportInterface {
   delete (url:string, options?:object): Promise<unknown>;
 
   request (url:string, options?:{
-    headers?:object,
+    headers?:{[key:string]:any},
     method: string,
-    data: unknown,
+    data?: FormData,
     timeout?:number
   }): Promise<unknown>;
 }

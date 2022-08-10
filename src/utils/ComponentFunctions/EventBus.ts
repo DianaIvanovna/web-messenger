@@ -1,14 +1,15 @@
-// Event Bus нужен для подписки/отписки/оповещения подсписчиков на некие события
 import { EventBusInterface } from './types';
 
 export default class EventBus implements EventBusInterface {
-  listeners;
+  listeners: {
+    [key:string]: Function[];
+  };
 
   constructor() {
     this.listeners = {};
   }
 
-  on(event, callback) {
+  on(event:string, callback:Function) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -16,7 +17,7 @@ export default class EventBus implements EventBusInterface {
     this.listeners[event].push(callback);
   }
 
-  off(event, callback) {
+  off(event:string, callback:Function) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -26,7 +27,7 @@ export default class EventBus implements EventBusInterface {
     );
   }
 
-  emit(event, ...args) {
+  emit(event:string, ...args:any) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

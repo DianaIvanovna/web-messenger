@@ -1,6 +1,5 @@
 // Класс Block нужен для создания полноценных компонентов с жизнеными циклами,
 // рендером, отслеживанием изменения параметров
-// TODO: переписать в TypeScript
 
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
@@ -29,7 +28,7 @@ export default class Block implements BlockInterface {
 
   _setUpdate = false;
 
-  constructor(tagName = 'div', propsAndChildren = {}) {
+  constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
     const { children, props } = this._getChildren(propsAndChildren);
 
     this._eventBus = new EventBus();
@@ -82,7 +81,9 @@ export default class Block implements BlockInterface {
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps(nextProps) {
+  setProps(nextProps:{
+    [key: string]:any
+  }) {
     if (!nextProps) {
       return;
     }
@@ -128,15 +129,17 @@ export default class Block implements BlockInterface {
     return this._element;
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props:{
+    [key: string]:any
+  }) {
     const self = this;
 
     return new Proxy(props, {
-      get(target, prop) {
+      get(target, prop:string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set(target, prop:string, value) {
         if (target[prop] !== value) {
           /* eslint no-param-reassign: "off" */
           target[prop] = value;
@@ -170,11 +173,17 @@ export default class Block implements BlockInterface {
     return newElement;
   }
 
-  _getChildren(propsAndChildren) {
-    const children = {};
-    const props = {};
+  _getChildren(propsAndChildren:{
+    [key: string]:any
+  }) {
+    const children:{
+      [key: string]:BlockInterface
+    } = {};
+    const props:{
+      [key: string]:any
+    } = {};
 
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
+    Object.entries(propsAndChildren).forEach(([key, value]:[string, any]) => {
       if (value instanceof Block) {
         children[key] = value;
       } else {
@@ -184,7 +193,9 @@ export default class Block implements BlockInterface {
     return { children, props };
   }
 
-  compile(template, props?) {
+  compile(template:string, props?:{
+    [key: string]:any
+  }) {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
@@ -214,7 +225,13 @@ export default class Block implements BlockInterface {
 
     let bufElement: HTMLElement | null = null;
 
-    events.forEach((element, index) => {
+    type EventElement = {
+      class?:string,
+      event:string,
+      handler: Function
+    }
+
+    events.forEach((element: EventElement, index:number) => {
       bufElement = element.class ? this._element.querySelector(element.class) : this._element;
       if (bufElement) {
         bufElement.addEventListener(events[index].event, events[index].handler);
@@ -226,8 +243,14 @@ export default class Block implements BlockInterface {
     const { events = [] } = this._props;
     let bufElement: HTMLElement | null = null;
 
-    events.forEach((element, index) => {
-      bufElement = this._element.querySelector(element.class);
+    type EventElement = {
+      class?:string,
+      event:string,
+      handler: Function
+    }
+
+    events.forEach((element:EventElement, index:number) => {
+      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
       if (bufElement) {
         bufElement.removeEventListener(events[index].event, events[index].handler);
       }

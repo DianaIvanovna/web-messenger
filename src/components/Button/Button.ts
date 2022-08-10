@@ -2,16 +2,16 @@ import './Button.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
 class Button extends Block {
-  constructor(tag: string, props) {
-    /* eslint no-param-reassign: "off" */
-    props.class = props.class
+  constructor(tag:string, props:Record<string, any>) {
+    const newProps = { ...props };
+    newProps.class = props.class
       ? `button ${props.class}`
       : 'button default-button';
-    props.type = props.type ? `type= ${props.type}` : '';
-    props.form = props.form ? `form= ${props.form}` : '';
-    props.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
+    newProps.type = props.type ? `type= ${props.type}` : '';
+    newProps.form = props.form ? `form= ${props.form}` : '';
+    newProps.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
 
-    super(tag, props);
+    super(tag, newProps);
   }
 
   render() {

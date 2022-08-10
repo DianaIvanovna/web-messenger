@@ -1,14 +1,19 @@
+/* eslint no-unused-vars: "off" */
 import FormValidation from '../../../utils/FormValidation/FormValidation';
 import FieldInput from '../../../components/FieldInput/FieldInput';
 import FieldRepeatPassword from '../../../components/FieldInput/FieldRepeatPassword';
 import Button from '../../../components/Button/Button';
 
-const inputsProps = {
+type inputsPropsType = {
+  [key:string]: {[key:string]:string|boolean}
+}
+
+const inputsProps:inputsPropsType = {
   emailInput: {
     name: 'email',
     type: 'text',
     title: 'Почта',
-    pattern: '^[A-Za-z]([A-za-z\w-][.]?)+[A-Za-z0-9]@[a-z]*\.[a-z]{2,6}\.?[a-z]{0,6}',
+    pattern: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+.+.[A-Za-z]{2}$',
     'data-error': 'Неправильный формат email',
     required: true,
   },
@@ -46,8 +51,12 @@ const inputsProps = {
   },
 };
 
-const RegForm = (redirectFunction) => {
-  const inputs = {
+const RegForm = (redirectFunction:(form:'regForm'|'loginForm')=>void) => {
+  type inputsType = {
+    [key:string] : FieldInput|null
+  };
+
+  const inputs:inputsType = {
     emailInput: null,
     loginInput: null,
     firstNameInput: null,
@@ -82,7 +91,7 @@ const RegForm = (redirectFunction) => {
     class: 'login-form__button login-form__button--second',
     attr: { class: 'login-form__button-container' },
   });
-  const sendForm = (event) => {
+  const sendForm = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
     const form: HTMLFormElement|null = document.querySelector('.login-form__form');

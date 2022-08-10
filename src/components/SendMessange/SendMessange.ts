@@ -1,5 +1,3 @@
-/* eslint no-param-reassign: "off" */
-
 import classes from './SendMessange.module.scss';
 import FormValidation from '../../utils/FormValidation/FormValidation';
 import clip from '../../../static/img/icons/clip.png';
@@ -7,20 +5,21 @@ import sendMessangeIcon from '../../../static/img/icons/send-messange.png';
 import Button from '../Button/Button';
 
 class SendMessange extends FormValidation {
-  constructor(tag, props) {
+  constructor(tag:string, props:Record<string, any>) {
     const formId = 'sendMessange';
+    const newProps = { ...props };
 
-    props.classes = classes;
-    props.clip = clip;
-    props.sendMessangeIcon = sendMessangeIcon;
-    props.formId = formId;
-    props.button = new Button('div', {
+    newProps.classes = classes;
+    newProps.clip = clip;
+    newProps.sendMessangeIcon = sendMessangeIcon;
+    newProps.formId = formId;
+    newProps.button = new Button('div', {
       form: formId,
       text: `<img src=${sendMessangeIcon}  />`,
       class: classes['send-messange__img'],
-      attr: { class: 'login-form__button-container' },
+      attr: { class: classes['send-messange__img'] },
     });
-    props.sendForm = (event) => {
+    newProps.sendForm = (event:Event) => {
       event.preventDefault();
       event.stopPropagation();
       // const { elements } = document.querySelector(`.${classes['send-messange']}`);
@@ -36,7 +35,7 @@ class SendMessange extends FormValidation {
       }
     };
 
-    super(tag, props);
+    super(tag, newProps);
   }
 
   render() {

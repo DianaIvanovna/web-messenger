@@ -11,15 +11,15 @@ class Templator implements TemplatorInterface {
 
   _template;
 
-  constructor(template) {
+  constructor(template:string) {
     this._template = template;
   }
 
-  compile(ctx) {
+  compile(ctx:object) {
     return this._compileTemplate(this._template, ctx);
   }
 
-  _compileTemplate(template, ctx) {
+  _compileTemplate(template:string, ctx:object) {
     let tmpl = template;
     let key: RegExpExecArray|null = null;
     const regExp = this.TEMPLATE_REGEXP;
@@ -36,8 +36,9 @@ class Templator implements TemplatorInterface {
             баг. если название функции одинаковые, то они переопределяются..
             нужно подумать как с этим быть, но пока просто добавляю хеш
           */
-          const newFuncName = `${tmplValue}_${Math.floor(Math.random() * 500)}`;
-          window[newFuncName] = data;
+          const newFuncName:string = `${tmplValue}_${Math.floor(Math.random() * 500)}`;
+
+          (<any>window)[newFuncName] = data;
 
           tmpl = tmpl.replace(
             new RegExp(key[0], 'gi'),
@@ -47,7 +48,7 @@ class Templator implements TemplatorInterface {
           continue;
         }
 
-        tmpl = tmpl.replace(new RegExp(key[0], 'gi'), data);
+        tmpl = tmpl.replace(new RegExp(key[0], 'gi'), data.toString());
       }
     }
 
@@ -55,7 +56,7 @@ class Templator implements TemplatorInterface {
   }
 }
 
-export function getTemplate(template, context) {
+export function getTemplate(template:string, context:object) {
   const tmpl = new Templator(template);
 
   return tmpl.compile(context); // Строка с html-вёрсткой

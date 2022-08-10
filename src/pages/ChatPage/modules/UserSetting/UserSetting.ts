@@ -8,8 +8,8 @@ import UserSettingPasswordUpdate from './modules/UserSettingPasswordUpdate';
 import photo from '../../../../../static/img/avatars/photo.jpg';
 
 const UserSettingComponent = () => {
-  const changeForm = (form) => {
-    if (form === 'update') {
+  const changeForm = (form:'formUpdate' |'formPassword') => {
+    if (form === 'formUpdate') {
       formUserUpdate.show();
       formPasswordUpdate.hide();
     } else {
@@ -20,7 +20,7 @@ const UserSettingComponent = () => {
   const formUserUpdate = UserSettingFormUpdate(changeForm);
   const formPasswordUpdate = UserSettingPasswordUpdate(changeForm);
 
-  changeForm('update');
+  changeForm('formUpdate');
   class UserSetting extends FormValidation {
     render() {
       return this.compile(`

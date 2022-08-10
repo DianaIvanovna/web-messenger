@@ -1,6 +1,6 @@
 /* eslint no-restricted-syntax: 0 */
 
-export function getObjectKey(obj, path, defaultValue = undefined) {
+export function getObjectKey(obj:{[key:string]:any}, path:string, defaultValue = 'undefined') {
   const keys = path.split('.');
   let result = { ...obj };
 
