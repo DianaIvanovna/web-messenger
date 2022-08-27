@@ -4,9 +4,10 @@
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import { getTemplate } from '../Templator/Templator';
-import { BlockInterface } from './types';
 
-export default class Block implements BlockInterface {
+type PlainObject = { [key: string]: any }
+
+export default class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -66,7 +67,7 @@ export default class Block implements BlockInterface {
   _componentDidMount() {
     this.componentDidMount();
 
-    Object.values(this._children).forEach((child: BlockInterface) => {
+    Object.values(this._children).forEach((child: Block) => {
       child.dispatchComponentDidMount();
     });
   }
@@ -81,9 +82,7 @@ export default class Block implements BlockInterface {
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps(nextProps:{
-    [key: string]:any
-  }) {
+  setProps(nextProps:PlainObject) {
     if (!nextProps) {
       return;
     }
@@ -129,9 +128,7 @@ export default class Block implements BlockInterface {
     return this._element;
   }
 
-  _makePropsProxy(props:{
-    [key: string]:any
-  }) {
+  _makePropsProxy(props:PlainObject) {
     const self = this;
 
     return new Proxy(props, {
@@ -173,15 +170,11 @@ export default class Block implements BlockInterface {
     return newElement;
   }
 
-  _getChildren(propsAndChildren:{
-    [key: string]:any
-  }) {
+  _getChildren(propsAndChildren:PlainObject) {
     const children:{
-      [key: string]:BlockInterface
+      [key: string]:Block
     } = {};
-    const props:{
-      [key: string]:any
-    } = {};
+    const props:PlainObject = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]:[string, any]) => {
       if (value instanceof Block) {
@@ -193,23 +186,21 @@ export default class Block implements BlockInterface {
     return { children, props };
   }
 
-  compile(template:string, props?:{
-    [key: string]:any
-  }) {
+  compile(template:string, props?:PlainObject) {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
 
     const propsAndStubs = { ...props };
 
-    Object.entries(this._children).forEach(([key, child]: [string, BlockInterface]) => {
+    Object.entries(this._children).forEach(([key, child]: [string, Block]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
     const fragment: HTMLTemplateElement = this._createDocumentTemplate();
     fragment.innerHTML = getTemplate(template, propsAndStubs);
 
-    Object.values(this._children).forEach((child: BlockInterface) => {
+    Object.values(this._children).forEach((child: Block) => {
       const stub :HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);
 
       if (stub) {
@@ -244,7 +235,7 @@ export default class Block implements BlockInterface {
     let bufElement: HTMLElement | null = null;
 
     type EventElement = {
-      class?:string,
+      class?:string, 
       event:string,
       handler: Function
     }

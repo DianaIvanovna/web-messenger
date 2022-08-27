@@ -131,27 +131,28 @@ class FormValidation extends Block implements FormValidationInterface {
     this._form = this._element.querySelector('form');
     const errorElement = this._form?.querySelector(`.error__${element.name}`);
 
-    if (!element.checkValidity()) {
-      if (element.hasAttribute('required') && !element.value) {
-        if (errorElement) {
-          errorElement.textContent = 'Это обязательное поле';
-        }
+    if (element.checkValidity()) { return true }
 
-        return false;
-      }
+    const requiredAndEmpty: boolean = element.hasAttribute('required') && !element.value
 
-      const errorInput = element.getAttribute('data-error');
-
-      if (errorInput) {
-        if (errorElement) {
-          errorElement.textContent = errorInput;
-        }
-        return false;
+    if (requiredAndEmpty) {
+      if (errorElement) {
+        errorElement.textContent = 'Это обязательное поле';
       }
 
       return false;
     }
-    return true;
+
+    const errorInput = element.getAttribute('data-error');
+
+    if (errorInput) {
+      if (errorElement) {
+        errorElement.textContent = errorInput;
+      }
+      return false;
+    }
+
+    return false;
   }
 
   _validateForm() { // проверяет валидность всей формы

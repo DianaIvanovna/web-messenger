@@ -1,9 +1,8 @@
 import Block from '../../../../utils/ComponentFunctions/Block';
+type PlainObject = { [key: string]: any }
 
 export default class ChatMainBlock extends Block {
-  setProps = (nextProps:{
-    [key: string]:any
-  }) => {
+  setProps = (nextProps:PlainObject) => {
     if (!nextProps) {
       return;
     }

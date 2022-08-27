@@ -1,11 +1,20 @@
-import { HTTPTransportInterface } from './types';
+import { HTTPTransportInterface, TOptions,  MethodsObject } from './types';
 
-const METHODS = {
+
+const METHODS:MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
   DELETE: 'DELETE',
 };
+const defaultOptions: TOptions = {
+  headers: {},
+  data: {},
+  timeout: 5000,
+  method: METHODS.GET
+}
+
+
 
 function queryStringify(data:{[key:string]:any}) {
   if (typeof data !== 'object') {
@@ -24,16 +33,12 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
   delete = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.DELETE });
 
-  request = (url:string, options?:{
-    headers?:{[key:string]:any},
-    method?: string,
-    data?: object,
-    timeout?:number
-  }) => {
-    const headers = options?.headers ? options.headers : null;
-    const data = options?.data ? options.data : null;
-    const timeout = options?.timeout ? options.timeout : 5000;
-    const method = options?.method ? options.method : null;
+  request = (url:string, options?:TOptions): Promise<unknown> => {
+    if (!options) {
+      options = defaultOptions
+    }
+    const {headers = null, data = null, timeout = 5000, method = METHODS.GET} = options
+
 
     return new Promise((resolve, reject) => {
       if (!method) {
