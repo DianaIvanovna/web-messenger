@@ -1,3 +1,4 @@
+import "./ChatPage.scss";
 import renderDOM from '../../utils/ComponentFunctions/renderDom';
 import UserSettingComponent from './modules/UserSetting/UserSetting';
 import DialogsContainer from './modules/DialogsContainer/DialogsContainer';
@@ -112,7 +113,7 @@ const chat = () => {
     ],
   });
 
-  renderDOM('.root', chatMain);
+  return chatMain;
 };
 
 export default chat();

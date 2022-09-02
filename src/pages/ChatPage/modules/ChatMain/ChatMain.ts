@@ -16,7 +16,7 @@ export default class ChatMainBlock extends Block {
       this._children.chatContainer.setProps({
         activeChat: nextProps.activeChat,
       });
-    }
+    } 
 
     const { children, props } = this._getChildren(nextProps);
 

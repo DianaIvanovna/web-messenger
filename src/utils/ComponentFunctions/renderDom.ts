@@ -10,3 +10,4 @@ export default function renderDOM(query: string, component: Block) {
 
   return root;
 }
+ 
