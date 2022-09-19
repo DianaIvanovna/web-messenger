@@ -4,7 +4,8 @@ import FieldInput from '../../../../../components/FieldInput/FieldInput';
 import Button from '../../../../../components/Button/Button';
 import  {Indexed} from '../../../../../store/Store';
 import { connect } from '../../../../../store/utils/connect';
-import UserLoginController from '../../../../../controllers/UserLoginController';
+import AuthController from '../../../../../controllers/AuthController';
+import UserController from '../../../../../controllers/UserController';
 
 import {inputsPropsFormUpdate} from "./inputsProps";
 type PlainObject = { [key: string]: any }
@@ -13,14 +14,15 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
 
     function mapUserToProps(state:Indexed):Indexed {
         return {
-          user: state.user,
+          user: {...state.user},
         }; 
     }
 
     class FormUserData extends FormValidation {
         _flagDisabled : Boolean;
         _formInputs: FieldInput[];
-        private _userLoginController;
+        private _authController;
+        private _userController;
 
         constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
             const newProps = { ...propsAndChildren };
@@ -108,7 +110,8 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             });
 
             this._formInputs = [emailInput,loginInput,firstNameInput,secondNameInput,phoneInput];
-            this._userLoginController = UserLoginController;
+            this._authController = AuthController;
+            this._userController = UserController;
 
             saveButton.hide();
             cancelButton.hide();
@@ -123,7 +126,8 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
                 changePasswordBtn,
                 exitBtn,
                 saveButton,
-                cancelButton
+                cancelButton,
+                sendForm: this.sendForm.bind(this),
             })
         }
 
@@ -145,9 +149,11 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             })
         };
 
-        cancelButtonHandler (event:Event) {
-            event.preventDefault();
-            event.stopPropagation();
+        cancelButtonHandler (event?:Event) {
+            if (event) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
             this._flagDisabled = false;
             this._children.saveButton.hide();
             this._children.cancelButton.hide();
@@ -167,20 +173,31 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             event.stopPropagation();
             const form: HTMLFormElement|null = document.querySelector('.user-setting__form');
             if (form) {
-              const { elements } = form;
+              const first_name = form.querySelector('input[name="first_name"]') as HTMLInputElement;
+              const second_name = form.querySelector('input[name="second_name"]') as HTMLInputElement;
+              const display_name = form.querySelector('input[name="display_name"]') as HTMLInputElement;
+              const login = form.querySelector('input[name="login"]') as HTMLInputElement;
+              const email = form.querySelector('input[name="email"]') as HTMLInputElement;
+              const phone = form.querySelector('input[name="phone"]') as HTMLInputElement;
+
+
+              const formData = {
+                first_name: first_name ? first_name.value : "",
+                second_name:  second_name ? second_name.value : "",
+                display_name:  display_name ? display_name.value : "",
+                login:  login ? login.value : "",
+                email:  email ? email.value : "",
+                phone: phone ? phone.value : "",
+              };
         
-              Array.from(elements)
-                .filter((item) => item.tagName === 'INPUT')
-                .forEach((element: HTMLInputElement) => {
-                  const { name, value } = element;
-                  console.log({ name, value });
-                });
+              this._userController.changeProfile(formData);
+              this.cancelButtonHandler();
             }
           };
 
         middlewareProps(nextProps:PlainObject):PlainObject {
             if ('user' in nextProps) {
-                this._formInputs.forEach((item)=>{
+                this._formInputs.forEach((item)=>{ 
                     item.setProps({
                         value: nextProps.user?.[item.name]
                     })
@@ -193,7 +210,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
         logout(event:Event) {
           event.preventDefault();
           event.stopPropagation();
-          this._userLoginController.logout();
+          this._authController.logout();
         }
     
         render() {
@@ -216,6 +233,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
         }
     }
     const FormUserDataConnectedToStore = connect(FormUserData,mapUserToProps );
+    
     return new FormUserDataConnectedToStore('div', {
         formId: 'userSetting',
         attr: { class: 'user-setting__form-container' },

@@ -4,7 +4,7 @@ import FieldInput from '../../components/FieldInput/FieldInput';
 import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from '../../utils/Router/Router';
-import UserLoginController from '../../controllers/UserLoginController';
+import AuthController from '../../controllers/AuthController';
 
 const router = new Router(".root");
 
@@ -62,7 +62,7 @@ const inputsProps = {
           formData[name] = value;
         });
 
-        UserLoginController.signin(formData);
+        AuthController.signin(formData);
     }
   };
 

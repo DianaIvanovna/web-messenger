@@ -26,7 +26,7 @@ class Store extends EventBus  {
         test2 : "ddddddddddddd",
         error: null,
 
-
+ 
         user: null,
         dialogs: [{
           id: 1,

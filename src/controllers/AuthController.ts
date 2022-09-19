@@ -2,13 +2,13 @@
 import AuthApi from "../api/AuthApi/AuthApi";
 import Store from "../store/Store";
 import Router from '../utils/Router/Router';
-import {signupData, signinData} from "./types";
+import {signupData, signinData} from "../api/AuthApi/types";
 
 const router = new Router(".root");
 
 const authApi = new AuthApi();
 
-class UserLoginController {
+class AuthController {
   public async auth() {
     try {
       document.querySelector(".preloader__back")?.classList.add("preloader__back--show")
@@ -23,15 +23,10 @@ class UserLoginController {
 
       }, 1000)
     } catch (error) {
-        if (error.status === 401) {
-          Store.set("auth.authCheck", true);
-          Store.set("auth.isLogged", false);
-          router.go("/reg");
-          document.querySelector(".preloader__back")?.classList.remove("preloader__back--show")
-        }else {
-          console.log("Ошибка", error);
-        }
-        
+      Store.set("auth.authCheck", true);
+      Store.set("auth.isLogged", false);
+      router.go("/reg");
+      document.querySelector(".preloader__back")?.classList.remove("preloader__back--show")
     }
   }
 
@@ -66,4 +61,4 @@ class UserLoginController {
   }
 } 
 
-  export default new UserLoginController;
+  export default new AuthController;

@@ -43,7 +43,7 @@ export default class HTTPTransport implements HTTPTransportInterface {
     if (!options) {
       options = defaultOptions
     }
-    const {headers = null, data = null, timeout = 5000, method = METHODS.GET} = options
+    const {headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null} = options
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -78,11 +78,14 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
-      xhr.withCredentials = true
+      xhr.withCredentials = true;
 
-      if (isGet || !data) {
+      if (formData) {
+        console.log("formData", formData);
+        xhr.send(formData);
+      }else if (isGet || !data) {
         xhr.send();
-      } else {
+      }else {
         xhr.send(JSON.stringify(data));
       }
     });

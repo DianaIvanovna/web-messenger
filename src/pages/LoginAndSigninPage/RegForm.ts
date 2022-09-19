@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from "../../utils/Router/Router";
 
-import UserLoginController from '../../controllers/UserLoginController';
+import AuthController from '../../controllers/AuthController';
 
 const router = new Router(".root");
 
@@ -105,7 +105,7 @@ const sendForm = (event:Event) => {
   const form: HTMLFormElement|null = document.querySelector('.login-form__form');
   if (form) {
     const { elements } = form;
-    const formData = {};
+    const formData = {}; 
 
     Array.from(elements)
       .filter((item) => item.tagName === 'INPUT')
@@ -114,7 +114,7 @@ const sendForm = (event:Event) => {
         formData[name] = value;
       });
 
-      UserLoginController.signup(formData);
+      AuthController.signup(formData);
   }
 };
 

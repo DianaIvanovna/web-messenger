@@ -8,7 +8,7 @@ export const inputsPropsFormUpdate:inputsPropsType = {
       type: 'text',
       placeholder: 'введите почту', 
       title: 'Почта',
-      pattern: '^[A-Za-z]([A-za-z\w-][.]?)+[A-Za-z0-9]@[a-z]*\.[a-z]{2,6}\.?[a-z]{0,6}',
+      pattern: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+.+.[A-Za-z]{2}$', 
       'data-error': 'Неправильный формат email',
       required: true,
     },

@@ -1,10 +1,12 @@
 import './UserSetting.scss';
 import FormValidation from '../../../../utils/FormValidation/FormValidation';
-import pen from '../../../../../static/img/icons/pen.png';
+
 import UserSettingFormUpdate from './modules/UserSettingFormUpdate';
 import UserSettingPasswordUpdate from './modules/UserSettingPasswordUpdate';
 import Store, {StoreEvents, Indexed} from '../../../../store/Store';
 import { connect } from '../../../../store/utils/connect';
+import Avatar from '../../../../components/Avatar/Avatar';
+
 import Block from "../../../../utils/ComponentFunctions/Block";
 import { getTemplate } from '../../../../utils/Templator/Templator';
 
@@ -23,10 +25,14 @@ const UserSettingComponent = () => {
     class UserSetting extends FormValidation {
         constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
             const newProps = { ...propsAndChildren };
-            newProps.avatar = photo;
             super(tagName, newProps);
+            const avatar = new Avatar('div', {
+              attr: { class: 'user-setting__avatar-container' },
+            });
+
 
             this.setProps({
+                avatar,
                 formUserUpdate: UserSettingFormUpdate(this.changeForm.bind(this)),
                 formPasswordUpdate : UserSettingPasswordUpdate(this.changeForm.bind(this)),
             })
@@ -58,10 +64,8 @@ const UserSettingComponent = () => {
       render() {
           return this.compile(`
           <div class="user-setting">
-            <div class="user-setting__avatar-container" >
-              <img src={{avatar}} alt="аватар" class="user-setting__avatar" />
-              <img src={{pen}} alt="изменить аватар" class="user-setting__icon" />
-            </div>
+            
+            {{avatar}}
             {{formUserUpdate}}
             {{formPasswordUpdate}}
           </div>
@@ -71,7 +75,6 @@ const UserSettingComponent = () => {
     const UserSettingConnectedToStore = connect(UserSetting,mapUserToProps );
     return  new UserSettingConnectedToStore('div', {
         //photo,
-        pen,
        // formUserUpdate,
         //formPasswordUpdate,
         attr: { class: 'chat__user-setting' },
