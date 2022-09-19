@@ -14,4 +14,4 @@ import "./ErrorPage.scss"
   const ErrorPage404 =  new ErrorPage('div', {attr: { class: 'error-page' },code:"404", title: "Oooops! Страница не найдена",});
   const ErrorPage500=  new ErrorPage('div', {attr: { class: 'error-page' },code:"500", title: "Мы уже фиксим",});
 
-  export {ErrorPage404, ErrorPage500}
+  export {ErrorPage404, ErrorPage500} 

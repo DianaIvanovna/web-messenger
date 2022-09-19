@@ -4,6 +4,7 @@ import FieldInput from '../../components/FieldInput/FieldInput';
 import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from '../../utils/Router/Router';
+import UserLoginController from '../../controllers/UserLoginController';
 
 const router = new Router(".root");
 
@@ -48,16 +49,20 @@ const inputsProps = {
   const sendForm = (event:Event) => {
     event.preventDefault();
     event.stopPropagation();
-    const form: HTMLFormElement|null = document.querySelector('.login-form__form');
+    const form: HTMLFormElement|null = document.querySelector('.login-form__form--signin');
     if (form) {
       const { elements } = form;
+      const formData = {}
 
       Array.from(elements)
         .filter((item) => item.tagName === 'INPUT')
         .forEach((element: HTMLInputElement) => {
           const { name, value } = element;
           console.log({ name, value });
+          formData[name] = value;
         });
+
+        UserLoginController.signin(formData);
     }
   };
 
@@ -65,7 +70,7 @@ const inputsProps = {
     render() {
       return this.compile(`
         <div class="login-form">
-          <form class="login-form__form" id={{formId}}>
+          <form class="login-form__form login-form__form--signin" id={{formId}}>
             <h1 class="login-form__title">{{title}}</h1>
             {{loginInput}}
             {{passwordInput}}

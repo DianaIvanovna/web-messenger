@@ -1,38 +1,7 @@
 import Block from '../../../../utils/ComponentFunctions/Block';
-type PlainObject = { [key: string]: any }
 
-export default class ChatMainBlock extends Block {
-  setProps = (nextProps:PlainObject) => {
-    if (!nextProps) {
-      return;
-    }
 
-    this._setUpdate = false;
-    const oldProps = { ...this._props };
-
-    // activeChat - переменная с чатом, который нужно открыть в chatContainer
-    // если она изменилась, передаю пропсом в chatContainer
-    if ('activeChat' in nextProps && this._children.chatContainer) {
-      this._children.chatContainer.setProps({
-        activeChat: nextProps.activeChat,
-      });
-    } 
-
-    const { children, props } = this._getChildren(nextProps);
-
-    if (Object.values(children).length) {
-      Object.assign(this._children, children);
-    }
-    if (Object.values(props).length) {
-      Object.assign(this._props, nextProps);
-    }
-
-    if (this._setUpdate) {
-      this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this._props);
-      this._setUpdate = false;
-    }
-  };
-
+export default  class ChatMainBlock extends Block {
   get element() {
     return this._element;
   }
@@ -40,7 +9,7 @@ export default class ChatMainBlock extends Block {
   render() {
     return this.compile(`
     <div class="chat__menu-container">
-      <div class="{{menuStyle}}">
+      <div class="{{menuStyle}}"> 
         <img
           class="chat__icon chat__icon--0"
           src="{{icon1}}"
@@ -75,3 +44,4 @@ export default class ChatMainBlock extends Block {
     `);
   }
 }
+

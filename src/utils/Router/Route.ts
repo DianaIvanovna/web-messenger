@@ -7,9 +7,9 @@ import Block from '../ComponentFunctions/Block';
 
 
 export default class Route {
-    _pathname: string;
-    _blockClass: Block ;
-    _block: null|Block;
+    private _pathname: string;
+    private readonly _blockClass: Block ;
+    private _block: null|Block;
     _props: {
         rootQuery: string,
         [key: string]: any 

@@ -1,14 +1,18 @@
 /* eslint no-unused-vars: "off" */
-import Block from '../../../../utils/ComponentFunctions/Block';
+import Block, {PlainObject} from '../../../../utils/ComponentFunctions/Block';
 import DialogsItem from '../../../../components/DialogsItem/DialogsItem';
-import { dialogs, dialogInterface } from '../../data';
+import Store, {StoreEvents, Indexed} from '../../../../store/Store';
+import { connect } from '../../../../store/utils/connect';
+import ChatController from '../../../../controllers/ChatController';
 
-const DialogsContainer = (openDialog:(item:dialogInterface)=>void) => {
+import {dialogInterface} from "../../../../store/type";
+
+const DialogsHandler = (dialogs:dialogInterface[]) => {
   const dialogComponents:{
     [key:string]:DialogsItem
   } = {};
 
-  let dialogTmp = '';
+  let dialogTmp = ''; 
   dialogs?.forEach((item, index) => {
     dialogComponents[`dialogComponents-${index}`] = new DialogsItem('div', {
       ...item,
@@ -20,28 +24,81 @@ const DialogsContainer = (openDialog:(item:dialogInterface)=>void) => {
           handler: (event:Event) => {
             event.preventDefault();
             event.stopPropagation();
-            openDialog(dialogs?.[index]);
+            ChatController.openDialog(dialogs?.[index]);
           },
         },
       ],
     });
   });
 
-  // еще не сделала вывод в шаблон массива , поэтому строю шаблонную строку таким образом
   Object.entries(dialogComponents).forEach(([key]) => {
     dialogTmp = `${dialogTmp}  {{${key}}}`;
   });
 
+  return {
+    dialogComponents,
+    dialogTmp,
+  }
+}
+
+const DialogsContainer = () => {
+  function mapUserToProps(state:Indexed):Indexed {
+    return {
+      dialogs: state.dialogs,
+    }; 
+  }
+
   class DialogsContainerBlock extends Block {
+
+    constructor(tagName:string = 'div', props:Record<string, any> = {}) {
+      let newProps = {...props};
+
+      if ('dialogs' in props) {
+        const {dialogComponents,dialogTmp} = DialogsHandler(props.dialogs )
+        newProps= { ...newProps, ...dialogComponents, dialogTmp}
+      }
+
+      super(tagName, newProps);
+
+    }
+
+    setProps(newProps:PlainObject) {
+      if (!newProps) {
+        return;
+      }
+      let nextProps = { ...newProps };
+      this._setUpdate = false;
+      const oldProps = { ...this._props };
+
+      if ('dialogs' in nextProps) {
+        const {dialogComponents,dialogTmp} = DialogsHandler(nextProps.dialogs )
+        nextProps= { ...nextProps, ...dialogComponents, dialogTmp}
+      }
+      const { children, props } = this._getChildren(nextProps);
+  
+      if (Object.values(children).length) {
+        Object.assign(this._children, children);
+      }
+      if (Object.values(props).length) {
+        Object.assign(this._props, nextProps);
+      }
+  
+      if (this._setUpdate) {
+        this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this._props);
+        this._setUpdate = false;
+      }
+    }
+
     render() {
-      return this.compile(dialogTmp);
+      return this.compile(this._props.dialogTmp);
     }
   }
 
-  const dialogsContainerBlock = new DialogsContainerBlock('div', {
-    ...dialogComponents,
+  const DialogsContainerBlockConnectedToStore = connect(DialogsContainerBlock,mapUserToProps )
 
-  });
+
+  const dialogsContainerBlock = new DialogsContainerBlockConnectedToStore('div');
+
 
   return dialogsContainerBlock;
 };

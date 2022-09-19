@@ -4,7 +4,7 @@ import Block from '../../utils/ComponentFunctions/Block';
 class Button extends Block {
   constructor(tag:string, props:Record<string, any>) {
     const newProps = { ...props };
-    newProps.class = props.class
+    newProps.class = props.class 
       ? `button ${props.class}`
       : 'button default-button';
     newProps.type = props.type ? `type= ${props.type}` : '';

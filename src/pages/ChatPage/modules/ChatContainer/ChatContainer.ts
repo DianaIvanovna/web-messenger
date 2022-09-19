@@ -1,15 +1,24 @@
 import Message from '../../../../components/Message/Message';
 import SendMessange from '../../../../components/SendMessange/SendMessange';
 import ChatMain from '../ChatMain/ChatMain';
+import Store, {StoreEvents, Indexed} from '../../../../store/Store';
+import { connect } from '../../../../store/utils/connect';
 
 const ChatContainer = () => {
+
+   function mapUserToProps(state:Indexed):Indexed {
+    return {
+      activeChat: state.activeChat
+    }; 
+  }
+
   class ChatContainerBlock extends ChatMain {
     constructor(tag:string, props:Record<string, any>) {
       const newProps = { ...props };
       if (!props.activeChat) {
         newProps.activeChat = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
       }
-
+ 
       super(tag, newProps);
     }
 
@@ -32,6 +41,7 @@ const ChatContainer = () => {
       // логика для отображения всех сообщений из чата
       if ('activeChat' in nextProps) {
         let activeChatTmp = '';
+        console.log("nextProps.activeChat", nextProps.activeChat)
         nextProps.activeChat.messages.forEach((message:MessangeType, index:number) => {
           const messageName = `message-${index}`;
           const classMes = `message ${message.myMes ? 'message--my' : ''} ${
@@ -77,10 +87,11 @@ const ChatContainer = () => {
     }
   }
 
-  const chatContainerBlock = new ChatContainerBlock('div', {
+  const  ChatContainerBlockConnectedToStore = connect(ChatContainerBlock,mapUserToProps )
 
+
+  const chatContainerBlock = new ChatContainerBlockConnectedToStore('div', {
     attr: { class: 'chat__container' },
-
   });
 
   return chatContainerBlock;

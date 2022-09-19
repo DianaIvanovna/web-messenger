@@ -14,7 +14,7 @@ export default class Block {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   };
-
+ 
   _props;
 
   _children;
@@ -82,13 +82,18 @@ export default class Block {
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps(nextProps:PlainObject) {
-    if (!nextProps) {
+  middlewareProps(props:PlainObject):PlainObject {
+    return props
+  }
+  setProps(newProps:PlainObject) {
+    if (!newProps) {
       return;
     }
-
+    let nextProps = { ...newProps };
     this._setUpdate = false;
     const oldProps = { ...this._props };
+
+    nextProps = this.middlewareProps(nextProps);
 
     const { children, props } = this._getChildren(nextProps);
 

@@ -6,6 +6,8 @@ import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from "../../utils/Router/Router";
 
+import UserLoginController from '../../controllers/UserLoginController';
+
 const router = new Router(".root");
 
 type inputsPropsType = {
@@ -30,7 +32,7 @@ const inputsProps:inputsPropsType = {
     required: true,
   },
   firstNameInput: {
-    name: 'first-name',
+    name: 'first_name',
     type: 'text',
     title: 'Имя',
     pattern: '(^[A-ZА-Я])([A-ZА-Яa-zа-я-]+)',
@@ -38,7 +40,7 @@ const inputsProps:inputsPropsType = {
     required: true,
   },
   secondNameInput: {
-    name: 'second-name',
+    name: 'second_name',
     type: 'text',
     title: 'Фамилия',
     pattern: '(^[A-ZА-Я])([A-ZА-Яa-zа-я-]+)',
@@ -94,19 +96,25 @@ const buttonRedirect = new Button('div', {
   class: 'login-form__button login-form__button--second',
   attr: { class: 'login-form__button-container' },
 });
+
+
+
 const sendForm = (event:Event) => {
   event.preventDefault();
   event.stopPropagation();
   const form: HTMLFormElement|null = document.querySelector('.login-form__form');
   if (form) {
     const { elements } = form;
+    const formData = {};
 
     Array.from(elements)
       .filter((item) => item.tagName === 'INPUT')
       .forEach((element:HTMLInputElement) => {
         const { name, value } = element;
-        console.log({ name, value });
+        formData[name] = value;
       });
+
+      UserLoginController.signup(formData);
   }
 };
 

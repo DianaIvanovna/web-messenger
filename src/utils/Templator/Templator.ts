@@ -61,3 +61,4 @@ export function getTemplate(template:string, context:object) {
 
   return tmpl.compile(context); // Строка с html-вёрсткой
 }
+

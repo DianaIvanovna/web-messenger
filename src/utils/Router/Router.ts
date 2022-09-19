@@ -1,7 +1,4 @@
 import Route from "./Route";
-import Block from "../ComponentFunctions/Block";
-
-
 
 class Router {
     static __instance: any;
@@ -9,6 +6,7 @@ class Router {
     history: History;
     private _currentRoute: Route|null;
     private _rootQuery:string;
+    private _defaultRoute: Route|null;
     
     constructor(rootQuery:string) {
       if (Router.__instance) {
@@ -23,26 +21,32 @@ class Router {
       Router.__instance = this;
     }
   
-    use(pathname:string, block:any) {
-      const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery}); 
+    public use(pathname:string, block:any) {
+      if (pathname === "*") {
+        const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery}); 
+        this._defaultRoute = route;
+      }else {
+        const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery}); 
   
-      this.routes.push(route);
-      
+        this.routes.push(route);
+      }
+
       return this;
-     
     }
   
-    start() {
+    public start() {
       // Реагируем на изменения в адресной строке и вызываем перерисовку
-      window.onpopstate = (event:any )=> {
-        this._onRoute(event.currentTarget?.location.pathname);
+      window.onpopstate = (event:PopStateEvent )=> {
+        const target = event.currentTarget as Window;
+
+        this._onRoute(target.location.pathname);
       };
   
       this._onRoute(window.location.pathname);
     }
   
-    _onRoute(pathname:string) {
-      const route = this.getRoute(pathname);
+    private _onRoute(pathname:string) {
+      const route = this.getRoute(pathname) || this._defaultRoute;
       if (!route) {
         return;
       }
@@ -56,19 +60,19 @@ class Router {
       route.render();
     }
   
-    go(pathname:string) {
+    public go(pathname:string) {
       this.history.pushState({}, "", pathname);
       this._onRoute(pathname);
     }
-    back() {
+    public back() {
       this.history.back(); 
     }
 
-    forward() {
+    public forward() {
       this.history.forward(); 
     }
   
-    getRoute(pathname:string) {
+    private getRoute(pathname:string) {
       return this.routes.find(route => route.match(pathname));
     }
   }
