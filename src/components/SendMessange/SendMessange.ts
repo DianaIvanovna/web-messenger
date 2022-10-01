@@ -15,23 +15,6 @@ class SendMessange extends FormValidation {
     newProps.addUser = addUser;
     newProps.sendMessangeIcon = sendMessangeIcon;
     newProps.formId = formId;
-    newProps.button = new Button('div', {
-      form: formId,
-      text: `<img src=${sendMessangeIcon}  />`,
-      class: classes['send-messange__button'],
-      attr: { class: classes['send-messange__button'] },
-    });
-    newProps.sendForm = (event:Event) => {
-      event.preventDefault();
-      event.stopPropagation(); 
-      const form :HTMLFormElement|null = document.querySelector(`.${classes['send-messange']}`);
-      if (form) { 
-        const input = form.querySelector('input[name="messange"]') as HTMLInputElement;
-      
-        newProps.sendMessange(input.value);
-        form.reset();
-      }
-    };
     newProps.events= [
       {
         event: 'click',
@@ -39,8 +22,33 @@ class SendMessange extends FormValidation {
         handler: newProps.openPopupAddUsers
       }
     ]
+    
 
-    super(tag, newProps);
+    super(tag, newProps); 
+    const button = new Button('div', {
+      form: formId,
+      text: `<img src=${sendMessangeIcon}  />`,  
+      class: classes['send-messange__button'],
+      attr: { class: classes['send-messange__button'] },
+    });
+    
+
+    this.setProps({
+      button,
+      sendForm: this.sendForm.bind(this),
+  })
+  }
+
+  sendForm (event:Event) {
+    event.preventDefault();
+    event.stopPropagation(); 
+    const form :HTMLFormElement|null = document.querySelector(`.${classes['send-messange']}`);
+    if (form) { 
+      const input = form.querySelector('input[name="messange"]') as HTMLInputElement;
+    
+      this._props.sendMessange(input.value);
+      form.reset();
+    } 
   }
 
   render() {

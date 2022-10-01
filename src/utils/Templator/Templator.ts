@@ -60,30 +60,22 @@ class Templator implements TemplatorInterface {
   }
 }
 
+const myAllowedTags= ["img", "div", "p", "span", "time", "h1", "h2", "h3"];
+const myAllowedAttributes ={
+  img: ["src", "alt", "class"],
+  div: ["class"],
+  p: ["class"],
+  span:["class"],
+  time:["class"],
+  h1: ["class"],
+  h2: ["class"],
+  h3: ["class"],
+}; 
+
 export function getTemplate(template:string, context:object,sanitize=false ) {
   const tmpl = new Templator(template);
 
   if (sanitize) {
-    // console.log("=================")
-    const myAllowedTags= ["img", "div", "p", "span", "time", "h1", "h2", "h3"];
-    const myAllowedAttributes ={
-      img: ["src", "alt", "class"],
-      div: ["class"],
-      p: ["class"],
-      span:["class"],
-      time:["class"],
-      h1: ["class"],
-      h2: ["class"],
-      h3: ["class"],
-    }; 
-
-    // console.log("NOsanitizeHtml", tmpl.compile(context))
-    // console.log("sanitizeHtml", sanitizeHtml(tmpl.compile(context), {
-    //   allowedTags: myAllowedTags,
-    //   allowedAttributes:myAllowedAttributes
-    // }))
-    // console.log("=================")
-
     return sanitizeHtml(tmpl.compile(context), {
       allowedTags: myAllowedTags,
       allowedAttributes: myAllowedAttributes
