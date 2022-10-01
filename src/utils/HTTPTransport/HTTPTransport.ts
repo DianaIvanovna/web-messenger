@@ -67,7 +67,10 @@ export default class HTTPTransport implements HTTPTransportInterface {
         Object.keys(headers).forEach((key) => {
           xhr.setRequestHeader(key, headers[key]);
         });
+      
       }
+
+      xhr.setRequestHeader("Content-Security-Policy", "default-src 'self';img-src *;script-src trusted.com;");
 
       xhr.onload = () => {
         resolve(xhr);

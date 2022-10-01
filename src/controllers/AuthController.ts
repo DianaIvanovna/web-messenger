@@ -14,7 +14,6 @@ class AuthController {
     try {
       document.querySelector(".preloader__back")?.classList.add("preloader__back--show")
       const data = await authApi.auth();
-
       Store.set("user", data);
       Store.set("auth.authCheck", true);
       Store.set("auth.isLogged", true);

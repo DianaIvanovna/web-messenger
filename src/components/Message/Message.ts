@@ -1,6 +1,7 @@
 import './Message.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
+
 class Message extends Block {
   constructor(tag:string, props:Record<string, any>) {
     const newProps = { ...props };
@@ -10,12 +11,13 @@ class Message extends Block {
     super(tag, newProps);
   }
   render() {
+
     return this.compile(`
        <p class="message__text" >
           {{content}}
           <time class="message__data" >{{time}}</time>
         </p>
-    `);
+    `, undefined, true); 
   }
 }
 

@@ -1,5 +1,6 @@
 import './List.scss';
 import Block from '../../utils/ComponentFunctions/Block';
+
 type PlainObject = { [key: string]: any }
 
 class List extends Block {

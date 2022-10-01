@@ -7,6 +7,7 @@ import ChatController from '../../../../controllers/ChatController';
 
 import { connect } from '../../../../store/utils/connect';
 import  { Indexed} from '../../../../store/Store';
+import sanitizeHtml from 'sanitize-html';
 
 type usersType = {
   avatar: string,
@@ -102,7 +103,7 @@ class AddUserToChatForm extends FormValidation{
           if (item.id === this._props.user?.id) {
             return `Вы: ${item.login} `
           }
-          return `${item.login} <img src={{deleteIcon}} alt="удалить" class="add-user-to-chat-form__icon" data-user-id="${item.id}" ></img>`
+          return `${sanitizeHtml(item.login)} <img src={{deleteIcon}} alt="удалить" class="add-user-to-chat-form__icon" data-user-id="${item.id}" ></img>`
         })
       } else  {
         arr = ["Нет пользователей"]

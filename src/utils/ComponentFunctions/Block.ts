@@ -200,7 +200,7 @@ export default class Block {
     return { children, props };
   }
 
-  compile(template:string, props?:PlainObject) {
+  compile(template:string, props?:PlainObject, sanitize=false ) {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
@@ -212,7 +212,7 @@ export default class Block {
     });
 
     const fragment: HTMLTemplateElement = this._createDocumentTemplate();
-    fragment.innerHTML = getTemplate(template, propsAndStubs);
+    fragment.innerHTML = getTemplate(template, propsAndStubs, sanitize); 
 
     Object.values(this._children).forEach((child: Block) => {
       const stub :HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);

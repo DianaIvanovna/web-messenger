@@ -24,6 +24,7 @@
     "@babel/core": "7.18.10",
     "@babel/eslint-parser": "7.18.9",
     "@parcel/transformer-sass": "2.6.2",
+    "@types/sanitize-html": "^2.6.2",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
@@ -53,6 +54,7 @@
     "util": "0.12.4"
   },
   "dependencies": {
+    "sanitize-html": "^2.7.2",
     "uuid": "8.3.2"
   }
 }

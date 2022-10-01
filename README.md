@@ -27,8 +27,10 @@ CloudTalk - проект с реализацией собственного ве
     - Работа с чатами:  [ChatApi.ts](src/api/ChatApi/ChatApi.ts) и  [ChatController.ts](src/controllers/ChatController.ts) 
     - Работа с данными пользователя:  [UserApi.ts](src/api/UserApi/UserApi.ts) и  [UserController.ts](src/controllers/UserController.ts) 
     - Работа с WebSocket для отправки сообщений:  [WebSocketService.ts](src/utils/WebSocketService/WebSocketService.ts) и  [MessageController.ts](src/controllers/MessageController.ts) 
+- Защита от XSS: 
+    подключен sanitizeHtml в компонентах, где выводятся данные с сервера. Для того, чтобы подключить sanitizeHtml в компонент, нужно в функции render в this.compile третим параметром передать true, тогда в файле [Templator.ts](src/utils/Templator/Templator.ts) перед отдачей шаблона строка пройдет через функцию sanitizeHtml. Данная функция подключена в компонент сообщений Message и компонент вывода диалогов DialogsItem. Так же в некоторых местах преобразовываются сами данные, перед вставкой в шаблон (например AddUserToChatForm проверяю логины пользователей перед выводом в шаблон, а так же в UserSettingFormUpdate проверка всех данных пользователя).
     
-
+    
 
 ## Планы на будущее
 - доработать api чатов отправкой файлов

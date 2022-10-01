@@ -6,6 +6,7 @@ import  {Indexed} from '../../../../../store/Store';
 import { connect } from '../../../../../store/utils/connect';
 import AuthController from '../../../../../controllers/AuthController';
 import UserController from '../../../../../controllers/UserController';
+import sanitizeHtml from 'sanitize-html';
 
 import {inputsPropsFormUpdate} from "./inputsProps";
 type PlainObject = { [key: string]: any }
@@ -198,7 +199,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             if ('user' in nextProps) {
                 this._formInputs.forEach((item)=>{ 
                     item.setProps({
-                        value: nextProps.user?.[item.name]
+                        value: sanitizeHtml(nextProps.user?.[item.name])
                     })
                 })
             }

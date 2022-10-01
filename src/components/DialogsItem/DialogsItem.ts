@@ -31,7 +31,7 @@ class DialogsItem extends Block {
 
     <span class="dialogs-item__number">{{unread_count}}</span>
     <time class="dialogs-item__time">{{timeLastMes}}</time>
-    `);
+    `, undefined, true);
   }
 }
 
