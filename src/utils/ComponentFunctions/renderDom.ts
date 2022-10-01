@@ -1,6 +1,6 @@
-import { BlockInterface } from './types';
+import Block from "./Block";
 
-export default function renderDOM(query: string, component: BlockInterface) {
+export default function renderDOM(query: string, component: Block) {
   const root: HTMLElement|null = document.querySelector(query);
 
   if (root) {
@@ -10,3 +10,4 @@ export default function renderDOM(query: string, component: BlockInterface) {
 
   return root;
 }
+ 

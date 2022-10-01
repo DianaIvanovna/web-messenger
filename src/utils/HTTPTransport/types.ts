@@ -1,4 +1,19 @@
 /* eslint no-unused-vars: 0 */
+export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE'
+export type MethodsObject  = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+}
+export type TOptions = {
+  headers?:{[key:string]:any},
+  method?: Methods,
+  data?: object,
+  timeout?:number
+  formData?:FormData,
+}
+
 export interface HTTPTransportInterface {
   get (url:string, options?:object): Promise<unknown>;
 
@@ -8,10 +23,5 @@ export interface HTTPTransportInterface {
 
   delete (url:string, options?:object): Promise<unknown>;
 
-  request (url:string, options?:{
-    headers?:{[key:string]:any},
-    method: string,
-    data?: FormData,
-    timeout?:number
-  }): Promise<unknown>;
+  request (url:string, options?:TOptions): Promise<unknown>;
 }

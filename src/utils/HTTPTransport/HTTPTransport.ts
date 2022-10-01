@@ -1,11 +1,20 @@
-import { HTTPTransportInterface } from './types';
+import { HTTPTransportInterface, TOptions,  MethodsObject } from './types';
 
-const METHODS = {
+
+const METHODS:MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
   DELETE: 'DELETE',
 };
+const defaultOptions: TOptions = {
+  headers: {},
+  data: {},
+  timeout: 5000,
+  method: METHODS.GET
+}
+
+
 
 function queryStringify(data:{[key:string]:any}) {
   if (typeof data !== 'object') {
@@ -16,6 +25,12 @@ function queryStringify(data:{[key:string]:any}) {
 }
 
 export default class HTTPTransport implements HTTPTransportInterface {
+  _host: string;
+
+  constructor(host:string) {
+    this._host = host;
+  }
+
   get = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
 
   post = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.POST });
@@ -24,16 +39,11 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
   delete = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.DELETE });
 
-  request = (url:string, options?:{
-    headers?:{[key:string]:any},
-    method?: string,
-    data?: object,
-    timeout?:number
-  }) => {
-    const headers = options?.headers ? options.headers : null;
-    const data = options?.data ? options.data : null;
-    const timeout = options?.timeout ? options.timeout : 5000;
-    const method = options?.method ? options.method : null;
+  request = (url:string, options?:TOptions): Promise<unknown> => {
+    if (!options) {
+      options = defaultOptions
+    }
+    const {headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null} = options
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -44,18 +54,23 @@ export default class HTTPTransport implements HTTPTransportInterface {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
+
       xhr.open(
         method,
         isGet && !!data
-          ? `${url}${queryStringify(data)}`
-          : url,
+          ? `${this._host}${url}${queryStringify(data)}`
+          : this._host + url,
+       
       );
 
       if (headers) {
         Object.keys(headers).forEach((key) => {
           xhr.setRequestHeader(key, headers[key]);
         });
+      
       }
+
+      xhr.setRequestHeader("Content-Security-Policy", "default-src 'self';img-src *;script-src trusted.com;");
 
       xhr.onload = () => {
         resolve(xhr);
@@ -66,10 +81,14 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
+      xhr.withCredentials = true;
 
-      if (isGet || !data) {
+      if (formData) {
+        console.log("formData", formData);
+        xhr.send(formData);
+      }else if (isGet || !data) {
         xhr.send();
-      } else {
+      }else {
         xhr.send(JSON.stringify(data));
       }
     });

@@ -1,0 +1,14 @@
+@import "../../variables.scss";
+
+.popup-error {
+   width: 100vw;
+   height: 50px;
+   background: #f35f63; 
+
+   &__text{
+    margin: 0;
+    @include fontText(normal, 400, 18px, 50px);
+    color: #ffffff;
+    text-align: center;
+   }
+}

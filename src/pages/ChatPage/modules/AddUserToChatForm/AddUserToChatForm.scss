@@ -1,0 +1,48 @@
+@import "../../../../variables.scss";
+
+.add-user-to-chat-form {
+    width: 100%;
+    &__title {
+        @include fontText(normal, 500, 22px, 100%);
+        color: $font_color_main;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    &__list {
+        
+        width: 100%;
+        .list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            // max-height: 100px;
+            // overflow-y: scroll;
+            // @include scrollMin();
+        }
+    }
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        &:hover {
+            border: 1px solid $inpit-valid-color;
+            cursor: pointer;
+        }
+    }
+
+    &__li{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include fontText(normal, 400, 16px, 150%);
+       
+       
+        height: 45px;
+       
+    }
+
+}

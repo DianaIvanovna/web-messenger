@@ -1,5 +1,9 @@
 import { getObjectKey } from './getObjectKey';
 import { TemplatorInterface } from './types';
+import sanitizeHtml from 'sanitize-html';
+
+
+
 
 /* TODOS:
   - дописать обработку массивов mas[0]
@@ -56,8 +60,36 @@ class Templator implements TemplatorInterface {
   }
 }
 
-export function getTemplate(template:string, context:object) {
+export function getTemplate(template:string, context:object,sanitize=false ) {
   const tmpl = new Templator(template);
 
-  return tmpl.compile(context); // Строка с html-вёрсткой
+  if (sanitize) {
+    // console.log("=================")
+    const myAllowedTags= ["img", "div", "p", "span", "time", "h1", "h2", "h3"];
+    const myAllowedAttributes ={
+      img: ["src", "alt", "class"],
+      div: ["class"],
+      p: ["class"],
+      span:["class"],
+      time:["class"],
+      h1: ["class"],
+      h2: ["class"],
+      h3: ["class"],
+    }; 
+
+    // console.log("NOsanitizeHtml", tmpl.compile(context))
+    // console.log("sanitizeHtml", sanitizeHtml(tmpl.compile(context), {
+    //   allowedTags: myAllowedTags,
+    //   allowedAttributes:myAllowedAttributes
+    // }))
+    // console.log("=================")
+
+    return sanitizeHtml(tmpl.compile(context), {
+      allowedTags: myAllowedTags,
+      allowedAttributes: myAllowedAttributes
+    })
+  }
+
+  return tmpl.compile(context)
 }
+

@@ -10,6 +10,9 @@ class FormValidation extends Block implements FormValidationInterface {
   constructor(tag:string, props = {}) {
     super(tag, props);
     this._form = null;
+ 
+
+    this._formSubmission = this._formSubmission.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +44,6 @@ class FormValidation extends Block implements FormValidationInterface {
 
   _setHandlers() { // Добавляет необходимые для валидации обработчики всем полям формы.
     this._form = this._element.querySelector('form');
-
     if (this._form) {
       Array.from(this._form)
         .filter((item:HTMLElement) => {
@@ -57,7 +59,7 @@ class FormValidation extends Block implements FormValidationInterface {
     }
 
     if (this._button) {
-      this._button.addEventListener('click', this._formSubmission.bind(this));
+      this._button.addEventListener('click', this._formSubmission);
     }
   }
 
@@ -88,15 +90,16 @@ class FormValidation extends Block implements FormValidationInterface {
           if (item.getAttribute('form') === this._props?.formId) {
             this._button = item;
           }
-          return item.hasAttribute('name');
+          return item.hasAttribute('name'); 
         })
         .forEach((element) => {
           element.removeEventListener('input', this._checkInputValidity.bind(this));
+          element.removeEventListener('focus', this._resetError.bind(this));
         });
     }
 
     if (this._button) {
-      this._button.removeEventListener('click', this._formSubmission.bind(this));
+      this._button.removeEventListener('click', this._formSubmission);
     }
   }
 
@@ -104,6 +107,7 @@ class FormValidation extends Block implements FormValidationInterface {
     event.preventDefault();
     event.stopPropagation();
     this._validateForm();
+
     if (this._button?.classList.contains('button-valid')) {
       this._props.sendForm(event);
     }
@@ -115,7 +119,7 @@ class FormValidation extends Block implements FormValidationInterface {
   }
 
   _resetError(input:Event) { // убирает сообщение об ошибке
-    this._form = this._element.querySelector('form');
+    this._form = this._element?.querySelector('form');
 
     const inputElement = input.target as HTMLInputElement;
 
@@ -131,27 +135,28 @@ class FormValidation extends Block implements FormValidationInterface {
     this._form = this._element.querySelector('form');
     const errorElement = this._form?.querySelector(`.error__${element.name}`);
 
-    if (!element.checkValidity()) {
-      if (element.hasAttribute('required') && !element.value) {
-        if (errorElement) {
-          errorElement.textContent = 'Это обязательное поле';
-        }
+    if (element.checkValidity()) { return true }
 
-        return false;
-      }
+    const requiredAndEmpty: boolean = element.hasAttribute('required') && !element.value
 
-      const errorInput = element.getAttribute('data-error');
-
-      if (errorInput) {
-        if (errorElement) {
-          errorElement.textContent = errorInput;
-        }
-        return false;
+    if (requiredAndEmpty) {
+      if (errorElement) {
+        errorElement.textContent = 'Это обязательное поле';
       }
 
       return false;
     }
-    return true;
+
+    const errorInput = element.getAttribute('data-error');
+
+    if (errorInput) {
+      if (errorElement) {
+        errorElement.textContent = errorInput;
+      }
+      return false;
+    }
+
+    return false;
   }
 
   _validateForm() { // проверяет валидность всей формы

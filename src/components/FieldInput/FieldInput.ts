@@ -1,7 +1,10 @@
 import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
+type PlainObject = { [key: string]: any }
+
 class FieldInput extends Block {
+  public readonly name: string;
   constructor(tag:string, props:Record<string, any>) {
     const newProps = { ...props };
     newProps.classes = classes;
@@ -12,20 +15,38 @@ class FieldInput extends Block {
     newProps.name = props.name ? `name= ${props.name}` : '';
     newProps.type = props.type ? `type= ${props.type}` : '';
     newProps.value = props.value ? `value= ${props.value}` : '';
-    newProps.placeholder = props.placeholder ? `placeholder= ${props.placeholder}` : '';
+    newProps.placeholder = props.placeholder ? `placeholder= "${props.placeholder}"` : '';
     newProps.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
     newProps.required = props.required ? 'required' : '';
     newProps.pattern = props.pattern ? `pattern= ${props.pattern}` : '';
     newProps['data-error'] = props['data-error'] ? `data-error="${props['data-error']}"` : '';
 
     super(tag, newProps);
+    this.name = props.name ;
   }
+
+  setValue(data: any) {
+    const input  = this._element.querySelector(".input") as HTMLInputElement;
+    input.value = data
+  }
+
+  middlewareProps(nextProps:PlainObject):PlainObject {
+    if ('disabled' in nextProps) {
+      nextProps.disabled = nextProps.disabled ? `disabled= ${nextProps.disabled}` : '';
+    }
+    if ('value' in nextProps) {
+      nextProps.value = nextProps.value ? `value= ${nextProps.value}` : '';
+    }
+
+    return nextProps
+  }
+
 
   render() {
     return this.compile(`
     <div class={{classes.field-input}}>
       <p class="{{classes.field-input__title}} ">{{title}}</p>
-      <input class="{{class}}" {{type}} {{name}} {{placeholder}} {{disabled}} {{value}} {{required}} {{pattern}} {{data-error}} >
+      <input class="{{class}}  input" {{type}} {{name}} {{placeholder}} {{disabled}} {{value}} {{required}} {{pattern}} {{data-error}} >
       <p class="{{classError}}"></p>
       </input>
     </div>  

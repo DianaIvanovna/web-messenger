@@ -1,0 +1,119 @@
+@import "../../variables.scss";
+
+.popup {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+
+    &__back {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: black;
+        opacity: 0.6;
+        z-index: 101;
+    }
+
+    &__container {
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        box-sizing: border-box;
+        transform: translate(-50%, 0%);
+    
+        z-index: 102;
+    
+        box-sizing: border-box;
+        opacity: 1;
+    
+        height: 100vh;
+        overflow-y: auto;
+        display: flex;
+
+
+    
+        &::-webkit-scrollbar-button {
+            background-repeat: no-repeat;
+            width: 0px;
+            height: 0px;
+        }
+    
+        &::-webkit-scrollbar-track {
+            background-color: #f7f9fa;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 0px;
+            border-radius: 0px;
+            background-color: #bcd2d6;
+        }
+    
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: #56999f;
+        }
+    
+        &::-webkit-resizer {
+            background-repeat: no-repeat;
+            width: 0px;
+            height: 0px;
+        }
+    
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+    } 
+    &__content {
+        position: relative;
+        background-color: #ffffff;
+        border-radius: 10px;
+        flex-shrink: 0;
+        margin: auto;
+        // удалить
+        // min-width: 500px;
+        padding: 40px 20px;
+        box-sizing: border-box;
+           
+        width: 100%;
+        max-width: 500px;
+              
+
+        @media screen and (max-width: 600px){
+            max-width: 300px;
+        }
+    }
+
+    
+
+    &__close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        fill: #bcd2d6;
+    
+        .popup__icon path {
+            fill: #bcd2d6;
+        }
+    
+        &:hover {
+            transition: 0.3 ease;
+            cursor: pointer;
+            fill: #397387;
+        }
+    }
+
+}

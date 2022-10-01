@@ -4,16 +4,18 @@
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import { getTemplate } from '../Templator/Templator';
-import { BlockInterface } from './types';
 
-export default class Block implements BlockInterface {
+export type PlainObject = { [key: string]: any }
+
+export default class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
+    END_RENDER: 'end:render',
   };
-
+  
   _props;
 
   _children;
@@ -51,6 +53,13 @@ export default class Block implements BlockInterface {
     this._eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     this._eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    this._eventBus.on(Block.EVENTS.END_RENDER, this._afterRendering.bind(this));
+  }
+
+  _afterRendering() {
+    this.afterRendering()
+  }
+  afterRendering() {
   }
 
   _createResources() {
@@ -66,7 +75,7 @@ export default class Block implements BlockInterface {
   _componentDidMount() {
     this.componentDidMount();
 
-    Object.values(this._children).forEach((child: BlockInterface) => {
+    Object.values(this._children).forEach((child: Block) => {
       child.dispatchComponentDidMount();
     });
   }
@@ -81,15 +90,18 @@ export default class Block implements BlockInterface {
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps(nextProps:{
-    [key: string]:any
-  }) {
-    if (!nextProps) {
+  middlewareProps(props:PlainObject):PlainObject {
+    return props
+  }
+  setProps(newProps:PlainObject) {
+    if (!newProps) {
       return;
     }
-
+    let nextProps = { ...newProps };
     this._setUpdate = false;
     const oldProps = { ...this._props };
+
+    nextProps = this.middlewareProps(nextProps);
 
     const { children, props } = this._getChildren(nextProps);
 
@@ -118,6 +130,7 @@ export default class Block implements BlockInterface {
 
       this.addEvents();
       this.addAttribute();
+      this._eventBus.emit(Block.EVENTS.END_RENDER);
     }
   }
 
@@ -129,9 +142,7 @@ export default class Block implements BlockInterface {
     return this._element;
   }
 
-  _makePropsProxy(props:{
-    [key: string]:any
-  }) {
+  _makePropsProxy(props:PlainObject) {
     const self = this;
 
     return new Proxy(props, {
@@ -173,15 +184,11 @@ export default class Block implements BlockInterface {
     return newElement;
   }
 
-  _getChildren(propsAndChildren:{
-    [key: string]:any
-  }) {
+  _getChildren(propsAndChildren:PlainObject) {
     const children:{
-      [key: string]:BlockInterface
+      [key: string]:Block
     } = {};
-    const props:{
-      [key: string]:any
-    } = {};
+    const props:PlainObject = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]:[string, any]) => {
       if (value instanceof Block) {
@@ -193,23 +200,21 @@ export default class Block implements BlockInterface {
     return { children, props };
   }
 
-  compile(template:string, props?:{
-    [key: string]:any
-  }) {
+  compile(template:string, props?:PlainObject, sanitize=false ) {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
 
     const propsAndStubs = { ...props };
 
-    Object.entries(this._children).forEach(([key, child]: [string, BlockInterface]) => {
+    Object.entries(this._children).forEach(([key, child]: [string, Block]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
     const fragment: HTMLTemplateElement = this._createDocumentTemplate();
-    fragment.innerHTML = getTemplate(template, propsAndStubs);
+    fragment.innerHTML = getTemplate(template, propsAndStubs, sanitize); 
 
-    Object.values(this._children).forEach((child: BlockInterface) => {
+    Object.values(this._children).forEach((child: Block) => {
       const stub :HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);
 
       if (stub) {
@@ -223,7 +228,7 @@ export default class Block implements BlockInterface {
   addEvents() {
     const { events = [] } = this._props;
 
-    let bufElement: HTMLElement | null = null;
+    let bufElement: NodeListOf<HTMLElement> | HTMLElement[] | null = null;
 
     type EventElement = {
       class?:string,
@@ -232,27 +237,34 @@ export default class Block implements BlockInterface {
     }
 
     events.forEach((element: EventElement, index:number) => {
-      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
+      bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
       if (bufElement) {
-        bufElement.addEventListener(events[index].event, events[index].handler);
+        bufElement.forEach((item:HTMLElement)=>{
+          item.addEventListener(events[index].event, events[index].handler);
+        })
       }
     });
   }
 
   removeEvents() {
     const { events = [] } = this._props;
-    let bufElement: HTMLElement | null = null;
+    let bufElement: NodeListOf<HTMLElement> | HTMLElement[]  | null = null;
 
     type EventElement = {
-      class?:string,
+      class?:string, 
       event:string,
       handler: Function
     }
 
     events.forEach((element:EventElement, index:number) => {
-      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
+
+      bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
+
       if (bufElement) {
-        bufElement.removeEventListener(events[index].event, events[index].handler);
+        bufElement.forEach((item:HTMLElement)=>{
+          item.addEventListener(events[index].event, events[index].handler);
+        })
+        //bufElement.removeEventListener(events[index].event, events[index].handler);
       }
     });
   }
@@ -269,6 +281,7 @@ export default class Block implements BlockInterface {
   }
 
   hide() {
+
     this.getContent().style.display = 'none';
   }
 }

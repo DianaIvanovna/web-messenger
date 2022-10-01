@@ -52,3 +52,35 @@ $font_color_attention: #f2a490;
   align-items: center;
   justify-content: center;
 }
+
+@mixin scrollMin() {
+  &::-webkit-scrollbar-button {
+      background-repeat: no-repeat;
+      width: 2px;
+      height: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+      background-color: #f7f9fa;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 5px;
+      border-radius: 20px;
+      background-color: #bcd2d6;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background-color: $back-color-attention;
+  }
+
+  &::-webkit-resizer {
+      background-repeat: no-repeat;
+      width: 2px;
+      height: 0px;
+  }
+
+  &::-webkit-scrollbar {
+      width: 2px;
+  }
+}
