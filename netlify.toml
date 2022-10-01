@@ -8,3 +8,8 @@
 [build]
   publish = "dist" 
   command = "parcel  build src/index.html"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

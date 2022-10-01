@@ -21,7 +21,7 @@ function mapToProps(state:Indexed):Indexed {
 function mapUserToProps(state:Indexed):Indexed {
     return {
         error: state.error,
-    }; 
+    };  
 }
 
 

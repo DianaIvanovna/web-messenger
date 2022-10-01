@@ -59,7 +59,7 @@ class FormValidation extends Block implements FormValidationInterface {
     }
 
     if (this._button) {
-      this._button.addEventListener('click', this._formSubmission);
+      this._button.addEventListener('click', this._formSubmission); 
     }
   }
 
@@ -106,7 +106,9 @@ class FormValidation extends Block implements FormValidationInterface {
   _formSubmission(event:Event) { // отправка формы
     event.preventDefault();
     event.stopPropagation();
+
     this._validateForm();
+
 
     if (this._button?.classList.contains('button-valid')) {
       this._props.sendForm(event);

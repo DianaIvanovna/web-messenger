@@ -108,6 +108,11 @@
     width: 100%;
     @include scrollMin();
     padding-right: 5px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
   }
 
   &__main {
