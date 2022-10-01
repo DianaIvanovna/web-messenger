@@ -11,6 +11,7 @@ export type TOptions = {
   method?: Methods,
   data?: object,
   timeout?:number
+  formData?:FormData,
 }
 
 export interface HTTPTransportInterface {

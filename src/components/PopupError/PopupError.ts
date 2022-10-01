@@ -7,7 +7,6 @@ type PlainObject = { [key: string]: any }
 class PopupError extends Block {
     middlewareProps(nextProps:PlainObject):PlainObject {
         if ('error' in nextProps) {
-            console.log("PopupError extProps.error", nextProps.error)
             if (nextProps.error) {
                 this.show();
                 setTimeout(()=>{

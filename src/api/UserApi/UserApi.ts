@@ -1,5 +1,5 @@
 import HTTPTransport from "../../utils/HTTPTransport/HTTPTransport";
-import {profileData, passwordData} from "./types";
+import {profileData, passwordData, searchUserData} from "./types";
 
 export default class AuthApi {
     private readonly _headers = {
@@ -73,6 +73,23 @@ export default class AuthApi {
                 return res
             }
             return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
+        })
+        
+    }
+
+    searchUser(data: searchUserData) {
+        return this.UserApiInstance.post('user/search', {
+            headers: this._headers,
+            data: data 
+        })
+        .then((res:XMLHttpRequest) => {
+            if (res.status === 200)  {
+                return res
+            }
+            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
+        })
+        .then(data => {
+            return JSON.parse(data.response)
         })
         
     }

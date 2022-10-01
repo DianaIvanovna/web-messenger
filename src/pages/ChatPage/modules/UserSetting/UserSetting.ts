@@ -20,7 +20,7 @@ const UserSettingComponent = () => {
         return {
           user: state.user,
         }; 
-    }
+    } 
 
     class UserSetting extends FormValidation {
         constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {

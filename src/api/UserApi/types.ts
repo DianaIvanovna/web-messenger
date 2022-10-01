@@ -11,3 +11,7 @@ export type passwordData = {
     oldPassword: string,
     newPassword: string,
 }
+
+export type searchUserData = {
+    login: string
+}

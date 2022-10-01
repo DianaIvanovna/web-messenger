@@ -21,7 +21,7 @@ export default class Route {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
-    this._props = props;
+    this._props = props; 
   }
 
   navigate(pathname:string) {

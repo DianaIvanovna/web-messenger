@@ -1,0 +1,14 @@
+@import "../../../../variables.scss";
+
+.create-chat-form {
+    min-width: 250px;
+    &__title {
+        @include fontText(normal, 500, 22px, 100%);
+        color: $font_color_main;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    &__button {
+        margin: 0;
+    }
+}

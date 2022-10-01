@@ -61,78 +61,101 @@ type inputsType = {
   [key:string] : FieldInput|null
 };
 
-const inputs:inputsType = {
-  emailInput: null,
-  loginInput: null,
-  firstNameInput: null,
-  secondNameInput: null,
-  phoneInput: null,
-};
-Object.entries(inputsProps).forEach(([key, child]) => {
-  inputs[key] = new FieldInput('div', {
-    ...child,
-    attr: { class: 'login-form__field' },
-  });
-});
-const repeatPasswordInput = new FieldRepeatPassword('div', {
-  title: 'Пароль',
-  titleRepeat: 'Пароль',
-  name: 'password',
-  nameRepeat: 'repeatPassword',
-  required: true,
-  pattern: '^(?=.*[A-ZА-Я])(?=.*[0-9]).{10,}$',
-  'data-error': 'Пароль должен содержать от 8 до 40 символов. Обязательно хотя бы одна заглавная буква и цифра.',
-  'data-error-repeat': 'Пароль не совпадает',
-  attr: { class: 'login-form__field' },
-});
-const buttonSubmit = new Button('div', {
-  form: 'regForm',
-  text: 'Зарегистрироваться',
-  class: 'login-form__button login-form__button--submit',
-  attr: { class: 'login-form__button-container' },
-});
-const buttonRedirect = new Button('div', {
-  text: 'Войти',
-  class: 'login-form__button login-form__button--second',
-  attr: { class: 'login-form__button-container' },
-});
 
+class LoginForm extends FormValidation {
+  constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
+    const newProps = { ...propsAndChildren };
+    super(tagName, newProps);
 
+    const inputs:inputsType = {
+      emailInput: null,
+      loginInput: null,
+      firstNameInput: null,
+      secondNameInput: null,
+      phoneInput: null,
+    };
 
-const sendForm = (event:Event) => {
+    Object.entries(inputsProps).forEach(([key, child]) => {
+      inputs[key] = new FieldInput('div', {
+        ...child,
+        attr: { class: 'login-form__field' },
+      });
+    });
+    const repeatPasswordInput = new FieldRepeatPassword('div', {
+      title: 'Пароль',
+      titleRepeat: 'Пароль',
+      name: 'password',
+      nameRepeat: 'repeatPassword',
+      required: true,
+      pattern: '^(?=.*[A-ZА-Я])(?=.*[0-9]).{10,}$',
+      'data-error': 'Пароль должен содержать от 8 до 40 символов. Обязательно хотя бы одна заглавная буква и цифра.',
+      'data-error-repeat': 'Пароль не совпадает',
+      attr: { class: 'login-form__field' },
+    });
+    const buttonSubmit = new Button('div', {
+      form: 'regForm',
+      text: 'Зарегистрироваться',
+      class: 'login-form__button login-form__button--submit',
+      attr: { class: 'login-form__button-container' },
+    });
+    const buttonRedirect = new Button('div', {
+      text: 'Войти',
+      class: 'login-form__button login-form__button--second',
+      attr: { class: 'login-form__button-container' },
+    });
+
+    this.setProps({
+      ...inputs,
+      repeatPasswordInput,
+      buttonSubmit,
+      buttonRedirect,
+      sendForm: this.sendForm.bind(this),
+  })
+}
+
+sendForm (event:Event) {
   event.preventDefault();
   event.stopPropagation();
-  const form: HTMLFormElement|null = document.querySelector('.login-form__form');
+  const form: HTMLFormElement|null = document.querySelector('.login-form__form--reg');
   if (form) {
-    const { elements } = form;
-    const formData = {}; 
+    const emailHTML= form.querySelector('input[name="email"]') as HTMLInputElement;
+    const loginHTML= form.querySelector('input[name="login"]') as HTMLInputElement;
+    const firstNameHTML= form.querySelector('input[name="first_name"]') as HTMLInputElement;
+    const secondNameHTML= form.querySelector('input[name="second_name"]') as HTMLInputElement;
+    const phoneHTML= form.querySelector('input[name="phone"]') as HTMLInputElement;
+    const passwordHTML= form.querySelector('input[name="password"]') as HTMLInputElement;
 
-    Array.from(elements)
-      .filter((item) => item.tagName === 'INPUT')
-      .forEach((element:HTMLInputElement) => {
-        const { name, value } = element;
-        formData[name] = value;
-      });
+    const formData = {
+      email: emailHTML?.value,
+      login: loginHTML?.value,
+      first_name: firstNameHTML?.value,
+      second_name:secondNameHTML?.value,
+      phone:phoneHTML?.value,
+      password:passwordHTML?.value,
+    }
 
-      AuthController.signup(formData);
+    AuthController.signup(formData);
   }
 };
 
-class LoginForm extends FormValidation {
+
+
   render() {
     return this.compile(`
     <div class="login-form"> 
-      <form class="login-form__form" id={{formId}}>
-        <h1 class="login-form__title">{{title}}</h1>
-        {{emailInput}}
-        {{loginInput}}
-        {{firstNameInput}}
-        {{secondNameInput}}
-        {{phoneInput}}
-        {{repeatPasswordInput}}
-        {{buttonSubmit}}
+      <div class="login-form__form-container" >
+        <form class="login-form__form login-form__form--reg" id={{formId}}>
+          <h1 class="login-form__title">{{title}}</h1>
+          {{emailInput}}
+          {{loginInput}}
+          {{firstNameInput}}
+          {{secondNameInput}}
+          {{phoneInput}}
+          {{repeatPasswordInput}}
+          {{buttonSubmit}}
+        </form>
         {{buttonRedirect}}
-      </form>
+        </div>
     </div>
      
     `);
@@ -142,11 +165,7 @@ class LoginForm extends FormValidation {
 const regForm = new LoginForm('div', {
   formId: 'regForm',
   title: 'Регистрация',
-  ...inputs,
-  repeatPasswordInput,
-  sendForm,
-  buttonSubmit,
-  buttonRedirect,
+  
   attr: { class: 'login-form__container' },
   events: [
 
@@ -154,7 +173,7 @@ const regForm = new LoginForm('div', {
       class: '.login-form__button--second',
       event: 'click',
       handler: ()=>{
-        router.go("/login");
+        router.go("/");
       },
     },
   ],

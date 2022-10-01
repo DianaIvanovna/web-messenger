@@ -1,0 +1,97 @@
+
+@import "../../variables.scss";
+
+.search-user {
+    //min-width: 300px;
+    height: 100%;
+    margin-bottom: 10px;
+    
+
+    &__input-container {
+        width: 100%;
+        display: flex;
+        position: relative;
+    }
+    &__input {
+        @include fontText(normal, 400, 14px, 150%);
+        width: 100%;
+        height: 35px;
+        
+        border: none;
+        background: transparent;
+        border-bottom: 1px solid $back-color-attention;
+        box-sizing: border-box;
+        &:invalid {
+          border: 2px dashed $inpit-error-color;
+          border-radius: 5px;
+    
+        }
+        &:valid {
+          border: 2px solid $inpit-valid-color;
+          border-radius: 5px;
+        }
+        // &:active,
+        // &:hover,
+        // &:focus {
+        //   border-color: $font_color_second;
+        // }
+        padding: 0 40px 0 10px;
+    }
+
+    &__button {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        cursor: pointer;
+        background-color: transparent;
+        height: 30px;
+        width: 30px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        
+
+        svg {
+            height: 30px;
+            width: 30px;
+        }
+
+        
+    }
+
+    &__list {
+        position: absolute;
+        top: 35px;
+        left: 0;
+        width: 100%;
+        //min-height: 150px;
+        background: #fff;
+        .list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            max-height: 100px;
+            overflow-y: scroll;
+            @include scrollMin();
+        }
+    }
+
+    &__li{
+        width: 100%;
+        @include fontText(normal, 400, 14px, 150%);
+        
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        height: 25px;
+        &:hover {
+            border: 1px solid $inpit-valid-color;
+        }
+
+        span {
+            box-sizing: border-box;
+            padding-left: 10px;
+            width: 100%;
+            display: inline-block;
+        }
+    }
+}

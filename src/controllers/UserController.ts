@@ -1,10 +1,8 @@
 
 import UserApi from "../api/UserApi/UserApi";
 import Store from "../store/Store";
-import Router from '../utils/Router/Router';
-import {profileData, passwordData} from "../api/UserApi/types"
+import {profileData, passwordData, searchUserData} from "../api/UserApi/types"
 
-const router = new Router(".root");
 const api = new UserApi();
 
 class UserController {
@@ -38,13 +36,23 @@ class UserController {
   public async getAvatar(path:string) {
     try {
        const avatar = await api.getAvatar(path);
-      // console.log("avatar", avatar)
        Store.set("user.avatarFile", avatar) 
 
     } catch (error) {
         Store.set("error", `${error.status}: ${error.text}`);
     }
   }
+  public async searchUser(data:searchUserData) {
+    try {
+      const users = await api.searchUser(data);
+      Store.set("searchUsers", users) 
+
+    } catch (error) {
+        Store.set("error", `${error.status}: ${error.text}`);
+    }
+  }
+
+  
 
 } 
 

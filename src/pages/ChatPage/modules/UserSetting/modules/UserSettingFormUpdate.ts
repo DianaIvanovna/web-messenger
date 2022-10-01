@@ -14,7 +14,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
 
     function mapUserToProps(state:Indexed):Indexed {
         return {
-          user: {...state.user},
+          user: {...state.user} ,
         }; 
     }
 
@@ -93,7 +93,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             });
             const saveButton = new Button('div', {
                 form: this._props.formId,
-                text: 'Сохранить',
+                text: 'Сохранить', 
                 class: 'user-setting__button',
                 attr: { class: 'user-setting__button-container' },
             });
@@ -127,7 +127,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
                 exitBtn,
                 saveButton,
                 cancelButton,
-                sendForm: this.sendForm.bind(this),
+                sendForm: this.sendFormData.bind(this),
             })
         }
 
@@ -168,10 +168,10 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             })
         };
 
-        sendForm (event:Event)  {
+        sendFormData (event:Event)  {
             event.preventDefault();
             event.stopPropagation();
-            const form: HTMLFormElement|null = document.querySelector('.user-setting__form');
+            const form: HTMLFormElement|null = document.querySelector(".user-setting__form-user");
             if (form) {
               const first_name = form.querySelector('input[name="first_name"]') as HTMLInputElement;
               const second_name = form.querySelector('input[name="second_name"]') as HTMLInputElement;
@@ -179,7 +179,6 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
               const login = form.querySelector('input[name="login"]') as HTMLInputElement;
               const email = form.querySelector('input[name="email"]') as HTMLInputElement;
               const phone = form.querySelector('input[name="phone"]') as HTMLInputElement;
-
 
               const formData = {
                 first_name: first_name ? first_name.value : "",
@@ -215,7 +214,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
     
         render() {
           return this.compile(`
-            <form class="user-setting__form" id={{formId}}>
+            <form class="user-setting__form user-setting__form-user" id={{formId}}>
                 {{emailInput}}
                 {{loginInput}}
                 {{firstNameInput}}
@@ -235,7 +234,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
     const FormUserDataConnectedToStore = connect(FormUserData,mapUserToProps );
     
     return new FormUserDataConnectedToStore('div', {
-        formId: 'userSetting',
+        formId: 'userSetting123',
         attr: { class: 'user-setting__form-container' },
       });;
 }

@@ -1,12 +1,19 @@
 import Route from "./Route";
 
+type routesItem={
+  route: Route,
+  protection:()=>boolean
+}
+
+type protectionFunc = ()=>boolean;
+
 class Router {
     static __instance: any;
-    routes: Route[];
+    routes: routesItem[];
     history: History;
-    private _currentRoute: Route|null;
+    private _currentRoute: routesItem|null;
     private _rootQuery:string;
-    private _defaultRoute: Route|null;
+    private _defaultRoute: routesItem|null;
     
     constructor(rootQuery:string) {
       if (Router.__instance) {
@@ -20,15 +27,25 @@ class Router {
   
       Router.__instance = this;
     }
+    protectionDefault() {
+      return true
+    }
   
-    public use(pathname:string, block:any) {
+    public use(pathname:string, block:any, protection?:protectionFunc) {
+      const  protectionItem =  protection?protection:this.protectionDefault
       if (pathname === "*") {
         const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery}); 
-        this._defaultRoute = route;
+        this._defaultRoute = {
+          route,
+          protection:protectionItem,
+        };
       }else {
-        const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery}); 
+        const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery});  
   
-        this.routes.push(route);
+        this.routes.push({
+          route,
+          protection:protectionItem,
+        });
       }
 
       return this;
@@ -46,18 +63,23 @@ class Router {
     }
   
     private _onRoute(pathname:string) {
-      const route = this.getRoute(pathname) || this._defaultRoute;
-      if (!route) {
+      let routeItem = this.getRoute(pathname) || this._defaultRoute;
+      // простая защита роута
+      if (routeItem && !routeItem.protection()){
+        routeItem =  this.getRoute("/") || this._defaultRoute;
+      }
+
+      if (!routeItem || !routeItem.route) {
         return;
       }
   
       if (this._currentRoute) {
         
-        this._currentRoute.leave();
+        this._currentRoute.route.leave();
       }
       
-      this._currentRoute = route;
-      route.render();
+      this._currentRoute = routeItem;
+      routeItem.route.render();
     }
   
     public go(pathname:string) {
@@ -72,8 +94,8 @@ class Router {
       this.history.forward(); 
     }
   
-    private getRoute(pathname:string) {
-      return this.routes.find(route => route.match(pathname));
+    private getRoute(pathname:string):routesItem|undefined  {
+      return this.routes.find(item => item.route.match(pathname));
     }
   }
   

@@ -14,6 +14,9 @@ import UserSettingComponent from './modules/UserSetting/UserSetting';
 import SettingContainer from './modules/SettingContainer/SettingContainer';
 import ContactsContainer from './modules/ContactsContainer/ContactsContainer';
 import ChatContainer from './modules/ChatContainer/ChatContainer';
+import Popup from "../../components/Popup/Popup";
+import CreateChatForm from "./modules/CreateChatForm/CreateChatForm";
+import AddUserToChatForm from "./modules/AddUserToChatForm/AddUserToChatForm";
 
 function mapUserToProps(state:Indexed):Indexed {
     return {
@@ -33,6 +36,15 @@ class Chat extends Block{
         newProps.settingContainer = SettingContainer();
         newProps.chatContainer = ChatContainer();
         newProps.activeChat = null;
+        newProps.CreateChatForm= new CreateChatForm('div',{
+        });
+        newProps.AddUserToChatForm = new AddUserToChatForm('div', {
+          attr: { class: "add-user-to-chat-form" },
+        })
+        newProps.PopupCreateChatForm = new Popup('div',{
+          children: newProps.CreateChatForm
+        }); 
+        newProps.PopupAddUsers = new Popup('div',{children: newProps.AddUserToChatForm});
         newProps.events = [
             {
                 class: '.chat__icon--0',
@@ -63,14 +75,32 @@ class Chat extends Block{
                 },
               },
         ]
+        super(tagName, newProps);
 
         
 
-        super(tagName, newProps);
+
+
         this._arrComponents = [newProps.userSetting,newProps.dialogsContainer, newProps.contactsContainer, newProps.settingContainer ];
+        newProps.dialogsContainer.setProps({
+          openPopupCreateChat: this.openPopupCreateChat
+        })
+        newProps.chatContainer.setProps({
+          openPopupAddUsers: this.openPopupAddUsers,
+        })
+        
     }
     componentDidMount() {
-        this.iconHandler(0);
+        this.iconHandler(1);
+        this._children.PopupCreateChatForm?.hide();
+        this._children.PopupAddUsers?.hide();
+    }
+
+    openPopupCreateChat = () => {
+      this._children.PopupCreateChatForm?.show();
+    }
+    openPopupAddUsers = () => {
+      this._children.PopupAddUsers?.show();
     }
 
     iconHandler( index:number, event?:Event) {
@@ -95,43 +125,49 @@ class Chat extends Block{
     init() {
         this._createResources();
         this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
+        
     }
 
     render() {
         return this.compile(`
-        <div class="chat__menu-container">
-        <div class="{{menuStyle}}">
-          <img
-            class="chat__icon chat__icon--0"
-            src="{{icon1}}"
-            alt="настройки пользователя"
-          />
-          <img
-            class="chat__icon chat__icon--1"
-            src="{{icon2}}"
-            alt="чаты"
-          />
-          <img
-            class="chat__icon chat__icon--2"
-            src="{{icon3}}"
-            alt="контакты"
-          />
-          <img
-            class="chat__icon chat__icon--3"
-            src="{{icon4}}"
-            alt="настройки"
-          />
+        {{PopupCreateChatForm}}
+        {{PopupAddUsers}}
+        <div class="chat">
+          <div class="chat__menu-container">
+          <div class="{{menuStyle}}">
+            <img
+              class="chat__icon chat__icon--0"
+              src="{{icon1}}"
+              alt="настройки пользователя"
+            />
+            <img
+              class="chat__icon chat__icon--1"
+              src="{{icon2}}"
+              alt="чаты"
+            />
+            <img
+              class="chat__icon chat__icon--2"
+              src="{{icon3}}"
+              alt="контакты"
+            />
+            <img
+              class="chat__icon chat__icon--3"
+              src="{{icon4}}"
+              alt="настройки"
+            />
+          </div>
+    
+          <div class="chat__main">
+            {{userSetting}}
+            {{dialogsContainer}}
+            {{contactsContainer}}
+            {{settingContainer}}
+          </div>
+          
         </div>
-  
-        <div class="chat__main">
-          {{userSetting}}
-          {{dialogsContainer}}
-          {{contactsContainer}}
-          {{settingContainer}}
+        {{chatContainer}}
         </div>
         
-      </div>
-      {{chatContainer}}
         `);
     }
 }
@@ -140,5 +176,5 @@ const ChatConnectedToStore = connect(Chat,mapUserToProps )
 
 export default new ChatConnectedToStore("div", {
     icon1,icon2,icon3,icon4,
-    attr: { class: 'chat' },
+    attr: { class: 'chat-page' },
 });

@@ -87,17 +87,8 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                     newPassword:  newPassword ? newPassword.value : "",
                 };
 
-                console.log("formData", formData)
                 this._userController.changePassword(formData);
                 this.cancelButtonHandler();
-            //   const { elements } = form;
-            //   console.log("elements", elements)
-            //   Array.from(elements)
-            //     .filter((item) => item.tagName === 'INPUT')
-            //     .forEach((element: HTMLInputElement) => {
-            //       const { name, value } = element;
-            //       console.log({ name, value });
-            //     });
             } 
         };
 

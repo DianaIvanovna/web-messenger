@@ -15,7 +15,7 @@ class FieldInput extends Block {
     newProps.name = props.name ? `name= ${props.name}` : '';
     newProps.type = props.type ? `type= ${props.type}` : '';
     newProps.value = props.value ? `value= ${props.value}` : '';
-    newProps.placeholder = props.placeholder ? `placeholder= ${props.placeholder}` : '';
+    newProps.placeholder = props.placeholder ? `placeholder= "${props.placeholder}"` : '';
     newProps.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
     newProps.required = props.required ? 'required' : '';
     newProps.pattern = props.pattern ? `pattern= ${props.pattern}` : '';

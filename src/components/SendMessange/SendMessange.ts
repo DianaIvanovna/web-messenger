@@ -1,6 +1,7 @@
 import classes from './SendMessange.module.scss';
 import FormValidation from '../../utils/FormValidation/FormValidation';
 import clip from '../../../static/img/icons/clip.png';
+import addUser from "../../../static/img/icons/addUser.png";
 import sendMessangeIcon from '../../../static/img/icons/send-messange.png';
 import Button from '../Button/Button';
 
@@ -11,29 +12,33 @@ class SendMessange extends FormValidation {
 
     newProps.classes = classes;
     newProps.clip = clip;
+    newProps.addUser = addUser;
     newProps.sendMessangeIcon = sendMessangeIcon;
     newProps.formId = formId;
     newProps.button = new Button('div', {
       form: formId,
       text: `<img src=${sendMessangeIcon}  />`,
-      class: classes['send-messange__img'],
-      attr: { class: classes['send-messange__img'] },
+      class: classes['send-messange__button'],
+      attr: { class: classes['send-messange__button'] },
     });
     newProps.sendForm = (event:Event) => {
       event.preventDefault();
-      event.stopPropagation();
-      // const { elements } = document.querySelector(`.${classes['send-messange']}`);
+      event.stopPropagation(); 
       const form :HTMLFormElement|null = document.querySelector(`.${classes['send-messange']}`);
-
-      if (form) {
-        Array.from(form.elements)
-          .filter((item) => item.tagName === 'INPUT')
-          .forEach((element: HTMLInputElement) => {
-            const { value, name } = element;
-            console.log({ name, value });
-          });
+      if (form) { 
+        const input = form.querySelector('input[name="messange"]') as HTMLInputElement;
+      
+        newProps.sendMessange(input.value);
+        form.reset();
       }
     };
+    newProps.events= [
+      {
+        event: 'click',
+        class: '.send-messange__img--add-user',
+        handler: newProps.openPopupAddUsers
+      }
+    ]
 
     super(tag, newProps);
   }
@@ -41,8 +46,14 @@ class SendMessange extends FormValidation {
   render() {
     return this.compile(`
        <form class={{classes.send-messange}} id="{{formId}}" >
-        <button class={{classes.send-messange__img}}><img src={{clip}} /></button>
+        <div class={{classes.send-messange__button-container}}>
+         
+          <img src={{clip}} class={{classes.send-messange__img}} />
+          <img src={{addUser}}  class="{{classes.send-messange__img}} send-messange__img--add-user " />
+          
+        </div>
         <input class={{classes.send-messange__input}} placeholder="Сообщение" type="text" id="messange" name="messange" required >
+    
         <p class="error error-messange"></p>
         {{button}}
         
@@ -50,4 +61,6 @@ class SendMessange extends FormValidation {
     `);
   }
 }
+
+//<button class="{{classes.send-messange__img}} send-messange__img--add-user "></button>
 export default SendMessange;

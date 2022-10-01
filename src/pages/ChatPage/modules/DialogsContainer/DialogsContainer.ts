@@ -1,106 +1,118 @@
 /* eslint no-unused-vars: "off" */
 import Block, {PlainObject} from '../../../../utils/ComponentFunctions/Block';
 import DialogsItem from '../../../../components/DialogsItem/DialogsItem';
-import Store, {StoreEvents, Indexed} from '../../../../store/Store';
+import {Indexed} from '../../../../store/Store';
 import { connect } from '../../../../store/utils/connect';
 import ChatController from '../../../../controllers/ChatController';
+import Button from '../../../../components/Button/Button';
 
 import {dialogInterface} from "../../../../store/type";
+import MessageController from '../../../../controllers/MessageController';
+
 
 const DialogsHandler = (dialogs:dialogInterface[]) => {
-  const dialogComponents:{
-    [key:string]:DialogsItem
-  } = {};
-
-  let dialogTmp = ''; 
-  dialogs?.forEach((item, index) => {
-    dialogComponents[`dialogComponents-${index}`] = new DialogsItem('div', {
-      ...item,
-      lastMessange: item.messages?.[0],
-      attr: { class: 'dialogs-item' },
-      events: [
-        {
-          event: 'click',
-          handler: (event:Event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            ChatController.openDialog(dialogs?.[index]);
+    const dialogComponents:{
+      [key:string]:DialogsItem
+    } = {};
+  
+    let dialogTmp = ''; 
+    dialogs?.forEach((item, index) => {
+      dialogComponents[`dialogComponents-${index}`] = new DialogsItem('div', {
+        ...item,
+        attr: { class: 'dialogs-item' },
+        events: [
+          {
+            event: 'click',
+            handler: (event:Event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              ChatController.openDialog(dialogs?.[index].id);
+              if (!dialogs?.[index].messages) {
+                MessageController.getOldMessages(dialogs?.[index].id)
+              }
+            },
           },
-        },
-      ],
+        ],
+      });
     });
-  });
-
-  Object.entries(dialogComponents).forEach(([key]) => {
-    dialogTmp = `${dialogTmp}  {{${key}}}`;
-  });
-
-  return {
-    dialogComponents,
-    dialogTmp,
-  }
+  
+    Object.entries(dialogComponents).forEach(([key]) => {
+      dialogTmp = `${dialogTmp}  {{${key}}}`;
+    });
+  
+    return {
+      dialogComponents,
+      dialogTmp,
+    }
 }
-
+  
 const DialogsContainer = () => {
   function mapUserToProps(state:Indexed):Indexed {
     return {
-      dialogs: state.dialogs,
+      chats: state.chats,
     }; 
   }
 
   class DialogsContainerBlock extends Block {
-
+    private _chatController;
     constructor(tagName:string = 'div', props:Record<string, any> = {}) {
-      let newProps = {...props};
+        let newProps = {...props};
 
-      if ('dialogs' in props) {
-        const {dialogComponents,dialogTmp} = DialogsHandler(props.dialogs )
-        newProps= { ...newProps, ...dialogComponents, dialogTmp}
-      }
-
-      super(tagName, newProps);
-
+        if (!props.chats) {
+            newProps.dialogTmp = "<div class='chat__loader' >Загрузка...</div>"
+        }
+       
+        super(tagName, newProps);
+        this._chatController = ChatController;
+        const button = new Button('div', {
+           text: `Создать новый чат`,
+            class: "chat__button-new-chat",
+            events: [
+                {event: 'click',
+                handler: this.createChat.bind(this),
+              }
+            ]
+        });
+        this.setProps({
+          button: button,
+        })
+    }
+    componentDidMount() {
+        this._chatController.getChats();
     }
 
-    setProps(newProps:PlainObject) {
-      if (!newProps) {
-        return;
+    middlewareProps(nextProps:PlainObject):PlainObject {
+      if ('chats' in nextProps && nextProps.chats) {
+          if (nextProps.chats.length === 0) {
+              const dialogTmp = `<p>Диалогов нет</p>`;
+              nextProps= { ...nextProps,  dialogTmp}
+          }
+          else {
+              const {dialogComponents,dialogTmp} = DialogsHandler(nextProps.chats )
+              nextProps= { ...nextProps, ...dialogComponents, dialogTmp}
+          }
       }
-      let nextProps = { ...newProps };
-      this._setUpdate = false;
-      const oldProps = { ...this._props };
 
-      if ('dialogs' in nextProps) {
-        const {dialogComponents,dialogTmp} = DialogsHandler(nextProps.dialogs )
-        nextProps= { ...nextProps, ...dialogComponents, dialogTmp}
-      }
-      const { children, props } = this._getChildren(nextProps);
-  
-      if (Object.values(children).length) {
-        Object.assign(this._children, children);
-      }
-      if (Object.values(props).length) {
-        Object.assign(this._props, nextProps);
-      }
-  
-      if (this._setUpdate) {
-        this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProps, this._props);
-        this._setUpdate = false;
-      }
+      return nextProps;
+    }
+
+    createChat() {
+      this._props.openPopupCreateChat()
     }
 
     render() {
-      return this.compile(this._props.dialogTmp);
+        const template= `{{button}} ${this._props.dialogTmp}`;
+        return this.compile(template );
     }
   }
 
   const DialogsContainerBlockConnectedToStore = connect(DialogsContainerBlock,mapUserToProps )
 
 
-  const dialogsContainerBlock = new DialogsContainerBlockConnectedToStore('div');
+  const dialogsContainerBlock = new DialogsContainerBlockConnectedToStore('div', {});
 
 
   return dialogsContainerBlock;
-};
+}
 
 export default DialogsContainer;
