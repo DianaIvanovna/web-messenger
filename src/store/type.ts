@@ -1,4 +1,4 @@
-export interface dialogInterface {
+export interface DialogInterface {
     id: number;
     photo: string;
     first_name:string;
@@ -12,7 +12,18 @@ export interface dialogInterface {
       myMes: boolean,}[] ;
 }
 
-export type messageType = {
+export type UserData = {
+  id: number
+  first_name:string,
+  second_name:string,
+  display_name: string,
+  login:string,
+  email:string,
+  phone: string,
+  avatar: string,
+}
+
+export type MessageType = {
   chat_id: number,
   content: string,
   file: null,
@@ -22,7 +33,7 @@ export type messageType = {
   type: "message"
   user_id: number,
 }
-export type lastMessageType = {
+export type LastMessageType = {
   content: string,
   id: number,
   time: string,
@@ -37,12 +48,12 @@ export type lastMessageType = {
   }
 }
 
-export type chatType = {
+export type ChatType = {
   avatar: null|string,
   created_by: number,
   id: number,
-  last_message: lastMessageType,
-  messages?:messageType[] | null,
+  last_message: LastMessageType,
+  messages?:MessageType[] | null,
   title: string,
   unread_count: number,
   userConnect?: boolean,

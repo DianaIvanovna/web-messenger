@@ -4,10 +4,10 @@ import ChatMain from '../ChatMain/ChatMain';
 import { PlainObject } from '../../../../utils/ComponentFunctions/Block';
 import {Indexed} from '../../../../store/Store';
 import { connect } from '../../../../store/utils/connect';
-import MessageController from '../../../../controllers/MessageController';
+import {MessageController} from '../../../../controllers/MessageController';
 import Button from '../../../../components/Button/Button';
 
-import { chatType, messageType } from '../../../../store/type';
+import { ChatType, MessageType } from '../../../../store/type';
 
 const ChatContainer = () => {
 
@@ -19,12 +19,16 @@ const ChatContainer = () => {
     }; 
   }
 
+  type ChatContainerBlockProps = {
+    attr?:object,
+    activeChatId?: number,
+    activeChatTmp?:string,
+  }
+  
   class ChatContainerBlock extends ChatMain {
-    _messageController;
     _flagChangeDialog = false;
 
-
-    constructor(tag:string, props:Record<string, any>) {
+    constructor(tag:string, props:ChatContainerBlockProps) {
       const newProps = { ...props };
       if (!props.activeChatId) {
         newProps.activeChatTmp = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
@@ -44,7 +48,6 @@ const ChatContainer = () => {
       });
      
 
-      this._messageController = MessageController;
       this.setProps({
         DownloadMoreButton,
       })
@@ -54,9 +57,10 @@ const ChatContainer = () => {
         if ('chats' in nextProps && nextProps.chats) {
             let activeChatTmp = ''; 
             let messangeTmp = '';
-            const activeChatId = nextProps.activeChatId? nextProps.activeChatId : this._props.activeChatId;
+            
+            const activeChatId = nextProps.activeChatId || this._props.activeChatId;
 
-            const findIndex = nextProps.chats.findIndex((item:chatType)=> {
+            const findIndex = nextProps.chats.findIndex((item:ChatType)=> {
               return item.id===activeChatId
             }) 
 
@@ -103,7 +107,7 @@ const ChatContainer = () => {
 
     private _downloadMore() {
       const chatId = this._props.activeChatId;
-      const findIndex = this._props.chats.findIndex((item:chatType)=> {
+      const findIndex = this._props.chats.findIndex((item:ChatType)=> {
         return item.id===chatId
       });
       if (findIndex !== -1) {
@@ -112,13 +116,13 @@ const ChatContainer = () => {
       }
     }
 
-    private createMessangesDOM(messages:messageType[], nextProps:any):string {
+    private createMessangesDOM(messages:MessageType[], nextProps:any):string {
       let tmp =''
-      messages.forEach((message:messageType, index:number) => {
+      messages.forEach((message:MessageType, index:number) => {
         const flagMesMy = +message.user_id ===+this._props.userId;
         const messageName = `message-${index}`;
         const classMes = `message ${flagMesMy ? 'message--my' : ''} ${message.is_read ? 'message--read' : ''}`; 
-        //добавить проверку на отправленность сообщения message--send
+        //TODO:добавить проверку на отправленность сообщения message--send
 
         nextProps[`message-${index}`] = new Message('div', {
           ...message,
@@ -132,19 +136,10 @@ const ChatContainer = () => {
 
     sendMessange(value:string) {
       if (this._props.activeChatId) {
-        this._messageController.sendMessange(this._props.activeChatId,value) 
+        MessageController.sendMessange(this._props.activeChatId,value) 
       }
     }
-
-    // afterRendering() {
-    //   const messangeContainer = this.element.querySelector('.chat__container-messages');
-    //   if (messangeContainer ) {
-    //     console.log("скролл вниз")
-    //     messangeContainer.scrollTop = messangeContainer.scrollHeight;
-    //     this._flagChangeDialog = false;
-    //   }
-    // }
-
+    //TODO: сделать правильный скролл сообщений
     render() {
       
       return this.compile(`

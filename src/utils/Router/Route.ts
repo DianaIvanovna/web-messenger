@@ -1,6 +1,3 @@
-function isEqual(lhs:string, rhs:string) {
-    return lhs === rhs;
-}
 import renderDOM from "../ComponentFunctions/renderDom";
 
 import Block from '../ComponentFunctions/Block';
@@ -38,7 +35,7 @@ export default class Route {
   }
 
   match(pathname:string) {
-    return isEqual(pathname, this._pathname);
+    return pathname === this._pathname
   }
 
   render() {

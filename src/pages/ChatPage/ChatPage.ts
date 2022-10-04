@@ -30,7 +30,7 @@ class Chat extends Block{
     constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
         const newProps = { ...propsAndChildren };
         newProps.menuStyle = 'chat__menu chat__menu--active-1';
-        newProps.dialogsContainer = DialogsContainer();
+        newProps.dialogsContainer = DialogsContainer;
         newProps.userSetting = UserSettingComponent();
         newProps.contactsContainer = ContactsContainer();
         newProps.settingContainer = SettingContainer();

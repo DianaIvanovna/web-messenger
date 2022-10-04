@@ -1,6 +1,6 @@
-import Store, {Indexed} from "../../store/Store";
+import {Indexed, Store} from "../../store/Store";
 import {SocketItem, sendData} from "./types";
-import { chatType } from "../../store/type";
+import { ChatType } from "../../store/type";
 
 function mapUserToProps(state:Indexed):Indexed {
   return {
@@ -53,10 +53,10 @@ export default class WebSocketService  {
     socket.removeEventListener('close', this._closeSoket.bind(this));    // сокет закрылся
   }
 
-  _openSoket() {
+  private _openSoket() {
   }
 
-  _newMessangeSoket(chatId:number) {
+  private _newMessangeSoket(chatId:number) {
     const eventMessage = event as MessageEvent;
     if (!eventMessage) {
       return ;
@@ -64,7 +64,7 @@ export default class WebSocketService  {
 
     const data = JSON.parse(eventMessage.data);
     const state = mapUserToProps(Store.getState());
-    const index =  state.chats.findIndex((item:chatType)=>{
+    const index =  state.chats.findIndex((item:ChatType)=>{
       return item.id === chatId
     })
 
@@ -90,7 +90,7 @@ export default class WebSocketService  {
     }
 
   }
-  _errorSoket() {
+  private _errorSoket() {
     const eventMessage = event as ErrorEvent;
     if (!eventMessage) {
       return ;
@@ -99,7 +99,7 @@ export default class WebSocketService  {
   }
 
 
-  _closeSoket(chatId:number) {
+  private _closeSoket(chatId:number) {
     const eventMessage = event as CloseEvent;
     if (!eventMessage) {
       return ;

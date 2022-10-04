@@ -2,10 +2,10 @@ import './CreateChatForm.scss';
 import FormValidation from '../../../../utils/FormValidation/FormValidation';
 import FieldInput from '../../../../components/FieldInput/FieldInput';
 import Button from '../../../../components/Button/Button';
-import ChatController from '../../../../controllers/ChatController';
+import {ChatController} from '../../../../controllers/ChatController';
 
 class CreateChatForm extends FormValidation{
-  private _chatController;
+
   constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
     const newProps = { ...propsAndChildren };
     newProps.formId = "createChat";
@@ -31,7 +31,6 @@ class CreateChatForm extends FormValidation{
         ],
     });
   
-    this._chatController = ChatController;
     this.setProps({
       titleChatInput,
       createChatBtn,
@@ -49,7 +48,7 @@ class CreateChatForm extends FormValidation{
     
     if (form) {
       const title = form.querySelector('input[name="title"]') as HTMLInputElement;
-      this._chatController.createChat({
+      ChatController.createChat({
         title: title ? title.value : "",
       });
       this._props.closeForm()

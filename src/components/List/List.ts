@@ -3,23 +3,28 @@ import Block from '../../utils/ComponentFunctions/Block';
 
 type PlainObject = { [key: string]: any }
 
+interface ListProps {
+  class?:string,
+  classLi:string,
+  liTmp?: string,
+  arrChildren: any[],
+  [key:string]:any,
+}
+
 class List extends Block {
-  constructor(tag:string, props:Record<string, any>) {
+  constructor(tag:string, props:ListProps) {
     const newProps = { ...props };
 
-    newProps.class = props.class 
-      ? `list ${props.class}`
-      : 'list';
-    newProps.classLi = props.classLi 
-      ? `list__li ${props.classLi}`
-      : 'list__li';
+    newProps.class = `list ${props.class||''}`
+    newProps.classLi = `list__li ${props.classLi||''}`
+    
     newProps.liTmp ="";
     if (newProps.arrChildren) {
         newProps.arrChildren.forEach((item:any, index:number)=>{
             const itemName = `li-${index}`;
             newProps[`li-${index}`] = item;
             newProps.liTmp = `  ${newProps.liTmp} <li class="${newProps.classLi}"> {{${itemName}}}  </li> `;
-        })
+        }) 
     }
 
     super(tag, newProps);

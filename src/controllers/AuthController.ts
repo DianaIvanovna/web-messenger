@@ -1,19 +1,19 @@
 
-import AuthApi from "../api/AuthApi/AuthApi";
-import Store from "../store/Store";
+import {AuthApi} from "../api/AuthApi/AuthApi";
+import {Store} from "../store/Store";
 import Router from '../utils/Router/Router';
-import {signupData, signinData} from "../api/AuthApi/types";
-import MessageController from "./MessageController";
+import {SignupData, SigninData} from "../api/AuthApi/types";
+import {MessageController} from "./MessageController";
 
 const router = new Router(".root");
 
 const authApi = new AuthApi();
 
-class AuthController {
+class AuthControllerClass {
   public async auth() {
     try {
       document.querySelector(".preloader__back")?.classList.add("preloader__back--show")
-      const data = await authApi.auth();
+      const data = await authApi.auth(); 
       Store.set("user", data);
       Store.set("auth.authCheck", true);
       Store.set("auth.isLogged", true);
@@ -22,12 +22,11 @@ class AuthController {
     } catch (error) {
       Store.set("auth.authCheck", true);
       Store.set("auth.isLogged", false);
-      //router.go("/");
       document.querySelector(".preloader__back")?.classList.remove("preloader__back--show")
     }
   }
 
-  public async signup(data:signupData) {
+  public async signup(data:SignupData) {
     try {
       await authApi.signup(data);
       router.go("/messenger");
@@ -35,10 +34,9 @@ class AuthController {
       Store.set("error", `${error.status}: ${error.text}`);
     }
   }
-  public async signin(data:signinData) {
+  public async signin(data:SigninData) {
     try {
       await authApi.signin(data);
-
       this.auth()
     } catch (error) {
         Store.set("error", `${error.status}: ${error.text}`);
@@ -48,15 +46,13 @@ class AuthController {
   public async logout() {
     try {
       await authApi.logout();
-
       router.go("/");
       MessageController.closeSockets();
       Store.resetState();
-
     } catch (error) {
       Store.set("error", `${error.status}: ${error.text}`);
     }
   }
 } 
 
-  export default new AuthController;
+export const AuthController = new AuthControllerClass;

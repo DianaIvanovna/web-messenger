@@ -2,10 +2,25 @@ import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 
 type PlainObject = { [key: string]: any }
+type FieldInputProps = {
+  name: string,
+  type?:  string,
+  placeholder?:  string,
+  title?: string,
+  'data-error'?:  string,
+  required?: string|boolean,
+  classes?: any,
+  class?: string,
+  classError?: string,
+  value?:string,
+  disabled?:string|boolean,
+  pattern?:string,
+  attr?: object,
+}
 
 class FieldInput extends Block {
   public readonly name: string;
-  constructor(tag:string, props:Record<string, any>) {
+  constructor(tag:string, props:FieldInputProps) {
     const newProps = { ...props };
     newProps.classes = classes;
     newProps.class = props.class

@@ -2,7 +2,7 @@ import WebSocketService from "../utils/WebSocketService/WebSocketService";
 
 const webSocketService = new WebSocketService();
 
-class MessageController {
+class MessageControllerClass {
     public async sendMessange(chatId:number, messange:string) {
         webSocketService.send(chatId, {
             content: messange,
@@ -22,5 +22,4 @@ class MessageController {
     }
 }
 
-
-export default new MessageController;
+export const MessageController = new MessageControllerClass;

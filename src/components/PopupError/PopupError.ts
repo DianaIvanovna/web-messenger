@@ -1,6 +1,6 @@
 import './PopupError.scss';
 import Block from '../../utils/ComponentFunctions/Block';
-import Store from '../../store/Store';
+import {Store} from '../../store/Store';
 
 type PlainObject = { [key: string]: any }
 
@@ -9,10 +9,14 @@ class PopupError extends Block {
         if ('error' in nextProps) {
             if (nextProps.error) {
                 this.show();
-                setTimeout(()=>{
+
+                function errorHandler() {
                     Store.set("error", null)
                     this.hide();
-                }, 3000)
+                    clearInterval(timerId);
+                 }
+
+                const timerId =setTimeout(errorHandler, 3000)
             }else {
                 this.hide();
             }

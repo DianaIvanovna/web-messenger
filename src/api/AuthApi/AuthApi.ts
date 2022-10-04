@@ -1,77 +1,64 @@
 import HTTPTransport from "../../utils/HTTPTransport/HTTPTransport";
-import {signupData, signinData} from "./types";
+import {SignupData, SigninData} from "./types";
+import { TOptions, METHODS} from '../types';
+import {UserData} from "../../store/type";
 
-export default class AuthApi {
-    private readonly _headers = {
+export class AuthApi { 
+    private readonly _defaultHeaders = {
         'content-type': 'application/json',
         'credentials': 'include',
         'mode': 'cors',
     }
-
-    private AuthApiInstance:HTTPTransport;
+    private _authInstance:HTTPTransport;
 
     constructor() {
-        this.AuthApiInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2/auth");
+        this._authInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2/auth");
     }
-    auth() {
-        return this.AuthApiInstance.get('/user', {
-            headers: this._headers,
-        })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200) return res;
 
-            return Promise.reject({
-                status: res.status,
-                response: JSON.parse(res.response)
-            }); 
-        }) 
-        .then(data => {
-            return JSON.parse(data.response)
+    request(path:string, options:TOptions={}) {
+        if (!options.headers) {
+            options.headers = this._defaultHeaders
+        }
+
+        return this._authInstance.request(path, options)
+            .then((res:XMLHttpRequest) => {
+                if (res.status === 200) return res;
+
+                return Promise.reject({
+                    status: res.status,
+                    text: res.response
+                }); 
+            }) 
+            .then(data => {
+                if ( data.response==="OK") {
+                    return null
+                }
+                return JSON.parse(data.response)
+            })
+    }
+
+    auth(): Promise<UserData>{
+        return this.request('/user', {
+            method: METHODS.GET
         })
     }
-    signup(data: signupData) {
-        return this.AuthApiInstance.post('/signup', {
-            headers: this._headers,
+    signup(data: SignupData): Promise<null> {
+        return this.request('/signup', {
+            method: METHODS.POST,
             data: data 
         })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-        })
-        .then(data => {
-            return data.response
-        })
     }
-    signin(data: signinData) {
-        return this.AuthApiInstance.post('/signin', {
-            headers: this._headers,
-            data: data
-        })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-        })
-        .then(data => {
-            return data.response
+    signin(data: SigninData): Promise<null> {
+        return this.request('/signin', {
+            method: METHODS.POST,
+            data: data 
         })
     }
 
-    logout() {
-        return this.AuthApiInstance.post('/logout', {
-            headers: this._headers,
-        })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-        })
-        .then(data => {
-            return data.response
+    logout(): Promise<null> {
+        return this.request('/logout', {
+            method: METHODS.POST,
         })
     }
 }
+

@@ -1,56 +1,63 @@
 import HTTPTransport from "../../utils/HTTPTransport/HTTPTransport";
-import {profileData, passwordData, searchUserData} from "./types";
+import {ProfileData, PasswordData, SearchUserData} from "./types";
+import { TOptions, METHODS} from '../types';
+import { UserData } from "../../store/type";
 
-export default class AuthApi {
-    private readonly _headers = {
+export class UserApi {
+    private readonly _defaultHeaders = {
         'content-type': 'application/json',
         'credentials': 'include',
         'mode': 'cors',
     }
-
-    private UserApiInstance:HTTPTransport;
+    private _authInstance:HTTPTransport;
 
     constructor() {
-        this.UserApiInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2/");
+        this._authInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2");
     }
 
-    
-    profile(data: profileData) {
-        return this.UserApiInstance.put('user/profile', {
-            headers: this._headers,
+    request(path:string, options:TOptions={}) {
+        if (!options.headers) {
+            options.headers = this._defaultHeaders
+        }
+
+        return this._authInstance.request(path, options)
+            .then((res:XMLHttpRequest) => {
+                if (res.status === 200) return res;
+
+                return Promise.reject({
+                    status: res.status,
+                    text: res.response
+                }); 
+            }) 
+            .then(data => {
+                if ( data.response==="OK") {
+                    return null
+                }
+                return JSON.parse(data.response)
+            })
+    }
+
+    profile(data: ProfileData):Promise<UserData> {
+        return this.request('/user/profile', {
+            method: METHODS.PUT,
             data: data 
         })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-        })
-        .then(data => {
-            return JSON.parse(data.response)
-        })
     }
-    avatar(data: FormData) {
-        return this.UserApiInstance.put('user/profile/avatar', {
+    avatar(data: FormData):Promise<UserData> {
+        return this.request('/user/profile/avatar', {
+            method: METHODS.PUT,
             headers: {
                 'credentials': 'include',
                 'mode': 'cors',
             },
             formData: data 
         })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-        })
-        .then(data => {
-            return JSON.parse(data.response)
-        })
+
     }
-    getAvatar(path:string){
-        return this.UserApiInstance.get(`resources${path}`, {
-            headers: this._headers,
+    getAvatar(path:string):Promise<string>{
+
+        return this._authInstance.get(`/resources${path}`, {
+            headers: this._defaultHeaders,
         })
         .then((res:XMLHttpRequest) => {
             if (res.status === 200)  {
@@ -63,33 +70,18 @@ export default class AuthApi {
             return data.responseURL
         })
     }
-    password(data: passwordData) {
-        return this.UserApiInstance.put('user/password', {
-            headers: this._headers,
+    password(data: PasswordData):Promise<null> {
+        return this.request('/user/password', {
+            method: METHODS.PUT,
             data: data 
-        })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
         })
         
     }
 
-    searchUser(data: searchUserData) {
-        return this.UserApiInstance.post('user/search', {
-            headers: this._headers,
+    searchUser(data: SearchUserData):Promise<UserData[]> {
+        return this.request('/user/search', {
+            method: METHODS.POST,
             data: data 
-        })
-        .then((res:XMLHttpRequest) => {
-            if (res.status === 200)  {
-                return res
-            }
-            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-        })
-        .then(data => {
-            return JSON.parse(data.response)
         })
         
     }

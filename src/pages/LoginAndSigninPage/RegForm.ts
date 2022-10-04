@@ -5,59 +5,73 @@ import FieldRepeatPassword from '../../components/FieldInput/FieldRepeatPassword
 import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from "../../utils/Router/Router";
+import {inputError} from "../../constants/ErrorConst";
+import {pattenrInput} from "../../constants/PatternConsts";
 
-import AuthController from '../../controllers/AuthController';
+import {AuthController} from '../../controllers/AuthController';
 
 const router = new Router(".root");
 
-type inputsPropsType = {
-  [key:string]: {[key:string]:string|boolean}
+type InputsType = {
+  name: string,
+  type: string,
+  title: string,
+  pattern: string,
+  'data-error': string,
+  required: boolean,
+}
+type InputsPropsType = {
+  emailInput: InputsType,
+  loginInput: InputsType,
+  firstNameInput: InputsType,
+  secondNameInput: InputsType,
+  phoneInput: InputsType,
 }
 
-const inputsProps:inputsPropsType = {
+const inputsProps:InputsPropsType = {
   emailInput: {
     name: 'email',
     type: 'text',
     title: 'Почта',
-    pattern: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+.+.[A-Za-z]{2}$',
-    'data-error': 'Неправильный формат email',
+    pattern: pattenrInput.email,
+    'data-error': inputError.email,
     required: true,
   },
   loginInput: {
     name: 'login',
     type: 'text',
     title: 'Логин',
-    pattern: '^(?=.*[A-Za-z])[0-9A-Za-z_-]{3,20}$',
-    'data-error': 'Должно быть от 3 до 20 символов. Допускается латиница, цифры (но не состоять из цифр), дефис и нижнее подчёркивание',
+    pattern: pattenrInput.login,
+    'data-error': inputError.login,
     required: true,
   },
   firstNameInput: {
     name: 'first_name',
     type: 'text',
     title: 'Имя',
-    pattern: '(^[A-ZА-Я])([A-ZА-Яa-zа-я-]+)',
-    'data-error': 'Первая буква должна быть заглавной. Допускается латиница или кириллица, дефис.',
+    pattern: pattenrInput.first_name,
+    'data-error': inputError.first_name,
     required: true,
   },
   secondNameInput: {
     name: 'second_name',
     type: 'text',
     title: 'Фамилия',
-    pattern: '(^[A-ZА-Я])([A-ZА-Яa-zа-я-]+)',
-    'data-error': 'Первая буква должна быть заглавной. Допускается латиница или кириллица, дефис.',
+    pattern: pattenrInput.second_name,
+    'data-error': inputError.second_name,
     required: true,
   },
   phoneInput: {
     name: 'phone',
     type: 'text',
     title: 'Телефон',
-    pattern: '(^[+]*)([0-9]{10,15})',
-    'data-error': 'От 10 до 15 символов, состоит из цифр, может начинается с плюса',
+    pattern: pattenrInput.phone,
+    'data-error': inputError.phone,
     required: true,
   },
 };
 
-type inputsType = {
+type InputsItem = {
   [key:string] : FieldInput|null
 };
 
@@ -67,7 +81,7 @@ class LoginForm extends FormValidation {
     const newProps = { ...propsAndChildren };
     super(tagName, newProps);
 
-    const inputs:inputsType = {
+    const inputs:InputsItem = {
       emailInput: null,
       loginInput: null,
       firstNameInput: null,

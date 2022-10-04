@@ -1,108 +1,82 @@
 import HTTPTransport from "../../utils/HTTPTransport/HTTPTransport";
-import {dataAddUsers, dataCreateChat, dataUsersChat, dataTokenChat} from "./types";
+import {DataAddUsers, DataCreateChat, DataUsersChat, DataTokenChat} from "./types";
+import { TOptions, METHODS} from '../types';
+import { ChatType, UserData } from "../../store/type";
 
 
-export default class ChatApi {
-    private readonly _headers = {
+export class ChatApi {
+    private readonly _defaultHeaders = {
         'content-type': 'application/json',
         'credentials': 'include',
         'mode': 'cors',
-    } 
-
-    private ChatApiInstance:HTTPTransport;
+    }
+    private _authInstance:HTTPTransport;
 
     constructor() {
-        this.ChatApiInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2/chats");
+        this._authInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2/chats");
     }
 
-    getChats() {
-        return this.ChatApiInstance.get('/', {
-            headers: this._headers,
-        })
-            .then((res:XMLHttpRequest) => { 
-                if (res.status === 200)  {
-                    return res
-                }
-                return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-            })
-            .then(data => {
-                return JSON.parse(data.response)
-            })
-    }
+    request(path:string, options:TOptions={}) {
+        if (!options.headers) {
+            options.headers = this._defaultHeaders
+        }
 
-    getTokenChat(data:dataTokenChat) {  
-
-        return this.ChatApiInstance.post(`/token/${data.id}`, {
-            headers: this._headers,
-            data,
-        })
-            .then((res:XMLHttpRequest) => { 
-                if (res.status === 200)  {
-                    return res
-                }
-                return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-            })
-            .then(data => {
-                return JSON.parse(data.response)
-            })
-    }
-
-    createChat(data: dataCreateChat) {
-        return this.ChatApiInstance.post('/', {
-            headers: this._headers,
-            data,
-        })
+        return this._authInstance.request(path, options)
             .then((res:XMLHttpRequest) => {
-                if (res.status === 200)  {
-                    return res
-                }
-                return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-            })
+                if (res.status === 200) return res;
+
+                return Promise.reject({
+                    status: res.status,
+                    text: res.response
+                }); 
+            }) 
             .then(data => {
+                if ( data.response==="OK") {
+                    return null
+                }
                 return JSON.parse(data.response)
             })
     }
 
-    getChatUsers(data: dataUsersChat) {
-        return this.ChatApiInstance.get(  `/${data.id}/users`, {
-            headers: this._headers,
-            data,
+    getChats():Promise<ChatType[]> {
+        return this.request('/', {
+            method: METHODS.GET
         })
-            .then((res:XMLHttpRequest) => {
-                if (res.status === 200)  {
-                    return res
-                }
-                return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-            })
-            .then(data => {
-                return JSON.parse(data.response)
-            })
     }
 
-    addUsersToChat(data:dataAddUsers) {
-        return this.ChatApiInstance.put('/users', {
-            headers: this._headers,
+    getTokenChat(data:DataTokenChat):Promise<{token:string }> {  
+        return this.request(`/token/${data.id}`, {
+            method: METHODS.POST,
             data,
         })
-            .then((res:XMLHttpRequest) => {
-                if (res.status === 200)  {
-                    return res
-                }
-                return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-            })
+    }
+
+    createChat(data: DataCreateChat):Promise<null>  {
+        return this.request(`/`, {
+            method: METHODS.POST,
+            data,
+        })
+    }
+
+    getChatUsers(data: DataUsersChat):Promise<UserData[]>  {
+        return this.request(`/${data.id}/users`, {
+            method: METHODS.GET,
+            data,
+        })
+    }
+
+    addUsersToChat(data:DataAddUsers):Promise<null> {
+        return this.request('/users', {
+            method: METHODS.PUT,
+            data,
+        })
+
     }
    
-    deleteUsersToChat(data:dataAddUsers) {
-        return this.ChatApiInstance.delete('/users', {
-            headers: this._headers,
+    deleteUsersToChat(data:DataAddUsers):Promise<null> {
+        return this.request('/users', {
+            method: METHODS.DELETE,
             data,
         })
-            .then((res:XMLHttpRequest) => {
-                if (res.status === 200)  {
-                    return res
-                }
-                return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});
-            })
     }
-
 }
