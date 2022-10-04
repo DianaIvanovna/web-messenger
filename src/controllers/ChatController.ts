@@ -1,14 +1,15 @@
 
-import ChatApi from "../api/ChatApi/ChatApi";
-import {dataAddUsers, dataCreateChat,dataUsersChat} from "../api/ChatApi/types";
-import Store from "../store/Store";
+import {ChatApi} from "../api/ChatApi/ChatApi";
+import {DataAddUsers, DataCreateChat,DataUsersChat} from "../api/ChatApi/types";
+import {Store} from "../store/Store";
 import WebSocketService from "../utils/WebSocketService/WebSocketService";
-import {chatType} from "../store/type";
-import {dataTokenChat} from "../api/ChatApi/types";
+import {ChatType} from "../store/type";
+import {DataTokenChat} from "../api/ChatApi/types";
+import { UserData } from "../store/type";
 
 const api = new ChatApi();
  
-class ChatController {
+class ChatControllerClass {
   private _webSocketService:WebSocketService ;
   constructor() {
     this._webSocketService = new WebSocketService();
@@ -16,7 +17,7 @@ class ChatController {
 
   public async getChats() {
     try {
-      const chats:chatType[] = await api.getChats();
+      const chats:ChatType[] = await api.getChats();
     
       Store.set("chats", chats);
       chats.forEach(chat => { 
@@ -30,15 +31,15 @@ class ChatController {
     }
   } 
   
-  public async getTokenChat(data:dataTokenChat) {
+  public async getTokenChat(data:DataTokenChat) {
     try {
-      const tokenData = await api.getTokenChat(data);
+      const tokenData:{token:string} = await api.getTokenChat(data);
       const store = Store.getState();
-      const indexChat = store.chats?.findIndex((item:chatType)=>{
+      const indexChat = store.chats?.findIndex((item:ChatType)=>{
         return item.id === data.id
       })
 
-      if (indexChat!== -1) {
+      if (indexChat!== -1  ) {
         this._webSocketService.use(store.user?.id, data.id, tokenData.token)
       }
 
@@ -47,17 +48,16 @@ class ChatController {
     }
   } 
 
-  public async createChat(data:dataCreateChat) {
+  public async createChat(data:DataCreateChat) {
     try {
-      const chat = await api.createChat(data);
-      console.log("chats", chat)
+      await api.createChat(data);
       this.getChats()
 
     } catch (error) {
         Store.set("error", `${error.status}: ${error.text}`);
     }
   } 
-  public async addUsersToChat(data:dataAddUsers) {
+  public async addUsersToChat(data:DataAddUsers) {
     try {
       await api.addUsersToChat(data);
       this.getChatUsers({
@@ -68,7 +68,7 @@ class ChatController {
         Store.set("error", `${error.status}: ${error.text}`);
     }
   } 
-  public async deleteUsersToChat(data:dataAddUsers) {
+  public async deleteUsersToChat(data:DataAddUsers) {
     try {
       await api.deleteUsersToChat(data);
       this.getChatUsers({
@@ -79,13 +79,10 @@ class ChatController {
         Store.set("error", `${error.status}: ${error.text}`);
     }
   } 
-  public async getChatUsers(data:dataUsersChat) {
+  public async getChatUsers(data:DataUsersChat) {
     try {
-      const users = await api.getChatUsers(data);
+      const users:UserData[] = await api.getChatUsers(data); 
       Store.set("usersActiveChat",users);
-      console.log("users", users);
-      
-
     } catch (error) {
         Store.set("error", `${error.status}: ${error.text}`);
     }
@@ -96,4 +93,5 @@ class ChatController {
   }
 } 
 
-  export default new ChatController;
+
+  export const ChatController = new ChatControllerClass;

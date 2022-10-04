@@ -1,4 +1,4 @@
-export type profileData = {
+export type ProfileData = {
     first_name: string,
     second_name: string,
     display_name: string,
@@ -7,11 +7,11 @@ export type profileData = {
     phone: string
 }
 
-export type passwordData = {
+export type PasswordData = {
     oldPassword: string,
     newPassword: string,
 }
 
-export type searchUserData = {
+export type SearchUserData = {
     login: string
 }

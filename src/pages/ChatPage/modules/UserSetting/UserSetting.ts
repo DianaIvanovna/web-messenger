@@ -3,14 +3,9 @@ import FormValidation from '../../../../utils/FormValidation/FormValidation';
 
 import UserSettingFormUpdate from './modules/UserSettingFormUpdate';
 import UserSettingPasswordUpdate from './modules/UserSettingPasswordUpdate';
-import Store, {StoreEvents, Indexed} from '../../../../store/Store';
+import  { Indexed} from '../../../../store/Store';
 import { connect } from '../../../../store/utils/connect';
 import Avatar from '../../../../components/Avatar/Avatar';
-
-import Block from "../../../../utils/ComponentFunctions/Block";
-import { getTemplate } from '../../../../utils/Templator/Templator';
-
-import photo from '../../../../../static/img/avatars/avatar4.png';
 
 type PlainObject = { [key: string]: any }
 
@@ -27,7 +22,7 @@ const UserSettingComponent = () => {
             const newProps = { ...propsAndChildren };
             super(tagName, newProps);
             const avatar = new Avatar('div', {
-              attr: { class: 'user-setting__avatar-container' },
+              attr: { class: 'user-setting__avatar-container' }, 
             });
 
 
@@ -74,11 +69,7 @@ const UserSettingComponent = () => {
     }
     const UserSettingConnectedToStore = connect(UserSetting,mapUserToProps );
     return  new UserSettingConnectedToStore('div', {
-        //photo,
-       // formUserUpdate,
-        //formPasswordUpdate,
         attr: { class: 'chat__user-setting' },
-    
       });
 }
 

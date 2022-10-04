@@ -3,12 +3,13 @@ import FormValidation from '../../../../../utils/FormValidation/FormValidation';
 import FieldRepeatPassword from '../../../../../components/FieldInput/FieldRepeatPassword';
 import FieldInput from '../../../../../components/FieldInput/FieldInput';
 import Button from '../../../../../components/Button/Button';
-import UserController from '../../../../../controllers/UserController';
+import {UserController} from '../../../../../controllers/UserController';
+import {inputError} from "../../../../../constants/ErrorConst";
+import {pattenrInput} from "../../../../../constants/PatternConsts";
 
 const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword') => void) => {
 
     class FormPasswordUpdate extends FormValidation {
-        private _userController;
 
         constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
             const newProps = { ...propsAndChildren };
@@ -18,8 +19,8 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                 name: 'old_password',
                 type: 'password',
                 title: 'Старый пароль',
-                pattern: '^(?=.*[A-ZА-Я])(?=.*[0-9]).{10,}$',
-                'data-error': 'Пароль должен содержать от 8 до 40 символов. Обязательно хотя бы одна заглавная буква и цифра.',
+                pattern: pattenrInput.password,
+                'data-error': inputError.password,
                 required: true,
                 attr: { class: 'user-setting__input' },
             });
@@ -30,9 +31,9 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                 name: 'password',
                 nameRepeat: 'repeatPassword',
                 required: true,
-                pattern: '^(?=.*[A-ZА-Я])(?=.*[0-9]).{10,}$',
-                'data-error': 'Пароль должен содержать от 8 до 40 символов. Обязательно хотя бы одна заглавная буква и цифра.',
-                'data-error-repeat': 'Пароль не совпадает',
+                pattern: pattenrInput.password,
+                'data-error': inputError.password,
+                'data-error-repeat': inputError.password_repeat,
                 attr: { class: 'user-setting__input' },
             });
 
@@ -54,7 +55,6 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                 },
                 ],
             });
-            this._userController = UserController;
             this.setProps({
                 oldPassword,
                 repeatPasswordInput,
@@ -87,7 +87,7 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                     newPassword:  newPassword ? newPassword.value : "",
                 };
 
-                this._userController.changePassword(formData);
+                UserController.changePassword(formData);
                 this.cancelButtonHandler();
             } 
         };

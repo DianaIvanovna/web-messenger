@@ -5,7 +5,7 @@ const METHODS:MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
-  DELETE: 'DELETE',
+  DELETE: 'DELETE', 
 };
 const defaultOptions: TOptions = {
   headers: {},
@@ -31,7 +31,14 @@ export default class HTTPTransport implements HTTPTransportInterface {
     this._host = host;
   }
 
-  get = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  get = (url:string, options:TOptions = {}) => {
+    let newUrl = url;
+    if (!!options?.data) {
+      newUrl = `${newUrl}${queryStringify(options.data)}`;
+    }
+
+    return this.request(newUrl, { ...options, method: METHODS.GET });
+  }
 
   post = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.POST });
 
@@ -52,15 +59,10 @@ export default class HTTPTransport implements HTTPTransportInterface {
       }
 
       const xhr = new XMLHttpRequest();
-      const isGet = method === METHODS.GET;
-
 
       xhr.open(
         method,
-        isGet && !!data
-          ? `${this._host}${url}${queryStringify(data)}`
-          : this._host + url,
-       
+        this._host + url,
       );
 
       if (headers) {
@@ -84,12 +86,10 @@ export default class HTTPTransport implements HTTPTransportInterface {
       xhr.withCredentials = true;
 
       if (formData) {
-        console.log("formData", formData);
         xhr.send(formData);
-      }else if (isGet || !data) {
-        xhr.send();
-      }else {
-        xhr.send(JSON.stringify(data));
+      }
+      else {
+        xhr.send(data?JSON.stringify(data):null);
       }
     });
   };

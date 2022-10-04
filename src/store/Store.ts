@@ -1,52 +1,40 @@
 import EventBus from "../utils/ComponentFunctions/EventBus";
 import set from "../utils/OtherFunctions/set";
-import {chatType} from "./type";
+import {ChatType} from "./type";
 
 export enum StoreEvents {
     Updated = 'updated',
 }
 export type storeType = {
-  chats: chatType[],
+  chats: ChatType[],
 };
 
 export type Indexed<T = any> = {
     [key in string]: T;
 };
 
-class Store extends EventBus  {
-    // constructor() {}
+const DEFAULT_STATE  = {
+  auth: {
+    authCheck: false,
+    isLogged: false,
+  },
+  error: null,
+  searchUsers: null,
+  user: null,
+  chats:  null,
+  activeChat : null, 
+  usersActiveChat: null
+}
 
-    private _resetData: Indexed = {
-      auth: {
-        authCheck: false,
-        isLogged: false,
-      },
-      error: null,
-      searchUsers: null,
-      user: null,
-      chats:  null,
-      activeChat : null,
-      usersActiveChat: null
-  };
+class StoreClass extends EventBus  {
 
-    private state: Indexed = {
-        auth: {
-          authCheck: false,
-          isLogged: false,
-        },
-        error: null,
-        searchUsers: null,
-        user: null,
-        chats:  null,
-        activeChat : null,
-        usersActiveChat: null
-    };
+    private state: Indexed = DEFAULT_STATE;
   
     public getState() {
       return this.state;
     }
     public resetState() {
-      return this.state = this._resetData;
+      return this.state = DEFAULT_STATE;
     }
   
     public set(path: string, value: unknown) {
@@ -55,6 +43,5 @@ class Store extends EventBus  {
     };
 } 
 
-const store = new Store()
 
-export default store;
+export const Store = new StoreClass()

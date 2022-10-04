@@ -1,4 +1,4 @@
-export type signupData = {
+export type SignupData = {
     first_name: string,
     second_name: string,
     login: string,
@@ -7,7 +7,7 @@ export type signupData = {
     phone: string
 }
 
-export type signinData = {
+export type SigninData = {
     login: string,
     password: string
 }

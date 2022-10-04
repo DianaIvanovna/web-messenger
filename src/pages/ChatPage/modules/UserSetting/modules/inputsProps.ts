@@ -1,6 +1,21 @@
+import {inputError} from "../../../../../constants/ErrorConst";
+import {pattenrInput} from "../../../../../constants/PatternConsts";
+type inputsType = {
+  name: string,
+  type: string,
+  placeholder: string,
+  title: string,
+  pattern: string,
+  'data-error': string,
+  required: boolean,
+}
 type inputsPropsType = {
-    [key:string]: {[key:string]:string|boolean}
-  }
+  emailInput: inputsType,
+  loginInput: inputsType,
+  firstNameInput: inputsType,
+  secondNameInput: inputsType,
+  phoneInput: inputsType,
+}
 
 export const inputsPropsFormUpdate:inputsPropsType = {
     emailInput: {
@@ -8,8 +23,8 @@ export const inputsPropsFormUpdate:inputsPropsType = {
       type: 'text',
       placeholder: 'введите почту', 
       title: 'Почта',
-      pattern: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+.+.[A-Za-z]{2}$', 
-      'data-error': 'Неправильный формат email',
+      pattern: pattenrInput.email, 
+      'data-error': inputError.email,
       required: true,
     },
     loginInput: {
@@ -17,8 +32,8 @@ export const inputsPropsFormUpdate:inputsPropsType = {
       type: 'text',
       placeholder: 'введите Логин',
       title: 'Логин',
-      pattern: '^(?=.*[A-Za-z])[0-9A-Za-z_-]{3,20}$',
-      'data-error': 'Должно быть от 3 до 20 символов. Допускается латиница, цифры (но не состоять из цифр), дефис и нижнее подчёркивание',
+      pattern: pattenrInput.login, 
+      'data-error': inputError.login,
       required: true,
     },
     firstNameInput: {
@@ -26,8 +41,8 @@ export const inputsPropsFormUpdate:inputsPropsType = {
       type: 'text',
       placeholder: 'введите имя',
       title: 'Имя',
-      pattern: '(^[A-ZА-Я])([A-ZА-Яa-zа-я-]+)',
-      'data-error': 'Первая буква должна быть заглавной. Допускается латиница или кириллица, дефис.',
+      pattern: pattenrInput.first_name, 
+      'data-error': inputError.first_name,
       required: true,
     },
     secondNameInput: {
@@ -35,8 +50,8 @@ export const inputsPropsFormUpdate:inputsPropsType = {
       type: 'text',
       placeholder: 'введите фамилию',
       title: 'Фамилия',
-      pattern: '(^[A-ZА-Я])([A-ZА-Яa-zа-я-]+)',
-      'data-error': 'Первая буква должна быть заглавной. Допускается латиница или кириллица, дефис.',
+      pattern:pattenrInput.second_name, 
+      'data-error': inputError.second_name,
       required: true,
     },
     phoneInput: {
@@ -44,8 +59,8 @@ export const inputsPropsFormUpdate:inputsPropsType = {
       type: 'text',
       placeholder: 'введите телефон',
       title: 'Телефон',
-      pattern: '(^[+]*)([0-9]{10,15})',
-      'data-error': 'От 10 до 15 символов, состоит из цифр, может начинается с плюса',
+      pattern: pattenrInput.phone, 
+      'data-error': inputError.phone,
       required: true,
     },
 };

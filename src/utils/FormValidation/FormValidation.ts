@@ -1,6 +1,7 @@
 // Класс FormValidation нужен для валидации форм
 import Block from '../ComponentFunctions/Block';
 import { FormValidationInterface } from './types';
+import {EventElement} from "../ComponentFunctions/types";
 
 class FormValidation extends Block implements FormValidationInterface {
   _form: HTMLFormElement|null;
@@ -22,13 +23,6 @@ class FormValidation extends Block implements FormValidationInterface {
   addEvents() {
     const { events = [] } = this._props;
 
-    type EventElement = {
-      class?:string,
-      event:string,
-      handler: Function
-    }
-
-    // оставляю старую логику добавления событий
     let bufElement: HTMLElement | null = null;
 
     events.forEach((element:EventElement, index:number) => {
@@ -38,7 +32,6 @@ class FormValidation extends Block implements FormValidationInterface {
       }
     });
 
-    // добавляю обработчики для input
     this._setHandlers();
   }
 
@@ -64,13 +57,8 @@ class FormValidation extends Block implements FormValidationInterface {
   }
 
   removeEvents() {
-    // оставляю старую логику добавления событий
     const { events = [] } = this._props;
-    type EventElement = {
-      class?:string,
-      event:string,
-      handler: Function
-    }
+
     let bufElement:HTMLElement | null = null;
 
     events.forEach((element:EventElement, index:number) => {
@@ -79,7 +67,6 @@ class FormValidation extends Block implements FormValidationInterface {
         bufElement.removeEventListener(events[index].event, events[index].handler);
       }
     });
-    // удаляю обработчики для input
     this._removeHandlers();
   }
 

@@ -4,7 +4,10 @@ import FieldInput from '../../components/FieldInput/FieldInput';
 import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from '../../utils/Router/Router';
-import AuthController from '../../controllers/AuthController';
+import {AuthController} from '../../controllers/AuthController';
+import {inputError} from "../../constants/ErrorConst";
+import {pattenrInput} from "../../constants/PatternConsts";
+
 
 const router = new Router(".root");
 const inputsProps = {
@@ -12,16 +15,16 @@ const inputsProps = {
     name: 'login',
     type: 'text',
     title: 'Логин',
-    pattern: '^(?=.*[A-Za-z])[0-9A-Za-z_-]{3,20}$',
-    'data-error': 'Должно быть от 3 до 20 символов. Допускается латиница, цифры (но не состоять из цифр), дефис и нижнее подчёркивание',
+    pattern: pattenrInput.login,
+    'data-error': inputError.login,
     required: true,
   },
   passwordInput: {
     name: 'password',
     type: 'password',
     title: 'Пароль',
-    pattern: '^(?=.*[A-ZА-Я])(?=.*[0-9]).{10,}$',
-    'data-error': 'Пароль должен содержать от 8 до 40 символов. Обязательно хотя бы одна заглавная буква и цифра.',
+    pattern: pattenrInput.password,
+    'data-error': inputError.password,
     required: true,
   },
 };

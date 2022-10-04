@@ -1,10 +1,7 @@
-// Класс Block нужен для создания полноценных компонентов с жизнеными циклами,
-// рендером, отслеживанием изменения параметров
-
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import { getTemplate } from '../Templator/Templator';
-
+import {EventElement} from "./types";
 export type PlainObject = { [key: string]: any }
 
 export default class Block {
@@ -37,13 +34,8 @@ export default class Block {
     this._id = makeUUID();
     this._children = children;
     this._children = this._makePropsProxy({ ...children });
-
-    // Проксируем переданные пропсы для отслеживания их изменения
     this._props = this._makePropsProxy({ ...props, _id: this._id });
     this._meta = { tagName, props };
-
-    // подписываемся на основные события компонента
-    // init, componentDidMount, componentDidUpdateб render
     this._registerEvents();
     this._eventBus.emit(Block.EVENTS.INIT);
   }
@@ -122,11 +114,9 @@ export default class Block {
     const block = this.render();
 
     if (block) {
-    // TODO: Удалить старые события через removeEventListener
       this.removeEvents();
       this._element.innerHTML = '';
       this._element.appendChild(block);
-      // TODO: Навесить новые события через addEventListener
 
       this.addEvents();
       this.addAttribute();
@@ -230,12 +220,6 @@ export default class Block {
 
     let bufElement: NodeListOf<HTMLElement> | HTMLElement[] | null = null;
 
-    type EventElement = {
-      class?:string,
-      event:string,
-      handler: Function
-    }
-
     events.forEach((element: EventElement, index:number) => {
       bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
       if (bufElement) {
@@ -250,12 +234,6 @@ export default class Block {
     const { events = [] } = this._props;
     let bufElement: NodeListOf<HTMLElement> | HTMLElement[]  | null = null;
 
-    type EventElement = {
-      class?:string, 
-      event:string,
-      handler: Function
-    }
-
     events.forEach((element:EventElement, index:number) => {
 
       bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
@@ -264,7 +242,6 @@ export default class Block {
         bufElement.forEach((item:HTMLElement)=>{
           item.addEventListener(events[index].event, events[index].handler);
         })
-        //bufElement.removeEventListener(events[index].event, events[index].handler);
       }
     });
   }

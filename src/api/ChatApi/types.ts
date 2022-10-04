@@ -1,17 +1,17 @@
 
-export type dataAddUsers = {
+export type DataAddUsers = {
     users: number[],
     chatId: number
 }
 
-export type dataCreateChat = {
+export type DataCreateChat = {
     title: string
 }
 
-export type dataUsersChat = {
+export type DataUsersChat = {
     id: number
 }
-export type dataTokenChat = {
+export type DataTokenChat = {
     id: number
 }
 

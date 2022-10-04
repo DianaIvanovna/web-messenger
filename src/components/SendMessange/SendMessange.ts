@@ -4,9 +4,22 @@ import clip from '../../../static/img/icons/clip.png';
 import addUser from "../../../static/img/icons/addUser.png";
 import sendMessangeIcon from '../../../static/img/icons/send-messange.png';
 import Button from '../Button/Button';
+import {EventElement} from "../../utils/ComponentFunctions/types";
+type SendMessangeProps = {
+  attr?:object,
+  events?: EventElement[],
+  formId?: string,
+  activeChatId?: number,
+  classes?:any,
+  clip?: string,
+  addUser?: string,
+  sendMessangeIcon?:string,
+  openPopupAddUsers?:any ,
+  sendMessange: ()=>{},
+}
 
 class SendMessange extends FormValidation {
-  constructor(tag:string, props:Record<string, any>) {
+  constructor(tag:string, props:SendMessangeProps) {
     const formId = 'sendMessange';
     const newProps = { ...props };
 

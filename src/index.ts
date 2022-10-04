@@ -9,8 +9,8 @@ import PopupError from './components/PopupError/PopupError';
 import renderDOM from './utils/ComponentFunctions/renderDom';
 
 import { connect } from './store/utils/connect';
-import AuthController from './controllers/AuthController';
-import Store, {Indexed} from "./store/Store";
+import {AuthController} from './controllers/AuthController';
+import {Indexed, Store} from "./store/Store";
 
 function mapToProps(state:Indexed):Indexed {
     return {
@@ -33,15 +33,13 @@ class Index {
         FLOW_RENDER: 'flow:render',
       };
     private _eventBus;
-    private _authController;
     constructor() {
         this._eventBus = new EventBus();
         this._registerEvents();
-        this._authController = AuthController;
         this._eventBus.emit(Index.EVENTS.INIT);
     }
 
-    _registerEvents() {
+    private _registerEvents() {
         this._eventBus.on(Index.EVENTS.INIT, this.init.bind(this));
     }
 
@@ -51,7 +49,6 @@ class Index {
     }
 
     init() {
-        // в самом начале запускаю роутинг
         const router = new Router(".root");
 
         router
@@ -63,7 +60,7 @@ class Index {
 
         .start();
 
-        this._authController.auth();
+        AuthController.auth();
 
         const PopupErrorConnectedToStore= connect(PopupError,mapUserToProps )
         const popupError = new PopupErrorConnectedToStore('div', {

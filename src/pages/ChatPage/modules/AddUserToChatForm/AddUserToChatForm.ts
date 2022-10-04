@@ -3,13 +3,13 @@ import FormValidation from '../../../../utils/FormValidation/FormValidation';
 import SearchUser from '../../../../components/SearchUser/SearchUser';
 import List from '../../../../components/List/List';
 import deleteIcon from "../../../../../static/img/icons/delete.png";
-import ChatController from '../../../../controllers/ChatController';
+import {ChatController} from '../../../../controllers/ChatController';
 
 import { connect } from '../../../../store/utils/connect';
 import  { Indexed} from '../../../../store/Store';
 import sanitizeHtml from 'sanitize-html';
 
-type usersType = {
+type UsersType = {
   avatar: string,
   display_name: string,
   email: string,
@@ -32,7 +32,6 @@ function mapUserToProps(state:Indexed):Indexed {
 }
 
 class AddUserToChatForm extends FormValidation{
-  private _chatController;
   
   constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
     const newProps = { ...propsAndChildren };
@@ -63,7 +62,6 @@ class AddUserToChatForm extends FormValidation{
     newProps.SearchUser = searchUser
 
     super(tagName, newProps);
-    this._chatController = ChatController;
 
     if (newProps.usersActiveChat) {
       this.usersHandler(newProps.usersActiveChat)
@@ -78,7 +76,7 @@ class AddUserToChatForm extends FormValidation{
     
     if (form) {
       const title = form.querySelector('input[name="title"]') as HTMLInputElement;
-      this._chatController.createChat({
+      ChatController.createChat({
         title: title ? title.value : "",
       });
     }
@@ -89,14 +87,14 @@ class AddUserToChatForm extends FormValidation{
     const id = eventTarget?.getAttribute("data-user-id") ;
 
     if (id) {
-      this._chatController.deleteUsersToChat({
+      ChatController.deleteUsersToChat({
         users: [+id],
         chatId: this._props.activeChatId
       });
     }
   }
 
-  usersHandler(users:usersType[]) {
+  usersHandler(users:UsersType[]) {
     let arr;
       if (users?.length >0) {
         arr = users.map((item)=>{
@@ -118,7 +116,7 @@ class AddUserToChatForm extends FormValidation{
     if ('activeChatId' in nextProps && nextProps.activeChatId ) {
      
       if (nextProps.activeChatId !== this._props.activeChatId){
-        this._chatController.getChatUsers({
+        ChatController.getChatUsers({
           id: nextProps.activeChatId
       })
       }

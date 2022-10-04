@@ -4,8 +4,8 @@ import FieldInput from '../../../../../components/FieldInput/FieldInput';
 import Button from '../../../../../components/Button/Button';
 import  {Indexed} from '../../../../../store/Store';
 import { connect } from '../../../../../store/utils/connect';
-import AuthController from '../../../../../controllers/AuthController';
-import UserController from '../../../../../controllers/UserController';
+import {AuthController} from '../../../../../controllers/AuthController';
+import {UserController} from '../../../../../controllers/UserController';
 import sanitizeHtml from 'sanitize-html';
 
 import {inputsPropsFormUpdate} from "./inputsProps";
@@ -16,14 +16,12 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
     function mapUserToProps(state:Indexed):Indexed {
         return {
           user: {...state.user} ,
-        }; 
+        };  
     }
 
     class FormUserData extends FormValidation {
-        _flagDisabled : Boolean;
+        _flagDisabled : boolean;
         _formInputs: FieldInput[];
-        private _authController;
-        private _userController;
 
         constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
             const newProps = { ...propsAndChildren };
@@ -111,8 +109,6 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
             });
 
             this._formInputs = [emailInput,loginInput,firstNameInput,secondNameInput,phoneInput];
-            this._authController = AuthController;
-            this._userController = UserController;
 
             saveButton.hide();
             cancelButton.hide();
@@ -190,7 +186,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
                 phone: phone ? phone.value : "",
               };
         
-              this._userController.changeProfile(formData);
+              UserController.changeProfile(formData);
               this.cancelButtonHandler();
             }
           };
@@ -210,7 +206,7 @@ const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =
         logout(event:Event) {
           event.preventDefault();
           event.stopPropagation();
-          this._authController.logout();
+          AuthController.logout();
         }
     
         render() {

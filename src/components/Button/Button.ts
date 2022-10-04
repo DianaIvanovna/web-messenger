@@ -1,8 +1,20 @@
 import './Button.scss';
 import Block from '../../utils/ComponentFunctions/Block';
+import {EventElement} from "../../utils/ComponentFunctions/types";
+
+type ButtonProps = {
+  type?: string,
+  disabled?:string,
+  text?: string,
+  form?: string,
+  class?:string,
+  events?: EventElement[],
+  shift?:number,
+  attr?: object,
+}
 
 class Button extends Block {
-  constructor(tag:string, props:Record<string, any>) {
+  constructor(tag:string, props:ButtonProps ) {
     const newProps = { ...props };
     newProps.class = props.class 
       ? `button ${props.class}`

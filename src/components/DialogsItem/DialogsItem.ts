@@ -1,10 +1,33 @@
 import './DialogsItem.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 import avatarStub from "../../../static/img/avatars/avatar2.png";
+import {LastMessageType} from "../../store/type";
+import {EventElement} from "../../utils/ComponentFunctions/types";
+
+type DialogsItemProps  = {
+  id: number;
+  photo: string;
+  first_name:string;
+  link: string;
+  unreadMessage: number;
+  messages:
+    {
+      text: string,
+      data: string,
+      flagRead: boolean,
+      flagSend: boolean,
+      myMes: boolean,
+    }[] ;
+  attr?: object,
+  events?: EventElement[],
+  avatar?:string;
+  textLastMes?:string;
+  timeLastMes?:string;
+  last_message?:LastMessageType;
+}
 
 class DialogsItem extends Block {
-
-  constructor(tag:string, props:Record<string, any>) {
+  constructor(tag:string, props:DialogsItemProps) {
     const newProps = { ...props };
     if (!newProps.avatar) {
       newProps.avatar = avatarStub
