@@ -1,0 +1,35 @@
+.avatar {
+    &__form {
+        width: 100px;
+    height: 100px;
+        position: relative;
+         z-index: 10;
+    }
+    &__input {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        position: absolute;
+        z-index: -10;
+    }
+    &__input:focus + label {
+        outline: 1px solid #0078d7;
+        outline: -webkit-focus-ring-color auto 5px;   
+   }
+
+   &__file {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}

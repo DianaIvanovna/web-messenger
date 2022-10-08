@@ -1,8 +1,32 @@
 import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
+import {EventElement} from "../../utils/ComponentFunctions/types";
+
+type FieldRepeatPasswordProps = {
+  type?: string,
+  disabled?:string,
+  text?: string,
+  form?: string,
+  class?:string,
+  events?: EventElement[],
+  shift?:number,
+  attr?: object,
+  classes?: any,
+  classRepeat?: string,
+  classError?: string,
+  classErrorRepeat?: string,
+  name:string,
+  nameRepeat: string,
+  required: boolean|string,
+  pattern:string,
+  'data-error'?:string,
+  'data-error-repeat'?: string,
+  title?: string,
+  titleRepeat?: string,
+}
 
 class FieldRepeatPassword extends Block {
-  constructor(tag:string, props:Record<string, any>) {
+  constructor(tag:string, props:FieldRepeatPasswordProps) {
     const newProps = { ...props };
     newProps.classes = classes;
     newProps.class = props.class
@@ -32,10 +56,16 @@ class FieldRepeatPassword extends Block {
             if (password.value === repeatPassword.value) {
               repeatPassword.setCustomValidity('');
             } else {
-              repeatPassword.setCustomValidity(props['data-error-repeat']);
+              if (props['data-error-repeat']) {
+                repeatPassword.setCustomValidity(props['data-error-repeat']);
+              }
+             
             }
           } else {
-            repeatPassword.setCustomValidity(props['data-error-repeat']);
+            if (props['data-error-repeat']) {
+              repeatPassword.setCustomValidity(props['data-error-repeat']);
+            }
+            
           }
         }
       },

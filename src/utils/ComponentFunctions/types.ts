@@ -7,3 +7,9 @@ export interface EventBusInterface {
   off(event:string, callback:()=>Function): void;
   emit(event:string, args:any[]): void;
 }
+
+export type EventElement = {
+  class?:string, 
+  event:string,
+  handler: Function
+}

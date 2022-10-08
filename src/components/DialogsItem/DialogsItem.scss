@@ -33,6 +33,10 @@
     margin-bottom: 5px;
   }
 
+  &__text-container {
+    flex-grow: 1;
+  }
+
   &__messange {
     @include fontText(normal, 400, 13px, 150%);
     color: $font_color_second;

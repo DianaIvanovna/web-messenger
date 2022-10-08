@@ -9,7 +9,7 @@
     "import/prefer-default-export": "off",
     "no-useless-escape": "off",
     "class-methods-use-this": "off",
-    "inebreak-style":"0",
+    "inebreak-style": "0",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "max-params": [2, 3],
     "import/extensions": [

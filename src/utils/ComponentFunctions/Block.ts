@@ -1,11 +1,8 @@
-// Класс Block нужен для создания полноценных компонентов с жизнеными циклами,
-// рендером, отслеживанием изменения параметров
-
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import { getTemplate } from '../Templator/Templator';
-
-type PlainObject = { [key: string]: any }
+import {EventElement} from "./types";
+export type PlainObject = { [key: string]: any }
 
 export default class Block {
   static EVENTS = {
@@ -13,8 +10,9 @@ export default class Block {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
+    END_RENDER: 'end:render',
   };
-
+  
   _props;
 
   _children;
@@ -36,13 +34,8 @@ export default class Block {
     this._id = makeUUID();
     this._children = children;
     this._children = this._makePropsProxy({ ...children });
-
-    // Проксируем переданные пропсы для отслеживания их изменения
     this._props = this._makePropsProxy({ ...props, _id: this._id });
     this._meta = { tagName, props };
-
-    // подписываемся на основные события компонента
-    // init, componentDidMount, componentDidUpdateб render
     this._registerEvents();
     this._eventBus.emit(Block.EVENTS.INIT);
   }
@@ -52,6 +45,13 @@ export default class Block {
     this._eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     this._eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    this._eventBus.on(Block.EVENTS.END_RENDER, this._afterRendering.bind(this));
+  }
+
+  _afterRendering() {
+    this.afterRendering()
+  }
+  afterRendering() {
   }
 
   _createResources() {
@@ -82,13 +82,18 @@ export default class Block {
     this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps(nextProps:PlainObject) {
-    if (!nextProps) {
+  middlewareProps(props:PlainObject):PlainObject {
+    return props
+  }
+  setProps(newProps:PlainObject) {
+    if (!newProps) {
       return;
     }
-
+    let nextProps = { ...newProps };
     this._setUpdate = false;
     const oldProps = { ...this._props };
+
+    nextProps = this.middlewareProps(nextProps);
 
     const { children, props } = this._getChildren(nextProps);
 
@@ -109,14 +114,13 @@ export default class Block {
     const block = this.render();
 
     if (block) {
-    // TODO: Удалить старые события через removeEventListener
       this.removeEvents();
       this._element.innerHTML = '';
       this._element.appendChild(block);
-      // TODO: Навесить новые события через addEventListener
 
       this.addEvents();
       this.addAttribute();
+      this._eventBus.emit(Block.EVENTS.END_RENDER);
     }
   }
 
@@ -186,7 +190,7 @@ export default class Block {
     return { children, props };
   }
 
-  compile(template:string, props?:PlainObject) {
+  compile(template:string, props?:PlainObject, sanitize=false ) {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
@@ -198,7 +202,7 @@ export default class Block {
     });
 
     const fragment: HTMLTemplateElement = this._createDocumentTemplate();
-    fragment.innerHTML = getTemplate(template, propsAndStubs);
+    fragment.innerHTML = getTemplate(template, propsAndStubs, sanitize); 
 
     Object.values(this._children).forEach((child: Block) => {
       const stub :HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -214,36 +218,30 @@ export default class Block {
   addEvents() {
     const { events = [] } = this._props;
 
-    let bufElement: HTMLElement | null = null;
-
-    type EventElement = {
-      class?:string,
-      event:string,
-      handler: Function
-    }
+    let bufElement: NodeListOf<HTMLElement> | HTMLElement[] | null = null;
 
     events.forEach((element: EventElement, index:number) => {
-      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
+      bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
       if (bufElement) {
-        bufElement.addEventListener(events[index].event, events[index].handler);
+        bufElement.forEach((item:HTMLElement)=>{
+          item.addEventListener(events[index].event, events[index].handler);
+        })
       }
     });
   }
 
   removeEvents() {
     const { events = [] } = this._props;
-    let bufElement: HTMLElement | null = null;
-
-    type EventElement = {
-      class?:string, 
-      event:string,
-      handler: Function
-    }
+    let bufElement: NodeListOf<HTMLElement> | HTMLElement[]  | null = null;
 
     events.forEach((element:EventElement, index:number) => {
-      bufElement = element.class ? this._element.querySelector(element.class) : this._element;
+
+      bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
+
       if (bufElement) {
-        bufElement.removeEventListener(events[index].event, events[index].handler);
+        bufElement.forEach((item:HTMLElement)=>{
+          item.addEventListener(events[index].event, events[index].handler);
+        })
       }
     });
   }
@@ -260,6 +258,7 @@ export default class Block {
   }
 
   hide() {
+
     this.getContent().style.display = 'none';
   }
 }

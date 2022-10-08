@@ -1,6 +1,7 @@
 // Класс FormValidation нужен для валидации форм
 import Block from '../ComponentFunctions/Block';
 import { FormValidationInterface } from './types';
+import {EventElement} from "../ComponentFunctions/types";
 
 class FormValidation extends Block implements FormValidationInterface {
   _form: HTMLFormElement|null;
@@ -10,6 +11,9 @@ class FormValidation extends Block implements FormValidationInterface {
   constructor(tag:string, props = {}) {
     super(tag, props);
     this._form = null;
+ 
+
+    this._formSubmission = this._formSubmission.bind(this);
   }
 
   componentDidMount() {
@@ -19,13 +23,6 @@ class FormValidation extends Block implements FormValidationInterface {
   addEvents() {
     const { events = [] } = this._props;
 
-    type EventElement = {
-      class?:string,
-      event:string,
-      handler: Function
-    }
-
-    // оставляю старую логику добавления событий
     let bufElement: HTMLElement | null = null;
 
     events.forEach((element:EventElement, index:number) => {
@@ -35,13 +32,11 @@ class FormValidation extends Block implements FormValidationInterface {
       }
     });
 
-    // добавляю обработчики для input
     this._setHandlers();
   }
 
   _setHandlers() { // Добавляет необходимые для валидации обработчики всем полям формы.
     this._form = this._element.querySelector('form');
-
     if (this._form) {
       Array.from(this._form)
         .filter((item:HTMLElement) => {
@@ -57,18 +52,13 @@ class FormValidation extends Block implements FormValidationInterface {
     }
 
     if (this._button) {
-      this._button.addEventListener('click', this._formSubmission.bind(this));
+      this._button.addEventListener('click', this._formSubmission); 
     }
   }
 
   removeEvents() {
-    // оставляю старую логику добавления событий
     const { events = [] } = this._props;
-    type EventElement = {
-      class?:string,
-      event:string,
-      handler: Function
-    }
+
     let bufElement:HTMLElement | null = null;
 
     events.forEach((element:EventElement, index:number) => {
@@ -77,7 +67,6 @@ class FormValidation extends Block implements FormValidationInterface {
         bufElement.removeEventListener(events[index].event, events[index].handler);
       }
     });
-    // удаляю обработчики для input
     this._removeHandlers();
   }
 
@@ -88,22 +77,26 @@ class FormValidation extends Block implements FormValidationInterface {
           if (item.getAttribute('form') === this._props?.formId) {
             this._button = item;
           }
-          return item.hasAttribute('name');
+          return item.hasAttribute('name'); 
         })
         .forEach((element) => {
           element.removeEventListener('input', this._checkInputValidity.bind(this));
+          element.removeEventListener('focus', this._resetError.bind(this));
         });
     }
 
     if (this._button) {
-      this._button.removeEventListener('click', this._formSubmission.bind(this));
+      this._button.removeEventListener('click', this._formSubmission);
     }
   }
 
   _formSubmission(event:Event) { // отправка формы
     event.preventDefault();
     event.stopPropagation();
+
     this._validateForm();
+
+
     if (this._button?.classList.contains('button-valid')) {
       this._props.sendForm(event);
     }
@@ -115,7 +108,7 @@ class FormValidation extends Block implements FormValidationInterface {
   }
 
   _resetError(input:Event) { // убирает сообщение об ошибке
-    this._form = this._element.querySelector('form');
+    this._form = this._element?.querySelector('form');
 
     const inputElement = input.target as HTMLInputElement;
 

@@ -5,7 +5,7 @@ const METHODS:MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
-  DELETE: 'DELETE',
+  DELETE: 'DELETE', 
 };
 const defaultOptions: TOptions = {
   headers: {},
@@ -25,7 +25,20 @@ function queryStringify(data:{[key:string]:any}) {
 }
 
 export default class HTTPTransport implements HTTPTransportInterface {
-  get = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  _host: string;
+
+  constructor(host:string) {
+    this._host = host;
+  }
+
+  get = (url:string, options:TOptions = {}) => {
+    let newUrl = url;
+    if (!!options?.data) {
+      newUrl = `${newUrl}${queryStringify(options.data)}`;
+    }
+
+    return this.request(newUrl, { ...options, method: METHODS.GET });
+  }
 
   post = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.POST });
 
@@ -37,8 +50,7 @@ export default class HTTPTransport implements HTTPTransportInterface {
     if (!options) {
       options = defaultOptions
     }
-    const {headers = null, data = null, timeout = 5000, method = METHODS.GET} = options
-
+    const {headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null} = options
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -47,20 +59,20 @@ export default class HTTPTransport implements HTTPTransportInterface {
       }
 
       const xhr = new XMLHttpRequest();
-      const isGet = method === METHODS.GET;
 
       xhr.open(
         method,
-        isGet && !!data
-          ? `${url}${queryStringify(data)}`
-          : url,
+        this._host + url,
       );
 
       if (headers) {
         Object.keys(headers).forEach((key) => {
           xhr.setRequestHeader(key, headers[key]);
         });
+      
       }
+
+      xhr.setRequestHeader("Content-Security-Policy", "default-src 'self';img-src *;script-src trusted.com;");
 
       xhr.onload = () => {
         resolve(xhr);
@@ -71,11 +83,13 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
+      xhr.withCredentials = true;
 
-      if (isGet || !data) {
-        xhr.send();
-      } else {
-        xhr.send(JSON.stringify(data));
+      if (formData) {
+        xhr.send(formData);
+      }
+      else {
+        xhr.send(data?JSON.stringify(data):null);
       }
     });
   };

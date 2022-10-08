@@ -3,6 +3,13 @@
 @import '../../../static/font/montserratAlternates.css';
 @import '../../variables.scss';
 
+.chat-page {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  box-sizing: border-box;
+}
+
 .chat {
   width: 100%;
   min-height: 100vh;
@@ -26,6 +33,12 @@
     text-align: center;
     align-items: center;
     margin: 0;
+  }
+
+  &__loader {
+    @include fontText(normal, 400, 14px, 150%);
+    text-align: center;
+    margin-top: 15px;
   }
 
   &__menu {
@@ -75,6 +88,7 @@
 
   &__container {
     width: 100%;
+    height: 100vh;
     display: flex;
 
     flex-direction: column;
@@ -87,9 +101,27 @@
       justify-content: end;
     }
   }
+  &__container-messages {
+    height: 100%;
+    overflow-y: scroll;
+    width: 100%;
+    @include scrollMin();
+    padding-right: 5px;
+  }
 
   &__main {
     padding: 0 5px;
+  }
+
+  &__button-download {
+    width: 100%;
+    margin: 0 0 10px;
+    @include fontText(normal, 400, 14px, 150%);
+
+    background: #397387;
+    color: #fff;
+    border: none;
+    height: 30px;
   }
 
   &__messange {
@@ -98,5 +130,16 @@
 
   &__user-setting {
     width: 100%;
+  }
+
+  &__button-new-chat {
+    width: calc(100% - 10px);
+    margin: 10px 5px;
+    @include fontText(normal, 400, 14px, 150%);
+
+    background: #397387;
+    color: #fff;
+    border: none;
+    height: 30px;
   }
 }

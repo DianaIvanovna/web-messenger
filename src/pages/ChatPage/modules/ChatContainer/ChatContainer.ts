@@ -1,86 +1,158 @@
 import Message from '../../../../components/Message/Message';
 import SendMessange from '../../../../components/SendMessange/SendMessange';
 import ChatMain from '../ChatMain/ChatMain';
+import { PlainObject } from '../../../../utils/ComponentFunctions/Block';
+import {Indexed} from '../../../../store/Store';
+import { connect } from '../../../../store/utils/connect';
+import {MessageController} from '../../../../controllers/MessageController';
+import Button from '../../../../components/Button/Button';
+
+import { ChatType, MessageType } from '../../../../store/type';
 
 const ChatContainer = () => {
+
+   function mapUserToProps(state:Indexed):Indexed {
+    return {
+      userId: state.user?.id,
+      chats: state.chats,
+      activeChatId: state.activeChatId,
+    }; 
+  }
+
+  type ChatContainerBlockProps = {
+    attr?:object,
+    activeChatId?: number,
+    activeChatTmp?:string,
+  }
+  
   class ChatContainerBlock extends ChatMain {
-    constructor(tag:string, props:Record<string, any>) {
+    _flagChangeDialog = false;
+
+    constructor(tag:string, props:ChatContainerBlockProps) {
       const newProps = { ...props };
-      if (!props.activeChat) {
-        newProps.activeChat = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
+      if (!props.activeChatId) {
+        newProps.activeChatTmp = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
       }
-
       super(tag, newProps);
-    }
 
-    setProps = (newProps:Record<string, any>) => {
-      if (!newProps) {
-        return;
-      }
-      const nextProps = { ...newProps };
-      this._setUpdate = false;
-      const oldProps = { ...this._props };
+      const DownloadMoreButton = new Button('div', {
+        text: `Загрузить еще`,
+        class: "chat__button-download",
+        shift: 20,
+        events: [
+          {
+            event: 'click',
+            handler: this._downloadMore.bind(this)
+          }
+        ]
+      });
+     
 
-      type MessangeType = {
-          text: string
-          data: string,
-          flagRead: boolean,
-          flagSend: boolean,
-          myMes: boolean,
-      }
+      this.setProps({
+        DownloadMoreButton,
+      })
+    } 
+    
+    middlewareProps(nextProps:PlainObject):PlainObject {
+        if ('chats' in nextProps && nextProps.chats) {
+            let activeChatTmp = ''; 
+            let messangeTmp = '';
+            
+            const activeChatId = nextProps.activeChatId || this._props.activeChatId;
 
-      // логика для отображения всех сообщений из чата
-      if ('activeChat' in nextProps) {
-        let activeChatTmp = '';
-        nextProps.activeChat.messages.forEach((message:MessangeType, index:number) => {
-          const messageName = `message-${index}`;
-          const classMes = `message ${message.myMes ? 'message--my' : ''} ${
-            message.flagRead ? 'message--read' : ''
-          } ${message.flagSend ? 'message--send' : ''}`;
+            const findIndex = nextProps.chats.findIndex((item:ChatType)=> {
+              return item.id===activeChatId
+            }) 
 
-          nextProps[`message-${index}`] = new Message('div', {
-            ...message,
-            attr: { class: classMes },
-          });
-          activeChatTmp = `{{${messageName}}} ${activeChatTmp}`;
-        });
-
-        // форма отправки сообщения
-        if (!this._children.SendMessange) {
-          nextProps.SendMessange = new SendMessange('div', { attr: { class: 'chat__input-messange' } });
+            if (findIndex === -1) {
+              activeChatTmp = '<p class="chat__subtitle">Выберите чат чтобы отправить сообщение</p>';
+             
+            } else {
+              if (nextProps.chats[findIndex]?.messages &&nextProps.chats[findIndex]?.messages.length !==0 ) {
+                 // формирую массив сообщение и шаблон сообщений
+                messangeTmp = this.createMessangesDOM(nextProps.chats[findIndex].messages, nextProps);
+                if (nextProps.chats[findIndex]?.messages?.length % 20) {
+                  messangeTmp = ` ${messangeTmp}`
+                }else {
+                  
+                  messangeTmp = `{{DownloadMoreButton}} ${messangeTmp}`
+                }
+              }
+              activeChatTmp = `<div class="chat__container-messages">${messangeTmp}</div> {{sendMessange}} `;
+            }
+            nextProps.activeChatId = nextProps.activeChatId;
+            nextProps.activeChatTmp = activeChatTmp
+           
+        }
+        if ('activeChatId' in nextProps && nextProps.activeChatId !== this._props.activeChatId) {
+          this._flagChangeDialog = true;
         }
 
-        activeChatTmp = `${activeChatTmp} {{SendMessange}} `;
 
-        nextProps.activeChat = activeChatTmp;
+        
+
+        if ('openPopupAddUsers' in nextProps ) {
+          const sendMessange = new SendMessange('div',{ 
+            openPopupAddUsers: nextProps.openPopupAddUsers,
+            sendMessange: this.sendMessange.bind(this),
+            attr: { class: 'chat__input-messange' } 
+          });
+
+          this.setProps({
+            sendMessange: sendMessange,
+          })
+        }
+        return nextProps;
+    }
+
+    private _downloadMore() {
+      const chatId = this._props.activeChatId;
+      const findIndex = this._props.chats.findIndex((item:ChatType)=> {
+        return item.id===chatId
+      });
+      if (findIndex !== -1) {
+        const mesLen = this._props.chats[findIndex].messages?.length;
+        MessageController.getOldMessages(chatId, mesLen)
       }
+    }
 
-      const { children, props } = this._getChildren(nextProps);
+    private createMessangesDOM(messages:MessageType[], nextProps:any):string {
+      let tmp =''
+      messages.forEach((message:MessageType, index:number) => {
+        const flagMesMy = +message.user_id ===+this._props.userId;
+        const messageName = `message-${index}`;
+        const classMes = `message ${flagMesMy ? 'message--my' : ''} ${message.is_read ? 'message--read' : ''}`; 
+        //TODO:добавить проверку на отправленность сообщения message--send
 
-      if (Object.values(children).length) {
-        Object.assign(this._children, children);
+        nextProps[`message-${index}`] = new Message('div', {
+          ...message,
+          attr: { class: classMes },
+        });
+        tmp = `{{${messageName}}} ${tmp}`;
+      });
+
+      return tmp;
+    }
+
+    sendMessange(value:string) {
+      if (this._props.activeChatId) {
+        MessageController.sendMessange(this._props.activeChatId,value) 
       }
-      if (Object.values(props).length) {
-        Object.assign(this._props, nextProps);
-      }
-
-      if (this._setUpdate) {
-        this._eventBus.emit(ChatMain.EVENTS.FLOW_CDU, oldProps, this._props);
-        this._setUpdate = false;
-      }
-    };
-
+    }
+    //TODO: сделать правильный скролл сообщений
     render() {
+      
       return this.compile(`
-        {{activeChat}}
+        {{activeChatTmp}}
       `);
     }
   }
 
-  const chatContainerBlock = new ChatContainerBlock('div', {
+  const  ChatContainerBlockConnectedToStore = connect(ChatContainerBlock,mapUserToProps)
 
+
+  const chatContainerBlock = new ChatContainerBlockConnectedToStore('div', {
     attr: { class: 'chat__container' },
-
   });
 
   return chatContainerBlock;
