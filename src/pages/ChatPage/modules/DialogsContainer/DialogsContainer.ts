@@ -12,7 +12,7 @@ import {MessageController} from '../../../../controllers/MessageController';
 
 const DialogsHandler = (dialogs:DialogInterface[]) => {
     const dialogComponents:Record<string, DialogsItem> = {};
-   
+  
     let dialogTmp = ''; 
     dialogs?.forEach((item, index) => {
       dialogComponents[`dialogComponents-${index}`] = new DialogsItem('div', {

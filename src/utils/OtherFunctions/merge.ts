@@ -2,11 +2,13 @@ type Indexed<T = any> = {
     [key in string]: T;
 };
 
+/*функция объединения двух объектов*/
+
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
     for (let p in rhs) {
         if (!rhs.hasOwnProperty(p)) {
             continue;
-        }
+        } 
 
         try {
             if (rhs[p].constructor === Object) {

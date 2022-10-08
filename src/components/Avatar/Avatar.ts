@@ -12,7 +12,7 @@ function mapUserToProps(state:Indexed):Indexed {
         avatarFile: state.user?.avatarFile || null,
     }; 
 }
-
+ 
 class Avatar extends Block {
     constructor(tag:string, props:{attr?:object}) {  
         const newProps:Record<string, any> = { ...props, pen };

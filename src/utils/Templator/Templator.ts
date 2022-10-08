@@ -70,7 +70,7 @@ const myAllowedAttributes ={
   h1: ["class"],
   h2: ["class"],
   h3: ["class"],
-}; 
+};  
 
 export function getTemplate(template:string, context:object,sanitize=false ) {
   const tmpl = new Templator(template);

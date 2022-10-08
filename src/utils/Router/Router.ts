@@ -18,7 +18,7 @@ class Router {
     constructor(rootQuery:string) {
       if (Router.__instance) {
         return Router.__instance;
-      }
+      } 
   
       this.routes = [];
       this.history = window.history;
@@ -26,7 +26,7 @@ class Router {
       this._rootQuery = rootQuery;
   
       Router.__instance = this;
-    }
+    } 
     protectionDefault() {
       return true
     }
