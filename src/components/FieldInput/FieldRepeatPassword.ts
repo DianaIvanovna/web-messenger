@@ -1,6 +1,7 @@
 import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 import {EventElement} from "../../utils/ComponentFunctions/types";
+
 type FieldRepeatPasswordProps = {
   type?: string,
   disabled?:string,

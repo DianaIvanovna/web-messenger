@@ -4,8 +4,8 @@ import FieldRepeatPassword from '../../../../../components/FieldInput/FieldRepea
 import FieldInput from '../../../../../components/FieldInput/FieldInput';
 import Button from '../../../../../components/Button/Button';
 import {UserController} from '../../../../../controllers/UserController';
-import {inputError} from "../../../../../constants/ErrorConst";
-import {pattenrInput} from "../../../../../constants/PatternConsts";
+import {InputError} from "../../../../../constants/ErrorConst";
+import {PatternInput} from "../../../../../constants/PatternConsts";
 
 const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword') => void) => {
 
@@ -19,8 +19,8 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                 name: 'old_password',
                 type: 'password',
                 title: 'Старый пароль',
-                pattern: pattenrInput.password,
-                'data-error': inputError.password,
+                pattern: PatternInput.password,
+                'data-error': InputError.password,
                 required: true,
                 attr: { class: 'user-setting__input' },
             });
@@ -31,9 +31,9 @@ const UserSettingPasswordUpdate = (changeForm: (form:'formUpdate' |'formPassword
                 name: 'password',
                 nameRepeat: 'repeatPassword',
                 required: true,
-                pattern: pattenrInput.password,
-                'data-error': inputError.password,
-                'data-error-repeat': inputError.password_repeat,
+                pattern: PatternInput.password,
+                'data-error': InputError.password,
+                'data-error-repeat': InputError.password_repeat,
                 attr: { class: 'user-setting__input' },
             });
 

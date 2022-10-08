@@ -3,6 +3,13 @@ import Block from '../../utils/ComponentFunctions/Block';
 import avatarStub from "../../../static/img/avatars/avatar2.png";
 import {LastMessageType} from "../../store/type";
 import {EventElement} from "../../utils/ComponentFunctions/types";
+type Message = {
+  text: string;
+  data: string;
+  flagRead: boolean;
+  flagSend: boolean;
+  myMes: boolean;
+};
 
 type DialogsItemProps  = {
   id: number;
@@ -10,14 +17,7 @@ type DialogsItemProps  = {
   first_name:string;
   link: string;
   unreadMessage: number;
-  messages:
-    {
-      text: string,
-      data: string,
-      flagRead: boolean,
-      flagSend: boolean,
-      myMes: boolean,
-    }[] ;
+  messages: Message[] ;
   attr?: object,
   events?: EventElement[],
   avatar?:string;

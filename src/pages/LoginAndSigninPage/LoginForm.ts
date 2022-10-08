@@ -5,8 +5,8 @@ import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from '../../utils/Router/Router';
 import {AuthController} from '../../controllers/AuthController';
-import {inputError} from "../../constants/ErrorConst";
-import {pattenrInput} from "../../constants/PatternConsts";
+import {InputError} from "../../constants/ErrorConst";
+import {PatternInput} from "../../constants/PatternConsts";
 
 
 const router = new Router(".root");
@@ -15,16 +15,16 @@ const inputsProps = {
     name: 'login',
     type: 'text',
     title: 'Логин',
-    pattern: pattenrInput.login,
-    'data-error': inputError.login,
+    pattern: PatternInput.login,
+    'data-error': InputError.login,
     required: true,
   },
   passwordInput: {
     name: 'password',
     type: 'password',
     title: 'Пароль',
-    pattern: pattenrInput.password,
-    'data-error': inputError.password,
+    pattern: PatternInput.password,
+    'data-error': InputError.password,
     required: true,
   },
 };

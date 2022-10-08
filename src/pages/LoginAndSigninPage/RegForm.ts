@@ -5,8 +5,8 @@ import FieldRepeatPassword from '../../components/FieldInput/FieldRepeatPassword
 import Button from '../../components/Button/Button';
 import "./LoginAndSigninPage.scss";
 import Router from "../../utils/Router/Router";
-import {inputError} from "../../constants/ErrorConst";
-import {pattenrInput} from "../../constants/PatternConsts";
+import {InputError} from "../../constants/ErrorConst";
+import {PatternInput} from "../../constants/PatternConsts";
 
 import {AuthController} from '../../controllers/AuthController';
 
@@ -33,40 +33,40 @@ const inputsProps:InputsPropsType = {
     name: 'email',
     type: 'text',
     title: 'Почта',
-    pattern: pattenrInput.email,
-    'data-error': inputError.email,
+    pattern: PatternInput.email,
+    'data-error': InputError.email,
     required: true,
   },
   loginInput: {
     name: 'login',
     type: 'text',
     title: 'Логин',
-    pattern: pattenrInput.login,
-    'data-error': inputError.login,
+    pattern: PatternInput.login,
+    'data-error': InputError.login,
     required: true,
   },
   firstNameInput: {
     name: 'first_name',
     type: 'text',
     title: 'Имя',
-    pattern: pattenrInput.first_name,
-    'data-error': inputError.first_name,
+    pattern: PatternInput.first_name,
+    'data-error': InputError.first_name,
     required: true,
   },
   secondNameInput: {
     name: 'second_name',
     type: 'text',
     title: 'Фамилия',
-    pattern: pattenrInput.second_name,
-    'data-error': inputError.second_name,
+    pattern: PatternInput.second_name,
+    'data-error': InputError.second_name,
     required: true,
   },
   phoneInput: {
     name: 'phone',
     type: 'text',
     title: 'Телефон',
-    pattern: pattenrInput.phone,
-    'data-error': inputError.phone,
+    pattern: PatternInput.phone,
+    'data-error': InputError.phone,
     required: true,
   },
 };
