@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/157</span>
+                <span class='fraction'>0/153</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/157</span>
+                <span class='fraction'>0/153</span>
             </div>
         
             
@@ -216,11 +216,7 @@
 <a name='L151'></a><a href='#L151'>151</a>
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L154'></a><a href='#L154'>154</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -373,20 +369,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import "./SearchUser.scss";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import FormValidation from "../../utils/FormValidation/FormValidation";</span>
-<span class="cstat-no" title="statement not covered" >import {UserController} from "../../controllers/UserController";</span>
-<span class="cstat-no" title="statement not covered" >import {ChatController} from "../../controllers/ChatController";</span>
-<span class="cstat-no" title="statement not covered" >import Button from "../Button/Button";</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './SearchUser.scss';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import FormValidation from '../../utils/FormValidation/FormValidation';</span>
+<span class="cstat-no" title="statement not covered" >import { UserController } from '../../controllers/UserController';</span>
+<span class="cstat-no" title="statement not covered" >import { ChatController } from '../../controllers/ChatController';</span>
+<span class="cstat-no" title="statement not covered" >import Button from '../Button/Button';</span>
 <span class="cstat-no" title="statement not covered" >import { connect } from '../../store/utils/connect';</span>
-<span class="cstat-no" title="statement not covered" >import  { Indexed} from '../../store/Store';</span>
-<span class="cstat-no" title="statement not covered" >import List from "../List/List";</span>
-<span class="cstat-no" title="statement not covered" >import {EventElement} from "../../utils/ComponentFunctions/types";</span>
-<span class="cstat-no" title="statement not covered" >import {SVG} from "../SVG/SVG";</span>
+<span class="cstat-no" title="statement not covered" >import { Indexed } from '../../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import List from '../List/List';</span>
+<span class="cstat-no" title="statement not covered" >import { EventElement } from '../../utils/ComponentFunctions/types';</span>
+<span class="cstat-no" title="statement not covered" >import { SVG } from '../SVG/SVG';</span>
 <span class="cstat-no" title="statement not covered" >import Block from '../../utils/ComponentFunctions/Block';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >type PlainObject = { [key: string]: any }</span>
@@ -416,108 +408,104 @@
 <span class="cstat-no" title="statement not covered" >  return {</span>
 <span class="cstat-no" title="statement not covered" >    searchUsers: state.searchUsers,</span>
 <span class="cstat-no" title="statement not covered" >    activeChatId: state.activeChatId,</span>
-<span class="cstat-no" title="statement not covered" >  }; </span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >class SearchUser extends FormValidation { </span>
-<span class="cstat-no" title="statement not covered" >    constructor(tag:string, props:SearchUserProps) {</span>
-<span class="cstat-no" title="statement not covered" >      const newProps = { ...props };</span>
-<span class="cstat-no" title="statement not covered" >      newProps.formId = "searchUser";</span>
-<span class="cstat-no" title="statement not covered" >      newProps.svg = new SVG("div", {id:"search"})</span>
+<span class="cstat-no" title="statement not covered" >class SearchUser extends FormValidation {</span>
+<span class="cstat-no" title="statement not covered" >  constructor(tag:string, props:SearchUserProps) {</span>
+<span class="cstat-no" title="statement not covered" >    const newProps = { ...props };</span>
+<span class="cstat-no" title="statement not covered" >    newProps.formId = 'searchUser';</span>
+<span class="cstat-no" title="statement not covered" >    newProps.svg = new SVG('div', { id: 'search' });</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" > </span>
-<span class="cstat-no" title="statement not covered" >      super(tag, newProps);</span>
+<span class="cstat-no" title="statement not covered" >    super(tag, newProps);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      if (newProps.searchUsers) {</span>
-<span class="cstat-no" title="statement not covered" >        this.usersHandler(newProps.searchUsers);</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    if (newProps.searchUsers) {</span>
+<span class="cstat-no" title="statement not covered" >      this.usersHandler(newProps.searchUsers);</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      const listUsers =  new List('div', {</span>
-<span class="cstat-no" title="statement not covered" >        arrChildren: [],</span>
-<span class="cstat-no" title="statement not covered" >        classLi: "search-user__li",</span>
-<span class="cstat-no" title="statement not covered" >        attr: { class: "search-user__list" },</span>
-<span class="cstat-no" title="statement not covered" >        events: [</span>
-<span class="cstat-no" title="statement not covered" >         {</span>
-<span class="cstat-no" title="statement not covered" >          event: "click",</span>
+<span class="cstat-no" title="statement not covered" >    const listUsers = new List('div', {</span>
+<span class="cstat-no" title="statement not covered" >      arrChildren: [],</span>
+<span class="cstat-no" title="statement not covered" >      classLi: 'search-user__li',</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'search-user__list' },</span>
+<span class="cstat-no" title="statement not covered" >      events: [</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >          event: 'click',</span>
 <span class="cstat-no" title="statement not covered" >          handler: this.addUserToChat.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >         }</span>
-<span class="cstat-no" title="statement not covered" >        ]</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      ],</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      const createChatBtn = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >        text: 'найти',</span>
-<span class="cstat-no" title="statement not covered" >        form: this._props.formId,</span>
-<span class="cstat-no" title="statement not covered" >        class:" default-button create-chat-form__button",</span>
-<span class="cstat-no" title="statement not covered" >        events: [</span>
-<span class="cstat-no" title="statement not covered" >          {</span>
-<span class="cstat-no" title="statement not covered" >            event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >            handler: this.sendForm.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >        ],</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
-<span class="cstat-no" title="statement not covered" >      </span>
-<span class="cstat-no" title="statement not covered" >      this.setProps({</span>
-<span class="cstat-no" title="statement not covered" >        sendForm: this.sendForm.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >        createChatBtn: createChatBtn,</span>
-<span class="cstat-no" title="statement not covered" >        listUsers: listUsers,</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
-<span class="cstat-no" title="statement not covered" >    } </span>
+<span class="cstat-no" title="statement not covered" >    const createChatBtn = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >      text: 'найти',</span>
+<span class="cstat-no" title="statement not covered" >      form: this._props.formId,</span>
+<span class="cstat-no" title="statement not covered" >      class: ' default-button create-chat-form__button',</span>
+<span class="cstat-no" title="statement not covered" >      events: [</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >          event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >          handler: this.sendForm.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      ],</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    usersHandler(users:UsersType[]) {  </span>
-<span class="cstat-no" title="statement not covered" >      let arr:string[];</span>
-<span class="cstat-no" title="statement not covered" >      if (users?.length &gt;0) {</span>
-<span class="cstat-no" title="statement not covered" >        arr = users.map((item)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >          return `&lt;span data-user-id="${item.id}" &gt;${item.login}&lt;/span&gt;`</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >      } else if (users?.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >        arr = [`пользователь не найден`]</span>
-<span class="cstat-no" title="statement not covered" >      }else  {</span>
-<span class="cstat-no" title="statement not covered" >        arr = []</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      this._children.listUsers.setProps({</span>
-<span class="cstat-no" title="statement not covered" >        arrChildren: arr</span>
+<span class="cstat-no" title="statement not covered" >    this.setProps({</span>
+<span class="cstat-no" title="statement not covered" >      sendForm: this.sendForm.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >      createChatBtn,</span>
+<span class="cstat-no" title="statement not covered" >      listUsers,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  usersHandler(users:UsersType[]) {</span>
+<span class="cstat-no" title="statement not covered" >    let arr:string[];</span>
+<span class="cstat-no" title="statement not covered" >    if (users?.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      arr = users.map((item) =&gt; `&lt;span data-user-id="${item.id}" &gt;${item.login}&lt;/span&gt;`);</span>
+<span class="cstat-no" title="statement not covered" >    } else if (users?.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      arr = ['пользователь не найден'];</span>
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >      arr = [];</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    this._children.listUsers.setProps({</span>
+<span class="cstat-no" title="statement not covered" >      arrChildren: arr,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  sendForm(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const form: HTMLElement|null = document.getElementById(this._props.formId);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (form) {</span>
+<span class="cstat-no" title="statement not covered" >      const input = form.querySelector('input[name="login"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >      UserController.searchUser({</span>
+<span class="cstat-no" title="statement not covered" >        login: input ? input.value : '',</span>
 <span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      this._children.listUsers.show();</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  addUserToChat(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >    const eventTarget = event.target as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >    const id = eventTarget?.getAttribute('data-user-id');</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (id) {</span>
+<span class="cstat-no" title="statement not covered" >      ChatController.addUsersToChat({</span>
+<span class="cstat-no" title="statement not covered" >        users: [+id],</span>
+<span class="cstat-no" title="statement not covered" >        chatId: this._props.activeChatId,</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      this._children.listUsers.hide();</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  middlewareProps(nextProps:PlainObject):PlainObject {</span>
+<span class="cstat-no" title="statement not covered" >    if ('searchUsers' in nextProps) {</span>
+<span class="cstat-no" title="statement not covered" >      this.usersHandler(nextProps.searchUsers);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    sendForm(event:Event) {</span>
-<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >      event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >    return nextProps;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      const form: HTMLElement|null = document.getElementById(this._props.formId);</span>
-<span class="cstat-no" title="statement not covered" >  </span>
-<span class="cstat-no" title="statement not covered" >      if (form) {</span>
-<span class="cstat-no" title="statement not covered" >        const input = form.querySelector('input[name="login"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >        UserController.searchUser({</span>
-<span class="cstat-no" title="statement not covered" >          login: input ? input.value : "",</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >        this._children.listUsers.show();</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    addUserToChat(event:Event) {</span>
-<span class="cstat-no" title="statement not covered" >      const eventTarget = event.target as HTMLInputElement ;</span>
-<span class="cstat-no" title="statement not covered" >      const id = eventTarget?.getAttribute("data-user-id") ;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      if (id) {</span>
-<span class="cstat-no" title="statement not covered" >        ChatController.addUsersToChat({</span>
-<span class="cstat-no" title="statement not covered" >          users: [+id],</span>
-<span class="cstat-no" title="statement not covered" >          chatId: this._props.activeChatId</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >        this._children.listUsers.hide();</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    } </span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    middlewareProps(nextProps:PlainObject):PlainObject {</span>
-<span class="cstat-no" title="statement not covered" >      if ('searchUsers' in nextProps) {</span>
-<span class="cstat-no" title="statement not covered" >        this.usersHandler(nextProps.searchUsers); </span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      return nextProps;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  </span>
-<span class="cstat-no" title="statement not covered" >    render() { </span>
-<span class="cstat-no" title="statement not covered" >      return this.compile(`</span>
+<span class="cstat-no" title="statement not covered" >  render() {</span>
+<span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
 <span class="cstat-no" title="statement not covered" >        &lt;form  id={{formId}} class="search-user"  &gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div class="search-user__input-container"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;input class="search-user__input" input" type="text" name="login" placeholder="добавить человека по логину" required  &gt;</span>
@@ -530,10 +518,10 @@
 <span class="cstat-no" title="statement not covered" >            &lt;/div&gt; </span>
 <span class="cstat-no" title="statement not covered" >        &lt;/form&gt;</span>
 <span class="cstat-no" title="statement not covered" >      `);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  </span>
-<span class="cstat-no" title="statement not covered" >  export default   connect(SearchUser,mapUserToProps );</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export default connect(SearchUser, mapUserToProps);</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -541,7 +529,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

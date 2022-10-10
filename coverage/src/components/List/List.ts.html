@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/57</span>
+                <span class='fraction'>0/58</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/57</span>
+                <span class='fraction'>0/58</span>
             </div>
         
             
@@ -120,7 +120,9 @@
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -194,35 +196,36 @@
 <span class="cstat-no" title="statement not covered" >  constructor(tag:string, props:ListProps) {</span>
 <span class="cstat-no" title="statement not covered" >    const newProps = { ...props };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    newProps.class = `list ${props.class||''}`</span>
-<span class="cstat-no" title="statement not covered" >    newProps.classLi = `list__li ${props.classLi||''}`</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    newProps.liTmp ="";</span>
+<span class="cstat-no" title="statement not covered" >    newProps.class = `list ${props.class || ''}`;</span>
+<span class="cstat-no" title="statement not covered" >    newProps.classLi = `list__li ${props.classLi || ''}`;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    newProps.liTmp = '';</span>
 <span class="cstat-no" title="statement not covered" >    if (newProps.arrChildren) {</span>
-<span class="cstat-no" title="statement not covered" >        newProps.arrChildren.forEach((item:any, index:number)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >            const itemName = `li-${index}`;</span>
-<span class="cstat-no" title="statement not covered" >            newProps[`li-${index}`] = item;</span>
-<span class="cstat-no" title="statement not covered" >            newProps.liTmp = `  ${newProps.liTmp} &lt;li class="${newProps.classLi}"&gt; {{${itemName}}}  &lt;/li&gt; `;</span>
-<span class="cstat-no" title="statement not covered" >        }) </span>
+<span class="cstat-no" title="statement not covered" >      newProps.arrChildren.forEach((item:any, index:number) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const itemName = `li-${index}`;</span>
+<span class="cstat-no" title="statement not covered" >        newProps[`li-${index}`] = item;</span>
+<span class="cstat-no" title="statement not covered" >        newProps.liTmp = `  ${newProps.liTmp} &lt;li class="${newProps.classLi}"&gt; {{${itemName}}}  &lt;/li&gt; `;</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    super(tag, newProps);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  middlewareProps(nextProps:PlainObject):PlainObject {</span>
-<span class="cstat-no" title="statement not covered" >    if ('arrChildren' in nextProps &amp;&amp; nextProps.arrChildren) {</span>
-<span class="cstat-no" title="statement not covered" >        let liTmp = ''</span>
-<span class="cstat-no" title="statement not covered" >        nextProps.arrChildren.forEach((item:any, index:number)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >          const itemName = `li-${index}`;</span>
-<span class="cstat-no" title="statement not covered" >          nextProps[`li-${index}`] = item;</span>
-<span class="cstat-no" title="statement not covered" >          liTmp = `  ${liTmp} &lt;li class="${this._props.classLi}"&gt; {{${itemName}}}  &lt;/li&gt; `;</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >        nextProps.liTmp = liTmp;</span>
+<span class="cstat-no" title="statement not covered" >    const newProps = { ...nextProps };</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if ('arrChildren' in newProps &amp;&amp; newProps.arrChildren) {</span>
+<span class="cstat-no" title="statement not covered" >      let liTmp = '';</span>
+<span class="cstat-no" title="statement not covered" >      newProps.arrChildren.forEach((item:any, index:number) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const itemName = `li-${index}`;</span>
+<span class="cstat-no" title="statement not covered" >        newProps[`li-${index}`] = item;</span>
+<span class="cstat-no" title="statement not covered" >        liTmp = `  ${liTmp} &lt;li class="${this._props.classLi}"&gt; {{${itemName}}}  &lt;/li&gt; `;</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      newProps.liTmp = liTmp;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return nextProps;</span>
+<span class="cstat-no" title="statement not covered" >    return newProps;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  render() {</span>
 <span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
@@ -241,7 +244,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

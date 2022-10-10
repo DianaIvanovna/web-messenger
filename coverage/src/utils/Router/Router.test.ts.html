@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>57/57</span>
+                <span class='fraction'>53/53</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>57/57</span>
+                <span class='fraction'>53/53</span>
             </div>
         
             
@@ -116,11 +116,7 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -173,67 +169,59 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { expect } from "chai";
-import Sinon from "sinon";
-import Router from "./Router";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { expect } from 'chai';
+import Sinon from 'sinon';
+import Router from './Router';
 &nbsp;
-describe("Router",()=&gt;{
-&nbsp;
-    global.window.history.back = () =&gt; {
-        if ( typeof window.onpopstate === 'function') {
-            window.onpopstate({currentTarget:window} as unknown as PopStateEvent)
-        }
-        fakeBack()
+describe('Router', () =&gt; {
+  global.window.history.back = () =&gt; {
+    if (typeof window.onpopstate === 'function') {
+      window.onpopstate({ currentTarget: window } as unknown as PopStateEvent);
     }
-    global.window.history.forward = () =&gt; {
-        if ( typeof window.onpopstate === 'function') {
-            window.onpopstate({currentTarget:window} as unknown as PopStateEvent)
-        }
-        fakeForward()
+    fakeBack();
+  };
+  global.window.history.forward = () =&gt; {
+    if (typeof window.onpopstate === 'function') {
+      window.onpopstate({ currentTarget: window } as unknown as PopStateEvent);
     }
-    global.window.history.pushState = () =&gt; {
-        if ( typeof window.onpopstate === 'function') {
-            window.onpopstate({currentTarget:window} as unknown as PopStateEvent)
-        }
-        fakePushState()
+    fakeForward();
+  };
+  global.window.history.pushState = () =&gt; {
+    if (typeof window.onpopstate === 'function') {
+      window.onpopstate({ currentTarget: window } as unknown as PopStateEvent);
     }
+    fakePushState();
+  };
 &nbsp;
-    const fakeBack = Sinon.fake.returns(true);
-    const fakeForward = Sinon.fake.returns(true);
-    const fakePushState = Sinon.fake.returns(true);
+  const fakeBack = Sinon.fake.returns(true);
+  const fakeForward = Sinon.fake.returns(true);
+  const fakePushState = Sinon.fake.returns(true);
 &nbsp;
-    const BlockMock = class {}
-    const router = new Router(".root");
-        
-        
+  const BlockMock = class {};
+  const router = new Router('.root');
 &nbsp;
-    it('Router.use return this',()=&gt;{
-        const res = router.use("/", BlockMock)
-        expect(res).to.eq(router)
-    })
-    it('Router.go call history.pushState',()=&gt;{
-        router.start();
-        router.go("/12");
+  it('Router.use return this', () =&gt; {
+    const res = router.use('/', BlockMock);
+    expect(res).to.eq(router);
+  });
+  it('Router.go call history.pushState', () =&gt; {
+    router.start();
+    router.go('/12');
 &nbsp;
-        expect(fakePushState.callCount).to.eq(1)
-    })
-    it('Router.back call history.back',()=&gt;{
-        router.back();
+    expect(fakePushState.callCount).to.eq(1);
+  });
+  it('Router.back call history.back', () =&gt; {
+    router.back();
 &nbsp;
-        expect(fakeBack.callCount).to.eq(1)
-    })
+    expect(fakeBack.callCount).to.eq(1);
+  });
 &nbsp;
-    it('Router.forward call history.forward',()=&gt;{
-        router.forward();
+  it('Router.forward call history.forward', () =&gt; {
+    router.forward();
 &nbsp;
-        expect(fakeForward.callCount).to.eq(1)
-    })
-&nbsp;
-})
+    expect(fakeForward.callCount).to.eq(1);
+  });
+});
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -241,7 +229,7 @@ describe("Router",()=&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

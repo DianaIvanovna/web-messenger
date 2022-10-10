@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.07% </span>
+                <span class="strong">48.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/56</span>
+                <span class='fraction'>26/54</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.07% </span>
+                <span class="strong">48.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/56</span>
+                <span class='fraction'>26/54</span>
             </div>
         
             
@@ -117,8 +117,7 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -126,16 +125,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -145,7 +134,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -156,14 +153,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -173,11 +170,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
-import {UserApi} from "../api/UserApi/UserApi";
-import {Store} from "../store/Store";
-import {ProfileData, PasswordData, SearchUserData} from "../api/UserApi/types";
-import { UserData } from "../store/type";
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { UserApi } from '../api/UserApi/UserApi';
+import { Store } from '../store/Store';
+import { ProfileData, PasswordData, SearchUserData } from '../api/UserApi/types';
+import { UserData } from '../store/type';
 &nbsp;
 const api = new UserApi();
 &nbsp;
@@ -185,57 +182,57 @@ class UserControllerClass {
   public async <span class="fstat-no" title="function not covered" >changeProfile(data:ProfileData) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const user:UserData = await api.profile(data);</span>
-<span class="cstat-no" title="statement not covered" >      Store.set("user", user) </span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      Store.set('user', user);</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
   public async <span class="fstat-no" title="function not covered" >changePassword(data:PasswordData) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >       await api.password(data);</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      await api.password(data);</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
   public async <span class="fstat-no" title="function not covered" >changeAvatar(data:FormData) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >       const user:UserData = await api.avatar(data);</span>
-<span class="cstat-no" title="statement not covered" >       Store.set("user", user) </span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      const user:UserData = await api.avatar(data);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('user', user);</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
   public async getAvatar(path:string) {
     try {
-       const avatar:string = await api.getAvatar(path);
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >       Store.set("user.avatarFile", avatar) </span></span>
-<span class="cstat-no" title="statement not covered" ></span>
+      const avatar:string = await api.getAvatar(path);
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >      Store.set('user.avatarFile', avatar);</span></span>
     } catch (error) {
-        Store.set("error", `${error.status}: ${error.text}`);
+      Store.set('error', `${error.status}: ${error.text}`);
     }
   }
+&nbsp;
   public async <span class="fstat-no" title="function not covered" >searchUser(data:SearchUserData) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const users:UserData[] = await api.searchUser(data);</span>
-<span class="cstat-no" title="statement not covered" >      Store.set("searchUsers", users) </span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      Store.set('searchUsers', users);</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-} 
+}
 &nbsp;
-export const UserController = new UserControllerClass;</pre></td></tr></table></pre>
+export const UserController = new UserControllerClass();
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

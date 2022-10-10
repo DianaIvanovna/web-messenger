@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/87</span>
+                <span class='fraction'>0/86</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/87</span>
+                <span class='fraction'>0/86</span>
             </div>
         
             
@@ -149,9 +149,7 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -240,10 +238,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import classes from './SendMessange.module.scss';</span></span></span>
 <span class="cstat-no" title="statement not covered" >import FormValidation from '../../utils/FormValidation/FormValidation';</span>
 <span class="cstat-no" title="statement not covered" >import clip from '../../../static/img/icons/clip.png';</span>
-<span class="cstat-no" title="statement not covered" >import addUser from "../../../static/img/icons/addUser.png";</span>
+<span class="cstat-no" title="statement not covered" >import addUser from '../../../static/img/icons/addUser.png';</span>
 <span class="cstat-no" title="statement not covered" >import sendMessangeIcon from '../../../static/img/icons/send-messange.png';</span>
 <span class="cstat-no" title="statement not covered" >import Button from '../Button/Button';</span>
-<span class="cstat-no" title="statement not covered" >import {EventElement} from "../../utils/ComponentFunctions/types";</span>
+<span class="cstat-no" title="statement not covered" >import { EventElement } from '../../utils/ComponentFunctions/types';</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >type SendMessangeProps = {</span>
 <span class="cstat-no" title="statement not covered" >  attr?:object,</span>
 <span class="cstat-no" title="statement not covered" >  events?: EventElement[],</span>
@@ -253,7 +252,7 @@
 <span class="cstat-no" title="statement not covered" >  clip?: string,</span>
 <span class="cstat-no" title="statement not covered" >  addUser?: string,</span>
 <span class="cstat-no" title="statement not covered" >  sendMessangeIcon?:string,</span>
-<span class="cstat-no" title="statement not covered" >  openPopupAddUsers?:any ,</span>
+<span class="cstat-no" title="statement not covered" >  openPopupAddUsers?:any,</span>
 <span class="cstat-no" title="statement not covered" >  sendMessange: ()=&gt;{},</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -267,40 +266,38 @@
 <span class="cstat-no" title="statement not covered" >    newProps.addUser = addUser;</span>
 <span class="cstat-no" title="statement not covered" >    newProps.sendMessangeIcon = sendMessangeIcon;</span>
 <span class="cstat-no" title="statement not covered" >    newProps.formId = formId;</span>
-<span class="cstat-no" title="statement not covered" >    newProps.events= [</span>
+<span class="cstat-no" title="statement not covered" >    newProps.events = [</span>
 <span class="cstat-no" title="statement not covered" >      {</span>
 <span class="cstat-no" title="statement not covered" >        event: 'click',</span>
 <span class="cstat-no" title="statement not covered" >        class: '.send-messange__img--add-user',</span>
-<span class="cstat-no" title="statement not covered" >        handler: newProps.openPopupAddUsers</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    ]</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >        handler: newProps.openPopupAddUsers,</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    ];</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    super(tag, newProps); </span>
+<span class="cstat-no" title="statement not covered" >    super(tag, newProps);</span>
 <span class="cstat-no" title="statement not covered" >    const button = new Button('div', {</span>
 <span class="cstat-no" title="statement not covered" >      form: formId,</span>
-<span class="cstat-no" title="statement not covered" >      text: `&lt;img src=${sendMessangeIcon}  /&gt;`,  </span>
+<span class="cstat-no" title="statement not covered" >      text: `&lt;img src=${sendMessangeIcon}  /&gt;`,</span>
 <span class="cstat-no" title="statement not covered" >      class: classes['send-messange__button'],</span>
 <span class="cstat-no" title="statement not covered" >      attr: { class: classes['send-messange__button'] },</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    this.setProps({</span>
 <span class="cstat-no" title="statement not covered" >      button,</span>
 <span class="cstat-no" title="statement not covered" >      sendForm: this.sendForm.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >  })</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  sendForm (event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >  sendForm(event:Event) {</span>
 <span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >    event.stopPropagation(); </span>
+<span class="cstat-no" title="statement not covered" >    event.stopPropagation();</span>
 <span class="cstat-no" title="statement not covered" >    const form :HTMLFormElement|null = document.querySelector(`.${classes['send-messange']}`);</span>
-<span class="cstat-no" title="statement not covered" >    if (form) { </span>
+<span class="cstat-no" title="statement not covered" >    if (form) {</span>
 <span class="cstat-no" title="statement not covered" >      const input = form.querySelector('input[name="messange"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >      this._props.sendMessange(input.value);</span>
 <span class="cstat-no" title="statement not covered" >      form.reset();</span>
-<span class="cstat-no" title="statement not covered" >    } </span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  render() {</span>
@@ -322,7 +319,7 @@
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >//&lt;button class="{{classes.send-messange__img}} send-messange__img--add-user "&gt;&lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >// &lt;button class="{{classes.send-messange__img}} send-messange__img--add-user "&gt;&lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >export default SendMessange;</span>
 &nbsp;</pre></td></tr></table></pre>
 
@@ -331,7 +328,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

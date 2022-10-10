@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.39% </span>
+                <span class="strong">81.65% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>82/102</span>
+                <span class='fraction'>89/109</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.82% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/17</span>
+                <span class='fraction'>10/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.39% </span>
+                <span class="strong">81.65% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>82/102</span>
+                <span class='fraction'>89/109</span>
             </div>
         
             
@@ -165,7 +165,19 @@
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -186,6 +198,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -247,7 +261,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -267,7 +281,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Route from "./Route";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Route from './Route';
 &nbsp;
 type routesItem={
   route: Route,
@@ -277,98 +291,105 @@ type routesItem={
 type protectionFunc = ()=&gt;boolean;
 &nbsp;
 class Router {
-    static __instance: any;
-    routes: routesItem[];
-    history: History;
-    private _currentRoute: routesItem|null;
-    private _rootQuery:string;
-    private _defaultRoute: routesItem|null;
-    
-    constructor(rootQuery:string) {
-      if (Router.__instance) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        return Router.__instance;</span>
-<span class="cstat-no" title="statement not covered" >      } </span>
-  
-      this.routes = [];
-      this.history = window.history;
-      this._currentRoute = null;
-      this._rootQuery = rootQuery;
-  
-      Router.__instance = this;
-    } 
-<span class="fstat-no" title="function not covered" >    protectionDefault() {</span>
-<span class="cstat-no" title="statement not covered" >      return true</span>
+  static __instance: any;
+&nbsp;
+  routes: routesItem[];
+&nbsp;
+  history: History;
+&nbsp;
+  private _currentRoute: routesItem|null;
+&nbsp;
+  private _rootQuery:string;
+&nbsp;
+  private _defaultRoute: routesItem|null;
+&nbsp;
+  constructor(rootQuery:string) {
+    if (Router.__instance) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      // eslint-disable-next-line no-constructor-return</span>
+<span class="cstat-no" title="statement not covered" >      return Router.__instance;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-  
-    public use(pathname:string, block:any, protection?:protectionFunc) {
-      const  protectionItem =  protection<span class="branch-0 cbranch-no" title="branch not covered" >?protection:</span>this.protectionDefault
-      if (pathname === "*") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >        const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery}); </span>
-<span class="cstat-no" title="statement not covered" >        this._defaultRoute = {</span>
-<span class="cstat-no" title="statement not covered" >          route,</span>
-<span class="cstat-no" title="statement not covered" >          protection:protectionItem,</span>
-<span class="cstat-no" title="statement not covered" >        };</span>
-      }else {
-        const route:Route  = new Route(pathname, block, {rootQuery: this._rootQuery});  
-  
-        this.routes.push({
-          route,
-          protection:protectionItem,
-        });
-      }
 &nbsp;
-      return this;
-    }
-  
-    public start() {
-      // Реагируем на изменения в адресной строке и вызываем перерисовку
-      window.onpopstate = (event:PopStateEvent )=&gt; {
-        const target = event.currentTarget as Window;
+    this.routes = [];
+    this.history = window.history;
+    this._currentRoute = null;
+    this._rootQuery = rootQuery;
 &nbsp;
-        this._onRoute(target.location.pathname);
-      };
-  
-      this._onRoute(window.location.pathname);
-    }
-  
-    private _onRoute(pathname:string) {
-      let routeItem = this.getRoute(pathname) || this._defaultRoute;
-      // простая защита роута
-      if (routeItem<span class="branch-0 cbranch-no" title="branch not covered" > &amp;&amp; !routeItem.protection())<span class="branch-0 cbranch-no" title="branch not covered" ></span>{</span>
-<span class="cstat-no" title="statement not covered" >        routeItem =  this.getRoute("/") || this._defaultRoute;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-&nbsp;
-      if (!routeItem<span class="branch-0 cbranch-no" title="branch not covered" > || !routeItem.route)</span> {
-        return;
-      }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >  </span></span>
-<span class="cstat-no" title="statement not covered" >      if (this._currentRoute) {</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        this._currentRoute.route.leave();</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      </span>
-<span class="cstat-no" title="statement not covered" >      this._currentRoute = routeItem;</span>
-<span class="cstat-no" title="statement not covered" >      routeItem.route.render();</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-  
-    public go(pathname:string) {
-      this.history.pushState({}, "", pathname);
-      this._onRoute(pathname);
-    }
-    public back() {
-      this.history.back(); 
-    }
-&nbsp;
-    public forward() {
-      this.history.forward(); 
-    }
-  
-    private getRoute(pathname:string):routesItem|undefined  {
-      return this.routes.find(item =&gt; item.route.match(pathname));
-    }
+    Router.__instance = this;
   }
-  
-  export default Router; 
+&nbsp;
+<span class="fstat-no" title="function not covered" >  protectionDefault() {</span>
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
+  public use(pathname:string, block:any, protection?:protectionFunc) {
+    const protectionItem = protection || this.protectionDefault;
+    if (pathname === '*') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      const route:Route = new Route(pathname, block, { rootQuery: this._rootQuery });</span>
+<span class="cstat-no" title="statement not covered" >      this._defaultRoute = {</span>
+<span class="cstat-no" title="statement not covered" >        route,</span>
+<span class="cstat-no" title="statement not covered" >        protection: protectionItem,</span>
+<span class="cstat-no" title="statement not covered" >      };</span>
+    } else {
+      const route:Route = new Route(pathname, block, { rootQuery: this._rootQuery });
+&nbsp;
+      this.routes.push({
+        route,
+        protection: protectionItem,
+      });
+    }
+&nbsp;
+    return this;
+  }
+&nbsp;
+  public start() {
+    // Реагируем на изменения в адресной строке и вызываем перерисовку
+    window.onpopstate = (event:PopStateEvent) =&gt; {
+      const target = event.currentTarget as Window;
+&nbsp;
+      this._onRoute(target.location.pathname);
+    };
+&nbsp;
+    this._onRoute(window.location.pathname);
+  }
+&nbsp;
+  private _onRoute(pathname:string) {
+    let routeItem = this.getRoute(pathname) || this._defaultRoute;
+    // простая защита роута
+    if (routeItem<span class="branch-0 cbranch-no" title="branch not covered" > &amp;&amp; !routeItem.protection())</span> <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      routeItem = this.getRoute('/') || this._defaultRoute;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+&nbsp;
+    if (!routeItem<span class="branch-0 cbranch-no" title="branch not covered" > || !routeItem.route)</span> {
+      return;
+    }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >    if (this._currentRoute) {</span>
+<span class="cstat-no" title="statement not covered" >      this._currentRoute.route.leave();</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    this._currentRoute = routeItem;</span>
+<span class="cstat-no" title="statement not covered" >    routeItem.route.render();</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
+  public go(pathname:string) {
+    this.history.pushState({}, '', pathname);
+    this._onRoute(pathname);
+  }
+&nbsp;
+  public back() {
+    this.history.back();
+  }
+&nbsp;
+  public forward() {
+    this.history.forward();
+  }
+&nbsp;
+  private getRoute(pathname:string):routesItem|undefined {
+    return this.routes.find((item) =&gt; item.route.match(pathname));
+  }
+}
+&nbsp;
+export default Router;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -376,7 +397,7 @@ class Router {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

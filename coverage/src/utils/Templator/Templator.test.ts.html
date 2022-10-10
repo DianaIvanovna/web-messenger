@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>62/62</span>
+                <span class='fraction'>58/58</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>62/62</span>
+                <span class='fraction'>58/58</span>
             </div>
         
             
@@ -121,11 +121,7 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -183,72 +179,64 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { expect } from "chai";
-import { getTemplate } from "./Templator"
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { expect } from 'chai';
+import { getTemplate } from './Templator';
 &nbsp;
-describe("Templator", ()=&gt;{
-    it("should return string with variable substitution",()=&gt;{
-        const tmp = "&lt;div&gt;{{test}}&lt;/div&gt;";
-        const ctx = {
-            test: "diana"
-        }
-        const expectedResult = "&lt;div&gt;diana&lt;/div&gt;"
+describe('Templator', () =&gt; {
+  it('should return string with variable substitution', () =&gt; {
+    const tmp = '&lt;div&gt;{{test}}&lt;/div&gt;';
+    const ctx = {
+      test: 'diana',
+    };
+    const expectedResult = '&lt;div&gt;diana&lt;/div&gt;';
 &nbsp;
+    const res = getTemplate(tmp, ctx);
 &nbsp;
-        const res = getTemplate(tmp,ctx)
+    expect(res).to.eq(expectedResult);
+  });
 &nbsp;
-        expect(res).to.eq(expectedResult)
-    })
+  it('should return string with nested object substitution', () =&gt; {
+    const tmp = '&lt;div&gt;{{data.name}}&lt;/div&gt;';
+    const ctx = {
+      data: {
+        name: 'diana',
+      },
+    };
+    const expectedResult = '&lt;div&gt;diana&lt;/div&gt;';
 &nbsp;
-    it("should return string with nested object substitution", ()=&gt;{
-        const tmp = "&lt;div&gt;{{data.name}}&lt;/div&gt;";
-        const ctx = {
-            data: {
-                name: "diana",
-            }
-        }
-        const expectedResult = "&lt;div&gt;diana&lt;/div&gt;"
+    const res = getTemplate(tmp, ctx);
 &nbsp;
+    expect(res).to.eq(expectedResult);
+  });
+  it('should return a string with an undefined if there is no variable', () =&gt; {
+    const tmp = '&lt;div&gt;{{data.test}}&lt;/div&gt;';
+    const ctx = {
+      data: {
+        name: 'diana',
+      },
+    };
+    const expectedResult = '&lt;div&gt;undefined&lt;/div&gt;';
 &nbsp;
-        const res = getTemplate(tmp,ctx)
+    const res = getTemplate(tmp, ctx);
 &nbsp;
-        expect(res).to.eq(expectedResult)
-    })
-    it("should return a string with an undefined if there is no variable", ()=&gt;{
-        const tmp = "&lt;div&gt;{{data.test}}&lt;/div&gt;";
-        const ctx = {
-            data: {
-                name: "diana",
-            }
-        }
-        const expectedResult = "&lt;div&gt;undefined&lt;/div&gt;"
+    expect(res).to.eq(expectedResult);
+  });
 &nbsp;
+  it('should protect against XSL if sanitize is enabled', () =&gt; {
+    const tmp = '&lt;div&gt;{{data.test}}&lt;/div&gt;';
+    const ctx = {
+      data: {
+        name: "'&lt;script&gt;alert('XSS')&lt;/script&gt;'",
+      },
+    };
+    const sanitize = true;
+    const expectedResult = '&lt;div&gt;undefined&lt;/div&gt;';
 &nbsp;
-        const res = getTemplate(tmp,ctx)
+    const res = getTemplate(tmp, ctx, sanitize);
 &nbsp;
-        expect(res).to.eq(expectedResult)
-    })
-&nbsp;
-    it("should protect against XSL if sanitize is enabled", ()=&gt;{
-        const tmp = "&lt;div&gt;{{data.test}}&lt;/div&gt;";
-        const ctx = {
-            data: {
-                name: "'&lt;script&gt;alert('XSS')&lt;/script&gt;'",
-            }
-        }
-        const sanitize = true;
-        const expectedResult = "&lt;div&gt;undefined&lt;/div&gt;"
-&nbsp;
-        const res = getTemplate(tmp,ctx, sanitize)
-&nbsp;
-        expect(res).to.eq(expectedResult)
-    })
-    
-})
+    expect(res).to.eq(expectedResult);
+  });
+});
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -256,7 +244,7 @@ describe("Templator", ()=&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

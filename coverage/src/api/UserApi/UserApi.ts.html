@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">39.77% </span>
+                <span class="strong">41.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/88</span>
+                <span class='fraction'>37/90</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">39.77% </span>
+                <span class="strong">41.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/88</span>
+                <span class='fraction'>37/90</span>
             </div>
         
             
@@ -151,7 +151,9 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -169,6 +171,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -197,7 +203,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -218,18 +224,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -237,95 +235,103 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import HTTPTransport from "../../utils/HTTPTransport/HTTPTransport";
-import {ProfileData, PasswordData, SearchUserData} from "./types";
-import { TOptions, METHODS} from '../types';
-import { UserData } from "../../store/type";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import HTTPTransport from '../../utils/HTTPTransport/HTTPTransport';
+import { ProfileData, PasswordData, SearchUserData } from './types';
+import { TOptions, METHODS } from '../types';
+import { UserData } from '../../store/type';
 &nbsp;
 export class UserApi {
-    private readonly _defaultHeaders = {
-        'content-type': 'application/json',
-        'credentials': 'include',
-        'mode': 'cors',
-    }
-    private _authInstance:HTTPTransport;
+  private readonly _defaultHeaders = {
+    'content-type': 'application/json',
+    credentials: 'include',
+    mode: 'cors',
+  };
 &nbsp;
-    constructor() {
-        this._authInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2");
-    }
+  private _authInstance:HTTPTransport;
 &nbsp;
-<span class="fstat-no" title="function not covered" >    request(path:string, options:TOptions={}) {</span>
-<span class="cstat-no" title="statement not covered" >        if (!options.headers) {</span>
-<span class="cstat-no" title="statement not covered" >            options.headers = this._defaultHeaders</span>
+  constructor() {
+    this._authInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2');
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  request(path:string, options:TOptions = {}) {</span>
+<span class="cstat-no" title="statement not covered" >    const newOptions = { ...options };</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (!newOptions.headers) {</span>
+<span class="cstat-no" title="statement not covered" >      newOptions.headers = this._defaultHeaders;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return this._authInstance.request(path, newOptions)</span>
+<span class="cstat-no" title="statement not covered" >      .then((res:XMLHttpRequest) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (res.status === 200) return res;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        // eslint-disable-next-line prefer-promise-reject-errors</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.reject({</span>
+<span class="cstat-no" title="statement not covered" >          status: res.status,</span>
+<span class="cstat-no" title="statement not covered" >          text: res.response,</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      .then((data) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (data.response === 'OK') {</span>
+<span class="cstat-no" title="statement not covered" >          return null;</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        return JSON.parse(data.response);</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  profile(data: ProfileData):Promise&lt;UserData&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/user/profile', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.PUT,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  avatar(data: FormData):Promise&lt;UserData&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/user/profile/avatar', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.PUT,</span>
+<span class="cstat-no" title="statement not covered" >      headers: {</span>
+<span class="cstat-no" title="statement not covered" >        credentials: 'include',</span>
+<span class="cstat-no" title="statement not covered" >        mode: 'cors',</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      formData: data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
+  getAvatar(path:string):Promise&lt;string&gt; {
+    return this._authInstance.get(`/resources${path}`, {
+      headers: this._defaultHeaders,
+    })
+      .then((res:XMLHttpRequest) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (res.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >          return res;</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return this._authInstance.request(path, options)</span>
-<span class="cstat-no" title="statement not covered" >            .then((res:XMLHttpRequest) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                if (res.status === 200) return res;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >                return Promise.reject({</span>
-<span class="cstat-no" title="statement not covered" >                    status: res.status,</span>
-<span class="cstat-no" title="statement not covered" >                    text: res.response</span>
-<span class="cstat-no" title="statement not covered" >                }); </span>
-<span class="cstat-no" title="statement not covered" >            }) </span>
-<span class="cstat-no" title="statement not covered" >            .then(data =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                if ( data.response==="OK") {</span>
-<span class="cstat-no" title="statement not covered" >                    return null</span>
-<span class="cstat-no" title="statement not covered" >                }</span>
-<span class="cstat-no" title="statement not covered" >                return JSON.parse(data.response)</span>
-<span class="cstat-no" title="statement not covered" >            })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >        // eslint-disable-next-line prefer-promise-reject-errors</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.reject({ status: res.status, text: JSON.parse(res.response).reason });</span>
+      })
+      .then((data) =&gt; data.responseURL);
+  }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    profile(data: ProfileData):Promise&lt;UserData&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/user/profile', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.PUT,</span>
-<span class="cstat-no" title="statement not covered" >            data: data </span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="fstat-no" title="function not covered" >    avatar(data: FormData):Promise&lt;UserData&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/user/profile/avatar', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.PUT,</span>
-<span class="cstat-no" title="statement not covered" >            headers: {</span>
-<span class="cstat-no" title="statement not covered" >                'credentials': 'include',</span>
-<span class="cstat-no" title="statement not covered" >                'mode': 'cors',</span>
-<span class="cstat-no" title="statement not covered" >            },</span>
-<span class="cstat-no" title="statement not covered" >            formData: data </span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-    getAvatar(path:string):Promise&lt;string&gt;{
+<span class="fstat-no" title="function not covered" >  password(data: PasswordData):Promise&lt;null&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/user/password', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.PUT,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
-        return this._authInstance.get(`/resources${path}`, {
-            headers: this._defaultHeaders,
-        })
-        .then((res:XMLHttpRequest) =&gt; {
-<span class="cstat-no" title="statement not covered" >            if (res.status === 200)  {</span>
-<span class="cstat-no" title="statement not covered" >                return res</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >            </span>
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({status: res.status, text: JSON.parse(res.response).reason});</span>
-        })
-        .then(data =&gt; {
-<span class="cstat-no" title="statement not covered" >            return data.responseURL</span>
-        })
-    }
-<span class="fstat-no" title="function not covered" >    password(data: PasswordData):Promise&lt;null&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/user/password', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.PUT,</span>
-<span class="cstat-no" title="statement not covered" >            data: data </span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-&nbsp;
-<span class="fstat-no" title="function not covered" >    searchUser(data: SearchUserData):Promise&lt;UserData[]&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/user/search', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.POST,</span>
-<span class="cstat-no" title="statement not covered" >            data: data </span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="fstat-no" title="function not covered" >  searchUser(data: SearchUserData):Promise&lt;UserData[]&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/user/search', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.POST,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -334,7 +340,7 @@ export class UserApi {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

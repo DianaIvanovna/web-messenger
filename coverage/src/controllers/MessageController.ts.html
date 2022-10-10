@@ -87,7 +87,8 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -111,38 +112,40 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import WebSocketService from "../utils/WebSocketService/WebSocketService";</span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import WebSocketService from '../utils/WebSocketService/WebSocketService';</span></span></span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const webSocketService = new WebSocketService();</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >class MessageControllerClass {</span>
-<span class="cstat-no" title="statement not covered" >    public async sendMessange(chatId:number, messange:string) {</span>
-<span class="cstat-no" title="statement not covered" >        webSocketService.send(chatId, {</span>
-<span class="cstat-no" title="statement not covered" >            content: messange,</span>
-<span class="cstat-no" title="statement not covered" >            type: 'message',</span>
-<span class="cstat-no" title="statement not covered" >          })</span>
-<span class="cstat-no" title="statement not covered" >    } </span>
+<span class="cstat-no" title="statement not covered" >  public async sendMessange(chatId:number, messange:string) {</span>
+<span class="cstat-no" title="statement not covered" >    webSocketService.send(chatId, {</span>
+<span class="cstat-no" title="statement not covered" >      content: messange,</span>
+<span class="cstat-no" title="statement not covered" >      type: 'message',</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    public async getOldMessages (chatId:number, shift = 0) {</span>
-<span class="cstat-no" title="statement not covered" >        webSocketService.send(chatId, {</span>
-<span class="cstat-no" title="statement not covered" >            content: shift,</span>
-<span class="cstat-no" title="statement not covered" >            type: 'get old',  </span>
-<span class="cstat-no" title="statement not covered" >        }) </span>
-<span class="cstat-no" title="statement not covered" >    } </span>
+<span class="cstat-no" title="statement not covered" >  public async getOldMessages(chatId:number, shift = 0) {</span>
+<span class="cstat-no" title="statement not covered" >    webSocketService.send(chatId, {</span>
+<span class="cstat-no" title="statement not covered" >      content: shift,</span>
+<span class="cstat-no" title="statement not covered" >      type: 'get old',</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    public async closeSockets() {</span>
-<span class="cstat-no" title="statement not covered" >        webSocketService.closeSockets() </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  public async closeSockets() {</span>
+<span class="cstat-no" title="statement not covered" >    webSocketService.closeSockets();</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export const MessageController = new MessageControllerClass;</span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >export const MessageController = new MessageControllerClass();</span>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

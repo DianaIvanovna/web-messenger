@@ -183,12 +183,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -205,69 +206,69 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import './Avatar.scss';
 import Block from '../../utils/ComponentFunctions/Block';
 import pen from '../../../static/img/icons/pen.png';
-import  {Indexed} from '../../store/Store';
+import { Indexed } from '../../store/Store';
 import { connect } from '../../store/utils/connect';
-import {UserController} from '../../controllers/UserController';
+import { UserController } from '../../controllers/UserController';
 import photo from '../../../static/img/avatars/avatar4.png';
 &nbsp;
 function mapUserToProps(state:Indexed):Indexed {
-    return {
-        avatar: state.user<span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >?.a</span>vatar </span>|| null,
-        avatarFile: state.user<span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >?.a</span>vatarFile </span>|| null,
-    }; 
+  return {
+    avatar: state.user<span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >?.a</span>vatar </span>|| null,
+    avatarFile: state.user<span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >?.a</span>vatarFile </span>|| null,
+  };
 }
- 
+&nbsp;
 class Avatar extends Block {
-    constructor(tag:string, props:{attr?:object}) {  
-        const newProps:Record&lt;string, any&gt; = { ...props, pen };
+  constructor(tag:string, props:{attr?:object}) {
+    const newProps:Record&lt;string, any&gt; = { ...props, pen };
 &nbsp;
-        super(tag, newProps);
-        const events = [
-            ...(newProps.events || []),
-            {   
-                event: 'change',
-                class:".avatar__input",
-                handler: this.sendAvatar.bind(this)
-            }
-        ]
-            
-        this.setProps({
-            events: events,
-        })
-    }
+    super(tag, newProps);
+    const events = [
+      ...(newProps.events || []),
+      {
+        event: 'change',
+        class: '.avatar__input',
+        handler: this.sendAvatar.bind(this),
+      },
+    ];
 &nbsp;
-<span class="fstat-no" title="function not covered" >    sendAvatar(event:Event) {</span>
-<span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >        event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >        let Data = new FormData();</span>
-<span class="cstat-no" title="statement not covered" >        const eventTarget = event.target as HTMLInputElement ;</span>
-<span class="cstat-no" title="statement not covered" >        if (eventTarget.files) {</span>
-<span class="cstat-no" title="statement not covered" >            Data.append('avatar', eventTarget.files[0]);</span>
-<span class="cstat-no" title="statement not covered" >            UserController.changeAvatar(Data);</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+    this.setProps({
+      events,
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  sendAvatar(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >    const Data = new FormData();</span>
+<span class="cstat-no" title="statement not covered" >    const eventTarget = event.target as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >    if (eventTarget.files) {</span>
+<span class="cstat-no" title="statement not covered" >      Data.append('avatar', eventTarget.files[0]);</span>
+<span class="cstat-no" title="statement not covered" >      UserController.changeAvatar(Data);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
-    middlewareProps(nextProps:Indexed):Indexed {
-        if (!nextProps.avatar) {
-            nextProps.avatarFile = photo
-        }
-        if ('avatar' in nextProps &amp;&amp; nextProps.avatar) {
-            UserController.getAvatar(nextProps.avatar);
-            
-        }
+  middlewareProps(nextProps:Indexed):Indexed {
+    const newProps = { ...nextProps };
 &nbsp;
-        return nextProps;
+    if (!newProps.avatar) {
+      newProps.avatarFile = photo;
+    }
+    if ('avatar' in newProps &amp;&amp; newProps.avatar) {
+      UserController.getAvatar(newProps.avatar);
     }
 &nbsp;
-    render() {
-        return this.compile(`
+    return newProps;
+  }
+&nbsp;
+  render() {
+    return this.compile(`
         &lt;form  id="avatarForm" class="avatar__form" &gt;
             &lt;input type="file" id="file-input" name="file" multiple class="avatar__input" accept=".jpg, .jpeg, .png" &gt;
             &lt;label for="file-input"&gt;
@@ -277,11 +278,10 @@ class Avatar extends Block {
             &lt;/label&gt;
         &lt;/form&gt;
         `);
-    }
+  }
 }
 &nbsp;
-&nbsp;
-export default connect(Avatar,mapUserToProps );
+export default connect(Avatar, mapUserToProps);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -289,7 +289,7 @@ export default connect(Avatar,mapUserToProps );
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

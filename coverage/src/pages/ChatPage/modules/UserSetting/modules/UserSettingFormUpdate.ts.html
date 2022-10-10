@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/243</span>
+                <span class='fraction'>0/241</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/243</span>
+                <span class='fraction'>0/241</span>
             </div>
         
             
@@ -304,9 +304,7 @@
 <a name='L239'></a><a href='#L239'>239</a>
 <a name='L240'></a><a href='#L240'>240</a>
 <a name='L241'></a><a href='#L241'>241</a>
-<a name='L242'></a><a href='#L242'>242</a>
-<a name='L243'></a><a href='#L243'>243</a>
-<a name='L244'></a><a href='#L244'>244</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L242'></a><a href='#L242'>242</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -547,221 +545,221 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >/* eslint no-unused-vars: "off" */</span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >/* eslint-disable camelcase */</span></span></span>
+<span class="cstat-no" title="statement not covered" >/* eslint no-unused-vars: "off" */</span>
+<span class="cstat-no" title="statement not covered" >import sanitizeHtml from 'sanitize-html';</span>
 <span class="cstat-no" title="statement not covered" >import FormValidation from '../../../../../utils/FormValidation/FormValidation';</span>
 <span class="cstat-no" title="statement not covered" >import FieldInput from '../../../../../components/FieldInput/FieldInput';</span>
 <span class="cstat-no" title="statement not covered" >import Button from '../../../../../components/Button/Button';</span>
-<span class="cstat-no" title="statement not covered" >import  {Indexed} from '../../../../../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import { Indexed } from '../../../../../store/Store';</span>
 <span class="cstat-no" title="statement not covered" >import { connect } from '../../../../../store/utils/connect';</span>
-<span class="cstat-no" title="statement not covered" >import {AuthController} from '../../../../../controllers/AuthController';</span>
-<span class="cstat-no" title="statement not covered" >import {UserController} from '../../../../../controllers/UserController';</span>
-<span class="cstat-no" title="statement not covered" >import sanitizeHtml from 'sanitize-html';</span>
+<span class="cstat-no" title="statement not covered" >import { AuthController } from '../../../../../controllers/AuthController';</span>
+<span class="cstat-no" title="statement not covered" >import { UserController } from '../../../../../controllers/UserController';</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >import {inputsPropsFormUpdate} from "./inputsProps";</span>
+<span class="cstat-no" title="statement not covered" >import { inputsPropsFormUpdate } from './inputsProps';</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >type PlainObject = { [key: string]: any }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const UserSettingFormUpdate = (changeForm: (form:'formUpdate' |'formPassword') =&gt; void) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  function mapUserToProps(state:Indexed):Indexed {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+<span class="cstat-no" title="statement not covered" >      user: { ...state.user },</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    function mapUserToProps(state:Indexed):Indexed {</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
-<span class="cstat-no" title="statement not covered" >          user: {...state.user} ,</span>
-<span class="cstat-no" title="statement not covered" >        };  </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  class FormUserData extends FormValidation {</span>
+<span class="cstat-no" title="statement not covered" >    _flagDisabled : boolean;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    class FormUserData extends FormValidation {</span>
-<span class="cstat-no" title="statement not covered" >        _flagDisabled : boolean;</span>
-<span class="cstat-no" title="statement not covered" >        _formInputs: FieldInput[];</span>
+<span class="cstat-no" title="statement not covered" >    _formInputs: FieldInput[];</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
-<span class="cstat-no" title="statement not covered" >            const newProps = { ...propsAndChildren };</span>
-<span class="cstat-no" title="statement not covered" >            super(tagName, newProps);</span>
-<span class="cstat-no" title="statement not covered" >            this._flagDisabled = true;</span>
+<span class="cstat-no" title="statement not covered" >    constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
+<span class="cstat-no" title="statement not covered" >      const newProps = { ...propsAndChildren };</span>
+<span class="cstat-no" title="statement not covered" >      super(tagName, newProps);</span>
+<span class="cstat-no" title="statement not covered" >      this._flagDisabled = true;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            const emailInput =  new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >                ...inputsPropsFormUpdate.emailInput,</span>
-<span class="cstat-no" title="statement not covered" >                disabled: this._flagDisabled,</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__input user-setting__input--' },</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const loginInput =  new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >                ...inputsPropsFormUpdate.loginInput,</span>
-<span class="cstat-no" title="statement not covered" >                disabled: this._flagDisabled,</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__input' },</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const firstNameInput =  new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >                ...inputsPropsFormUpdate.firstNameInput,</span>
-<span class="cstat-no" title="statement not covered" >                disabled: this._flagDisabled,</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__input' },</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const secondNameInput =  new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >                ...inputsPropsFormUpdate.secondNameInput,</span>
-<span class="cstat-no" title="statement not covered" >                disabled: this._flagDisabled,</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__input' },</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const phoneInput =  new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >                ...inputsPropsFormUpdate.phoneInput,</span>
-<span class="cstat-no" title="statement not covered" >                disabled: this._flagDisabled,</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__input' },</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const changeUserDataBtn = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >                text: 'Изменить данные',</span>
-<span class="cstat-no" title="statement not covered" >                class: 'user-setting__button',</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >                events: [</span>
-<span class="cstat-no" title="statement not covered" >                  {</span>
-<span class="cstat-no" title="statement not covered" >                    event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                    handler: this.changeUserDataBtnHandler.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >                  },</span>
-<span class="cstat-no" title="statement not covered" >                ],</span>
-<span class="cstat-no" title="statement not covered" >              });</span>
-<span class="cstat-no" title="statement not covered" >            const changePasswordBtn = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >                text: 'Изменить пароль',</span>
-<span class="cstat-no" title="statement not covered" >                class: 'user-setting__button',</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >                events: [</span>
-<span class="cstat-no" title="statement not covered" >                  {</span>
-<span class="cstat-no" title="statement not covered" >                    event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                    handler: (event:Event) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                      event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >                      event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >                      changeForm('formPassword');</span>
-<span class="cstat-no" title="statement not covered" >                    },</span>
-<span class="cstat-no" title="statement not covered" >                  },</span>
-<span class="cstat-no" title="statement not covered" >                ],</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const exitBtn = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >                text: 'Выйти',</span>
-<span class="cstat-no" title="statement not covered" >                class: 'user-setting__button user-setting__button--exit',</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >                events: [</span>
-<span class="cstat-no" title="statement not covered" >                  {</span>
-<span class="cstat-no" title="statement not covered" >                    event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                    handler: this.logout.bind(this)</span>
-<span class="cstat-no" title="statement not covered" >                  },</span>
-<span class="cstat-no" title="statement not covered" >                ],</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const saveButton = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >                form: this._props.formId,</span>
-<span class="cstat-no" title="statement not covered" >                text: 'Сохранить', </span>
-<span class="cstat-no" title="statement not covered" >                class: 'user-setting__button',</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            const cancelButton = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >                text: 'Отмена',</span>
-<span class="cstat-no" title="statement not covered" >                class: 'user-setting__button',</span>
-<span class="cstat-no" title="statement not covered" >                attr: { class: 'user-setting__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >                events: [</span>
-<span class="cstat-no" title="statement not covered" >                  {</span>
-<span class="cstat-no" title="statement not covered" >                    event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                    handler: this.cancelButtonHandler.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >                  },</span>
-<span class="cstat-no" title="statement not covered" >                ],</span>
-<span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            this._formInputs = [emailInput,loginInput,firstNameInput,secondNameInput,phoneInput];</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            saveButton.hide();</span>
-<span class="cstat-no" title="statement not covered" >            cancelButton.hide();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            this.setProps({</span>
-<span class="cstat-no" title="statement not covered" >                emailInput,</span>
-<span class="cstat-no" title="statement not covered" >                loginInput,</span>
-<span class="cstat-no" title="statement not covered" >                firstNameInput,</span>
-<span class="cstat-no" title="statement not covered" >                secondNameInput,</span>
-<span class="cstat-no" title="statement not covered" >                phoneInput,</span>
-<span class="cstat-no" title="statement not covered" >                changeUserDataBtn,</span>
-<span class="cstat-no" title="statement not covered" >                changePasswordBtn,</span>
-<span class="cstat-no" title="statement not covered" >                exitBtn,</span>
-<span class="cstat-no" title="statement not covered" >                saveButton,</span>
-<span class="cstat-no" title="statement not covered" >                cancelButton,</span>
-<span class="cstat-no" title="statement not covered" >                sendForm: this.sendFormData.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >            })</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        changeUserDataBtnHandler(event:Event) {</span>
-<span class="cstat-no" title="statement not covered" >            event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >            event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            this._flagDisabled = true;</span>
-<span class="cstat-no" title="statement not covered" >            this._children.saveButton.show();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.cancelButton.show();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.changeUserDataBtn.hide();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.changePasswordBtn.hide();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.exitBtn.hide();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            this._formInputs.forEach((item)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >                item.setProps({</span>
-<span class="cstat-no" title="statement not covered" >                    disabled: false</span>
-<span class="cstat-no" title="statement not covered" >                })</span>
-<span class="cstat-no" title="statement not covered" >            })</span>
-<span class="cstat-no" title="statement not covered" >        };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        cancelButtonHandler (event?:Event) {</span>
-<span class="cstat-no" title="statement not covered" >            if (event) {</span>
+<span class="cstat-no" title="statement not covered" >      const emailInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >        ...inputsPropsFormUpdate.emailInput,</span>
+<span class="cstat-no" title="statement not covered" >        disabled: this._flagDisabled,</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__input user-setting__input--' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const loginInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >        ...inputsPropsFormUpdate.loginInput,</span>
+<span class="cstat-no" title="statement not covered" >        disabled: this._flagDisabled,</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__input' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const firstNameInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >        ...inputsPropsFormUpdate.firstNameInput,</span>
+<span class="cstat-no" title="statement not covered" >        disabled: this._flagDisabled,</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__input' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const secondNameInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >        ...inputsPropsFormUpdate.secondNameInput,</span>
+<span class="cstat-no" title="statement not covered" >        disabled: this._flagDisabled,</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__input' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const phoneInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >        ...inputsPropsFormUpdate.phoneInput,</span>
+<span class="cstat-no" title="statement not covered" >        disabled: this._flagDisabled,</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__input' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const changeUserDataBtn = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >        text: 'Изменить данные',</span>
+<span class="cstat-no" title="statement not covered" >        class: 'user-setting__button',</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >        events: [</span>
+<span class="cstat-no" title="statement not covered" >          {</span>
+<span class="cstat-no" title="statement not covered" >            event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >            handler: this.changeUserDataBtnHandler.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >          },</span>
+<span class="cstat-no" title="statement not covered" >        ],</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const changePasswordBtn = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >        text: 'Изменить пароль',</span>
+<span class="cstat-no" title="statement not covered" >        class: 'user-setting__button',</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >        events: [</span>
+<span class="cstat-no" title="statement not covered" >          {</span>
+<span class="cstat-no" title="statement not covered" >            event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >            handler: (event:Event) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >              event.preventDefault();</span>
 <span class="cstat-no" title="statement not covered" >              event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >            this._flagDisabled = false;</span>
-<span class="cstat-no" title="statement not covered" >            this._children.saveButton.hide();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.cancelButton.hide();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.changeUserDataBtn.show();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.changePasswordBtn.show();</span>
-<span class="cstat-no" title="statement not covered" >            this._children.exitBtn.show();</span>
+<span class="cstat-no" title="statement not covered" >              changeForm('formPassword');</span>
+<span class="cstat-no" title="statement not covered" >            },</span>
+<span class="cstat-no" title="statement not covered" >          },</span>
+<span class="cstat-no" title="statement not covered" >        ],</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const exitBtn = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >        text: 'Выйти',</span>
+<span class="cstat-no" title="statement not covered" >        class: 'user-setting__button user-setting__button--exit',</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >        events: [</span>
+<span class="cstat-no" title="statement not covered" >          {</span>
+<span class="cstat-no" title="statement not covered" >            event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >            handler: this.logout.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >          },</span>
+<span class="cstat-no" title="statement not covered" >        ],</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const saveButton = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >        form: this._props.formId,</span>
+<span class="cstat-no" title="statement not covered" >        text: 'Сохранить',</span>
+<span class="cstat-no" title="statement not covered" >        class: 'user-setting__button',</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      const cancelButton = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >        text: 'Отмена',</span>
+<span class="cstat-no" title="statement not covered" >        class: 'user-setting__button',</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >        events: [</span>
+<span class="cstat-no" title="statement not covered" >          {</span>
+<span class="cstat-no" title="statement not covered" >            event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >            handler: this.cancelButtonHandler.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >          },</span>
+<span class="cstat-no" title="statement not covered" >        ],</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            this._formInputs.forEach((item)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >                item.setProps({</span>
-<span class="cstat-no" title="statement not covered" >                    disabled: true</span>
-<span class="cstat-no" title="statement not covered" >                })</span>
-<span class="cstat-no" title="statement not covered" >            })</span>
+<span class="cstat-no" title="statement not covered" >      this._formInputs = [emailInput, loginInput, firstNameInput, secondNameInput, phoneInput];</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      saveButton.hide();</span>
+<span class="cstat-no" title="statement not covered" >      cancelButton.hide();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      this.setProps({</span>
+<span class="cstat-no" title="statement not covered" >        emailInput,</span>
+<span class="cstat-no" title="statement not covered" >        loginInput,</span>
+<span class="cstat-no" title="statement not covered" >        firstNameInput,</span>
+<span class="cstat-no" title="statement not covered" >        secondNameInput,</span>
+<span class="cstat-no" title="statement not covered" >        phoneInput,</span>
+<span class="cstat-no" title="statement not covered" >        changeUserDataBtn,</span>
+<span class="cstat-no" title="statement not covered" >        changePasswordBtn,</span>
+<span class="cstat-no" title="statement not covered" >        exitBtn,</span>
+<span class="cstat-no" title="statement not covered" >        saveButton,</span>
+<span class="cstat-no" title="statement not covered" >        cancelButton,</span>
+<span class="cstat-no" title="statement not covered" >        sendForm: this.sendFormData.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    changeUserDataBtnHandler(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >      event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      this._flagDisabled = true;</span>
+<span class="cstat-no" title="statement not covered" >      this._children.saveButton.show();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.cancelButton.show();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.changeUserDataBtn.hide();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.changePasswordBtn.hide();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.exitBtn.hide();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      this._formInputs.forEach((item) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        item.setProps({</span>
+<span class="cstat-no" title="statement not covered" >          disabled: false,</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    cancelButtonHandler(event?:Event) {</span>
+<span class="cstat-no" title="statement not covered" >      if (event) {</span>
+<span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >        event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >      this._flagDisabled = false;</span>
+<span class="cstat-no" title="statement not covered" >      this._children.saveButton.hide();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.cancelButton.hide();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.changeUserDataBtn.show();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.changePasswordBtn.show();</span>
+<span class="cstat-no" title="statement not covered" >      this._children.exitBtn.show();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      this._formInputs.forEach((item) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        item.setProps({</span>
+<span class="cstat-no" title="statement not covered" >          disabled: true,</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    sendFormData(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >      event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >      const form: HTMLFormElement|null = document.querySelector('.user-setting__form-user');</span>
+<span class="cstat-no" title="statement not covered" >      if (form) {</span>
+<span class="cstat-no" title="statement not covered" >        const first_name = form.querySelector('input[name="first_name"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >        const second_name = form.querySelector('input[name="second_name"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >        const display_name = form.querySelector('input[name="display_name"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >        const login = form.querySelector('input[name="login"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >        const email = form.querySelector('input[name="email"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >        const phone = form.querySelector('input[name="phone"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        const formData = {</span>
+<span class="cstat-no" title="statement not covered" >          first_name: first_name ? first_name.value : '',</span>
+<span class="cstat-no" title="statement not covered" >          second_name: second_name ? second_name.value : '',</span>
+<span class="cstat-no" title="statement not covered" >          display_name: display_name ? display_name.value : '',</span>
+<span class="cstat-no" title="statement not covered" >          login: login ? login.value : '',</span>
+<span class="cstat-no" title="statement not covered" >          email: email ? email.value : '',</span>
+<span class="cstat-no" title="statement not covered" >          phone: phone ? phone.value : '',</span>
 <span class="cstat-no" title="statement not covered" >        };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        sendFormData (event:Event)  {</span>
-<span class="cstat-no" title="statement not covered" >            event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >            event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >            const form: HTMLFormElement|null = document.querySelector(".user-setting__form-user");</span>
-<span class="cstat-no" title="statement not covered" >            if (form) {</span>
-<span class="cstat-no" title="statement not covered" >              const first_name = form.querySelector('input[name="first_name"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >              const second_name = form.querySelector('input[name="second_name"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >              const display_name = form.querySelector('input[name="display_name"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >              const login = form.querySelector('input[name="login"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >              const email = form.querySelector('input[name="email"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >              const phone = form.querySelector('input[name="phone"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >        UserController.changeProfile(formData);</span>
+<span class="cstat-no" title="statement not covered" >        this.cancelButtonHandler();</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >              const formData = {</span>
-<span class="cstat-no" title="statement not covered" >                first_name: first_name ? first_name.value : "",</span>
-<span class="cstat-no" title="statement not covered" >                second_name:  second_name ? second_name.value : "",</span>
-<span class="cstat-no" title="statement not covered" >                display_name:  display_name ? display_name.value : "",</span>
-<span class="cstat-no" title="statement not covered" >                login:  login ? login.value : "",</span>
-<span class="cstat-no" title="statement not covered" >                email:  email ? email.value : "",</span>
-<span class="cstat-no" title="statement not covered" >                phone: phone ? phone.value : "",</span>
-<span class="cstat-no" title="statement not covered" >              };</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >              UserController.changeProfile(formData);</span>
-<span class="cstat-no" title="statement not covered" >              this.cancelButtonHandler();</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >          };</span>
+<span class="cstat-no" title="statement not covered" >    middlewareProps(nextProps:PlainObject):PlainObject {</span>
+<span class="cstat-no" title="statement not covered" >      if ('user' in nextProps) {</span>
+<span class="cstat-no" title="statement not covered" >        this._formInputs.forEach((item) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          item.setProps({</span>
+<span class="cstat-no" title="statement not covered" >            value: sanitizeHtml(nextProps.user?.[item.name]),</span>
+<span class="cstat-no" title="statement not covered" >          });</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        middlewareProps(nextProps:PlainObject):PlainObject {</span>
-<span class="cstat-no" title="statement not covered" >            if ('user' in nextProps) {</span>
-<span class="cstat-no" title="statement not covered" >                this._formInputs.forEach((item)=&gt;{ </span>
-<span class="cstat-no" title="statement not covered" >                    item.setProps({</span>
-<span class="cstat-no" title="statement not covered" >                        value: sanitizeHtml(nextProps.user?.[item.name])</span>
-<span class="cstat-no" title="statement not covered" >                    })</span>
-<span class="cstat-no" title="statement not covered" >                })</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >      return nextProps;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return nextProps;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >    logout(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >      event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >      AuthController.logout();</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        logout(event:Event) {</span>
-<span class="cstat-no" title="statement not covered" >          event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >          event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >          AuthController.logout();</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >        render() {</span>
-<span class="cstat-no" title="statement not covered" >          return this.compile(`</span>
+<span class="cstat-no" title="statement not covered" >    render() {</span>
+<span class="cstat-no" title="statement not covered" >      return this.compile(`</span>
 <span class="cstat-no" title="statement not covered" >            &lt;form class="user-setting__form user-setting__form-user" id={{formId}}&gt;</span>
 <span class="cstat-no" title="statement not covered" >                {{emailInput}}</span>
 <span class="cstat-no" title="statement not covered" >                {{loginInput}}</span>
@@ -777,19 +775,15 @@
 <span class="cstat-no" title="statement not covered" >                {{cancelButton}}</span>
 <span class="cstat-no" title="statement not covered" >            &lt;/form&gt;</span>
 <span class="cstat-no" title="statement not covered" >          `);</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    const FormUserDataConnectedToStore = connect(FormUserData,mapUserToProps );</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    return new FormUserDataConnectedToStore('div', {</span>
-<span class="cstat-no" title="statement not covered" >        formId: 'userSetting123',</span>
-<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__form-container' },</span>
-<span class="cstat-no" title="statement not covered" >      });;</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >  const FormUserDataConnectedToStore = connect(FormUserData, mapUserToProps);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  return new FormUserDataConnectedToStore('div', {</span>
+<span class="cstat-no" title="statement not covered" >    formId: 'userSetting123',</span>
+<span class="cstat-no" title="statement not covered" >    attr: { class: 'user-setting__form-container' },</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >export default UserSettingFormUpdate;</span>
 &nbsp;</pre></td></tr></table></pre>
@@ -799,7 +793,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../../../../prettify.js"></script>
         <script>

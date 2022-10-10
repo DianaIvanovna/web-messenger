@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/72</span>
+                <span class='fraction'>0/73</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/72</span>
+                <span class='fraction'>0/73</span>
             </div>
         
             
@@ -135,7 +135,9 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -213,10 +215,10 @@
 <span class="cstat-no" title="statement not covered" >type PlainObject = { [key: string]: any }</span>
 <span class="cstat-no" title="statement not covered" >type FieldInputProps = {</span>
 <span class="cstat-no" title="statement not covered" >  name: string,</span>
-<span class="cstat-no" title="statement not covered" >  type?:  string,</span>
-<span class="cstat-no" title="statement not covered" >  placeholder?:  string,</span>
+<span class="cstat-no" title="statement not covered" >  type?: string,</span>
+<span class="cstat-no" title="statement not covered" >  placeholder?: string,</span>
 <span class="cstat-no" title="statement not covered" >  title?: string,</span>
-<span class="cstat-no" title="statement not covered" >  'data-error'?:  string,</span>
+<span class="cstat-no" title="statement not covered" >  'data-error'?: string,</span>
 <span class="cstat-no" title="statement not covered" >  required?: string|boolean,</span>
 <span class="cstat-no" title="statement not covered" >  classes?: any,</span>
 <span class="cstat-no" title="statement not covered" >  class?: string,</span>
@@ -229,6 +231,7 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >class FieldInput extends Block {</span>
 <span class="cstat-no" title="statement not covered" >  public readonly name: string;</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  constructor(tag:string, props:FieldInputProps) {</span>
 <span class="cstat-no" title="statement not covered" >    const newProps = { ...props };</span>
 <span class="cstat-no" title="statement not covered" >    newProps.classes = classes;</span>
@@ -246,25 +249,25 @@
 <span class="cstat-no" title="statement not covered" >    newProps['data-error'] = props['data-error'] ? `data-error="${props['data-error']}"` : '';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    super(tag, newProps);</span>
-<span class="cstat-no" title="statement not covered" >    this.name = props.name ;</span>
+<span class="cstat-no" title="statement not covered" >    this.name = props.name;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  setValue(data: any) {</span>
-<span class="cstat-no" title="statement not covered" >    const input  = this._element.querySelector(".input") as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >    input.value = data</span>
+<span class="cstat-no" title="statement not covered" >    const input = this._element.querySelector('.input') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >    input.value = data;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  middlewareProps(nextProps:PlainObject):PlainObject {</span>
-<span class="cstat-no" title="statement not covered" >    if ('disabled' in nextProps) {</span>
-<span class="cstat-no" title="statement not covered" >      nextProps.disabled = nextProps.disabled ? `disabled= ${nextProps.disabled}` : '';</span>
+<span class="cstat-no" title="statement not covered" >    const newProps = { ...nextProps };</span>
+<span class="cstat-no" title="statement not covered" >    if ('disabled' in newProps) {</span>
+<span class="cstat-no" title="statement not covered" >      newProps.disabled = newProps.disabled ? `disabled= ${newProps.disabled}` : '';</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if ('value' in nextProps) {</span>
-<span class="cstat-no" title="statement not covered" >      nextProps.value = nextProps.value ? `value= ${nextProps.value}` : '';</span>
+<span class="cstat-no" title="statement not covered" >    if ('value' in newProps) {</span>
+<span class="cstat-no" title="statement not covered" >      newProps.value = newProps.value ? `value= ${newProps.value}` : '';</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return nextProps</span>
+<span class="cstat-no" title="statement not covered" >    return newProps;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  render() {</span>
 <span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
@@ -286,7 +289,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

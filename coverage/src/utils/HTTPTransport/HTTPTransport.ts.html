@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.58% </span>
+                <span class="strong">89.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>86/96</span>
+                <span class='fraction'>84/94</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.58% </span>
+                <span class="strong">89.36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>86/96</span>
+                <span class='fraction'>84/94</span>
             </div>
         
             
@@ -157,12 +157,7 @@
 <a name='L92'></a><a href='#L92'>92</a>
 <a name='L93'></a><a href='#L93'>93</a>
 <a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L95'></a><a href='#L95'>95</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -199,7 +194,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -211,6 +206,9 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -231,7 +229,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -248,30 +245,26 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { HTTPTransportInterface, TOptions,  MethodsObject } from './types';
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { HTTPTransportInterface, TOptions, MethodsObject } from './types';
 &nbsp;
 const METHODS:MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
-  DELETE: 'DELETE', 
+  DELETE: 'DELETE',
 };
 const defaultOptions: TOptions = {
   headers: {},
   data: {},
   timeout: 5000,
-  method: METHODS.GET
-}
-&nbsp;
-&nbsp;
+  method: METHODS.GET,
+};
 &nbsp;
 function queryStringify(data:{[key:string]:any}) {
   if (typeof data !== 'object') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
@@ -290,12 +283,12 @@ export default class HTTPTransport implements HTTPTransportInterface {
 &nbsp;
   get = (url:string, options:TOptions = {}) =&gt; {
     let newUrl = url;
-    if (!!options<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>ata) {
+    if (options<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>ata) {
       newUrl = `${newUrl}${queryStringify(options.data)}`;
     }
 &nbsp;
     return this.request(newUrl, { ...options, method: METHODS.GET });
-  }
+  };
 &nbsp;
   post = (url:string, options = {}) =&gt; this.request(url, { ...options, method: METHODS.POST });
 &nbsp;
@@ -305,9 +298,12 @@ export default class HTTPTransport implements HTTPTransportInterface {
 &nbsp;
   request = (url:string, options?:TOptions): Promise&lt;unknown&gt; =&gt; {
     if (!options) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      options = defaultOptions</span>
+<span class="cstat-no" title="statement not covered" >      // eslint-disable-next-line no-param-reassign</span>
+<span class="cstat-no" title="statement not covered" >      options = defaultOptions;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-    const {headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null} = options
+    const {
+      headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null,
+    } = options;
 &nbsp;
     return new Promise((resolve, reject) =&gt; {
       if (!method) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
@@ -326,10 +322,9 @@ export default class HTTPTransport implements HTTPTransportInterface {
         Object.keys(headers).forEach((key) =&gt; {
           xhr.setRequestHeader(key, headers[key]);
         });
-      
       }
 &nbsp;
-      xhr.setRequestHeader("Content-Security-Policy", "default-src 'self';img-src *;script-src trusted.com;");
+      xhr.setRequestHeader('Content-Security-Policy', "default-src 'self';img-src *;script-src trusted.com;");
 &nbsp;
       xhr.onload = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        resolve(xhr);</span>
@@ -344,9 +339,8 @@ export default class HTTPTransport implements HTTPTransportInterface {
 &nbsp;
       if (formData) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >        xhr.send(formData);</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-      else {
-        xhr.send(data?JSON.stringify(data):null);
+      } else {
+        xhr.send(data ? JSON.stringify(data) : null);
       }
     });
   };
@@ -358,7 +352,7 @@ export default class HTTPTransport implements HTTPTransportInterface {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

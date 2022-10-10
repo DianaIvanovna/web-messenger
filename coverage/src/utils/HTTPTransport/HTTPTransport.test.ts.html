@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>80/80</span>
+                <span class='fraction'>77/77</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>80/80</span>
+                <span class='fraction'>77/77</span>
             </div>
         
             
@@ -140,12 +140,7 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -222,87 +217,83 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Sinon,{ SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from "sinon";
-import HTTPTransport from "./HTTPTransport";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
 import { expect } from 'chai';
+import HTTPTransport from './HTTPTransport';
 &nbsp;
+describe('HTTPTransport', () =&gt; {
+  let xhr: SinonFakeXMLHttpRequestStatic;
+  let instance: HTTPTransport;
+  const requests: SinonFakeXMLHttpRequest[] = [];
 &nbsp;
-describe("HTTPTransport",()=&gt;{
+  beforeEach(() =&gt; {
+    xhr = Sinon.useFakeXMLHttpRequest();
 &nbsp;
-    let xhr: SinonFakeXMLHttpRequestStatic;
-    let instance: HTTPTransport;
-    const requests: SinonFakeXMLHttpRequest[] = [];
+    // @ts-ignore
+    global.XMLHttpRequest = xhr;
 &nbsp;
-    beforeEach(() =&gt; {
-        xhr = Sinon.useFakeXMLHttpRequest();
-    
-        // @ts-ignore
-        global.XMLHttpRequest = xhr;
-    
-        xhr.onCreate = ((request: SinonFakeXMLHttpRequest) =&gt; {
-          requests.push(request);
-        });
-    
-        instance = new HTTPTransport('');
+    xhr.onCreate = ((request: SinonFakeXMLHttpRequest) =&gt; {
+      requests.push(request);
     });
 &nbsp;
-    afterEach(() =&gt; {
-        requests.length = 0;
-    })
+    instance = new HTTPTransport('');
+  });
 &nbsp;
-    it('.get() should send GET request', () =&gt; {
-        instance.get('/user');
-    
-        const [request] = requests;
-    
-        expect(request.method).to.eq('GET');
-    });
-    it('.post() should send POST request', () =&gt; {
-        instance.post('/user');
-    
-        const [request] = requests;
-    
-        expect(request.method).to.eq('POST');
-    });
-    it('.put() should send PUT request', () =&gt; {
-        instance.put('/user');
-    
-        const [request] = requests;
-    
-        expect(request.method).to.eq('PUT');
-    });
-    it('.delete() should send DELETE request', () =&gt; {
-        instance.delete('/user');
-    
-        const [request] = requests;
-    
-        expect(request.method).to.eq('DELETE');
-    });
-    it('.get() should data queryStringify', () =&gt; {
-        instance.get('/user', {
-            data: {
-                a: "test"
-            }
-        });
-    
-        const [request] = requests;
-    
-        expect(request.url).to.eq('/user?a=test');
-    });
-    it('should add headers', () =&gt; {
-        instance.get('/user', {
-            headers: {
-                'credentials': 'include',
-            },
-        });
-    
-        const [request] = requests;
+  afterEach(() =&gt; {
+    requests.length = 0;
+  });
 &nbsp;
-        expect(request.requestHeaders).to.have.property('credentials', 'include');
+  it('.get() should send GET request', () =&gt; {
+    instance.get('/user');
+&nbsp;
+    const [request] = requests;
+&nbsp;
+    expect(request.method).to.eq('GET');
+  });
+  it('.post() should send POST request', () =&gt; {
+    instance.post('/user');
+&nbsp;
+    const [request] = requests;
+&nbsp;
+    expect(request.method).to.eq('POST');
+  });
+  it('.put() should send PUT request', () =&gt; {
+    instance.put('/user');
+&nbsp;
+    const [request] = requests;
+&nbsp;
+    expect(request.method).to.eq('PUT');
+  });
+  it('.delete() should send DELETE request', () =&gt; {
+    instance.delete('/user');
+&nbsp;
+    const [request] = requests;
+&nbsp;
+    expect(request.method).to.eq('DELETE');
+  });
+  it('.get() should data queryStringify', () =&gt; {
+    instance.get('/user', {
+      data: {
+        a: 'test',
+      },
     });
 &nbsp;
-})
+    const [request] = requests;
+&nbsp;
+    expect(request.url).to.eq('/user?a=test');
+  });
+  it('should add headers', () =&gt; {
+    instance.get('/user', {
+      headers: {
+        credentials: 'include',
+      },
+    });
+&nbsp;
+    const [request] = requests;
+&nbsp;
+    expect(request.requestHeaders).to.have.property('credentials', 'include');
+  });
+});
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -310,7 +301,7 @@ describe("HTTPTransport",()=&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

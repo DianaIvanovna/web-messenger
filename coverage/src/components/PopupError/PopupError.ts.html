@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/35</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/35</span>
             </div>
         
             
@@ -97,7 +97,9 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -133,35 +135,36 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './PopupError.scss';</span></span></span>
 <span class="cstat-no" title="statement not covered" >import Block from '../../utils/ComponentFunctions/Block';</span>
-<span class="cstat-no" title="statement not covered" >import {Store} from '../../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import { Store } from '../../store/Store';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >type PlainObject = { [key: string]: any }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >class PopupError extends Block {</span>
-<span class="cstat-no" title="statement not covered" >    middlewareProps(nextProps:PlainObject):PlainObject {</span>
-<span class="cstat-no" title="statement not covered" >        if ('error' in nextProps) {</span>
-<span class="cstat-no" title="statement not covered" >            if (nextProps.error) {</span>
-<span class="cstat-no" title="statement not covered" >                this.show();</span>
+<span class="cstat-no" title="statement not covered" >  middlewareProps(nextProps:PlainObject):PlainObject {</span>
+<span class="cstat-no" title="statement not covered" >    if ('error' in nextProps) {</span>
+<span class="cstat-no" title="statement not covered" >      if (nextProps.error) {</span>
+<span class="cstat-no" title="statement not covered" >        this.show();</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >                function errorHandler() {</span>
-<span class="cstat-no" title="statement not covered" >                    Store.set("error", null)</span>
-<span class="cstat-no" title="statement not covered" >                    this.hide();</span>
-<span class="cstat-no" title="statement not covered" >                    clearInterval(timerId);</span>
-<span class="cstat-no" title="statement not covered" >                 }</span>
+<span class="cstat-no" title="statement not covered" >        const errorHandler = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          Store.set('error', null);</span>
+<span class="cstat-no" title="statement not covered" >          this.hide();</span>
+<span class="cstat-no" title="statement not covered" >          clearInterval(timerId);</span>
+<span class="cstat-no" title="statement not covered" >        };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >                const timerId =setTimeout(errorHandler, 3000)</span>
-<span class="cstat-no" title="statement not covered" >            }else {</span>
-<span class="cstat-no" title="statement not covered" >                this.hide();</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return nextProps;</span>
+<span class="cstat-no" title="statement not covered" >        const timerId = setTimeout(errorHandler, 3000);</span>
+<span class="cstat-no" title="statement not covered" >      } else {</span>
+<span class="cstat-no" title="statement not covered" >        this.hide();</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    render() {</span>
-<span class="cstat-no" title="statement not covered" >        return this.compile(`</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return nextProps;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  render() {</span>
+<span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
 <span class="cstat-no" title="statement not covered" >        &lt;p class="popup-error__text"&gt;{{error}}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >        `);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >export default PopupError;</span>
@@ -172,7 +175,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

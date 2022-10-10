@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/97</span>
+                <span class='fraction'>0/92</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/97</span>
+                <span class='fraction'>0/92</span>
             </div>
         
             
@@ -155,11 +155,7 @@
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -251,23 +247,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
-<span class="cstat-no" title="statement not covered" >import {ChatApi} from "../api/ChatApi/ChatApi";</span>
-<span class="cstat-no" title="statement not covered" >import {DataAddUsers, DataCreateChat,DataUsersChat} from "../api/ChatApi/types";</span>
-<span class="cstat-no" title="statement not covered" >import {Store} from "../store/Store";</span>
-<span class="cstat-no" title="statement not covered" >import WebSocketService from "../utils/WebSocketService/WebSocketService";</span>
-<span class="cstat-no" title="statement not covered" >import {ChatType} from "../store/type";</span>
-<span class="cstat-no" title="statement not covered" >import {DataTokenChat} from "../api/ChatApi/types";</span>
-<span class="cstat-no" title="statement not covered" >import { UserData } from "../store/type";</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { ChatApi } from '../api/ChatApi/ChatApi';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+<span class="cstat-no" title="statement not covered" >  DataAddUsers, DataCreateChat, DataUsersChat, DataTokenChat,</span>
+<span class="cstat-no" title="statement not covered" >} from '../api/ChatApi/types';</span>
+<span class="cstat-no" title="statement not covered" >import { Store } from '../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import WebSocketService from '../utils/WebSocketService/WebSocketService';</span>
+<span class="cstat-no" title="statement not covered" >import { ChatType, UserData } from '../store/type';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const api = new ChatApi();</span>
-<span class="cstat-no" title="statement not covered" > </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >class ChatControllerClass {</span>
-<span class="cstat-no" title="statement not covered" >  private _webSocketService:WebSocketService ;</span>
+<span class="cstat-no" title="statement not covered" >  private _webSocketService:WebSocketService;</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  constructor() {</span>
 <span class="cstat-no" title="statement not covered" >    this._webSocketService = new WebSocketService();</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
@@ -275,90 +267,86 @@
 <span class="cstat-no" title="statement not covered" >  public async getChats() {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const chats:ChatType[] = await api.getChats();</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >      Store.set("chats", chats);</span>
-<span class="cstat-no" title="statement not covered" >      chats.forEach(chat =&gt; { </span>
-<span class="cstat-no" title="statement not covered" >        this.getTokenChat({</span>
-<span class="cstat-no" title="statement not covered" >          id: chat.id</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      Store.set('chats', chats);</span>
+<span class="cstat-no" title="statement not covered" >      chats.forEach((chat) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this.getTokenChat({</span>
+<span class="cstat-no" title="statement not covered" >          id: chat.id,</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  } </span>
-<span class="cstat-no" title="statement not covered" >  </span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async getTokenChat(data:DataTokenChat) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const tokenData:{token:string} = await api.getTokenChat(data);</span>
 <span class="cstat-no" title="statement not covered" >      const store = Store.getState();</span>
-<span class="cstat-no" title="statement not covered" >      const indexChat = store.chats?.findIndex((item:ChatType)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >        return item.id === data.id</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      const indexChat = store.chats?.findIndex((item:ChatType) =&gt; item.id === data.id);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      if (indexChat!== -1  ) {</span>
-<span class="cstat-no" title="statement not covered" >        this._webSocketService.use(store.user?.id, data.id, tokenData.token)</span>
+<span class="cstat-no" title="statement not covered" >      if (indexChat !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >        this._webSocketService.use(store.user?.id, data.id, tokenData.token);</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  } </span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async createChat(data:DataCreateChat) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      await api.createChat(data);</span>
-<span class="cstat-no" title="statement not covered" >      this.getChats()</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      this.getChats();</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  } </span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async addUsersToChat(data:DataAddUsers) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      await api.addUsersToChat(data);</span>
 <span class="cstat-no" title="statement not covered" >      this.getChatUsers({</span>
-<span class="cstat-no" title="statement not covered" >        id: data.chatId</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        id: data.chatId,</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  } </span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async deleteUsersToChat(data:DataAddUsers) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      await api.deleteUsersToChat(data);</span>
 <span class="cstat-no" title="statement not covered" >      this.getChatUsers({</span>
-<span class="cstat-no" title="statement not covered" >        id: data.chatId</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        id: data.chatId,</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  } </span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async getChatUsers(data:DataUsersChat) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      const users:UserData[] = await api.getChatUsers(data); </span>
-<span class="cstat-no" title="statement not covered" >      Store.set("usersActiveChat",users);</span>
+<span class="cstat-no" title="statement not covered" >      const users:UserData[] = await api.getChatUsers(data);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('usersActiveChat', users);</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        Store.set("error", `${error.status}: ${error.text}`);</span>
+<span class="cstat-no" title="statement not covered" >      Store.set('error', `${error.status}: ${error.text}`);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  } </span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public openDialog (id: number) {</span>
-<span class="cstat-no" title="statement not covered" >    Store.set("activeChatId", id);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >} </span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  public openDialog(id: number) {</span>
+<span class="cstat-no" title="statement not covered" >    Store.set('activeChatId', id);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  export const ChatController = new ChatControllerClass;</span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >export const ChatController = new ChatControllerClass();</span>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

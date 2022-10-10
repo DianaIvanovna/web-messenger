@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/69</span>
+                <span class='fraction'>0/66</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/69</span>
+                <span class='fraction'>0/66</span>
             </div>
         
             
@@ -129,9 +129,7 @@
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -197,64 +195,59 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './CreateChatForm.scss';</span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './CreateChatForm.scss';</span></span></span>
 <span class="cstat-no" title="statement not covered" >import FormValidation from '../../../../utils/FormValidation/FormValidation';</span>
 <span class="cstat-no" title="statement not covered" >import FieldInput from '../../../../components/FieldInput/FieldInput';</span>
 <span class="cstat-no" title="statement not covered" >import Button from '../../../../components/Button/Button';</span>
-<span class="cstat-no" title="statement not covered" >import {ChatController} from '../../../../controllers/ChatController';</span>
+<span class="cstat-no" title="statement not covered" >import { ChatController } from '../../../../controllers/ChatController';</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >class CreateChatForm extends FormValidation{</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >class CreateChatForm extends FormValidation {</span>
 <span class="cstat-no" title="statement not covered" >  constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
 <span class="cstat-no" title="statement not covered" >    const newProps = { ...propsAndChildren };</span>
-<span class="cstat-no" title="statement not covered" >    newProps.formId = "createChat";</span>
+<span class="cstat-no" title="statement not covered" >    newProps.formId = 'createChat';</span>
 <span class="cstat-no" title="statement not covered" >    super(tagName, newProps);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const titleChatInput =  new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >    const titleChatInput = new FieldInput('div', {</span>
 <span class="cstat-no" title="statement not covered" >      name: 'title',</span>
 <span class="cstat-no" title="statement not covered" >      type: 'text',</span>
-<span class="cstat-no" title="statement not covered" >      placeholder: "введите название чата", </span>
-<span class="cstat-no" title="statement not covered" >      title:"",</span>
+<span class="cstat-no" title="statement not covered" >      placeholder: 'введите название чата',</span>
+<span class="cstat-no" title="statement not covered" >      title: '',</span>
 <span class="cstat-no" title="statement not covered" >      'data-error': 'Это обязательное поле"',</span>
 <span class="cstat-no" title="statement not covered" >      required: true,</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >    const createChatBtn = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >        text: 'Создать чат',</span>
-<span class="cstat-no" title="statement not covered" >        form: this._props.formId,</span>
-<span class="cstat-no" title="statement not covered" >        class:" default-button create-chat-form__button",</span>
-<span class="cstat-no" title="statement not covered" >        events: [</span>
-<span class="cstat-no" title="statement not covered" >          {</span>
-<span class="cstat-no" title="statement not covered" >            event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >            handler: this.sendForm.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >        ],</span>
+<span class="cstat-no" title="statement not covered" >      text: 'Создать чат',</span>
+<span class="cstat-no" title="statement not covered" >      form: this._props.formId,</span>
+<span class="cstat-no" title="statement not covered" >      class: ' default-button create-chat-form__button',</span>
+<span class="cstat-no" title="statement not covered" >      events: [</span>
+<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >          event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >          handler: this.sendForm.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      ],</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >  </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    this.setProps({</span>
 <span class="cstat-no" title="statement not covered" >      titleChatInput,</span>
 <span class="cstat-no" title="statement not covered" >      createChatBtn,</span>
 <span class="cstat-no" title="statement not covered" >      sendForm: this.sendForm.bind(this),</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  sendForm (event:Event)  {</span>
+<span class="cstat-no" title="statement not covered" >  sendForm(event:Event) {</span>
 <span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
 <span class="cstat-no" title="statement not covered" >    event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const form: HTMLElement|null = document.getElementById(this._props.formId);</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (form) {</span>
 <span class="cstat-no" title="statement not covered" >      const title = form.querySelector('input[name="title"]') as HTMLInputElement;</span>
 <span class="cstat-no" title="statement not covered" >      ChatController.createChat({</span>
-<span class="cstat-no" title="statement not covered" >        title: title ? title.value : "",</span>
+<span class="cstat-no" title="statement not covered" >        title: title ? title.value : '',</span>
 <span class="cstat-no" title="statement not covered" >      });</span>
-<span class="cstat-no" title="statement not covered" >      this._props.closeForm()</span>
+<span class="cstat-no" title="statement not covered" >      this._props.closeForm();</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  render() {</span>
 <span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
@@ -267,14 +260,15 @@
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default CreateChatForm;</span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >export default CreateChatForm;</span>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

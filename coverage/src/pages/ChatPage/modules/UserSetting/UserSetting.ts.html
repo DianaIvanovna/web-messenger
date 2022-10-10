@@ -138,7 +138,8 @@
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -213,66 +214,67 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './UserSetting.scss';</span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './UserSetting.scss';</span></span></span>
 <span class="cstat-no" title="statement not covered" >import FormValidation from '../../../../utils/FormValidation/FormValidation';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >import UserSettingFormUpdate from './modules/UserSettingFormUpdate';</span>
 <span class="cstat-no" title="statement not covered" >import UserSettingPasswordUpdate from './modules/UserSettingPasswordUpdate';</span>
-<span class="cstat-no" title="statement not covered" >import  { Indexed} from '../../../../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import { Indexed } from '../../../../store/Store';</span>
 <span class="cstat-no" title="statement not covered" >import { connect } from '../../../../store/utils/connect';</span>
 <span class="cstat-no" title="statement not covered" >import Avatar from '../../../../components/Avatar/Avatar';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >type PlainObject = { [key: string]: any }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const UserSettingComponent = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  function mapUserToProps(state:Indexed):Indexed {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+<span class="cstat-no" title="statement not covered" >      user: state.user,</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    function mapUserToProps(state:Indexed):Indexed {</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
-<span class="cstat-no" title="statement not covered" >          user: state.user,</span>
-<span class="cstat-no" title="statement not covered" >        }; </span>
-<span class="cstat-no" title="statement not covered" >    } </span>
+<span class="cstat-no" title="statement not covered" >  class UserSetting extends FormValidation {</span>
+<span class="cstat-no" title="statement not covered" >    constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
+<span class="cstat-no" title="statement not covered" >      const newProps = { ...propsAndChildren };</span>
+<span class="cstat-no" title="statement not covered" >      super(tagName, newProps);</span>
+<span class="cstat-no" title="statement not covered" >      const avatar = new Avatar('div', {</span>
+<span class="cstat-no" title="statement not covered" >        attr: { class: 'user-setting__avatar-container' },</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    class UserSetting extends FormValidation {</span>
-<span class="cstat-no" title="statement not covered" >        constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
-<span class="cstat-no" title="statement not covered" >            const newProps = { ...propsAndChildren };</span>
-<span class="cstat-no" title="statement not covered" >            super(tagName, newProps);</span>
-<span class="cstat-no" title="statement not covered" >            const avatar = new Avatar('div', {</span>
-<span class="cstat-no" title="statement not covered" >              attr: { class: 'user-setting__avatar-container' }, </span>
-<span class="cstat-no" title="statement not covered" >            });</span>
+<span class="cstat-no" title="statement not covered" >      this.setProps({</span>
+<span class="cstat-no" title="statement not covered" >        avatar,</span>
+<span class="cstat-no" title="statement not covered" >        formUserUpdate: UserSettingFormUpdate(this.changeForm.bind(this)),</span>
+<span class="cstat-no" title="statement not covered" >        formPasswordUpdate: UserSettingPasswordUpdate(this.changeForm.bind(this)),</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    componentDidMount() {</span>
+<span class="cstat-no" title="statement not covered" >      this.changeForm('formUpdate');</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            this.setProps({</span>
-<span class="cstat-no" title="statement not covered" >                avatar,</span>
-<span class="cstat-no" title="statement not covered" >                formUserUpdate: UserSettingFormUpdate(this.changeForm.bind(this)),</span>
-<span class="cstat-no" title="statement not covered" >                formPasswordUpdate : UserSettingPasswordUpdate(this.changeForm.bind(this)),</span>
-<span class="cstat-no" title="statement not covered" >            })</span>
+<span class="cstat-no" title="statement not covered" >    changeForm(form:'formUpdate' |'formPassword') {</span>
+<span class="cstat-no" title="statement not covered" >      if (form === 'formUpdate') {</span>
+<span class="cstat-no" title="statement not covered" >        this._children.formUserUpdate.show();</span>
+<span class="cstat-no" title="statement not covered" >        this._children.formPasswordUpdate.hide();</span>
+<span class="cstat-no" title="statement not covered" >      } else {</span>
+<span class="cstat-no" title="statement not covered" >        this._children.formUserUpdate.hide();</span>
+<span class="cstat-no" title="statement not covered" >        this._children.formPasswordUpdate.show();</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    middlewareProps(nextProps:PlainObject):PlainObject {</span>
+<span class="cstat-no" title="statement not covered" >      const newProps = { ...nextProps };</span>
+<span class="cstat-no" title="statement not covered" >      if ('user' in newProps) {</span>
+<span class="cstat-no" title="statement not covered" >        if (newProps.user?.avatar) {</span>
+<span class="cstat-no" title="statement not covered" >          newProps.avatar = newProps.user.avatar;</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        componentDidMount() {</span>
-<span class="cstat-no" title="statement not covered" >            this.changeForm("formUpdate");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        changeForm (form:'formUpdate' |'formPassword') {</span>
-<span class="cstat-no" title="statement not covered" >            if (form === 'formUpdate') {</span>
-<span class="cstat-no" title="statement not covered" >              this._children.formUserUpdate.show();</span>
-<span class="cstat-no" title="statement not covered" >              this._children.formPasswordUpdate.hide();</span>
-<span class="cstat-no" title="statement not covered" >            } else {</span>
-<span class="cstat-no" title="statement not covered" >                this._children.formUserUpdate.hide();</span>
-<span class="cstat-no" title="statement not covered" >                this._children.formPasswordUpdate.show();</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >        };</span>
+<span class="cstat-no" title="statement not covered" >      return newProps;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        middlewareProps(nextProps:PlainObject):PlainObject {</span>
-<span class="cstat-no" title="statement not covered" >          if ('user' in nextProps) {</span>
-<span class="cstat-no" title="statement not covered" >            if (nextProps.user?.avatar) {</span>
-<span class="cstat-no" title="statement not covered" >                nextProps.avatar = nextProps.user.avatar</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >          }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >          return nextProps;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      render() {</span>
-<span class="cstat-no" title="statement not covered" >          return this.compile(`</span>
+<span class="cstat-no" title="statement not covered" >    render() {</span>
+<span class="cstat-no" title="statement not covered" >      return this.compile(`</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div class="user-setting"&gt;</span>
 <span class="cstat-no" title="statement not covered" >            </span>
 <span class="cstat-no" title="statement not covered" >            {{avatar}}</span>
@@ -280,22 +282,23 @@
 <span class="cstat-no" title="statement not covered" >            {{formPasswordUpdate}}</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >          `);</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    const UserSettingConnectedToStore = connect(UserSetting,mapUserToProps );</span>
-<span class="cstat-no" title="statement not covered" >    return  new UserSettingConnectedToStore('div', {</span>
-<span class="cstat-no" title="statement not covered" >        attr: { class: 'chat__user-setting' },</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >  const UserSettingConnectedToStore = connect(UserSetting, mapUserToProps);</span>
+<span class="cstat-no" title="statement not covered" >  return new UserSettingConnectedToStore('div', {</span>
+<span class="cstat-no" title="statement not covered" >    attr: { class: 'chat__user-setting' },</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default UserSettingComponent; </span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >export default UserSettingComponent;</span>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/82</span>
+                <span class='fraction'>0/86</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/82</span>
+                <span class='fraction'>0/86</span>
             </div>
         
             
@@ -145,7 +145,11 @@
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -227,87 +231,95 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import HTTPTransport from "../../utils/HTTPTransport/HTTPTransport";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import {DataAddUsers, DataCreateChat, DataUsersChat, DataTokenChat} from "./types";</span>
-<span class="cstat-no" title="statement not covered" >import { TOptions, METHODS} from '../types';</span>
-<span class="cstat-no" title="statement not covered" >import { ChatType, UserData } from "../../store/type";</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import HTTPTransport from '../../utils/HTTPTransport/HTTPTransport';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+<span class="cstat-no" title="statement not covered" >  DataAddUsers, DataCreateChat, DataUsersChat, DataTokenChat,</span>
+<span class="cstat-no" title="statement not covered" >} from './types';</span>
+<span class="cstat-no" title="statement not covered" >import { TOptions, METHODS } from '../types';</span>
+<span class="cstat-no" title="statement not covered" >import { ChatType, UserData } from '../../store/type';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >export class ChatApi {</span>
-<span class="cstat-no" title="statement not covered" >    private readonly _defaultHeaders = {</span>
-<span class="cstat-no" title="statement not covered" >        'content-type': 'application/json',</span>
-<span class="cstat-no" title="statement not covered" >        'credentials': 'include',</span>
-<span class="cstat-no" title="statement not covered" >        'mode': 'cors',</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    private _authInstance:HTTPTransport;</span>
+<span class="cstat-no" title="statement not covered" >  private readonly _defaultHeaders = {</span>
+<span class="cstat-no" title="statement not covered" >    'content-type': 'application/json',</span>
+<span class="cstat-no" title="statement not covered" >    credentials: 'include',</span>
+<span class="cstat-no" title="statement not covered" >    mode: 'cors',</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    constructor() {</span>
-<span class="cstat-no" title="statement not covered" >        this._authInstance = new HTTPTransport("https://ya-praktikum.tech/api/v2/chats");</span>
+<span class="cstat-no" title="statement not covered" >  private _authInstance:HTTPTransport;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  constructor() {</span>
+<span class="cstat-no" title="statement not covered" >    this._authInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2/chats');</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  request(path:string, options:TOptions = {}) {</span>
+<span class="cstat-no" title="statement not covered" >    const newOptions = { ...options };</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (!newOptions.headers) {</span>
+<span class="cstat-no" title="statement not covered" >      newOptions.headers = this._defaultHeaders;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    request(path:string, options:TOptions={}) {</span>
-<span class="cstat-no" title="statement not covered" >        if (!options.headers) {</span>
-<span class="cstat-no" title="statement not covered" >            options.headers = this._defaultHeaders</span>
+<span class="cstat-no" title="statement not covered" >    return this._authInstance.request(path, newOptions)</span>
+<span class="cstat-no" title="statement not covered" >      .then((res:XMLHttpRequest) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (res.status === 200) return res;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        // eslint-disable-next-line prefer-promise-reject-errors</span>
+<span class="cstat-no" title="statement not covered" >        return Promise.reject({</span>
+<span class="cstat-no" title="statement not covered" >          status: res.status,</span>
+<span class="cstat-no" title="statement not covered" >          text: res.response,</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      .then((data) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (data.response === 'OK') {</span>
+<span class="cstat-no" title="statement not covered" >          return null;</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        return JSON.parse(data.response);</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return this._authInstance.request(path, options)</span>
-<span class="cstat-no" title="statement not covered" >            .then((res:XMLHttpRequest) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                if (res.status === 200) return res;</span>
+<span class="cstat-no" title="statement not covered" >  getChats():Promise&lt;ChatType[]&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.GET,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >                return Promise.reject({</span>
-<span class="cstat-no" title="statement not covered" >                    status: res.status,</span>
-<span class="cstat-no" title="statement not covered" >                    text: res.response</span>
-<span class="cstat-no" title="statement not covered" >                }); </span>
-<span class="cstat-no" title="statement not covered" >            }) </span>
-<span class="cstat-no" title="statement not covered" >            .then(data =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                if ( data.response==="OK") {</span>
-<span class="cstat-no" title="statement not covered" >                    return null</span>
-<span class="cstat-no" title="statement not covered" >                }</span>
-<span class="cstat-no" title="statement not covered" >                return JSON.parse(data.response)</span>
-<span class="cstat-no" title="statement not covered" >            })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  getTokenChat(data:DataTokenChat):Promise&lt;{token:string }&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request(`/token/${data.id}`, {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.POST,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getChats():Promise&lt;ChatType[]&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.GET</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  createChat(data: DataCreateChat):Promise&lt;null&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.POST,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getTokenChat(data:DataTokenChat):Promise&lt;{token:string }&gt; {  </span>
-<span class="cstat-no" title="statement not covered" >        return this.request(`/token/${data.id}`, {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.POST,</span>
-<span class="cstat-no" title="statement not covered" >            data,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  getChatUsers(data: DataUsersChat):Promise&lt;UserData[]&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request(`/${data.id}/users`, {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.GET,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    createChat(data: DataCreateChat):Promise&lt;null&gt;  {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request(`/`, {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.POST,</span>
-<span class="cstat-no" title="statement not covered" >            data,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  addUsersToChat(data:DataAddUsers):Promise&lt;null&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/users', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.PUT,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    getChatUsers(data: DataUsersChat):Promise&lt;UserData[]&gt;  {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request(`/${data.id}/users`, {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.GET,</span>
-<span class="cstat-no" title="statement not covered" >            data,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    addUsersToChat(data:DataAddUsers):Promise&lt;null&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/users', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.PUT,</span>
-<span class="cstat-no" title="statement not covered" >            data,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >   </span>
-<span class="cstat-no" title="statement not covered" >    deleteUsersToChat(data:DataAddUsers):Promise&lt;null&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return this.request('/users', {</span>
-<span class="cstat-no" title="statement not covered" >            method: METHODS.DELETE,</span>
-<span class="cstat-no" title="statement not covered" >            data,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  deleteUsersToChat(data:DataAddUsers):Promise&lt;null&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.request('/users', {</span>
+<span class="cstat-no" title="statement not covered" >      method: METHODS.DELETE,</span>
+<span class="cstat-no" title="statement not covered" >      data,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
@@ -316,7 +328,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

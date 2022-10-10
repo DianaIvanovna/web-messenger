@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/75</span>
+                <span class='fraction'>0/76</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/75</span>
+                <span class='fraction'>0/76</span>
             </div>
         
             
@@ -214,91 +214,91 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './style.scss';</span></span></span>
 <span class="cstat-no" title="statement not covered" >import Router from './utils/Router/Router';</span>
-<span class="cstat-no" title="statement not covered" >import {ErrorPage404,ErrorPage500} from "./pages/ErrorPage/ErrorPage";</span>
-<span class="cstat-no" title="statement not covered" >import ChatPage from "./pages/ChatPage/ChatPage";</span>
+<span class="cstat-no" title="statement not covered" >import { ErrorPage404, ErrorPage500 } from './pages/ErrorPage/ErrorPage';</span>
+<span class="cstat-no" title="statement not covered" >import ChatPage from './pages/ChatPage/ChatPage';</span>
 <span class="cstat-no" title="statement not covered" >import loginForm from './pages/LoginAndSigninPage/LoginForm';</span>
-<span class="cstat-no" title="statement not covered" >import regForm from "./pages/LoginAndSigninPage/RegForm";</span>
+<span class="cstat-no" title="statement not covered" >import regForm from './pages/LoginAndSigninPage/RegForm';</span>
 <span class="cstat-no" title="statement not covered" >import EventBus from './utils/ComponentFunctions/EventBus';</span>
 <span class="cstat-no" title="statement not covered" >import PopupError from './components/PopupError/PopupError';</span>
 <span class="cstat-no" title="statement not covered" >import renderDOM from './utils/ComponentFunctions/renderDom';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >import { connect } from './store/utils/connect';</span>
-<span class="cstat-no" title="statement not covered" >import {AuthController} from './controllers/AuthController';</span>
-<span class="cstat-no" title="statement not covered" >import {Indexed, Store} from "./store/Store";</span>
+<span class="cstat-no" title="statement not covered" >import { AuthController } from './controllers/AuthController';</span>
+<span class="cstat-no" title="statement not covered" >import { Indexed, Store } from './store/Store';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >function mapToProps(state:Indexed):Indexed {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-<span class="cstat-no" title="statement not covered" >        isLogged: state.auth.isLogged,</span>
-<span class="cstat-no" title="statement not covered" >    }; </span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
+<span class="cstat-no" title="statement not covered" >    isLogged: state.auth.isLogged,</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >function mapUserToProps(state:Indexed):Indexed {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-<span class="cstat-no" title="statement not covered" >        error: state.error,</span>
-<span class="cstat-no" title="statement not covered" >    };  </span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
+<span class="cstat-no" title="statement not covered" >    error: state.error,</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >class Index {</span>
-<span class="cstat-no" title="statement not covered" >    static EVENTS = {</span>
-<span class="cstat-no" title="statement not covered" >        INIT: 'init',</span>
-<span class="cstat-no" title="statement not covered" >        FLOW_CDM: 'flow:component-did-mount',</span>
-<span class="cstat-no" title="statement not covered" >        FLOW_CDU: 'flow:component-did-update',</span>
-<span class="cstat-no" title="statement not covered" >        FLOW_RENDER: 'flow:render',</span>
-<span class="cstat-no" title="statement not covered" >      };</span>
-<span class="cstat-no" title="statement not covered" >    private _eventBus;</span>
-<span class="cstat-no" title="statement not covered" >    constructor() {</span>
-<span class="cstat-no" title="statement not covered" >        this._eventBus = new EventBus();</span>
-<span class="cstat-no" title="statement not covered" >        this._registerEvents();</span>
-<span class="cstat-no" title="statement not covered" >        this._eventBus.emit(Index.EVENTS.INIT);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  static EVENTS = {</span>
+<span class="cstat-no" title="statement not covered" >    INIT: 'init',</span>
+<span class="cstat-no" title="statement not covered" >    FLOW_CDM: 'flow:component-did-mount',</span>
+<span class="cstat-no" title="statement not covered" >    FLOW_CDU: 'flow:component-did-update',</span>
+<span class="cstat-no" title="statement not covered" >    FLOW_RENDER: 'flow:render',</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    private _registerEvents() {</span>
-<span class="cstat-no" title="statement not covered" >        this._eventBus.on(Index.EVENTS.INIT, this.init.bind(this));</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  private _eventBus;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    checkingForAuthorization(): boolean {</span>
-<span class="cstat-no" title="statement not covered" >        const state = mapToProps(Store.getState());</span>
-<span class="cstat-no" title="statement not covered" >        return state.isLogged</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  constructor() {</span>
+<span class="cstat-no" title="statement not covered" >    this._eventBus = new EventBus();</span>
+<span class="cstat-no" title="statement not covered" >    this._registerEvents();</span>
+<span class="cstat-no" title="statement not covered" >    this._eventBus.emit(Index.EVENTS.INIT);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    init() {</span>
-<span class="cstat-no" title="statement not covered" >        const router = new Router(".root");</span>
+<span class="cstat-no" title="statement not covered" >  private _registerEvents() {</span>
+<span class="cstat-no" title="statement not covered" >    this._eventBus.on(Index.EVENTS.INIT, this.init.bind(this));</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        router</span>
-<span class="cstat-no" title="statement not covered" >        .use("/", loginForm)</span>
-<span class="cstat-no" title="statement not covered" >        .use("/500", ErrorPage500)</span>
-<span class="cstat-no" title="statement not covered" >        .use("/messenger", ChatPage, this.checkingForAuthorization)  </span>
-<span class="cstat-no" title="statement not covered" >        .use( "/sign-up", regForm)</span>
-<span class="cstat-no" title="statement not covered" >        .use("*", ErrorPage404)</span>
+<span class="cstat-no" title="statement not covered" >  checkingForAuthorization(): boolean {</span>
+<span class="cstat-no" title="statement not covered" >    const state = mapToProps(Store.getState());</span>
+<span class="cstat-no" title="statement not covered" >    return state.isLogged;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        .start();</span>
+<span class="cstat-no" title="statement not covered" >  init() {</span>
+<span class="cstat-no" title="statement not covered" >    const router = new Router('.root');</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        AuthController.auth();</span>
+<span class="cstat-no" title="statement not covered" >    router</span>
+<span class="cstat-no" title="statement not covered" >      .use('/', loginForm)</span>
+<span class="cstat-no" title="statement not covered" >      .use('/500', ErrorPage500)</span>
+<span class="cstat-no" title="statement not covered" >      .use('/messenger', ChatPage, this.checkingForAuthorization)</span>
+<span class="cstat-no" title="statement not covered" >      .use('/sign-up', regForm)</span>
+<span class="cstat-no" title="statement not covered" >      .use('*', ErrorPage404)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const PopupErrorConnectedToStore= connect(PopupError,mapUserToProps )</span>
-<span class="cstat-no" title="statement not covered" >        const popupError = new PopupErrorConnectedToStore('div', {</span>
-<span class="cstat-no" title="statement not covered" >            attr: { class: 'popup-error' },</span>
-<span class="cstat-no" title="statement not covered" >            </span>
-<span class="cstat-no" title="statement not covered" >        }) </span>
-<span class="cstat-no" title="statement not covered" >        popupError.hide()</span>
-<span class="cstat-no" title="statement not covered" >        renderDOM(".popup-error-container", popupError)</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >      .start();</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    AuthController.auth();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const PopupErrorConnectedToStore = connect(PopupError, mapUserToProps);</span>
+<span class="cstat-no" title="statement not covered" >    const popupError = new PopupErrorConnectedToStore('div', {</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'popup-error' },</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    popupError.hide();</span>
+<span class="cstat-no" title="statement not covered" >    renderDOM('.popup-error-container', popupError);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" >export default new Index();</span>
-&nbsp;
- </pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../prettify.js"></script>
         <script>

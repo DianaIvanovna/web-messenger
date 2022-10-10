@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/154</span>
+                <span class='fraction'>0/146</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/154</span>
+                <span class='fraction'>0/146</span>
             </div>
         
             
@@ -209,16 +209,7 @@
 <a name='L144'></a><a href='#L144'>144</a>
 <a name='L145'></a><a href='#L145'>145</a>
 <a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a>
-<a name='L149'></a><a href='#L149'>149</a>
-<a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L147'></a><a href='#L147'>147</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -364,27 +355,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import {Indexed, Store} from "../../store/Store";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import {SocketItem, sendData} from "./types";</span>
-<span class="cstat-no" title="statement not covered" >import { ChatType } from "../../store/type";</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >/* eslint-disable no-console */</span></span></span>
+<span class="cstat-no" title="statement not covered" >/* eslint-disable no-restricted-globals */</span>
+<span class="cstat-no" title="statement not covered" >import { Indexed, Store } from '../../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import { SocketItem, sendData } from './types';</span>
+<span class="cstat-no" title="statement not covered" >import { ChatType } from '../../store/type';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >function mapUserToProps(state:Indexed):Indexed {</span>
 <span class="cstat-no" title="statement not covered" >  return {</span>
 <span class="cstat-no" title="statement not covered" >    chats: state.chats,</span>
-<span class="cstat-no" title="statement not covered" >  }; </span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default class WebSocketService  {</span>
+<span class="cstat-no" title="statement not covered" >export default class WebSocketService {</span>
 <span class="cstat-no" title="statement not covered" >  static __instance: any;</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  static EVENTS = {</span>
 <span class="cstat-no" title="statement not covered" >    OPEN: 'open',</span>
 <span class="cstat-no" title="statement not covered" >    MESSANGE: 'message',</span>
@@ -392,40 +377,41 @@
 <span class="cstat-no" title="statement not covered" >    CLOSE: 'close',</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  private _sockets:SocketItem[] = []; </span>
+<span class="cstat-no" title="statement not covered" >  private _sockets:SocketItem[] = [];</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  constructor() {</span>
 <span class="cstat-no" title="statement not covered" >    if (WebSocketService.__instance) {</span>
+<span class="cstat-no" title="statement not covered" >      // eslint-disable-next-line no-constructor-return</span>
 <span class="cstat-no" title="statement not covered" >      return WebSocketService.__instance;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    WebSocketService.__instance = this;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public use(userId:number, chatId:number, token:string) {</span>
-<span class="cstat-no" title="statement not covered" >    const newSocket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`); </span>
+<span class="cstat-no" title="statement not covered" >    const newSocket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    this._sockets.push({</span>
-<span class="cstat-no" title="statement not covered" >      chatId: chatId,</span>
-<span class="cstat-no" title="statement not covered" >      token: token,</span>
-<span class="cstat-no" title="statement not covered" >      userId:userId,</span>
-<span class="cstat-no" title="statement not covered" >      socket : newSocket,</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >      chatId,</span>
+<span class="cstat-no" title="statement not covered" >      token,</span>
+<span class="cstat-no" title="statement not covered" >      userId,</span>
+<span class="cstat-no" title="statement not covered" >      socket: newSocket,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    this._addEventsHandler(newSocket, chatId);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  private _addEventsHandler(socket:WebSocket, chatId:number) {</span>
-<span class="cstat-no" title="statement not covered" >    socket.addEventListener('open', this._openSoket.bind(this, chatId));     // соединение установлено</span>
-<span class="cstat-no" title="statement not covered" >    socket.addEventListener('message', this._newMessangeSoket.bind(this, chatId));  // пришло новое сообщение</span>
-<span class="cstat-no" title="statement not covered" >    socket.addEventListener('error', this._errorSoket.bind(this, chatId));    // ошибка</span>
-<span class="cstat-no" title="statement not covered" >    socket.addEventListener('close', this._closeSoket.bind(this, chatId));    // сокет закрылся</span>
+<span class="cstat-no" title="statement not covered" >    socket.addEventListener('open', this._openSoket.bind(this, chatId)); // соединение установлено</span>
+<span class="cstat-no" title="statement not covered" >    socket.addEventListener('message', this._newMessangeSoket.bind(this, chatId)); // пришло новое сообщение</span>
+<span class="cstat-no" title="statement not covered" >    socket.addEventListener('error', this._errorSoket.bind(this, chatId)); // ошибка</span>
+<span class="cstat-no" title="statement not covered" >    socket.addEventListener('close', this._closeSoket.bind(this, chatId)); // сокет закрылся</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  private _removeEventsHandler(socket:WebSocket) {</span>
-<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('open', this._openSoket.bind(this));     // соединение установлено</span>
-<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('message', this._newMessangeSoket.bind(this));  // пришло новое сообщение</span>
-<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('error', this._errorSoket.bind(this));    // ошибка</span>
-<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('close', this._closeSoket.bind(this));    // сокет закрылся</span>
+<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('open', this._openSoket.bind(this)); // соединение установлено</span>
+<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('message', this._newMessangeSoket.bind(this)); // пришло новое сообщение</span>
+<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('error', this._errorSoket.bind(this)); // ошибка</span>
+<span class="cstat-no" title="statement not covered" >    socket.removeEventListener('close', this._closeSoket.bind(this)); // сокет закрылся</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  private _openSoket() {</span>
@@ -434,100 +420,87 @@
 <span class="cstat-no" title="statement not covered" >  private _newMessangeSoket(chatId:number) {</span>
 <span class="cstat-no" title="statement not covered" >    const eventMessage = event as MessageEvent;</span>
 <span class="cstat-no" title="statement not covered" >    if (!eventMessage) {</span>
-<span class="cstat-no" title="statement not covered" >      return ;</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const data = JSON.parse(eventMessage.data);</span>
 <span class="cstat-no" title="statement not covered" >    const state = mapUserToProps(Store.getState());</span>
-<span class="cstat-no" title="statement not covered" >    const index =  state.chats.findIndex((item:ChatType)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >      return item.id === chatId</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    const index = state.chats.findIndex((item:ChatType) =&gt; item.id === chatId);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (index === -1) {</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (data?.type === 'user connected') {</span>
-<span class="cstat-no" title="statement not covered" >      Store.set(`chats.${index}.userConnect`, true)</span>
+<span class="cstat-no" title="statement not covered" >      Store.set(`chats.${index}.userConnect`, true);</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    let newMessages;</span>
-<span class="cstat-no" title="statement not covered" >    let oldMessages = state.chats[index].messages? state.chats[index].messages : [];</span>
+<span class="cstat-no" title="statement not covered" >    const oldMessages = state.chats[index].messages ? state.chats[index].messages : [];</span>
 <span class="cstat-no" title="statement not covered" >    if (Array.isArray(data)) {</span>
-<span class="cstat-no" title="statement not covered" >      newMessages = [...oldMessages, ...data,]</span>
+<span class="cstat-no" title="statement not covered" >      newMessages = [...oldMessages, ...data];</span>
 <span class="cstat-no" title="statement not covered" >    } else {</span>
-<span class="cstat-no" title="statement not covered" >      newMessages = [data, ...oldMessages]</span>
+<span class="cstat-no" title="statement not covered" >      newMessages = [data, ...oldMessages];</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    if (newMessages ) {</span>
-<span class="cstat-no" title="statement not covered" >      Store.set(`chats.${index}.messages`,  newMessages  )</span>
+<span class="cstat-no" title="statement not covered" >    if (newMessages) {</span>
+<span class="cstat-no" title="statement not covered" >      Store.set(`chats.${index}.messages`, newMessages);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  private _errorSoket() {</span>
 <span class="cstat-no" title="statement not covered" >    const eventMessage = event as ErrorEvent;</span>
 <span class="cstat-no" title="statement not covered" >    if (!eventMessage) {</span>
-<span class="cstat-no" title="statement not covered" >      return ;</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    console.log('Ошибка', eventMessage.message);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  private _closeSoket(chatId:number) {</span>
 <span class="cstat-no" title="statement not covered" >    const eventMessage = event as CloseEvent;</span>
 <span class="cstat-no" title="statement not covered" >    if (!eventMessage) {</span>
-<span class="cstat-no" title="statement not covered" >      return ;</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (eventMessage.wasClean) {</span>
-<span class="cstat-no" title="statement not covered" >        console.log('Соединение закрыто чисто');</span>
+<span class="cstat-no" title="statement not covered" >      console.log('Соединение закрыто чисто');</span>
 <span class="cstat-no" title="statement not covered" >    } else {</span>
 <span class="cstat-no" title="statement not covered" >      console.log('Обрыв соединения');</span>
 <span class="cstat-no" title="statement not covered" >      if (eventMessage.code === 1006) {</span>
-<span class="cstat-no" title="statement not covered" >        const indexSocket = this._sockets.findIndex((item)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >          return item.chatId === chatId</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >        const indexSocket = this._sockets.findIndex((item) =&gt; item.chatId === chatId);</span>
 <span class="cstat-no" title="statement not covered" >        this._reconnecting(indexSocket);</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      </span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    console.log('Код: ' + eventMessage.code + ' причина: ' + eventMessage.reason);</span>
+<span class="cstat-no" title="statement not covered" >    console.log(`Код: ${eventMessage.code} причина: ${eventMessage.reason}`);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public send(chatId:number, messange:sendData) {</span>
-<span class="cstat-no" title="statement not covered" >    const indexChat = this._sockets.findIndex((item)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >      return item.chatId === chatId</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    const indexChat = this._sockets.findIndex((item) =&gt; item.chatId === chatId);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    if (indexChat!== -1) {</span>
+<span class="cstat-no" title="statement not covered" >    if (indexChat !== -1) {</span>
 <span class="cstat-no" title="statement not covered" >      // добавить проверку что соединение отвалилось</span>
 <span class="cstat-no" title="statement not covered" >      this._sockets[indexChat].socket.send(JSON.stringify(messange));</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public closeSockets() {</span>
-<span class="cstat-no" title="statement not covered" >    this._sockets.forEach((item)=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >      item.socket.close(1000, "работа закончена");</span>
-<span class="cstat-no" title="statement not covered" >      this._removeEventsHandler(item.socket)</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    this._sockets.forEach((item) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      item.socket.close(1000, 'работа закончена');</span>
+<span class="cstat-no" title="statement not covered" >      this._removeEventsHandler(item.socket);</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  private _reconnecting(indexSocket:number) {</span>
-<span class="cstat-no" title="statement not covered" >    const data = this._sockets[indexSocket]; </span>
+<span class="cstat-no" title="statement not covered" >    const data = this._sockets[indexSocket];</span>
 <span class="cstat-no" title="statement not covered" >    if (data) {</span>
-<span class="cstat-no" title="statement not covered" >      const newSocket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${data.userId}/${data.chatId}/${data.token}`); </span>
-<span class="cstat-no" title="statement not covered" >      data.socket = newSocket</span>
+<span class="cstat-no" title="statement not covered" >      const newSocket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${data.userId}/${data.chatId}/${data.token}`);</span>
+<span class="cstat-no" title="statement not covered" >      data.socket = newSocket;</span>
 <span class="cstat-no" title="statement not covered" >      this._addEventsHandler(newSocket, data.chatId);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  </span>
 <span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -535,7 +508,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

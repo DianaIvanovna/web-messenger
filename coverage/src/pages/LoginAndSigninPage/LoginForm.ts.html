@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/117</span>
+                <span class='fraction'>0/114</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/117</span>
+                <span class='fraction'>0/114</span>
             </div>
         
             
@@ -177,13 +177,7 @@
 <a name='L112'></a><a href='#L112'>112</a>
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L115'></a><a href='#L115'>115</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -301,14 +295,13 @@
 <span class="cstat-no" title="statement not covered" >import FormValidation from '../../utils/FormValidation/FormValidation';</span>
 <span class="cstat-no" title="statement not covered" >import FieldInput from '../../components/FieldInput/FieldInput';</span>
 <span class="cstat-no" title="statement not covered" >import Button from '../../components/Button/Button';</span>
-<span class="cstat-no" title="statement not covered" >import "./LoginAndSigninPage.scss";</span>
+<span class="cstat-no" title="statement not covered" >import './LoginAndSigninPage.scss';</span>
 <span class="cstat-no" title="statement not covered" >import Router from '../../utils/Router/Router';</span>
-<span class="cstat-no" title="statement not covered" >import {AuthController} from '../../controllers/AuthController';</span>
-<span class="cstat-no" title="statement not covered" >import {InputError} from "../../constants/ErrorConst";</span>
-<span class="cstat-no" title="statement not covered" >import {PatternInput} from "../../constants/PatternConsts";</span>
+<span class="cstat-no" title="statement not covered" >import { AuthController } from '../../controllers/AuthController';</span>
+<span class="cstat-no" title="statement not covered" >import { InputError } from '../../constants/ErrorConst';</span>
+<span class="cstat-no" title="statement not covered" >import { PatternInput } from '../../constants/PatternConsts';</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >const router = new Router(".root");</span>
+<span class="cstat-no" title="statement not covered" >const router = new Router('.root');</span>
 <span class="cstat-no" title="statement not covered" >const inputsProps = {</span>
 <span class="cstat-no" title="statement not covered" >  loginInput: {</span>
 <span class="cstat-no" title="statement not covered" >    name: 'login',</span>
@@ -329,54 +322,52 @@
 <span class="cstat-no" title="statement not covered" >};</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >class LoginForm extends FormValidation {</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
-<span class="cstat-no" title="statement not covered" >      const newProps = { ...propsAndChildren };</span>
-<span class="cstat-no" title="statement not covered" >      super(tagName, newProps);</span>
+<span class="cstat-no" title="statement not covered" >    const newProps = { ...propsAndChildren };</span>
+<span class="cstat-no" title="statement not covered" >    super(tagName, newProps);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      const loginInput = new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >          ...inputsProps.loginInput,</span>
-<span class="cstat-no" title="statement not covered" >          attr: { class: 'login-form__field' },</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >      const passwordInput = new FieldInput('div', {</span>
-<span class="cstat-no" title="statement not covered" >          ...inputsProps.passwordInput,</span>
-<span class="cstat-no" title="statement not covered" >          attr: { class: 'login-form__field' },</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >      const buttonSubmit = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >          form: 'loginForm',</span>
-<span class="cstat-no" title="statement not covered" >          text: 'Авторизоваться',</span>
-<span class="cstat-no" title="statement not covered" >          class: 'login-form__button login-form__button--submit',</span>
-<span class="cstat-no" title="statement not covered" >          attr: { class: 'login-form__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >      const buttonRedirect = new Button('div', {</span>
-<span class="cstat-no" title="statement not covered" >          text: 'Нет аккаунта?',</span>
-<span class="cstat-no" title="statement not covered" >          class: 'login-form__button login-form__button--second',</span>
-<span class="cstat-no" title="statement not covered" >          attr: { class: 'login-form__button-container' },</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >      this.setProps({</span>
-<span class="cstat-no" title="statement not covered" >        loginInput,</span>
-<span class="cstat-no" title="statement not covered" >        passwordInput,</span>
-<span class="cstat-no" title="statement not covered" >        buttonSubmit,</span>
-<span class="cstat-no" title="statement not covered" >        buttonRedirect,</span>
-<span class="cstat-no" title="statement not covered" >        sendForm: this.sendForm.bind(this),</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    const loginInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >      ...inputsProps.loginInput,</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'login-form__field' },</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    const passwordInput = new FieldInput('div', {</span>
+<span class="cstat-no" title="statement not covered" >      ...inputsProps.passwordInput,</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'login-form__field' },</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    const buttonSubmit = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >      form: 'loginForm',</span>
+<span class="cstat-no" title="statement not covered" >      text: 'Авторизоваться',</span>
+<span class="cstat-no" title="statement not covered" >      class: 'login-form__button login-form__button--submit',</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'login-form__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    const buttonRedirect = new Button('div', {</span>
+<span class="cstat-no" title="statement not covered" >      text: 'Нет аккаунта?',</span>
+<span class="cstat-no" title="statement not covered" >      class: 'login-form__button login-form__button--second',</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'login-form__button-container' },</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    this.setProps({</span>
+<span class="cstat-no" title="statement not covered" >      loginInput,</span>
+<span class="cstat-no" title="statement not covered" >      passwordInput,</span>
+<span class="cstat-no" title="statement not covered" >      buttonSubmit,</span>
+<span class="cstat-no" title="statement not covered" >      buttonRedirect,</span>
+<span class="cstat-no" title="statement not covered" >      sendForm: this.sendForm.bind(this),</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  sendForm (event:Event) {</span>
-<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >      event.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >      const form: HTMLFormElement|null = document.querySelector('.login-form__form--signin');</span>
-<span class="cstat-no" title="statement not covered" >      if (form) {</span>
-<span class="cstat-no" title="statement not covered" >        const loginHTML= form.querySelector('input[name="login"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >        const passwordHTML= form.querySelector('input[name="password"]') as HTMLInputElement;</span>
-<span class="cstat-no" title="statement not covered" >        const formData = {</span>
-<span class="cstat-no" title="statement not covered" >          login: loginHTML.value,</span>
-<span class="cstat-no" title="statement not covered" >          password: passwordHTML.value,</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        AuthController.signin(formData);</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  sendForm(event:Event) {</span>
+<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    event.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >    const form: HTMLFormElement|null = document.querySelector('.login-form__form--signin');</span>
+<span class="cstat-no" title="statement not covered" >    if (form) {</span>
+<span class="cstat-no" title="statement not covered" >      const loginHTML = form.querySelector('input[name="login"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >      const passwordHTML = form.querySelector('input[name="password"]') as HTMLInputElement;</span>
+<span class="cstat-no" title="statement not covered" >      const formData = {</span>
+<span class="cstat-no" title="statement not covered" >        login: loginHTML.value,</span>
+<span class="cstat-no" title="statement not covered" >        password: passwordHTML.value,</span>
+<span class="cstat-no" title="statement not covered" >      };</span>
+<span class="cstat-no" title="statement not covered" >      AuthController.signin(formData);</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  render() {</span>
 <span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
@@ -396,24 +387,24 @@
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const loginForm = new LoginForm('div', {</span>
-<span class="cstat-no" title="statement not covered" >    formId: 'loginForm',</span>
-<span class="cstat-no" title="statement not covered" >    title: 'Вход',</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    attr: { class: 'login-form__container' },</span>
-<span class="cstat-no" title="statement not covered" >    events: [</span>
+<span class="cstat-no" title="statement not covered" >const loginForm = new LoginForm('div', {</span>
+<span class="cstat-no" title="statement not covered" >  formId: 'loginForm',</span>
+<span class="cstat-no" title="statement not covered" >  title: 'Вход',</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {</span>
-<span class="cstat-no" title="statement not covered" >        class: '.login-form__button--second',</span>
-<span class="cstat-no" title="statement not covered" >        event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >        handler: ()=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >          router.go("/sign-up")</span>
-<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >  attr: { class: 'login-form__container' },</span>
+<span class="cstat-no" title="statement not covered" >  events: [</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    {</span>
+<span class="cstat-no" title="statement not covered" >      class: '.login-form__button--second',</span>
+<span class="cstat-no" title="statement not covered" >      event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >      handler: () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        router.go('/sign-up');</span>
 <span class="cstat-no" title="statement not covered" >      },</span>
-<span class="cstat-no" title="statement not covered" >    ],</span>
-<span class="cstat-no" title="statement not covered" >  });</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+<span class="cstat-no" title="statement not covered" >  ],</span>
+<span class="cstat-no" title="statement not covered" >});</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  export default loginForm;</span>
+<span class="cstat-no" title="statement not covered" >export default loginForm;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -421,7 +412,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

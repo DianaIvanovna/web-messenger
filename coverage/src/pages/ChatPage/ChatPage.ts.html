@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/180</span>
+                <span class='fraction'>0/178</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/180</span>
+                <span class='fraction'>0/178</span>
             </div>
         
             
@@ -241,9 +241,7 @@
 <a name='L176'></a><a href='#L176'>176</a>
 <a name='L177'></a><a href='#L177'>177</a>
 <a name='L178'></a><a href='#L178'>178</a>
-<a name='L179'></a><a href='#L179'>179</a>
-<a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L179'></a><a href='#L179'>179</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -421,12 +419,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import "./ChatPage.scss";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import Block from "../../utils/ComponentFunctions/Block";</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import './ChatPage.scss';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import Block from '../../utils/ComponentFunctions/Block';</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >import { Indexed} from '../../store/Store';</span>
+<span class="cstat-no" title="statement not covered" >import { Indexed } from '../../store/Store';</span>
 <span class="cstat-no" title="statement not covered" >import { connect } from '../../store/utils/connect';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >import icon1 from '../../../static/img/icons/user-settings.png';</span>
@@ -439,122 +435,117 @@
 <span class="cstat-no" title="statement not covered" >import SettingContainer from './modules/SettingContainer/SettingContainer';</span>
 <span class="cstat-no" title="statement not covered" >import ContactsContainer from './modules/ContactsContainer/ContactsContainer';</span>
 <span class="cstat-no" title="statement not covered" >import ChatContainer from './modules/ChatContainer/ChatContainer';</span>
-<span class="cstat-no" title="statement not covered" >import Popup from "../../components/Popup/Popup";</span>
-<span class="cstat-no" title="statement not covered" >import CreateChatForm from "./modules/CreateChatForm/CreateChatForm";</span>
-<span class="cstat-no" title="statement not covered" >import AddUserToChatForm from "./modules/AddUserToChatForm/AddUserToChatForm";</span>
+<span class="cstat-no" title="statement not covered" >import Popup from '../../components/Popup/Popup';</span>
+<span class="cstat-no" title="statement not covered" >import CreateChatForm from './modules/CreateChatForm/CreateChatForm';</span>
+<span class="cstat-no" title="statement not covered" >import AddUserToChatForm from './modules/AddUserToChatForm/AddUserToChatForm';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >function mapUserToProps(state:Indexed):Indexed {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-<span class="cstat-no" title="statement not covered" >      user: state.user,</span>
-<span class="cstat-no" title="statement not covered" >    }; </span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
+<span class="cstat-no" title="statement not covered" >    user: state.user,</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >class Chat extends Block{</span>
-<span class="cstat-no" title="statement not covered" >    _arrComponents;</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
-<span class="cstat-no" title="statement not covered" >        const newProps = { ...propsAndChildren };</span>
-<span class="cstat-no" title="statement not covered" >        newProps.menuStyle = 'chat__menu chat__menu--active-1';</span>
-<span class="cstat-no" title="statement not covered" >        newProps.dialogsContainer = DialogsContainer;</span>
-<span class="cstat-no" title="statement not covered" >        newProps.userSetting = UserSettingComponent();</span>
-<span class="cstat-no" title="statement not covered" >        newProps.contactsContainer = ContactsContainer();</span>
-<span class="cstat-no" title="statement not covered" >        newProps.settingContainer = SettingContainer();</span>
-<span class="cstat-no" title="statement not covered" >        newProps.chatContainer = ChatContainer();</span>
-<span class="cstat-no" title="statement not covered" >        newProps.activeChat = null;</span>
-<span class="cstat-no" title="statement not covered" >        newProps.CreateChatForm= new CreateChatForm('div',{</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >        newProps.AddUserToChatForm = new AddUserToChatForm('div', {</span>
-<span class="cstat-no" title="statement not covered" >          attr: { class: "add-user-to-chat-form" },</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >        newProps.PopupCreateChatForm = new Popup('div',{</span>
-<span class="cstat-no" title="statement not covered" >          children: newProps.CreateChatForm</span>
-<span class="cstat-no" title="statement not covered" >        }); </span>
-<span class="cstat-no" title="statement not covered" >        newProps.PopupAddUsers = new Popup('div',{children: newProps.AddUserToChatForm});</span>
-<span class="cstat-no" title="statement not covered" >        newProps.events = [</span>
-<span class="cstat-no" title="statement not covered" >            {</span>
-<span class="cstat-no" title="statement not covered" >                class: '.chat__icon--0',</span>
-<span class="cstat-no" title="statement not covered" >                event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                handler: (event:Event) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                  this.iconHandler( 0, event);</span>
-<span class="cstat-no" title="statement not covered" >                },</span>
-<span class="cstat-no" title="statement not covered" >            },</span>
-<span class="cstat-no" title="statement not covered" >            {</span>
-<span class="cstat-no" title="statement not covered" >                class: '.chat__icon--1',</span>
-<span class="cstat-no" title="statement not covered" >                event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                handler: (event:Event) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                    this.iconHandler( 1, event);</span>
-<span class="cstat-no" title="statement not covered" >                },</span>
-<span class="cstat-no" title="statement not covered" >              },</span>
-<span class="cstat-no" title="statement not covered" >              {</span>
-<span class="cstat-no" title="statement not covered" >                class: '.chat__icon--2',</span>
-<span class="cstat-no" title="statement not covered" >                event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                handler: (event:Event) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                    this.iconHandler( 2, event);</span>
-<span class="cstat-no" title="statement not covered" >                },</span>
-<span class="cstat-no" title="statement not covered" >              },</span>
-<span class="cstat-no" title="statement not covered" >              {</span>
-<span class="cstat-no" title="statement not covered" >                class: '.chat__icon--3',</span>
-<span class="cstat-no" title="statement not covered" >                event: 'click',</span>
-<span class="cstat-no" title="statement not covered" >                handler: (event:Event) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                    this.iconHandler(3, event);</span>
-<span class="cstat-no" title="statement not covered" >                },</span>
-<span class="cstat-no" title="statement not covered" >              },</span>
-<span class="cstat-no" title="statement not covered" >        ]</span>
-<span class="cstat-no" title="statement not covered" >        super(tagName, newProps);</span>
+<span class="cstat-no" title="statement not covered" >class Chat extends Block {</span>
+<span class="cstat-no" title="statement not covered" >  _arrComponents;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        </span>
+<span class="cstat-no" title="statement not covered" >  constructor(tagName:string = 'div', propsAndChildren:Record&lt;string, any&gt; = {}) {</span>
+<span class="cstat-no" title="statement not covered" >    const newProps = { ...propsAndChildren };</span>
+<span class="cstat-no" title="statement not covered" >    newProps.menuStyle = 'chat__menu chat__menu--active-1';</span>
+<span class="cstat-no" title="statement not covered" >    newProps.dialogsContainer = DialogsContainer;</span>
+<span class="cstat-no" title="statement not covered" >    newProps.userSetting = UserSettingComponent();</span>
+<span class="cstat-no" title="statement not covered" >    newProps.contactsContainer = ContactsContainer();</span>
+<span class="cstat-no" title="statement not covered" >    newProps.settingContainer = SettingContainer();</span>
+<span class="cstat-no" title="statement not covered" >    newProps.chatContainer = ChatContainer();</span>
+<span class="cstat-no" title="statement not covered" >    newProps.activeChat = null;</span>
+<span class="cstat-no" title="statement not covered" >    newProps.CreateChatForm = new CreateChatForm('div', {</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    newProps.AddUserToChatForm = new AddUserToChatForm('div', {</span>
+<span class="cstat-no" title="statement not covered" >      attr: { class: 'add-user-to-chat-form' },</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    newProps.PopupCreateChatForm = new Popup('div', {</span>
+<span class="cstat-no" title="statement not covered" >      children: newProps.CreateChatForm,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    newProps.PopupAddUsers = new Popup('div', { children: newProps.AddUserToChatForm });</span>
+<span class="cstat-no" title="statement not covered" >    newProps.events = [</span>
+<span class="cstat-no" title="statement not covered" >      {</span>
+<span class="cstat-no" title="statement not covered" >        class: '.chat__icon--0',</span>
+<span class="cstat-no" title="statement not covered" >        event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >        handler: (event:Event) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          this.iconHandler(0, event);</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      {</span>
+<span class="cstat-no" title="statement not covered" >        class: '.chat__icon--1',</span>
+<span class="cstat-no" title="statement not covered" >        event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >        handler: (event:Event) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          this.iconHandler(1, event);</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      {</span>
+<span class="cstat-no" title="statement not covered" >        class: '.chat__icon--2',</span>
+<span class="cstat-no" title="statement not covered" >        event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >        handler: (event:Event) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          this.iconHandler(2, event);</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      {</span>
+<span class="cstat-no" title="statement not covered" >        class: '.chat__icon--3',</span>
+<span class="cstat-no" title="statement not covered" >        event: 'click',</span>
+<span class="cstat-no" title="statement not covered" >        handler: (event:Event) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          this.iconHandler(3, event);</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    ];</span>
+<span class="cstat-no" title="statement not covered" >    super(tagName, newProps);</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    this._arrComponents = [newProps.userSetting, newProps.dialogsContainer, newProps.contactsContainer, newProps.settingContainer];</span>
+<span class="cstat-no" title="statement not covered" >    newProps.dialogsContainer.setProps({</span>
+<span class="cstat-no" title="statement not covered" >      openPopupCreateChat: this.openPopupCreateChat,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    newProps.chatContainer.setProps({</span>
+<span class="cstat-no" title="statement not covered" >      openPopupAddUsers: this.openPopupAddUsers,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  componentDidMount() {</span>
+<span class="cstat-no" title="statement not covered" >    this.iconHandler(1);</span>
+<span class="cstat-no" title="statement not covered" >    this._children.PopupCreateChatForm?.hide();</span>
+<span class="cstat-no" title="statement not covered" >    this._children.PopupAddUsers?.hide();</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        this._arrComponents = [newProps.userSetting,newProps.dialogsContainer, newProps.contactsContainer, newProps.settingContainer ];</span>
-<span class="cstat-no" title="statement not covered" >        newProps.dialogsContainer.setProps({</span>
-<span class="cstat-no" title="statement not covered" >          openPopupCreateChat: this.openPopupCreateChat</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >        newProps.chatContainer.setProps({</span>
-<span class="cstat-no" title="statement not covered" >          openPopupAddUsers: this.openPopupAddUsers,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    componentDidMount() {</span>
-<span class="cstat-no" title="statement not covered" >        this.iconHandler(1);</span>
-<span class="cstat-no" title="statement not covered" >        this._children.PopupCreateChatForm?.hide();</span>
-<span class="cstat-no" title="statement not covered" >        this._children.PopupAddUsers?.hide();</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  openPopupCreateChat = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this._children.PopupCreateChatForm?.show();</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    openPopupCreateChat = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      this._children.PopupCreateChatForm?.show();</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    openPopupAddUsers = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      this._children.PopupAddUsers?.show();</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  openPopupAddUsers = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this._children.PopupAddUsers?.show();</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    iconHandler( index:number, event?:Event) {</span>
-<span class="cstat-no" title="statement not covered" >        event?.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >        event?.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >        this._arrComponents.forEach((item,indexComponent)=&gt; {</span>
-<span class="cstat-no" title="statement not covered" >            if (indexComponent === index) {</span>
-<span class="cstat-no" title="statement not covered" >                item.show();</span>
-<span class="cstat-no" title="statement not covered" >                return;</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >            item.hide();</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >  iconHandler(index:number, event?:Event) {</span>
+<span class="cstat-no" title="statement not covered" >    event?.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    event?.stopPropagation();</span>
+<span class="cstat-no" title="statement not covered" >    this._arrComponents.forEach((item, indexComponent) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (indexComponent === index) {</span>
+<span class="cstat-no" title="statement not covered" >        item.show();</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >      item.hide();</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    this.setProps(</span>
+<span class="cstat-no" title="statement not covered" >      {</span>
+<span class="cstat-no" title="statement not covered" >        menuStyle: `chat__menu chat__menu--active-${index}`,</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >    );</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        this.setProps(</span>
-<span class="cstat-no" title="statement not covered" >            {</span>
-<span class="cstat-no" title="statement not covered" >                menuStyle: `chat__menu chat__menu--active-${index}`,</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >        )</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  init() {</span>
+<span class="cstat-no" title="statement not covered" >    this._createResources();</span>
+<span class="cstat-no" title="statement not covered" >    this._eventBus.emit(Block.EVENTS.FLOW_RENDER);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    init() {</span>
-<span class="cstat-no" title="statement not covered" >        this._createResources();</span>
-<span class="cstat-no" title="statement not covered" >        this._eventBus.emit(Block.EVENTS.FLOW_RENDER);</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    render() {</span>
-<span class="cstat-no" title="statement not covered" >        return this.compile(`</span>
+<span class="cstat-no" title="statement not covered" >  render() {</span>
+<span class="cstat-no" title="statement not covered" >    return this.compile(`</span>
 <span class="cstat-no" title="statement not covered" >        {{PopupCreateChatForm}}</span>
 <span class="cstat-no" title="statement not covered" >        {{PopupAddUsers}}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div class="chat"&gt;</span>
@@ -594,14 +585,17 @@
 <span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >        </span>
 <span class="cstat-no" title="statement not covered" >        `);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >const ChatConnectedToStore = connect(Chat,mapUserToProps )</span>
+<span class="cstat-no" title="statement not covered" >const ChatConnectedToStore = connect(Chat, mapUserToProps);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default new ChatConnectedToStore("div", {</span>
-<span class="cstat-no" title="statement not covered" >    icon1,icon2,icon3,icon4,</span>
-<span class="cstat-no" title="statement not covered" >    attr: { class: 'chat-page' },</span>
+<span class="cstat-no" title="statement not covered" >export default new ChatConnectedToStore('div', {</span>
+<span class="cstat-no" title="statement not covered" >  icon1,</span>
+<span class="cstat-no" title="statement not covered" >  icon2,</span>
+<span class="cstat-no" title="statement not covered" >  icon3,</span>
+<span class="cstat-no" title="statement not covered" >  icon4,</span>
+<span class="cstat-no" title="statement not covered" >  attr: { class: 'chat-page' },</span>
 <span class="cstat-no" title="statement not covered" >});</span>
 &nbsp;</pre></td></tr></table></pre>
 
@@ -610,7 +604,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-08T23:01:35.318Z
+                at 2022-10-10T19:17:40.531Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
