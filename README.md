@@ -65,4 +65,4 @@ npm run coverage - отчет о покрытии тестов
 
 - Дизайн доступен по ссылке в [фигме](https://www.figma.com/file/AcJiYk7XlOvnSpgjThv3DP/CloudTalk?node-id=13%3A30)
 - Сервис можно посмотреть по ссылке в [Netlify](https://dianaivanovna-web-messenger.netlify.app/)
-- А так же сервис можно посмотреть в Heroku 
+- А так же сервис можно посмотреть в  [Heroku](https://hidden-sea-55131.herokuapp.com/)
