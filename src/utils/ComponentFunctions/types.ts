@@ -9,7 +9,7 @@ export interface EventBusInterface {
 }
 
 export type EventElement = {
-  class?:string, 
+  class?:string,
   event:string,
   handler: Function
 }

@@ -6,5 +6,5 @@ export type SocketItem = {
 }
 export type sendData= {
     content: string|number,
-    type: string, 
+    type: string,
 }

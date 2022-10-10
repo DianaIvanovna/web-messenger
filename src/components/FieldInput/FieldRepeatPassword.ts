@@ -1,6 +1,6 @@
 import classes from './FieldInput.module.scss';
 import Block from '../../utils/ComponentFunctions/Block';
-import {EventElement} from "../../utils/ComponentFunctions/types";
+import { EventElement } from '../../utils/ComponentFunctions/types';
 
 type FieldRepeatPasswordProps = {
   type?: string,
@@ -55,17 +55,11 @@ class FieldRepeatPassword extends Block {
           if (password?.checkValidity()) {
             if (password.value === repeatPassword.value) {
               repeatPassword.setCustomValidity('');
-            } else {
-              if (props['data-error-repeat']) {
-                repeatPassword.setCustomValidity(props['data-error-repeat']);
-              }
-             
-            }
-          } else {
-            if (props['data-error-repeat']) {
+            } else if (props['data-error-repeat']) {
               repeatPassword.setCustomValidity(props['data-error-repeat']);
             }
-            
+          } else if (props['data-error-repeat']) {
+            repeatPassword.setCustomValidity(props['data-error-repeat']);
           }
         }
       },

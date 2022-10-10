@@ -30,13 +30,14 @@ $font_color_attention: #f2a490;
   font-size: $size;
   line-height: $height;
 }
-
-.body {
+ 
+.body { 
   background-image: linear-gradient(
       rgba(247, 249, 250, 0.5),
       rgba(247, 249, 250, 0.5)
     ),
-    url(/static/img/background.jpg);
+    url(/static/img/background.jpg); 
+      
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;

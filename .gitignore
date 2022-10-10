@@ -7,6 +7,7 @@ npm-debug.log*
 node_modules
 .parcel-cache
 /dist
+/coverage
 
 # Optional npm cache directory
 .npm

@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import { getTemplate } from '../Templator/Templator';
-import {EventElement} from "./types";
+import { EventElement } from './types';
+
 export type PlainObject = { [key: string]: any }
 
 export default class Block {
@@ -12,7 +14,7 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
     END_RENDER: 'end:render',
   };
-  
+
   _props;
 
   _children;
@@ -49,8 +51,9 @@ export default class Block {
   }
 
   _afterRendering() {
-    this.afterRendering()
+    this.afterRendering();
   }
+
   afterRendering() {
   }
 
@@ -83,8 +86,9 @@ export default class Block {
   }
 
   middlewareProps(props:PlainObject):PlainObject {
-    return props
+    return props;
   }
+
   setProps(newProps:PlainObject) {
     if (!newProps) {
       return;
@@ -190,7 +194,7 @@ export default class Block {
     return { children, props };
   }
 
-  compile(template:string, props?:PlainObject, sanitize=false ) {
+  compile(template:string, props?:PlainObject, sanitize = false) {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
@@ -202,7 +206,7 @@ export default class Block {
     });
 
     const fragment: HTMLTemplateElement = this._createDocumentTemplate();
-    fragment.innerHTML = getTemplate(template, propsAndStubs, sanitize); 
+    fragment.innerHTML = getTemplate(template, propsAndStubs, sanitize);
 
     Object.values(this._children).forEach((child: Block) => {
       const stub :HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -223,25 +227,24 @@ export default class Block {
     events.forEach((element: EventElement, index:number) => {
       bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
       if (bufElement) {
-        bufElement.forEach((item:HTMLElement)=>{
+        bufElement.forEach((item:HTMLElement) => {
           item.addEventListener(events[index].event, events[index].handler);
-        })
+        });
       }
     });
   }
 
   removeEvents() {
     const { events = [] } = this._props;
-    let bufElement: NodeListOf<HTMLElement> | HTMLElement[]  | null = null;
+    let bufElement: NodeListOf<HTMLElement> | HTMLElement[] | null = null;
 
     events.forEach((element:EventElement, index:number) => {
-
       bufElement = element.class ? this._element.querySelectorAll(element.class) : [this._element];
 
       if (bufElement) {
-        bufElement.forEach((item:HTMLElement)=>{
+        bufElement.forEach((item:HTMLElement) => {
           item.addEventListener(events[index].event, events[index].handler);
-        })
+        });
       }
     });
   }
@@ -258,7 +261,6 @@ export default class Block {
   }
 
   hide() {
-
     this.getContent().style.display = 'none';
   }
 }

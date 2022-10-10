@@ -1,5 +1,6 @@
-
-export const enum METHODS  {
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+export const enum METHODS {
     GET='GET',
     POST= 'POST',
     PUT='PUT',
@@ -13,5 +14,3 @@ export type TOptions = {
     timeout?:number,
     formData?:FormData,
 }
-
-

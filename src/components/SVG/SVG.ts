@@ -1,27 +1,28 @@
-import Block from "../../utils/ComponentFunctions/Block";
+import Block from '../../utils/ComponentFunctions/Block';
+
 type FilesType = {
     [key:string] : string
 }
 const files:FilesType = {
-    close : `<svg class="popup__close" width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+  close: `<svg class="popup__close" width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect y="0.5" width="30" height="30" rx="15" fill="#F7F9FA"/>
     <path d="M11.4984 11.422C11.8934 11.036 12.5338 11.036 12.9287 11.422L19.3004 17.6489C19.6954 18.0349 19.6954 18.6608 19.3004 19.0468L18.5016 19.8274C18.1066 20.2134 17.4662 20.2134 17.0713 19.8274L10.6996 13.6005C10.3046 13.2145 10.3046 12.5887 10.6996 12.2027L11.4984 11.422Z" fill="#BCD2D6"/>
     <path d="M10.6996 19.0468C10.3046 18.6608 10.3046 18.0349 10.6996 17.6489L17.0713 11.422C17.4662 11.036 18.1066 11.036 18.5016 11.422L19.3004 12.2027C19.6954 12.5887 19.6954 13.2145 19.3004 13.6005L12.9287 19.8274C12.5338 20.2134 11.8934 20.2134 11.4984 19.8274L10.6996 19.0468Z" fill="#BCD2D6"/>
     </svg>`,
 
-    search: `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  search: `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8854 15.9456C12.2351 18.0682 8.35569 17.9011 5.8989 15.4444C3.26287 12.8083 3.26287 8.53445 5.8989 5.89842C8.53494 3.26238 12.8088 3.26238 15.4448 5.89842C17.9016 8.3552 18.0687 12.2346 15.946 14.8849L21.1017 20.0405C21.3946 20.3334 21.3946 20.8083 21.1017 21.1012C20.8088 21.3941 20.3339 21.3941 20.041 21.1012L14.8854 15.9456ZM6.95956 14.3837C4.90931 12.3334 4.90931 9.00933 6.95956 6.95908C9.00982 4.90882 12.3339 4.90882 14.3842 6.95908C16.4329 9.00782 16.4344 12.3286 14.3887 14.3792C14.3872 14.3807 14.3857 14.3822 14.3842 14.3837C14.3827 14.3852 14.3812 14.3867 14.3797 14.3882C12.3291 16.4339 9.00831 16.4324 6.95956 14.3837Z" fill="black"/>
-    </svg>`
-}
+    </svg>`,
+};
 
 export class SVG extends Block {
-    constructor(tag:string, props:{id: string, file?:string} ) {
-        const newProps = { ...props };
-        newProps.file = files[newProps.id];
-        super(tag, newProps);
-    }
-  
-    render() {
-      return this.compile(`{{file}}`);
-    }
+  constructor(tag:string, props:{id: string, file?:string}) {
+    const newProps = { ...props };
+    newProps.file = files[newProps.id];
+    super(tag, newProps);
   }
+
+  render() {
+    return this.compile('{{file}}');
+  }
+}

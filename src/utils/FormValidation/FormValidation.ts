@@ -1,7 +1,7 @@
 // Класс FormValidation нужен для валидации форм
 import Block from '../ComponentFunctions/Block';
 import { FormValidationInterface } from './types';
-import {EventElement} from "../ComponentFunctions/types";
+import { EventElement } from '../ComponentFunctions/types';
 
 class FormValidation extends Block implements FormValidationInterface {
   _form: HTMLFormElement|null;
@@ -11,7 +11,6 @@ class FormValidation extends Block implements FormValidationInterface {
   constructor(tag:string, props = {}) {
     super(tag, props);
     this._form = null;
- 
 
     this._formSubmission = this._formSubmission.bind(this);
   }
@@ -52,7 +51,7 @@ class FormValidation extends Block implements FormValidationInterface {
     }
 
     if (this._button) {
-      this._button.addEventListener('click', this._formSubmission); 
+      this._button.addEventListener('click', this._formSubmission);
     }
   }
 
@@ -77,7 +76,7 @@ class FormValidation extends Block implements FormValidationInterface {
           if (item.getAttribute('form') === this._props?.formId) {
             this._button = item;
           }
-          return item.hasAttribute('name'); 
+          return item.hasAttribute('name');
         })
         .forEach((element) => {
           element.removeEventListener('input', this._checkInputValidity.bind(this));
@@ -95,7 +94,6 @@ class FormValidation extends Block implements FormValidationInterface {
     event.stopPropagation();
 
     this._validateForm();
-
 
     if (this._button?.classList.contains('button-valid')) {
       this._props.sendForm(event);
@@ -124,9 +122,9 @@ class FormValidation extends Block implements FormValidationInterface {
     this._form = this._element.querySelector('form');
     const errorElement = this._form?.querySelector(`.error__${element.name}`);
 
-    if (element.checkValidity()) { return true }
+    if (element.checkValidity()) { return true; }
 
-    const requiredAndEmpty: boolean = element.hasAttribute('required') && !element.value
+    const requiredAndEmpty: boolean = element.hasAttribute('required') && !element.value;
 
     if (requiredAndEmpty) {
       if (errorElement) {

@@ -1,10 +1,10 @@
 import './Button.scss';
 import Block from '../../utils/ComponentFunctions/Block';
-import {EventElement} from "../../utils/ComponentFunctions/types";
+import { EventElement } from '../../utils/ComponentFunctions/types';
 
 type ButtonProps = {
   type?: string,
-  disabled?:string,
+  disabled?:string|boolean,
   text?: string,
   form?: string,
   class?:string,
@@ -14,9 +14,9 @@ type ButtonProps = {
 }
 
 class Button extends Block {
-  constructor(tag:string, props:ButtonProps ) {
+  constructor(tag:string, props:ButtonProps) {
     const newProps = { ...props };
-    newProps.class = props.class 
+    newProps.class = props.class
       ? `button ${props.class}`
       : 'button default-button';
     newProps.type = props.type ? `type= ${props.type}` : '';

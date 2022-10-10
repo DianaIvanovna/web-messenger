@@ -1,8 +1,9 @@
 import './DialogsItem.scss';
 import Block from '../../utils/ComponentFunctions/Block';
-import avatarStub from "../../../static/img/avatars/avatar2.png";
-import {LastMessageType} from "../../store/type";
-import {EventElement} from "../../utils/ComponentFunctions/types";
+import avatarStub from '../../../static/img/avatars/avatar2.png';
+import { LastMessageType } from '../../store/type';
+import { EventElement } from '../../utils/ComponentFunctions/types';
+
 type Message = {
   text: string;
   data: string;
@@ -11,7 +12,7 @@ type Message = {
   myMes: boolean;
 };
 
-type DialogsItemProps  = {
+type DialogsItemProps = {
   id: number;
   photo: string;
   first_name:string;
@@ -30,13 +31,13 @@ class DialogsItem extends Block {
   constructor(tag:string, props:DialogsItemProps) {
     const newProps = { ...props };
     if (!newProps.avatar) {
-      newProps.avatar = avatarStub
+      newProps.avatar = avatarStub;
     }
-    newProps.textLastMes="";
-    newProps.timeLastMes="";
+    newProps.textLastMes = '';
+    newProps.timeLastMes = '';
     if (newProps.last_message) {
       newProps.textLastMes = newProps.last_message.content;
-      const date= new Date(newProps.last_message.time);
+      const date = new Date(newProps.last_message.time);
       newProps.timeLastMes = `${date.getHours()}:${date.getMinutes()}`;
     }
     super(tag, newProps);

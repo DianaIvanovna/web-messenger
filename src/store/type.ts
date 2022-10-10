@@ -30,7 +30,7 @@ export type MessageType = {
   id: number,
   is_read: boolean,
   time: string,
-  type: "message"
+  type: 'message'
   user_id: number,
 }
 export type LastMessageType = {

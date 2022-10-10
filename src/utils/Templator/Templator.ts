@@ -1,9 +1,6 @@
+import sanitizeHtml from 'sanitize-html';
 import { getObjectKey } from './getObjectKey';
 import { TemplatorInterface } from './types';
-import sanitizeHtml from 'sanitize-html';
-
-
-
 
 /* TODOS:
   - дописать обработку массивов mas[0]
@@ -60,28 +57,27 @@ class Templator implements TemplatorInterface {
   }
 }
 
-const myAllowedTags= ["img", "div", "p", "span", "time", "h1", "h2", "h3"];
-const myAllowedAttributes ={
-  img: ["src", "alt", "class"],
-  div: ["class"],
-  p: ["class"],
-  span:["class"],
-  time:["class"],
-  h1: ["class"],
-  h2: ["class"],
-  h3: ["class"],
-}; 
+const myAllowedTags = ['img', 'div', 'p', 'span', 'time', 'h1', 'h2', 'h3'];
+const myAllowedAttributes = {
+  img: ['src', 'alt', 'class'],
+  div: ['class'],
+  p: ['class'],
+  span: ['class'],
+  time: ['class'],
+  h1: ['class'],
+  h2: ['class'],
+  h3: ['class'],
+};
 
-export function getTemplate(template:string, context:object,sanitize=false ) {
+export function getTemplate(template:string, context:object, sanitize = false) {
   const tmpl = new Templator(template);
 
   if (sanitize) {
     return sanitizeHtml(tmpl.compile(context), {
       allowedTags: myAllowedTags,
-      allowedAttributes: myAllowedAttributes
-    })
+      allowedAttributes: myAllowedAttributes,
+    });
   }
 
-  return tmpl.compile(context)
+  return tmpl.compile(context);
 }
-

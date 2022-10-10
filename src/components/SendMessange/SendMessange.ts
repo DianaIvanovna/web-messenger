@@ -1,10 +1,11 @@
 import classes from './SendMessange.module.scss';
 import FormValidation from '../../utils/FormValidation/FormValidation';
 import clip from '../../../static/img/icons/clip.png';
-import addUser from "../../../static/img/icons/addUser.png";
+import addUser from '../../../static/img/icons/addUser.png';
 import sendMessangeIcon from '../../../static/img/icons/send-messange.png';
 import Button from '../Button/Button';
-import {EventElement} from "../../utils/ComponentFunctions/types";
+import { EventElement } from '../../utils/ComponentFunctions/types';
+
 type SendMessangeProps = {
   attr?:object,
   events?: EventElement[],
@@ -14,7 +15,7 @@ type SendMessangeProps = {
   clip?: string,
   addUser?: string,
   sendMessangeIcon?:string,
-  openPopupAddUsers?:any ,
+  openPopupAddUsers?:any,
   sendMessange: ()=>{},
 }
 
@@ -28,40 +29,38 @@ class SendMessange extends FormValidation {
     newProps.addUser = addUser;
     newProps.sendMessangeIcon = sendMessangeIcon;
     newProps.formId = formId;
-    newProps.events= [
+    newProps.events = [
       {
         event: 'click',
         class: '.send-messange__img--add-user',
-        handler: newProps.openPopupAddUsers
-      }
-    ]
-    
+        handler: newProps.openPopupAddUsers,
+      },
+    ];
 
-    super(tag, newProps); 
+    super(tag, newProps);
     const button = new Button('div', {
       form: formId,
-      text: `<img src=${sendMessangeIcon}  />`,  
+      text: `<img src=${sendMessangeIcon}  />`,
       class: classes['send-messange__button'],
       attr: { class: classes['send-messange__button'] },
     });
-    
 
     this.setProps({
       button,
       sendForm: this.sendForm.bind(this),
-  })
+    });
   }
 
-  sendForm (event:Event) {
+  sendForm(event:Event) {
     event.preventDefault();
-    event.stopPropagation(); 
+    event.stopPropagation();
     const form :HTMLFormElement|null = document.querySelector(`.${classes['send-messange']}`);
-    if (form) { 
+    if (form) {
       const input = form.querySelector('input[name="messange"]') as HTMLInputElement;
-    
+
       this._props.sendMessange(input.value);
       form.reset();
-    } 
+    }
   }
 
   render() {
@@ -83,5 +82,5 @@ class SendMessange extends FormValidation {
   }
 }
 
-//<button class="{{classes.send-messange__img}} send-messange__img--add-user "></button>
+// <button class="{{classes.send-messange__img}} send-messange__img--add-user "></button>
 export default SendMessange;
