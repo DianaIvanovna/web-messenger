@@ -12,7 +12,8 @@
     "test": "mocha --require ts-node/register --require ./mochaSetup.js ./src/**/*.test.ts",
     "coverage": "c8 --check-coverage npm run test",
     "precommit": "npm run lint:fix && npm run test",
-    "prepush": "npm run lint:fix && npm run test"
+    "prepush": "npm run lint:fix && npm run test",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
