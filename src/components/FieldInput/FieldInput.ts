@@ -4,10 +4,10 @@ import Block from '../../utils/ComponentFunctions/Block';
 type PlainObject = { [key: string]: any }
 type FieldInputProps = {
   name: string,
-  type?:  string,
-  placeholder?:  string,
+  type?: string,
+  placeholder?: string,
   title?: string,
-  'data-error'?:  string,
+  'data-error'?: string,
   required?: string|boolean,
   classes?: any,
   class?: string,
@@ -20,6 +20,7 @@ type FieldInputProps = {
 
 class FieldInput extends Block {
   public readonly name: string;
+
   constructor(tag:string, props:FieldInputProps) {
     const newProps = { ...props };
     newProps.classes = classes;
@@ -37,25 +38,25 @@ class FieldInput extends Block {
     newProps['data-error'] = props['data-error'] ? `data-error="${props['data-error']}"` : '';
 
     super(tag, newProps);
-    this.name = props.name ;
+    this.name = props.name;
   }
 
   setValue(data: any) {
-    const input  = this._element.querySelector(".input") as HTMLInputElement;
-    input.value = data
+    const input = this._element.querySelector('.input') as HTMLInputElement;
+    input.value = data;
   }
 
   middlewareProps(nextProps:PlainObject):PlainObject {
-    if ('disabled' in nextProps) {
-      nextProps.disabled = nextProps.disabled ? `disabled= ${nextProps.disabled}` : '';
+    const newProps = { ...nextProps };
+    if ('disabled' in newProps) {
+      newProps.disabled = newProps.disabled ? `disabled= ${newProps.disabled}` : '';
     }
-    if ('value' in nextProps) {
-      nextProps.value = nextProps.value ? `value= ${nextProps.value}` : '';
+    if ('value' in newProps) {
+      newProps.value = newProps.value ? `value= ${newProps.value}` : '';
     }
 
-    return nextProps
+    return newProps;
   }
-
 
   render() {
     return this.compile(`

@@ -1,20 +1,17 @@
-import { HTTPTransportInterface, TOptions,  MethodsObject } from './types';
-
+import { HTTPTransportInterface, TOptions, MethodsObject } from './types';
 
 const METHODS:MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
-  DELETE: 'DELETE', 
+  DELETE: 'DELETE',
 };
 const defaultOptions: TOptions = {
   headers: {},
   data: {},
   timeout: 5000,
-  method: METHODS.GET
-}
-
-
+  method: METHODS.GET,
+};
 
 function queryStringify(data:{[key:string]:any}) {
   if (typeof data !== 'object') {
@@ -33,12 +30,12 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
   get = (url:string, options:TOptions = {}) => {
     let newUrl = url;
-    if (!!options?.data) {
+    if (options?.data) {
       newUrl = `${newUrl}${queryStringify(options.data)}`;
     }
 
     return this.request(newUrl, { ...options, method: METHODS.GET });
-  }
+  };
 
   post = (url:string, options = {}) => this.request(url, { ...options, method: METHODS.POST });
 
@@ -48,9 +45,12 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
   request = (url:string, options?:TOptions): Promise<unknown> => {
     if (!options) {
-      options = defaultOptions
+      // eslint-disable-next-line no-param-reassign
+      options = defaultOptions;
     }
-    const {headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null} = options
+    const {
+      headers = null, data = null, timeout = 5000, method = METHODS.GET, formData = null,
+    } = options;
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -69,10 +69,9 @@ export default class HTTPTransport implements HTTPTransportInterface {
         Object.keys(headers).forEach((key) => {
           xhr.setRequestHeader(key, headers[key]);
         });
-      
       }
 
-      xhr.setRequestHeader("Content-Security-Policy", "default-src 'self';img-src *;script-src trusted.com;");
+      xhr.setRequestHeader('Content-Security-Policy', "default-src 'self';img-src *;script-src trusted.com;");
 
       xhr.onload = () => {
         resolve(xhr);
@@ -87,9 +86,8 @@ export default class HTTPTransport implements HTTPTransportInterface {
 
       if (formData) {
         xhr.send(formData);
-      }
-      else {
-        xhr.send(data?JSON.stringify(data):null);
+      } else {
+        xhr.send(data ? JSON.stringify(data) : null);
       }
     });
   };

@@ -1,45 +1,44 @@
-import { expect } from "chai";
-import set from "./set";
+import { expect } from 'chai';
+import set from './set';
 
-describe('set function', ()=>{ 
-    let obj = {}
-    const keypath = 'b';
-    const value='b';
+describe('set function', () => {
+  let obj = {};
+  const keypath = 'b';
+  const value = 'b';
 
-    beforeEach(()=>{
-        obj = {}
-    })
+  beforeEach(() => {
+    obj = {};
+  });
 
-    it("should set a value by keypath", ()=>{
-        set(obj,keypath ,value)
-   
-        expect(obj).to.haveOwnProperty(keypath, value)
-    })
+  it('should set a value by keypath', () => {
+    set(obj, keypath, value);
 
-    it("object it's not object", ()=>{
-        const notObject = 'string';
+    expect(obj).to.haveOwnProperty(keypath, value);
+  });
 
-        const result = set(notObject,keypath ,value)
+  it("object it's not object", () => {
+    const notObject = 'string';
 
-        expect(notObject).to.equal(result)
-    })
-    it("path it's not string", ()=>{
-        const notStringPath = 10;
+    const result = set(notObject, keypath, value);
 
-       //@ts-ignore
-        const f = () => {set(obj,notStringPath ,value)}
+    expect(notObject).to.equal(result);
+  });
+  it("path it's not string", () => {
+    const notStringPath = 10;
 
-        expect(f).to.throw(Error)
-    })
+    // @ts-ignore
+    const f = () => { set(obj, notStringPath, value); };
 
-    it("should set a value by nested path", ()=>{
-        const emptyObj = {}
-        const nestedPath = 'b.c';
-        const newValue = '2';
-     
-        const res = set(emptyObj,nestedPath ,newValue)
+    expect(f).to.throw(Error);
+  });
 
-        expect(res).to.deep.equal({b:{c:newValue}})
-    })
+  it('should set a value by nested path', () => {
+    const emptyObj = {};
+    const nestedPath = 'b.c';
+    const newValue = '2';
 
-})
+    const res = set(emptyObj, nestedPath, newValue);
+
+    expect(res).to.deep.equal({ b: { c: newValue } });
+  });
+});

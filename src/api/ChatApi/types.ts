@@ -1,4 +1,3 @@
-
 export type DataAddUsers = {
     users: number[],
     chatId: number
@@ -14,4 +13,3 @@ export type DataUsersChat = {
 export type DataTokenChat = {
     id: number
 }
-

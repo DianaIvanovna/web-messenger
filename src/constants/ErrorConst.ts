@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-shadow
 export const enum InputError {
     email= 'Неправильный формат email',
     login= 'Должно быть от 3 до 20 символов. Допускается латиница, цифры (но не состоять из цифр), дефис и нижнее подчёркивание',
@@ -7,4 +9,3 @@ export const enum InputError {
     password= 'Пароль должен содержать от 8 до 40 символов. Обязательно хотя бы одна заглавная буква и цифра.',
     password_repeat= 'Пароль не совпадает',
 }
-

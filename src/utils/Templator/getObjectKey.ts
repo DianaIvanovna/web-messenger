@@ -4,7 +4,6 @@ export function getObjectKey(obj:{[key:string]:any}, path:string, defaultValue =
   const keys = path.split('.');
   let result = { ...obj };
 
-
   for (const key of keys) {
     if (!result) {
       return defaultValue;
@@ -15,6 +14,6 @@ export function getObjectKey(obj:{[key:string]:any}, path:string, defaultValue =
       return defaultValue;
     }
   }
- 
+
   return result ?? defaultValue;
 }

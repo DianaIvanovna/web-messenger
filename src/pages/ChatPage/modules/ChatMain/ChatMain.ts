@@ -1,7 +1,6 @@
 import Block from '../../../../utils/ComponentFunctions/Block';
 
-
-export default  class ChatMainBlock extends Block {
+export default class ChatMainBlock extends Block {
   get element() {
     return this._element;
   }
@@ -44,4 +43,3 @@ export default  class ChatMainBlock extends Block {
     `);
   }
 }
-

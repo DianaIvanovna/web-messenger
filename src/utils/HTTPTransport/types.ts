@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
 export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE'
-export type MethodsObject  = {
+export type MethodsObject = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',

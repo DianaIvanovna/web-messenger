@@ -9,26 +9,26 @@ type MessageProps = {
   id: number,
   is_read: boolean,
   time: string,
-  type: "message"
+  type: 'message'
   user_id: number,
 }
 
 class Message extends Block {
-  constructor(tag:string, props:MessageProps) { 
+  constructor(tag:string, props:MessageProps) {
     const newProps = { ...props };
-    const date= new Date(newProps.time);
+    const date = new Date(newProps.time);
     newProps.time = `${date.getHours()}:${date.getMinutes()}`;
 
     super(tag, newProps);
   }
-  render() {
 
+  render() {
     return this.compile(`
        <p class="message__text" >
           {{content}}
           <time class="message__data" >{{time}}</time>
         </p>
-    `, undefined, true); 
+    `, undefined, true);
   }
 }
 

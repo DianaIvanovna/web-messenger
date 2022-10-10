@@ -3,14 +3,14 @@ import FormValidation from '../../utils/FormValidation/FormValidation';
 import FieldInput from '../../components/FieldInput/FieldInput';
 import FieldRepeatPassword from '../../components/FieldInput/FieldRepeatPassword';
 import Button from '../../components/Button/Button';
-import "./LoginAndSigninPage.scss";
-import Router from "../../utils/Router/Router";
-import {InputError} from "../../constants/ErrorConst";
-import {PatternInput} from "../../constants/PatternConsts";
+import './LoginAndSigninPage.scss';
+import Router from '../../utils/Router/Router';
+import { InputError } from '../../constants/ErrorConst';
+import { PatternInput } from '../../constants/PatternConsts';
 
-import {AuthController} from '../../controllers/AuthController';
+import { AuthController } from '../../controllers/AuthController';
 
-const router = new Router(".root");
+const router = new Router('.root');
 
 type InputsType = {
   name: string,
@@ -75,7 +75,6 @@ type InputsItem = {
   [key:string] : FieldInput|null
 };
 
-
 class LoginForm extends FormValidation {
   constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
     const newProps = { ...propsAndChildren };
@@ -124,35 +123,33 @@ class LoginForm extends FormValidation {
       buttonSubmit,
       buttonRedirect,
       sendForm: this.sendForm.bind(this),
-  })
-}
-
-sendForm (event:Event) {
-  event.preventDefault();
-  event.stopPropagation();
-  const form: HTMLFormElement|null = document.querySelector('.login-form__form--reg');
-  if (form) {
-    const emailHTML= form.querySelector('input[name="email"]') as HTMLInputElement;
-    const loginHTML= form.querySelector('input[name="login"]') as HTMLInputElement;
-    const firstNameHTML= form.querySelector('input[name="first_name"]') as HTMLInputElement;
-    const secondNameHTML= form.querySelector('input[name="second_name"]') as HTMLInputElement;
-    const phoneHTML= form.querySelector('input[name="phone"]') as HTMLInputElement;
-    const passwordHTML= form.querySelector('input[name="password"]') as HTMLInputElement;
-
-    const formData = {
-      email: emailHTML?.value,
-      login: loginHTML?.value,
-      first_name: firstNameHTML?.value,
-      second_name:secondNameHTML?.value,
-      phone:phoneHTML?.value,
-      password:passwordHTML?.value,
-    }
-
-    AuthController.signup(formData);
+    });
   }
-};
 
+  sendForm(event:Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const form: HTMLFormElement|null = document.querySelector('.login-form__form--reg');
+    if (form) {
+      const emailHTML = form.querySelector('input[name="email"]') as HTMLInputElement;
+      const loginHTML = form.querySelector('input[name="login"]') as HTMLInputElement;
+      const firstNameHTML = form.querySelector('input[name="first_name"]') as HTMLInputElement;
+      const secondNameHTML = form.querySelector('input[name="second_name"]') as HTMLInputElement;
+      const phoneHTML = form.querySelector('input[name="phone"]') as HTMLInputElement;
+      const passwordHTML = form.querySelector('input[name="password"]') as HTMLInputElement;
 
+      const formData = {
+        email: emailHTML?.value,
+        login: loginHTML?.value,
+        first_name: firstNameHTML?.value,
+        second_name: secondNameHTML?.value,
+        phone: phoneHTML?.value,
+        password: passwordHTML?.value,
+      };
+
+      AuthController.signup(formData);
+    }
+  }
 
   render() {
     return this.compile(`
@@ -179,15 +176,15 @@ sendForm (event:Event) {
 const regForm = new LoginForm('div', {
   formId: 'regForm',
   title: 'Регистрация',
-  
+
   attr: { class: 'login-form__container' },
   events: [
 
     {
       class: '.login-form__button--second',
       event: 'click',
-      handler: ()=>{
-        router.go("/");
+      handler: () => {
+        router.go('/');
       },
     },
   ],

@@ -1,7 +1,7 @@
-import "./ChatPage.scss";
-import Block from "../../utils/ComponentFunctions/Block";
+import './ChatPage.scss';
+import Block from '../../utils/ComponentFunctions/Block';
 
-import { Indexed} from '../../store/Store';
+import { Indexed } from '../../store/Store';
 import { connect } from '../../store/utils/connect';
 
 import icon1 from '../../../static/img/icons/user-settings.png';
@@ -14,122 +14,117 @@ import UserSettingComponent from './modules/UserSetting/UserSetting';
 import SettingContainer from './modules/SettingContainer/SettingContainer';
 import ContactsContainer from './modules/ContactsContainer/ContactsContainer';
 import ChatContainer from './modules/ChatContainer/ChatContainer';
-import Popup from "../../components/Popup/Popup";
-import CreateChatForm from "./modules/CreateChatForm/CreateChatForm";
-import AddUserToChatForm from "./modules/AddUserToChatForm/AddUserToChatForm";
+import Popup from '../../components/Popup/Popup';
+import CreateChatForm from './modules/CreateChatForm/CreateChatForm';
+import AddUserToChatForm from './modules/AddUserToChatForm/AddUserToChatForm';
 
 function mapUserToProps(state:Indexed):Indexed {
-    return {
-      user: state.user,
-    }; 
+  return {
+    user: state.user,
+  };
 }
 
-class Chat extends Block{
-    _arrComponents;
-    
-    constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
-        const newProps = { ...propsAndChildren };
-        newProps.menuStyle = 'chat__menu chat__menu--active-1';
-        newProps.dialogsContainer = DialogsContainer;
-        newProps.userSetting = UserSettingComponent();
-        newProps.contactsContainer = ContactsContainer();
-        newProps.settingContainer = SettingContainer();
-        newProps.chatContainer = ChatContainer();
-        newProps.activeChat = null;
-        newProps.CreateChatForm= new CreateChatForm('div',{
-        });
-        newProps.AddUserToChatForm = new AddUserToChatForm('div', {
-          attr: { class: "add-user-to-chat-form" },
-        })
-        newProps.PopupCreateChatForm = new Popup('div',{
-          children: newProps.CreateChatForm
-        }); 
-        newProps.PopupAddUsers = new Popup('div',{children: newProps.AddUserToChatForm});
-        newProps.events = [
-            {
-                class: '.chat__icon--0',
-                event: 'click',
-                handler: (event:Event) => {
-                  this.iconHandler( 0, event);
-                },
-            },
-            {
-                class: '.chat__icon--1',
-                event: 'click',
-                handler: (event:Event) => {
-                    this.iconHandler( 1, event);
-                },
-              },
-              {
-                class: '.chat__icon--2',
-                event: 'click',
-                handler: (event:Event) => {
-                    this.iconHandler( 2, event);
-                },
-              },
-              {
-                class: '.chat__icon--3',
-                event: 'click',
-                handler: (event:Event) => {
-                    this.iconHandler(3, event);
-                },
-              },
-        ]
-        super(tagName, newProps);
+class Chat extends Block {
+  _arrComponents;
 
-        
+  constructor(tagName:string = 'div', propsAndChildren:Record<string, any> = {}) {
+    const newProps = { ...propsAndChildren };
+    newProps.menuStyle = 'chat__menu chat__menu--active-1';
+    newProps.dialogsContainer = DialogsContainer;
+    newProps.userSetting = UserSettingComponent();
+    newProps.contactsContainer = ContactsContainer();
+    newProps.settingContainer = SettingContainer();
+    newProps.chatContainer = ChatContainer();
+    newProps.activeChat = null;
+    newProps.CreateChatForm = new CreateChatForm('div', {
+    });
+    newProps.AddUserToChatForm = new AddUserToChatForm('div', {
+      attr: { class: 'add-user-to-chat-form' },
+    });
+    newProps.PopupCreateChatForm = new Popup('div', {
+      children: newProps.CreateChatForm,
+    });
+    newProps.PopupAddUsers = new Popup('div', { children: newProps.AddUserToChatForm });
+    newProps.events = [
+      {
+        class: '.chat__icon--0',
+        event: 'click',
+        handler: (event:Event) => {
+          this.iconHandler(0, event);
+        },
+      },
+      {
+        class: '.chat__icon--1',
+        event: 'click',
+        handler: (event:Event) => {
+          this.iconHandler(1, event);
+        },
+      },
+      {
+        class: '.chat__icon--2',
+        event: 'click',
+        handler: (event:Event) => {
+          this.iconHandler(2, event);
+        },
+      },
+      {
+        class: '.chat__icon--3',
+        event: 'click',
+        handler: (event:Event) => {
+          this.iconHandler(3, event);
+        },
+      },
+    ];
+    super(tagName, newProps);
 
+    this._arrComponents = [newProps.userSetting, newProps.dialogsContainer, newProps.contactsContainer, newProps.settingContainer];
+    newProps.dialogsContainer.setProps({
+      openPopupCreateChat: this.openPopupCreateChat,
+    });
+    newProps.chatContainer.setProps({
+      openPopupAddUsers: this.openPopupAddUsers,
+    });
+  }
 
+  componentDidMount() {
+    this.iconHandler(1);
+    this._children.PopupCreateChatForm?.hide();
+    this._children.PopupAddUsers?.hide();
+  }
 
-        this._arrComponents = [newProps.userSetting,newProps.dialogsContainer, newProps.contactsContainer, newProps.settingContainer ];
-        newProps.dialogsContainer.setProps({
-          openPopupCreateChat: this.openPopupCreateChat
-        })
-        newProps.chatContainer.setProps({
-          openPopupAddUsers: this.openPopupAddUsers,
-        })
-        
-    }
-    componentDidMount() {
-        this.iconHandler(1);
-        this._children.PopupCreateChatForm?.hide();
-        this._children.PopupAddUsers?.hide();
-    }
+  openPopupCreateChat = () => {
+    this._children.PopupCreateChatForm?.show();
+  };
 
-    openPopupCreateChat = () => {
-      this._children.PopupCreateChatForm?.show();
-    }
-    openPopupAddUsers = () => {
-      this._children.PopupAddUsers?.show();
-    }
+  openPopupAddUsers = () => {
+    this._children.PopupAddUsers?.show();
+  };
 
-    iconHandler( index:number, event?:Event) {
-        event?.preventDefault();
-        event?.stopPropagation();
-        this._arrComponents.forEach((item,indexComponent)=> {
-            if (indexComponent === index) {
-                item.show();
-                return;
-            }
-            item.hide();
-        })
+  iconHandler(index:number, event?:Event) {
+    event?.preventDefault();
+    event?.stopPropagation();
+    this._arrComponents.forEach((item, indexComponent) => {
+      if (indexComponent === index) {
+        item.show();
+        return;
+      }
+      item.hide();
+    });
 
+    this.setProps(
+      {
+        menuStyle: `chat__menu chat__menu--active-${index}`,
+      },
+    );
+  }
 
-        this.setProps(
-            {
-                menuStyle: `chat__menu chat__menu--active-${index}`,
-            }
-        )
-    }
+  init() {
+    this._createResources();
+    this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
+  }
 
-    init() {
-        this._createResources();
-        this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
-        
-    }
-
-    render() {
-        return this.compile(`
+  render() {
+    return this.compile(`
         {{PopupCreateChatForm}}
         {{PopupAddUsers}}
         <div class="chat">
@@ -169,12 +164,15 @@ class Chat extends Block{
         </div>
         
         `);
-    }
+  }
 }
 
-const ChatConnectedToStore = connect(Chat,mapUserToProps )
+const ChatConnectedToStore = connect(Chat, mapUserToProps);
 
-export default new ChatConnectedToStore("div", {
-    icon1,icon2,icon3,icon4,
-    attr: { class: 'chat-page' },
+export default new ChatConnectedToStore('div', {
+  icon1,
+  icon2,
+  icon3,
+  icon4,
+  attr: { class: 'chat-page' },
 });

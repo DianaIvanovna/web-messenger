@@ -1,6 +1,6 @@
 import './Button.scss';
 import Block from '../../utils/ComponentFunctions/Block';
-import {EventElement} from "../../utils/ComponentFunctions/types";
+import { EventElement } from '../../utils/ComponentFunctions/types';
 
 type ButtonProps = {
   type?: string,
@@ -11,17 +11,17 @@ type ButtonProps = {
   events?: EventElement[],
   shift?:number,
   attr?: object,
-} 
+}
 
 class Button extends Block {
-  constructor(tag:string, props:ButtonProps ) {
+  constructor(tag:string, props:ButtonProps) {
     const newProps = { ...props };
-    newProps.class = props.class 
+    newProps.class = props.class
       ? `button ${props.class}`
       : 'button default-button';
     newProps.type = props.type ? `type= ${props.type}` : '';
     newProps.form = props.form ? `form= ${props.form}` : '';
-    newProps.disabled = props.disabled ? `disabled= ${props.disabled}` : ''; 
+    newProps.disabled = props.disabled ? `disabled= ${props.disabled}` : '';
 
     super(tag, newProps);
   }

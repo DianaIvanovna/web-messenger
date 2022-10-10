@@ -1,7 +1,7 @@
 import './Popup.scss';
 import Block from '../../utils/ComponentFunctions/Block';
-import {EventElement} from "../../utils/ComponentFunctions/types";
-import {SVG} from "../SVG/SVG";
+import { EventElement } from '../../utils/ComponentFunctions/types';
+import { SVG } from '../SVG/SVG';
 
 type PopupProps = {
   attr?:object,
@@ -10,41 +10,40 @@ type PopupProps = {
   svg?: Block
 }
 
-
-class Popup extends Block{
+class Popup extends Block {
   constructor(tag:string, props:PopupProps) {
-    const newProps = { ...props }; 
-    
-    newProps.events = newProps.events? [...newProps.events, 
-      {
-        class: '.popup__close',
-        event: 'click',
-        handler: () => {
-          this.closeForm();
-        },
-      }
-    ]: [
-      {
-        class: '.popup__close',
-        event: 'click',
-        handler: () => {
-          this.closeForm();
-        },
-      }
-    ]
+    const newProps = { ...props };
 
-    newProps.svg = new SVG("div", {id:"close"})
+    newProps.events = newProps.events ? [...newProps.events,
+      {
+        class: '.popup__close',
+        event: 'click',
+        handler: () => {
+          this.closeForm();
+        },
+      },
+    ] : [
+      {
+        class: '.popup__close',
+        event: 'click',
+        handler: () => {
+          this.closeForm();
+        },
+      },
+    ];
+
+    newProps.svg = new SVG('div', { id: 'close' });
 
     super(tag, newProps);
     if (newProps.children) {
       newProps.children.setProps({
-        closeForm: this.closeForm.bind(this)
-      })
+        closeForm: this.closeForm.bind(this),
+      });
     }
   }
 
   closeForm() {
-    this.hide()
+    this.hide();
   }
 
   render() {
