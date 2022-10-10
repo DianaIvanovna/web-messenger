@@ -9,11 +9,9 @@
     "build": "rimraf dist && webpack",
     "lint": "eslint \"./src/**/*.ts\"",
     "lint:fix": "eslint  --fix \"./src/**/*.ts\"",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.js ./src/**/*.test.ts",
+    "validate": "mocha --require ts-node/register --require ./mochaSetup.js ./src/**/*.test.ts",
     "coverage": "c8 --check-coverage npm run test",
-    "validate": "npm-run-all --parallel test lint:fix",
-    "precommit": "npm run validate",
-    "prepush": "npm run validate",
+    "test": "npm run lint:fix && npm run validate",
     "prepare": "husky install"
   },
   "repository": {
@@ -57,7 +55,7 @@
     "express-history-api-fallback": "2.2.1",
     "file-loader": "6.2.0",
     "html-webpack-plugin": "5.5.0",
-    "husky": "^8.0.1",
+    "husky": "^8.0.0",
     "jsdom": "20.0.1",
     "mocha": "10.0.0",
     "nodemon": "2.0.19",
@@ -88,10 +86,5 @@
   "dependencies": {
     "sanitize-html": "2.7.2",
     "uuid": "8.3.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint:all"
-    }
   }
 }
