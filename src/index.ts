@@ -68,7 +68,7 @@ class Index {
       attr: { class: 'popup-error' },
 
     });
-    console.log('тест ошибки', testerror2);
+    console.log('тест ошибки', testerror3);
 
     popupError.hide();
     renderDOM('.popup-error-container', popupError);
